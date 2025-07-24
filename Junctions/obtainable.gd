@@ -2,10 +2,12 @@ extends Node2D
 
 var spintables = spinTables.new()
 @onready var masterObTable: Array = spintables.masterObtainableTable
+@onready var anims: AnimationPlayer = $AnimationPlayer
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	anims.play("obtBob")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

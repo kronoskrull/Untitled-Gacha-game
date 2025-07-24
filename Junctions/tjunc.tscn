@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwftc41qkrccg"]
+
+[ext_resource type="Script" path="res://Junctions/tjunc.gd" id="1_1srp5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u2rhb"]
+size = Vector2(14, 14)
+
+[node name="junction" type="Node2D"]
+script = ExtResource("1_1srp5")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_u2rhb")
+debug_color = Color(0.859878, 0.900543, 1.54018e-06, 0.42)
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 18)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

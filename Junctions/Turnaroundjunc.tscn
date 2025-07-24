@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://biirvrro4x38h"]
+
+[ext_resource type="Script" path="res://Junctions/Turnaroundjunc.gd" id="1_ue6su"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u2rhb"]
+size = Vector2(14, 14)
+
+[node name="junction" type="Node2D"]
+script = ExtResource("1_ue6su")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_u2rhb")
+debug_color = Color(1, 1, 1, 0.42)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

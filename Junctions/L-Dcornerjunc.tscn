@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cv5v5t0ymabiv"]
+
+[ext_resource type="Script" path="res://Junctions/L-Dcornerjunc.gd" id="1_ygxnd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u2rhb"]
+size = Vector2(14, 14)
+
+[node name="junction" type="Node2D"]
+script = ExtResource("1_ygxnd")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_u2rhb")
+debug_color = Color(0.914156, 8.29774e-05, 0.717261, 0.42)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

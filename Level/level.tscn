@@ -1,0 +1,950 @@
+[gd_scene load_steps=18 format=3 uid="uid://drt1tip360qt7"]
+
+[ext_resource type="Texture2D" uid="uid://dhw6oc4h6i0ny" path="res://Assets/hudBlock1.0.png" id="1_a7teg"]
+[ext_resource type="Script" path="res://Level/level.gd" id="1_rljoh"]
+[ext_resource type="Shader" path="res://Assets/placeholder.gdshader" id="2_osb5b"]
+[ext_resource type="Texture2D" uid="uid://cm0qpwf8oyfq1" path="res://icon.svg" id="3_7y2kw"]
+[ext_resource type="Script" path="res://Spinner/spinner_placeholder.gd" id="3_thr51"]
+[ext_resource type="PackedScene" uid="uid://cv5v5t0ymabiv" path="res://Junctions/L-Dcornerjunc.tscn" id="4_1v6ax"]
+[ext_resource type="PackedScene" uid="uid://gvhpy1s1absr" path="res://Junctions/R-Dcornerjunc.tscn" id="7_r7vob"]
+[ext_resource type="PackedScene" uid="uid://br6hxiou2nh38" path="res://Junctions/L-Ucornerjunc.tscn" id="8_6yic6"]
+[ext_resource type="PackedScene" uid="uid://c5fn6ne537652" path="res://Junctions/R-Ucornerjunc.tscn" id="9_llhc3"]
+[ext_resource type="PackedScene" uid="uid://dwftc41qkrccg" path="res://Junctions/tjunc.tscn" id="10_15alu"]
+[ext_resource type="PackedScene" uid="uid://biirvrro4x38h" path="res://Junctions/Turnaroundjunc.tscn" id="11_j4p46"]
+[ext_resource type="PackedScene" uid="uid://bvdt4eqmecfd5" path="res://Junctions/4-Wayjunc.tscn" id="12_2vg2p"]
+[ext_resource type="PackedScene" uid="uid://chgxilpcrsci7" path="res://Interactables/obtainable.tscn" id="13_2xnj0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e1sik"]
+render_priority = 0
+shader = ExtResource("2_osb5b")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_g52lm"]
+viewport_path = NodePath("3Dlevel/SubViewport")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_swrcy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_htn7m"]
+size = Vector2(141.177, 141.176)
+
+[node name="level" type="Node2D"]
+script = ExtResource("1_rljoh")
+money = 1000
+
+[node name="3Dlevel" type="Node3D" parent="."]
+
+[node name="SubViewport" type="SubViewport" parent="3Dlevel"]
+size = Vector2i(692, 152)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="3Dlevel/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.864459, 0.502703, 0, -0.502703, 0.864459, 0, 5.09885, 4.65409)
+fov = 34.2778
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="3Dlevel"]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+
+[node name="spinnerPLACEHOLDER" type="CSGCylinder3D" parent="3Dlevel"]
+transform = Transform3D(0.951057, 0, 0.309017, 0, 1, 0, -0.309017, 0, 0.951057, 0, 0, 0)
+radius = 8.14187
+height = 0.526783
+sides = 10
+material = SubResource("ShaderMaterial_e1sik")
+script = ExtResource("3_thr51")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="3Dlevel/spinnerPLACEHOLDER"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.248394, 0)
+
+[node name="HUDBlock" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+texture = ExtResource("1_a7teg")
+
+[node name="spinnerView" type="Sprite2D" parent="."]
+position = Vector2(576, 572)
+texture = SubResource("ViewportTexture_g52lm")
+
+[node name="fadeRect" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 0)
+
+[node name="Control" type="Control" parent="."]
+z_index = 6
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="1spinButton" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -143.0
+offset_top = -145.0
+offset_right = 143.0
+offset_bottom = -97.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "SPIN SPIN SPIN!!!!"
+
+[node name="rollResult" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -130.0
+offset_top = -86.0
+offset_right = 131.0
+offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 41
+text = "ROLL RESULT"
+
+[node name="effectLabel" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = -131.0
+offset_right = 213.0
+offset_bottom = -108.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "EFFECT: "
+
+[node name="effect" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 152.0
+offset_top = -108.0
+offset_right = 343.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "EFFECT EFFECT EFFECT EFFECT EFFECT EFFECT EFFECT EFFECT EFFECT EFFECT EFFECT EFFECT"
+autowrap_mode = 2
+
+[node name="Panel" type="PanelContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -152.0
+offset_right = 206.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_swrcy")
+
+[node name="moneyLabel" type="Label" parent="Control/Panel"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "   MONS:  0"
+
+[node name="debugPanel" type="PanelContainer" parent="Control"]
+layout_mode = 0
+offset_left = 845.0
+offset_top = 56.0
+offset_right = 1052.0
+offset_bottom = 342.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/debugPanel"]
+layout_mode = 2
+
+[node name="panelname" type="Label" parent="Control/debugPanel/VBoxContainer"]
+layout_mode = 2
+text = "Debug Panel"
+horizontal_alignment = 1
+
+[node name="resetbutton" type="Button" parent="Control/debugPanel/VBoxContainer"]
+layout_mode = 2
+text = "Full Reset"
+
+[node name="posresButton" type="Button" parent="Control/debugPanel/VBoxContainer"]
+layout_mode = 2
+text = "Position Reset
+"
+
+[node name="curDIRlabel" type="Label" parent="Control/debugPanel/VBoxContainer"]
+layout_mode = 2
+text = "Current DIR:"
+
+[node name="curDIR" type="Label" parent="Control/debugPanel/VBoxContainer/curDIRlabel"]
+layout_mode = 2
+offset_left = 124.0
+offset_top = -1.0
+offset_right = 176.0
+offset_bottom = 22.0
+text = "(0, -16)"
+
+[node name="GridContainer" type="GridContainer" parent="Control/debugPanel/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="dirUP" type="Button" parent="Control/debugPanel/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Up"
+
+[node name="dirDown" type="Button" parent="Control/debugPanel/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Down"
+
+[node name="dirLeft" type="Button" parent="Control/debugPanel/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Left"
+
+[node name="dirRight" type="Button" parent="Control/debugPanel/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Right
+"
+
+[node name="+10button" type="Button" parent="Control/debugPanel/VBoxContainer"]
+layout_mode = 2
+text = "+10 coins
+"
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 31
+text = "GACHA PWN"
+
+[node name="player" type="Node2D" parent="." groups=["player"]]
+position = Vector2(576, 474)
+scale = Vector2(0.085, 0.085)
+
+[node name="Icon" type="Sprite2D" parent="player"]
+modulate = Color(0, 1, 0, 1)
+position = Vector2(0.000262737, -0.000442028)
+scale = Vector2(1.10294, 1.10294)
+texture = ExtResource("3_7y2kw")
+
+[node name="StaticBody2D" type="Area2D" parent="player"]
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player/StaticBody2D"]
+scale = Vector2(0.999999, 0.999999)
+shape = SubResource("RectangleShape2D_htn7m")
+
+[node name="junctions" type="Node2D" parent="."]
+
+[node name="L-DJuncs" type="Node2D" parent="junctions"]
+
+[node name="junction3" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(576, 426)
+
+[node name="junction4" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(720, 410)
+
+[node name="junction5" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(768, 378)
+
+[node name="junction6" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(768, 314)
+
+[node name="junction7" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(720, 266)
+
+[node name="junction8" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(672, 266)
+
+[node name="junction9" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(656, 250)
+
+[node name="junction10" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(608, 250)
+
+[node name="junction11" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(576, 250)
+
+[node name="junction12" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(528, 234)
+
+[node name="junction13" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(480, 202)
+
+[node name="junction14" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(512, 266)
+
+[node name="junction15" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(560, 266)
+
+[node name="junction16" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(640, 282)
+
+[node name="junction17" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(624, 314)
+
+[node name="junction18" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(736, 378)
+
+[node name="junction19" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(416, 410)
+
+[node name="junction20" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(432, 330)
+
+[node name="junction21" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(480, 314)
+
+[node name="junction22" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(432, 298)
+
+[node name="junction23" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(448, 154)
+
+[node name="junction24" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(448, 106)
+
+[node name="junction25" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(464, 74)
+
+[node name="junction26" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(544, 74)
+
+[node name="junction27" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(624, 74)
+
+[node name="junction28" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(752, 106)
+
+[node name="junction29" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(736, 122)
+
+[node name="junction30" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(736, 154)
+
+[node name="junction31" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(704, 202)
+
+[node name="junction32" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(608, 202)
+
+[node name="junction33" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(752, 234)
+
+[node name="junction34" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(736, 250)
+
+[node name="junction35" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(768, 122)
+
+[node name="junction" parent="junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(608, 410)
+
+[node name="R-DJuncs" type="Node2D" parent="junctions"]
+
+[node name="junction" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(384, 410)
+
+[node name="junction2" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(592, 410)
+
+[node name="junction3" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(400, 282)
+
+[node name="junction4" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(448, 202)
+
+[node name="junction5" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(432, 170)
+
+[node name="junction6" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(416, 122)
+
+[node name="junction7" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(432, 106)
+
+[node name="junction8" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(496, 74)
+
+[node name="junction9" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(528, 106)
+
+[node name="junction10" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(656, 74)
+
+[node name="junction11" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(672, 90)
+
+[node name="junction12" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(720, 138)
+
+[node name="junction13" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(704, 122)
+
+[node name="junction14" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(752, 138)
+
+[node name="junction15" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(720, 170)
+
+[node name="junction16" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(720, 202)
+
+[node name="junction17" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(688, 202)
+
+[node name="junction18" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(640, 186)
+
+[node name="junction19" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(576, 202)
+
+[node name="junction20" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(624, 250)
+
+[node name="junction21" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(592, 250)
+
+[node name="junction22" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(688, 282)
+
+[node name="junction23" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(704, 266)
+
+[node name="junction24" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(704, 378)
+
+[node name="junction25" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(752, 378)
+
+[node name="junction26" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(720, 362)
+
+[node name="junction27" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(672, 346)
+
+[node name="junction28" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(544, 282)
+
+[node name="junction29" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(528, 266)
+
+[node name="junction30" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(576, 282)
+
+[node name="junction31" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(448, 314)
+
+[node name="junction32" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(416, 298)
+
+[node name="junction33" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(608, 74)
+
+[node name="junction34" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(400, 74)
+
+[node name="junction35" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(384, 218)
+
+[node name="junction36" parent="junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(736, 426)
+
+[node name="L-UJuncs" type="Node2D" parent="junctions"]
+
+[node name="junction" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(720, 442)
+
+[node name="junction3" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(432, 362)
+
+[node name="junction4" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(560, 330)
+
+[node name="junction5" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(672, 426)
+
+[node name="junction6" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(752, 426)
+
+[node name="junction7" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(768, 458)
+
+[node name="junction8" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(768, 362)
+
+[node name="junction9" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(736, 346)
+
+[node name="junction10" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(720, 314)
+
+[node name="junction11" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(688, 298)
+
+[node name="junction12" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(704, 282)
+
+[node name="junction13" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(752, 186)
+
+[node name="junction14" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(704, 186)
+
+[node name="junction15" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(640, 218)
+
+[node name="junction16" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(688, 234)
+
+[node name="junction17" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(688, 170)
+
+[node name="junction18" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(672, 138)
+
+[node name="junction19" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(624, 170)
+
+[node name="junction20" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(608, 122)
+
+[node name="junction21" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(544, 154)
+
+[node name="junction22" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(544, 106)
+
+[node name="junction23" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(496, 186)
+
+[node name="junction24" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(432, 186)
+
+[node name="junction25" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(448, 170)
+
+[node name="junction26" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(448, 250)
+
+[node name="junction27" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(576, 218)
+
+[node name="junction28" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(736, 170)
+
+[node name="junction29" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(736, 138)
+
+[node name="junction30" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(624, 266)
+
+[node name="junction31" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(592, 266)
+
+[node name="junction32" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(560, 282)
+
+[node name="junction2" parent="junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(512, 458)
+
+[node name="R-UJuncs" type="Node2D" parent="junctions"]
+
+[node name="junction" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(384, 442)
+
+[node name="junction3" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(400, 458)
+
+[node name="junction4" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(448, 458)
+
+[node name="junction5" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(400, 394)
+
+[node name="junction6" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(416, 330)
+
+[node name="junction7" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(480, 378)
+
+[node name="junction8" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(512, 330)
+
+[node name="junction9" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(592, 346)
+
+[node name="junction10" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(576, 314)
+
+[node name="junction11" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(544, 298)
+
+[node name="junction12" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(704, 410)
+
+[node name="junction13" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(736, 394)
+
+[node name="junction14" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(624, 442)
+
+[node name="junction15" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(608, 458)
+
+[node name="junction16" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(384, 266)
+
+[node name="junction17" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(400, 250)
+
+[node name="junction18" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(384, 186)
+
+[node name="junction19" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(416, 154)
+
+[node name="junction20" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(448, 138)
+
+[node name="junction21" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(464, 186)
+
+[node name="junction22" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(608, 218)
+
+[node name="junction23" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(720, 154)
+
+[node name="junction24" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(720, 186)
+
+[node name="junction25" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(752, 122)
+
+[node name="junction26" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(720, 106)
+
+[node name="junction27" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(656, 106)
+
+[node name="junction28" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(656, 170)
+
+[node name="junction29" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(720, 218)
+
+[node name="junction30" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(656, 266)
+
+[node name="junction31" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(608, 266)
+
+[node name="junction32" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(576, 266)
+
+[node name="junction33" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(528, 250)
+
+[node name="junction34" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(480, 234)
+
+[node name="junction40" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(528, 218)
+
+[node name="junction41" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(544, 234)
+
+[node name="junction42" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(672, 298)
+
+[node name="junction35" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(528, 314)
+
+[node name="junction36" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(736, 442)
+
+[node name="junction37" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(752, 314)
+
+[node name="junction38" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(640, 426)
+
+[node name="junction39" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(704, 234)
+
+[node name="junction2" parent="junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(416, 442)
+
+[node name="TJuncs" type="Node2D" parent="junctions"]
+
+[node name="T -types" type="Node2D" parent="junctions/TJuncs"]
+
+[node name="junction" parent="junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
+position = Vector2(544, 330)
+
+[node name="junction2" parent="junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
+position = Vector2(560, 298)
+
+[node name="junction3" parent="junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
+position = Vector2(592, 314)
+
+[node name="junction4" parent="junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
+position = Vector2(688, 314)
+
+[node name="junction5" parent="junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
+position = Vector2(544, 218)
+
+[node name="junction6" parent="junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
+position = Vector2(528, 170)
+
+[node name="junction7" parent="junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
+position = Vector2(592, 170)
+
+[node name="junction8" parent="junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
+position = Vector2(656, 138)
+
+[node name="junction9" parent="junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
+position = Vector2(720, 90)
+
+[node name="junction10" parent="junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
+position = Vector2(512, 426)
+
+[node name="-| -types" type="Node2D" parent="junctions/TJuncs"]
+
+[node name="junction" parent="junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
+position = Vector2(400, 442)
+rotation = 1.57079
+dirType = 1
+
+[node name="junction2" parent="junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
+position = Vector2(448, 442)
+rotation = 1.57079
+dirType = 1
+
+[node name="junction3" parent="junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
+position = Vector2(448, 394)
+rotation = 1.57079
+dirType = 1
+
+[node name="junction4" parent="junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
+position = Vector2(624, 378)
+rotation = 1.57079
+dirType = 1
+
+[node name="junction5" parent="junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
+position = Vector2(768, 138)
+rotation = 1.57079
+dirType = 1
+
+[node name="junction6" parent="junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
+position = Vector2(672, 106)
+rotation = 1.57079
+dirType = 1
+
+[node name="junction7" parent="junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
+position = Vector2(400, 218)
+rotation = 1.57079
+dirType = 1
+
+[node name="junction8" parent="junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
+position = Vector2(400, 186)
+rotation = 1.57079
+dirType = 1
+
+[node name="junction9" parent="junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
+position = Vector2(768, 442)
+rotation = 1.57079
+dirType = 1
+
+[node name="junction13" parent="junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
+position = Vector2(752, 394)
+rotation = 1.57079
+dirType = 1
+
+[node name="junction10" parent="junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
+position = Vector2(768, 218)
+rotation = 1.57079
+dirType = 1
+
+[node name="junction11" parent="junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
+position = Vector2(576, 298)
+rotation = 1.57079
+dirType = 1
+
+[node name="junction12" parent="junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
+position = Vector2(512, 282)
+rotation = 1.57079
+dirType = 1
+
+[node name="junction14" parent="junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
+position = Vector2(624, 346)
+rotation = 1.57079
+dirType = 1
+
+[node name="|- -types" type="Node2D" parent="junctions/TJuncs"]
+
+[node name="junction" parent="junctions/TJuncs/|- -types" instance=ExtResource("10_15alu")]
+position = Vector2(400, 362)
+rotation = -1.57079
+dirType = 2
+
+[node name="junction2" parent="junctions/TJuncs/|- -types" instance=ExtResource("10_15alu")]
+position = Vector2(448, 426)
+rotation = -1.57079
+dirType = 2
+
+[node name="junction4" parent="junctions/TJuncs/|- -types" instance=ExtResource("10_15alu")]
+position = Vector2(656, 330)
+rotation = -1.57079
+dirType = 2
+
+[node name="junction5" parent="junctions/TJuncs/|- -types" instance=ExtResource("10_15alu")]
+position = Vector2(656, 314)
+rotation = -1.57079
+dirType = 2
+
+[node name="junction6" parent="junctions/TJuncs/|- -types" instance=ExtResource("10_15alu")]
+position = Vector2(624, 138)
+rotation = -1.57079
+dirType = 2
+
+[node name="junction7" parent="junctions/TJuncs/|- -types" instance=ExtResource("10_15alu")]
+position = Vector2(528, 122)
+rotation = -1.57079
+dirType = 2
+
+[node name="junction8" parent="junctions/TJuncs/|- -types" instance=ExtResource("10_15alu")]
+position = Vector2(496, 170)
+rotation = -1.57079
+dirType = 2
+
+[node name="Upside down-types" type="Node2D" parent="junctions/TJuncs"]
+
+[node name="junction" parent="junctions/TJuncs/Upside down-types" instance=ExtResource("10_15alu")]
+position = Vector2(720, 378)
+rotation = -3.14159
+dirType = 3
+
+[node name="junction2" parent="junctions/TJuncs/Upside down-types" instance=ExtResource("10_15alu")]
+position = Vector2(480, 458)
+rotation = -3.14159
+dirType = 3
+
+[node name="junction3" parent="junctions/TJuncs/Upside down-types" instance=ExtResource("10_15alu")]
+position = Vector2(688, 346)
+rotation = -3.14159
+dirType = 3
+
+[node name="junction4" parent="junctions/TJuncs/Upside down-types" instance=ExtResource("10_15alu")]
+position = Vector2(592, 202)
+rotation = -3.14159
+dirType = 3
+
+[node name="junction5" parent="junctions/TJuncs/Upside down-types" instance=ExtResource("10_15alu")]
+position = Vector2(528, 154)
+rotation = -3.14159
+dirType = 3
+
+[node name="junction6" parent="junctions/TJuncs/Upside down-types" instance=ExtResource("10_15alu")]
+position = Vector2(576, 170)
+rotation = -3.14159
+dirType = 3
+
+[node name="junction7" parent="junctions/TJuncs/Upside down-types" instance=ExtResource("10_15alu")]
+position = Vector2(544, 378)
+rotation = -3.14159
+dirType = 3
+
+[node name="TurnaroundJuncs" type="Node2D" parent="junctions"]
+
+[node name="junction" parent="junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(384, 74)
+
+[node name="junction2" parent="junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(400, 426)
+
+[node name="junction3" parent="junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(432, 458)
+
+[node name="junction4" parent="junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(480, 442)
+
+[node name="junction5" parent="junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(592, 458)
+
+[node name="junction6" parent="junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(656, 362)
+
+[node name="junction7" parent="junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(672, 330)
+
+[node name="junction8" parent="junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(656, 282)
+
+[node name="junction9" parent="junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(768, 298)
+
+[node name="junction10" parent="junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(752, 202)
+
+[node name="junction11" parent="junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(688, 138)
+
+[node name="junction12" parent="junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(752, 90)
+
+[node name="junction13" parent="junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(720, 74)
+
+[node name="junction14" parent="junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(480, 138)
+
+[node name="junction15" parent="junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(416, 186)
+
+[node name="junction16" parent="junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(512, 154)
+
+[node name="junction17" parent="junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(544, 138)
+
+[node name="junction18" parent="junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(432, 314)
+
+[node name="junction19" parent="junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(544, 314)
+
+[node name="4-wayJuncs" type="Node2D" parent="junctions"]
+
+[node name="junction" parent="junctions/4-wayJuncs" instance=ExtResource("12_2vg2p")]
+position = Vector2(576, 122)
+
+[node name="junction2" parent="junctions/4-wayJuncs" instance=ExtResource("12_2vg2p")]
+position = Vector2(464, 138)
+
+[node name="obtainables" type="Node2D" parent="."]
+
+[node name="obtainable" parent="obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(576, 458)
+
+[connection signal="pressed" from="Control/1spinButton" to="." method="_on_spin_button_pressed"]
+[connection signal="pressed" from="Control/debugPanel/VBoxContainer/resetbutton" to="." method="_on_resetbutton_pressed"]
+[connection signal="pressed" from="Control/debugPanel/VBoxContainer/posresButton" to="." method="_on_posres_button_pressed"]
+[connection signal="pressed" from="Control/debugPanel/VBoxContainer/GridContainer/dirUP" to="." method="_on_dir_up_pressed"]
+[connection signal="pressed" from="Control/debugPanel/VBoxContainer/GridContainer/dirDown" to="." method="_on_dir_down_pressed"]
+[connection signal="pressed" from="Control/debugPanel/VBoxContainer/GridContainer/dirLeft" to="." method="_on_dir_left_pressed"]
+[connection signal="pressed" from="Control/debugPanel/VBoxContainer/GridContainer/dirRight" to="." method="_on_dir_right_pressed"]
+[connection signal="pressed" from="Control/debugPanel/VBoxContainer/+10button" to="." method="_on_add10_button_pressed"]

@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://chgxilpcrsci7"]
+
+[ext_resource type="Script" path="res://Junctions/obtainable.gd" id="1_pbxrd"]
+[ext_resource type="Texture2D" uid="uid://ow34ey5ch8fr" path="res://Assets/obtainables/obt000-Sheet.png" id="2_l6vej"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u2rhb"]
+size = Vector2(14, 14)
+
+[node name="obtainable" type="Node2D"]
+script = ExtResource("1_pbxrd")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = -0.785398
+shape = SubResource("RectangleShape2D_u2rhb")
+debug_color = Color(0.6, 0, 1, 0.419608)
+
+[node name="Obt000-sheet" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_l6vej")
+hframes = 3
+frame = 1
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

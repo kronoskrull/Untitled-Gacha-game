@@ -125,6 +125,7 @@ func pauseForObtainable() -> void:
 	
 
 func getObtainable(obtainable: int) -> void:
+	pauseForObtainable()
 	match obtainable:
 		0, 1, 2:
 			print ("got common")

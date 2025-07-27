@@ -31,7 +31,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		randIndex = randi_range(spintables.commonObMaxIndex + 1, spintables.rareObMaxIndex)
 		
 	if rarity > 90 and rarity <= 100:                           # Ultra obtainable
-		randIndex = randi_range(spintables.rareObMaxIndex + 1, spintables.UltraObMaxIndex)
+		randIndex = randi_range(spintables.rareObMaxIndex + 1, spintables.ultraObMaxIndex)
 		
 	
 	var obtainable: int = masterObTable[randIndex]

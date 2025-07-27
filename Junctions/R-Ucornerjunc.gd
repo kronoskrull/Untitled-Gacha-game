@@ -12,7 +12,7 @@ func _process(delta: float) -> void:
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	var player = area.get_parent().get_parent()
+	var player = area.get_parent().get_parent().get_parent()
 	if player.playerDIR == Vector2(0, 32):
 		player.playerDIR = Vector2(-32, 0)
 	else:

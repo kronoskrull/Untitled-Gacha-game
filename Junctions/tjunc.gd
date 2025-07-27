@@ -10,8 +10,8 @@ extends Node2D
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	#breakpoint
-	var playerDIR = area.get_parent().get_parent().playerDIR
-	area.get_parent().get_parent().playerDIR = rollDIR(playerDIR)
+	var playerDIR = area.get_parent().get_parent().get_parent().playerDIR
+	playerDIR = rollDIR(playerDIR)
 	
 
 

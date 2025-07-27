@@ -54,7 +54,7 @@ viewport_path = NodePath("3Dlevel/SubViewport")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_swrcy"]
 
-[node name="level" type="Node2D"]
+[node name="level" type="Node3D"]
 script = ExtResource("1_rljoh")
 money = 1000
 
@@ -66,6 +66,7 @@ render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="3Dlevel/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 0.864459, 0.502703, 0, -0.502703, 0.864459, 0, 5.09885, 4.65409)
+current = true
 fov = 34.2778
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="3Dlevel"]
@@ -105,6 +106,7 @@ scale = Vector2(0.999999, 0.999999)
 shape = SubResource("RectangleShape2D_htn7m")
 
 [node name="Maze1_0" type="Sprite2D" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_tcoxg")
 position = Vector2(1150, 536)
 scale = Vector2(2, 2)
@@ -981,8 +983,14 @@ position = Vector2(464, 138)
 [node name="obtainables" type="Node2D" parent="."]
 
 [node name="obtainable" parent="obtainables" instance=ExtResource("13_2xnj0")]
-position = Vector2(1153, 852)
+position = Vector2(1152, 852)
 scale = Vector2(2, 2)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.32714, 11.5282)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.914642, 0.404264, 0, -0.404264, 0.914642, 0, 2.15805, 10.2964)
 
 [connection signal="pressed" from="Control/1spinButton" to="." method="_on_spin_button_pressed"]
 [connection signal="pressed" from="Control/debugPanel/VBoxContainer/resetbutton" to="." method="_on_resetbutton_pressed"]

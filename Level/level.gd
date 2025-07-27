@@ -1,10 +1,10 @@
-extends Node2D
+extends Node3D
 
 @onready var player: Node2D = $player
 var playerDIR: Vector2 = Vector2(0, -32)
 @onready var curDIRLabel: Label = $Control/debugPanel/VBoxContainer/curDIRlabel/curDIR
 
-var obtainablePause: bool = true
+var obtainablePause: bool = false
 @onready var fadeRect: ColorRect = $fadeRect
 
 var canSpin: bool = true
@@ -104,8 +104,9 @@ func move(distance: int) -> void:
 		for i in distance:
 			i = distance
 			if i > 0:
-				player.position = Vector2(player.position.x + playerDIR.x, player.position.y + playerDIR.y)
 				await pauseForObtainable()
+				player.position = Vector2(player.position.x + playerDIR.x, player.position.y + playerDIR.y)
+				
 				await get_tree().create_timer(0.6).timeout
 				distance -= 1
 		canSpin = true

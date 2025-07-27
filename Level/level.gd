@@ -1,11 +1,11 @@
 extends Node3D
 
-@onready var player: Node2D = $player
+@onready var player: Node2D = $SubViewport/player
 var playerDIR: Vector2 = Vector2(0, -32)
 @onready var curDIRLabel: Label = $Control/debugPanel/VBoxContainer/curDIRlabel/curDIR
 
 var obtainablePause: bool = false
-@onready var fadeRect: ColorRect = $fadeRect
+@onready var fadeRect: ColorRect = $SubViewport/fadeRect
 
 var canSpin: bool = true
 var spinOptions: spinTables = spinTables.new()

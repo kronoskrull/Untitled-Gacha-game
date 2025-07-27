@@ -17,7 +17,7 @@ func _process(delta: float) -> void:
 # Choose
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	
-	var player = area.get_parent().get_parent()
+	var player = area.get_parent().get_parent().get_parent()
 	
 	player.obtainablePause = true
 	

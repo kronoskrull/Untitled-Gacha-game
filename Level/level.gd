@@ -50,52 +50,10 @@ func interpretSpin() -> void:
 		
 		roll_result.text = str(spinResult)        #CULL
 		
-		var distance: int
-		match spinResult:
-			0:
-				distance = 0
-				move(distance)
-				effect.text = "Move forward 0 spaces"
-			1:
-				distance = 1
-				move(distance)
-				effect.text = "Move forward 1 space"
-			2:
-				distance = 2
-				move(distance)
-				effect.text = "Move forward 2 spaces"
-			3:
-				distance = 3
-				move(distance)
-				effect.text = "Move forward 3 spaces"
-			4:
-				distance = 4
-				move(distance)
-				effect.text = "Move forward 4 spaces"
-			5:
-				distance = 5
-				move(distance)
-				effect.text = "Move forward 5 spaces"
-			6:
-				money += 2
-				monUpdate()
-				effect.text = "Gain 2 coins"
-				canSpin = true
-			7:
-				money += 3
-				monUpdate()
-				effect.text = "Gain 3 coins"
-				canSpin = true
-			8:
-				money += 5
-				monUpdate()
-				effect.text = "Gain 5 coins"
-				canSpin = true
-			9:
-				money -= 1
-				monUpdate()
-				effect.text = "Lose 1 coin ;)"
-				canSpin = true
+		var distance: int = spinResult
+
+		move(distance)
+		effect.text = "Move forward " + str(distance) + " spaces"
 
 
 

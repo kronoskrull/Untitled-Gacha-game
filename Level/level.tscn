@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://drt1tip360qt7"]
+[gd_scene load_steps=22 format=3 uid="uid://drt1tip360qt7"]
 
 [ext_resource type="Texture2D" uid="uid://dhw6oc4h6i0ny" path="res://Assets/hudBlock1.0.png" id="1_a7teg"]
 [ext_resource type="Script" path="res://Level/level.gd" id="1_rljoh"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cm0qpwf8oyfq1" path="res://icon.svg" id="3_7y2kw"]
 [ext_resource type="Script" path="res://Spinner/spinner_placeholder.gd" id="3_thr51"]
 [ext_resource type="PackedScene" uid="uid://cv5v5t0ymabiv" path="res://Junctions/L-Dcornerjunc.tscn" id="4_1v6ax"]
+[ext_resource type="Texture2D" uid="uid://dyithwdhvhtwv" path="res://Assets/maze1.0.png" id="5_nn23b"]
 [ext_resource type="PackedScene" uid="uid://gvhpy1s1absr" path="res://Junctions/R-Dcornerjunc.tscn" id="7_r7vob"]
 [ext_resource type="PackedScene" uid="uid://br6hxiou2nh38" path="res://Junctions/L-Ucornerjunc.tscn" id="8_6yic6"]
 [ext_resource type="PackedScene" uid="uid://c5fn6ne537652" path="res://Junctions/R-Ucornerjunc.tscn" id="9_llhc3"]
@@ -13,18 +14,45 @@
 [ext_resource type="PackedScene" uid="uid://biirvrro4x38h" path="res://Junctions/Turnaroundjunc.tscn" id="11_j4p46"]
 [ext_resource type="PackedScene" uid="uid://bvdt4eqmecfd5" path="res://Junctions/4-Wayjunc.tscn" id="12_2vg2p"]
 [ext_resource type="PackedScene" uid="uid://chgxilpcrsci7" path="res://Interactables/obtainable.tscn" id="13_2xnj0"]
+[ext_resource type="Shader" path="res://Assets/crt_shader.gdshader" id="14_3swno"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e1sik"]
 render_priority = 0
 shader = ExtResource("2_osb5b")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_htn7m"]
+size = Vector2(141.177, 141.176)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tcoxg"]
+shader = ExtResource("14_3swno")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.4
+shader_parameter/scanlines_width = 0.25
+shader_parameter/grille_opacity = 0.0
+shader_parameter/resolution = Vector2(3764, 1696)
+shader_parameter/pixelate = true
+shader_parameter/roll = false
+shader_parameter/roll_speed = 8.0
+shader_parameter/roll_size = 0.0
+shader_parameter/roll_variation = 1.8
+shader_parameter/distort_intensity = 0.05
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.12
+shader_parameter/aberration = 4.75e-08
+shader_parameter/brightness = 1.4
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 1.0
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7jfsy"]
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_g52lm"]
 viewport_path = NodePath("3Dlevel/SubViewport")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_swrcy"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_htn7m"]
-size = Vector2(141.177, 141.176)
 
 [node name="level" type="Node2D"]
 script = ExtResource("1_rljoh")
@@ -55,24 +83,54 @@ script = ExtResource("3_thr51")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.248394, 0)
 
 [node name="HUDBlock" type="Sprite2D" parent="."]
-position = Vector2(576, 324)
+position = Vector2(1152, 648)
+scale = Vector2(2, 2)
 texture = ExtResource("1_a7teg")
 
+[node name="player" type="Node2D" parent="." groups=["player"]]
+position = Vector2(1152, 917)
+scale = Vector2(0.17, 0.17)
+
+[node name="Icon" type="Sprite2D" parent="player"]
+modulate = Color(0, 1, 0, 1)
+position = Vector2(0.000262737, -0.000442028)
+scale = Vector2(1.10294, 1.10294)
+texture = ExtResource("3_7y2kw")
+
+[node name="StaticBody2D" type="Area2D" parent="player"]
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player/StaticBody2D"]
+scale = Vector2(0.999999, 0.999999)
+shape = SubResource("RectangleShape2D_htn7m")
+
+[node name="Maze1_0" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_tcoxg")
+position = Vector2(1150, 536)
+scale = Vector2(2, 2)
+texture = ExtResource("5_nn23b")
+
+[node name="shaderregion" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_7jfsy")
+position = Vector2(341.25, 129.25)
+scale = Vector2(683.5, 259.5)
+
 [node name="spinnerView" type="Sprite2D" parent="."]
-position = Vector2(576, 572)
+position = Vector2(1157, 1144)
+scale = Vector2(2, 2)
 texture = SubResource("ViewportTexture_g52lm")
 
 [node name="fadeRect" type="ColorRect" parent="."]
-offset_right = 1152.0
-offset_bottom = 648.0
+offset_right = 2304.0
+offset_bottom = 1296.0
 color = Color(0, 0, 0, 0)
 
 [node name="Control" type="Control" parent="."]
 z_index = 6
 layout_mode = 3
 anchors_preset = 0
-offset_right = 1152.0
-offset_bottom = 648.0
+offset_right = 2304.0
+offset_bottom = 1296.0
 
 [node name="1spinButton" type="Button" parent="Control"]
 layout_mode = 1
@@ -81,12 +139,13 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -143.0
-offset_top = -145.0
-offset_right = 143.0
-offset_bottom = -97.0
+offset_left = -284.0
+offset_top = -288.0
+offset_right = 284.0
+offset_bottom = -197.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_font_sizes/font_size = 55
 text = "SPIN SPIN SPIN!!!!"
 
 [node name="rollResult" type="Label" parent="Control"]
@@ -97,12 +156,12 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -130.0
-offset_top = -86.0
+offset_top = -126.0
 offset_right = 131.0
-offset_bottom = -29.0
+offset_bottom = -69.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_font_sizes/font_size = 41
+theme_override_font_sizes/font_size = 82
 text = "ROLL RESULT"
 
 [node name="effectLabel" type="Label" parent="Control"]
@@ -112,10 +171,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 150.0
-offset_top = -131.0
-offset_right = 213.0
-offset_bottom = -108.0
+offset_left = 333.0
+offset_top = -248.0
+offset_right = 396.0
+offset_bottom = -225.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "EFFECT: "
@@ -127,10 +186,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 152.0
-offset_top = -108.0
-offset_right = 343.0
-offset_bottom = -3.0
+offset_left = 382.0
+offset_top = -181.0
+offset_right = 573.0
+offset_bottom = -76.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "EFFECT EFFECT EFFECT EFFECT EFFECT EFFECT EFFECT EFFECT EFFECT EFFECT EFFECT EFFECT"
@@ -141,8 +200,8 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -152.0
-offset_right = 206.0
+offset_top = -296.0
+offset_right = 399.0
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_swrcy")
 
@@ -226,27 +285,11 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 23.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 31
+theme_override_font_sizes/font_size = 62
 text = "GACHA PWN"
 
-[node name="player" type="Node2D" parent="." groups=["player"]]
-position = Vector2(576, 474)
-scale = Vector2(0.085, 0.085)
-
-[node name="Icon" type="Sprite2D" parent="player"]
-modulate = Color(0, 1, 0, 1)
-position = Vector2(0.000262737, -0.000442028)
-scale = Vector2(1.10294, 1.10294)
-texture = ExtResource("3_7y2kw")
-
-[node name="StaticBody2D" type="Area2D" parent="player"]
-collision_mask = 6
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="player/StaticBody2D"]
-scale = Vector2(0.999999, 0.999999)
-shape = SubResource("RectangleShape2D_htn7m")
-
 [node name="junctions" type="Node2D" parent="."]
+scale = Vector2(2, 2)
 
 [node name="L-DJuncs" type="Node2D" parent="junctions"]
 
@@ -938,7 +981,8 @@ position = Vector2(464, 138)
 [node name="obtainables" type="Node2D" parent="."]
 
 [node name="obtainable" parent="obtainables" instance=ExtResource("13_2xnj0")]
-position = Vector2(576, 458)
+position = Vector2(1153, 852)
+scale = Vector2(2, 2)
 
 [connection signal="pressed" from="Control/1spinButton" to="." method="_on_spin_button_pressed"]
 [connection signal="pressed" from="Control/debugPanel/VBoxContainer/resetbutton" to="." method="_on_resetbutton_pressed"]

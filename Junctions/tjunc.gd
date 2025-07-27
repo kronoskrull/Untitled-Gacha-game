@@ -25,20 +25,20 @@ func rollDIR(playerDIR) -> Vector2:
 			
 			match i:
 				0: # Left from point
-					if playerDIR != Vector2(16, 0):
-							playerDIR = Vector2(-16, 0)
+					if playerDIR != Vector2(32, 0):
+							playerDIR = Vector2(-32, 0)
 							return playerDIR
 					else:
 						rollDIR(playerDIR)
 				1: # Down from point
-					if playerDIR != Vector2(0, -16):
-						playerDIR = Vector2(0, 16)
+					if playerDIR != Vector2(0, -32):
+						playerDIR = Vector2(0, 32)
 						return playerDIR
 					else:
 						rollDIR(playerDIR)
 				2: # Right from point
-					if playerDIR != Vector2(-16, 0):
-						playerDIR = Vector2(16, 0)
+					if playerDIR != Vector2(-32, 0):
+						playerDIR = Vector2(32, 0)
 						return playerDIR
 					else:
 						rollDIR(playerDIR)
@@ -47,20 +47,20 @@ func rollDIR(playerDIR) -> Vector2:
 			
 			match i:
 				0: # Left from point
-					if playerDIR != Vector2(0, 16):
-							playerDIR = Vector2(0, -16)
+					if playerDIR != Vector2(0, 32):
+							playerDIR = Vector2(0, -32)
 							return playerDIR
 					else:
 						rollDIR(playerDIR)
 				1: # Down from point
-					if playerDIR != Vector2(16, 0):
-						playerDIR = Vector2(-16, 0)
+					if playerDIR != Vector2(32, 0):
+						playerDIR = Vector2(-32, 0)
 						return playerDIR
 					else:
 						rollDIR(playerDIR)
 				2: # Right from point
-					if playerDIR != Vector2(0, -16):
-						playerDIR = Vector2(0, 16)
+					if playerDIR != Vector2(0, -32):
+						playerDIR = Vector2(0, 32)
 						return playerDIR
 					else:
 						rollDIR(playerDIR)
@@ -69,20 +69,20 @@ func rollDIR(playerDIR) -> Vector2:
 			
 			match i:
 				0: # Left from point
-					if playerDIR != Vector2(0, -16):
-							playerDIR = Vector2(0, 16)
+					if playerDIR != Vector2(0, -32):
+							playerDIR = Vector2(0, 32)
 							return playerDIR
 					else:
 						rollDIR(playerDIR)
 				1: # Down from point
-					if playerDIR != Vector2(-16, 0):
-						playerDIR = Vector2(16, 0)
+					if playerDIR != Vector2(-32, 0):
+						playerDIR = Vector2(32, 0)
 						return playerDIR
 					else:
 						rollDIR(playerDIR)
 				2: # Right from point
-					if playerDIR != Vector2(0, 16):
-						playerDIR = Vector2(0, -16)
+					if playerDIR != Vector2(0, 32):
+						playerDIR = Vector2(0, -32)
 						return playerDIR
 					else:
 						rollDIR(playerDIR)
@@ -91,20 +91,20 @@ func rollDIR(playerDIR) -> Vector2:
 			
 			match i:
 				0: # Left from point
-					if playerDIR != Vector2(-16, 0):
-							playerDIR = Vector2(16, 0)
+					if playerDIR != Vector2(-32, 0):
+							playerDIR = Vector2(32, 0)
 							return playerDIR
 					else:
 						rollDIR(playerDIR)
 				1: # Down from point
-					if playerDIR != Vector2(0, 16):
-						playerDIR = Vector2(0, -16)
+					if playerDIR != Vector2(0, 32):
+						playerDIR = Vector2(0, -32)
 						return playerDIR
 					else:
 						rollDIR(playerDIR)
 				2: # Right from point
-					if playerDIR != Vector2(16, 0):
-						playerDIR = Vector2(-16, 0)
+					if playerDIR != Vector2(32, 0):
+						playerDIR = Vector2(-32, 0)
 						return playerDIR
 					else:
 						rollDIR(playerDIR)

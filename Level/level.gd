@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var player: Node2D = $player
-var playerDIR: Vector2 = Vector2(0, -16)
+var playerDIR: Vector2 = Vector2(0, -32)
 @onready var curDIRLabel: Label = $Control/debugPanel/VBoxContainer/curDIRlabel/curDIR
 
 var obtainablePause: bool = true
@@ -159,16 +159,16 @@ func _on_posres_button_pressed() -> void:
 
 
 func _on_dir_up_pressed() -> void:
-	playerDIR = Vector2(0, -16)
+	playerDIR = Vector2(0, -32)
 
 
 func _on_dir_down_pressed() -> void:
-	playerDIR = Vector2(0, 16)
+	playerDIR = Vector2(0, 32)
 
 
 func _on_dir_left_pressed() -> void:
-	playerDIR = Vector2(-16, 0)
+	playerDIR = Vector2(-32, 0)
 
 
 func _on_dir_right_pressed() -> void:
-	playerDIR = Vector2(16, 0)
+	playerDIR = Vector2(32, 0)

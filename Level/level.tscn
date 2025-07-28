@@ -1,12 +1,15 @@
-[gd_scene load_steps=23 format=3 uid="uid://drt1tip360qt7"]
+[gd_scene load_steps=35 format=3 uid="uid://drt1tip360qt7"]
 
-[ext_resource type="Texture2D" uid="uid://dhw6oc4h6i0ny" path="res://Assets/hudBlock1.0.png" id="1_a7teg"]
+[ext_resource type="Texture2D" uid="uid://dhw6oc4h6i0ny" path="res://Assets/effects/hudBlock1.0.png" id="1_a7teg"]
 [ext_resource type="Script" path="res://Level/level.gd" id="1_rljoh"]
-[ext_resource type="Shader" path="res://Assets/placeholder.gdshader" id="2_osb5b"]
-[ext_resource type="Texture2D" uid="uid://cm0qpwf8oyfq1" path="res://icon.svg" id="3_7y2kw"]
+[ext_resource type="Shader" path="res://Assets/shaders/placeholder.gdshader" id="2_osb5b"]
 [ext_resource type="Script" path="res://Spinner/spinner_placeholder.gd" id="3_thr51"]
 [ext_resource type="PackedScene" uid="uid://cv5v5t0ymabiv" path="res://Junctions/L-Dcornerjunc.tscn" id="4_1v6ax"]
+[ext_resource type="Texture2D" uid="uid://bhuv2qlc2tdvs" path="res://Assets/models/Spinner_tex.png" id="4_57hlo"]
+[ext_resource type="Texture2D" uid="uid://b05wrcfotqy8n" path="res://Assets/playerIcon_001.png" id="5_a7gi8"]
 [ext_resource type="Texture2D" uid="uid://dyithwdhvhtwv" path="res://Assets/maze1.0.png" id="5_nn23b"]
+[ext_resource type="ArrayMesh" uid="uid://d1lcl0yp5wud4" path="res://Assets/models/Spinner (1).obj" id="5_ynopn"]
+[ext_resource type="PackedScene" uid="uid://rwfyml6bh7va" path="res://Assets/models/Arcade (1).fbx" id="6_xd212"]
 [ext_resource type="PackedScene" uid="uid://gvhpy1s1absr" path="res://Junctions/R-Dcornerjunc.tscn" id="7_r7vob"]
 [ext_resource type="PackedScene" uid="uid://br6hxiou2nh38" path="res://Junctions/L-Ucornerjunc.tscn" id="8_6yic6"]
 [ext_resource type="PackedScene" uid="uid://c5fn6ne537652" path="res://Junctions/R-Ucornerjunc.tscn" id="9_llhc3"]
@@ -14,7 +17,9 @@
 [ext_resource type="PackedScene" uid="uid://biirvrro4x38h" path="res://Junctions/Turnaroundjunc.tscn" id="11_j4p46"]
 [ext_resource type="PackedScene" uid="uid://bvdt4eqmecfd5" path="res://Junctions/4-Wayjunc.tscn" id="12_2vg2p"]
 [ext_resource type="PackedScene" uid="uid://chgxilpcrsci7" path="res://Interactables/obtainable.tscn" id="13_2xnj0"]
-[ext_resource type="Shader" path="res://Assets/crt_shader.gdshader" id="14_3swno"]
+[ext_resource type="Shader" path="res://Assets/shaders/better_crt.gdshader" id="14_3swno"]
+[ext_resource type="FontFile" uid="uid://0kpmyoip0ktj" path="res://Assets/ka1.ttf" id="18_7x8mt"]
+[ext_resource type="FontFile" uid="uid://dmip7mk1p14dy" path="res://Assets/PrStart.ttf" id="20_fxtm5"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_3nx2p"]
 viewport_path = NodePath("SubViewport")
@@ -23,6 +28,25 @@ viewport_path = NodePath("SubViewport")
 render_priority = 0
 shader = ExtResource("2_osb5b")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_54ae4"]
+albedo_texture = ExtResource("4_57hlo")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nemm3"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0.5, 0.5, 0.5, 1)
+sky_energy_multiplier = 0.0
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.5, 0.5, 0.5, 1)
+
+[sub_resource type="Sky" id="Sky_0udfg"]
+sky_material = SubResource("ProceduralSkyMaterial_nemm3")
+
+[sub_resource type="Environment" id="Environment_tqm3s"]
+background_mode = 2
+sky = SubResource("Sky_0udfg")
+tonemap_mode = 2
+glow_enabled = true
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_htn7m"]
 size = Vector2(141.177, 141.176)
 
@@ -30,8 +54,8 @@ size = Vector2(141.177, 141.176)
 shader = ExtResource("14_3swno")
 shader_parameter/overlay = true
 shader_parameter/scanlines_opacity = 0.4
-shader_parameter/scanlines_width = 0.25
-shader_parameter/grille_opacity = 0.0
+shader_parameter/scanlines_width = 0.449
+shader_parameter/grille_opacity = 0.3
 shader_parameter/resolution = Vector2(7628, 3388)
 shader_parameter/pixelate = true
 shader_parameter/roll = false
@@ -41,10 +65,12 @@ shader_parameter/roll_variation = 1.8
 shader_parameter/distort_intensity = 0.05
 shader_parameter/noise_opacity = 0.4
 shader_parameter/noise_speed = 5.0
-shader_parameter/static_noise_intensity = 0.132
-shader_parameter/aberration = 0.00800005
+shader_parameter/static_noise_intensity = 0.166
+shader_parameter/variable_noise_intensity = true
+shader_parameter/aberration = 4.75e-08
+shader_parameter/aberration_variation = 0.008
 shader_parameter/brightness = 1.4
-shader_parameter/discolor = true
+shader_parameter/discolor = false
 shader_parameter/warp_amount = 1.0
 shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.4
@@ -55,6 +81,68 @@ shader_parameter/vignette_opacity = 0.0
 [sub_resource type="ViewportTexture" id="ViewportTexture_g52lm"]
 viewport_path = NodePath("3Dlevel/SubViewport")
 
+[sub_resource type="Animation" id="Animation_bne4e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("gotItem:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("itemSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, -59)]
+}
+
+[sub_resource type="Animation" id="Animation_kl46q"]
+resource_name = "blink_bob"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("gotItem:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("itemSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 1.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(1, -69), Vector2(1, -49)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pfo23"]
+_data = {
+"RESET": SubResource("Animation_bne4e"),
+"blink_bob": SubResource("Animation_kl46q")
+}
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_swrcy"]
 
 [node name="level" type="Node3D"]
@@ -62,44 +150,58 @@ script = ExtResource("1_rljoh")
 money = 1000
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.914642, 0.404264, 0, -0.404264, 0.914642, 0, 3.20218, 10.8347)
+transform = Transform3D(1, 0, 0, 0, 0.914642, 0.404264, 0, -0.404264, 0.914642, 0, 3.16594, 10.8507)
 texture = SubResource("ViewportTexture_3nx2p")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.992115, -0.125333, 0, 0.125333, 0.992115, -0.000522056, 1.44634, 20.2039)
+transform = Transform3D(1, 0, 0, 0, 0.982871, 0.184294, 0, -0.184294, 0.982871, -0.000522056, 4.34272, 21.4383)
 fov = 83.0
 
 [node name="lighting & env" type="Node3D" parent="."]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="lighting & env"]
 transform = Transform3D(-0.866024, -0.475921, -0.153307, 0, -0.306611, 0.951835, -0.500003, 0.824311, 0.265532, 0, 0, 0)
+shadow_enabled = true
 
 [node name="spinnerPLACEHOLDER" type="CSGCylinder3D" parent="lighting & env"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.516094, 18.1308)
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, -0.516094, 17.7286)
 radius = 3.24137
 height = 0.526783
 sides = 10
 material = SubResource("ShaderMaterial_e1sik")
 script = ExtResource("3_thr51")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="lighting & env/spinnerPLACEHOLDER"]
-transform = Transform3D(0.951057, 0, 0.309017, 0, 1, 0, -0.309017, 0, 0.951057, 0, 0.248394, 0)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="lighting & env"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0117798, 10.0422, 8.35042)
-size = Vector3(21, 6, 9)
+[node name="Spinner(1)" type="MeshInstance3D" parent="lighting & env/spinnerPLACEHOLDER"]
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0, 0.0360735, 0.0891991)
+material_override = SubResource("StandardMaterial3D_54ae4")
+mesh = ExtResource("5_ynopn")
+skeleton = NodePath("../../..")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="lighting & env"]
-transform = Transform3D(-4.02437e-08, 1.70625e-08, -1, 0.390346, 0.920668, 0, 0.920668, -0.390345, -4.37114e-08, -9.99911, -2.26265, 5.38854)
-size = Vector3(19.0253, 15.459, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.51265, 7.0075, -8.611)
+size = Vector3(78, 54, 1)
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="lighting & env"]
-transform = Transform3D(-4.02437e-08, 1.70625e-08, -1, 0.390346, 0.920668, 0, 0.920668, -0.390345, -4.37114e-08, 10.0009, -2.26265, 5.38855)
-size = Vector3(19.0253, 15.459, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.51265, 7.0075, 38.389)
+size = Vector3(78, 54, 1)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="lighting & env"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.00088501, -1.1501, 10.1422)
-size = Vector3(19.0253, 18.564, 1)
+[node name="CSGBox3D7" type="CSGBox3D" parent="lighting & env"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.51265, 33.0075, 17.389)
+size = Vector3(78, 54, 1)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="lighting & env"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 18.4873, 7.0075, 15.389)
+size = Vector3(78, 54, 1)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="lighting & env"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -20.5127, 7.0075, 15.389)
+size = Vector3(78, 54, 1)
+
+[node name="Arcade (1)" parent="lighting & env" instance=ExtResource("6_xd212")]
+transform = Transform3D(31, 0, 0, 0, 31, 0, 0, 0, 31, 0, -6.39379, 13.0707)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="lighting & env"]
+environment = SubResource("Environment_tqm3s")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 size = Vector2i(1907, 847)
@@ -114,10 +216,10 @@ position = Vector2(954, 804)
 scale = Vector2(0.17, 0.17)
 
 [node name="Icon" type="Sprite2D" parent="SubViewport/player"]
-modulate = Color(0, 1, 0, 1)
+modulate = Color(1, 0.916667, 0, 1)
 position = Vector2(0.000262737, -0.000442028)
-scale = Vector2(1.10294, 1.10294)
-texture = ExtResource("3_7y2kw")
+scale = Vector2(4.415, 4.415)
+texture = ExtResource("5_a7gi8")
 
 [node name="StaticBody2D" type="Area2D" parent="SubViewport/player"]
 collision_mask = 6
@@ -127,6 +229,7 @@ scale = Vector2(0.999999, 0.999999)
 shape = SubResource("RectangleShape2D_htn7m")
 
 [node name="Maze1_0" type="Sprite2D" parent="SubViewport"]
+visible = false
 material = SubResource("ShaderMaterial_tcoxg")
 position = Vector2(954, 423)
 scale = Vector2(2, 2)
@@ -146,6 +249,78 @@ texture = SubResource("ViewportTexture_g52lm")
 offset_right = 2304.0
 offset_bottom = 1296.0
 color = Color(0, 0, 0, 0)
+
+[node name="obtainables" type="Node2D" parent="SubViewport"]
+
+[node name="obtainable" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(1114, 612)
+scale = Vector2(2, 2)
+
+[node name="obtainable2" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(666, 804)
+scale = Vector2(2, 2)
+
+[node name="obtainable3" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(890, 516)
+scale = Vector2(2, 2)
+
+[node name="obtainedAnim" type="Node2D" parent="SubViewport"]
+visible = false
+position = Vector2(954, 412)
+
+[node name="itemSprite" type="Sprite2D" parent="SubViewport/obtainedAnim"]
+position = Vector2(1, -59)
+scale = Vector2(3, 3)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/obtainedAnim"]
+libraries = {
+"": SubResource("AnimationLibrary_pfo23")
+}
+
+[node name="gotItem" type="Label" parent="SubViewport/obtainedAnim"]
+offset_left = -334.0
+offset_top = -252.0
+offset_right = 337.0
+offset_bottom = -183.0
+theme_override_fonts/font = ExtResource("18_7x8mt")
+theme_override_font_sizes/font_size = 61
+text = "You got an item!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="itemname" type="Label" parent="SubViewport/obtainedAnim"]
+offset_left = -216.0
+offset_top = -188.0
+offset_right = 211.0
+offset_bottom = -83.0
+theme_override_fonts/font = ExtResource("20_fxtm5")
+theme_override_font_sizes/font_size = 41
+text = "[itemname]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="itemEffect" type="Label" parent="SubViewport/obtainedAnim"]
+offset_left = -325.0
+offset_top = 4.0
+offset_right = 326.0
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource("20_fxtm5")
+theme_override_font_sizes/font_size = 31
+text = "Adds +1 to every roll"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="commentLabel" type="Label" parent="SubViewport/obtainedAnim"]
+offset_left = -321.0
+offset_top = 143.0
+offset_right = 317.0
+offset_bottom = 247.0
+theme_override_fonts/font = ExtResource("20_fxtm5")
+theme_override_font_sizes/font_size = 26
+text = "Add1 to every roll"
+horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="junctions" type="Node2D" parent="SubViewport"]
 position = Vector2(-198, -112)
@@ -788,6 +963,9 @@ position = Vector2(480, 442)
 [node name="junction5" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
 position = Vector2(592, 458)
 
+[node name="junction20" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(576, 458)
+
 [node name="junction6" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
 position = Vector2(656, 362)
 
@@ -838,12 +1016,6 @@ position = Vector2(576, 122)
 [node name="junction2" parent="SubViewport/junctions/4-wayJuncs" instance=ExtResource("12_2vg2p")]
 position = Vector2(464, 138)
 
-[node name="obtainables" type="Node2D" parent="SubViewport"]
-
-[node name="obtainable" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
-position = Vector2(890, 740)
-scale = Vector2(2, 2)
-
 [node name="Control" type="Control" parent="."]
 z_index = 6
 layout_mode = 3
@@ -864,6 +1036,7 @@ offset_right = 284.0
 offset_bottom = -197.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("18_7x8mt")
 theme_override_font_sizes/font_size = 55
 text = "SPIN SPIN SPIN!!!!"
 
@@ -1005,8 +1178,29 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 23.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("18_7x8mt")
 theme_override_font_sizes/font_size = 62
 text = "GACHA PWN"
+
+[node name="rarityLabel" type="Label" parent="."]
+offset_left = 132.0
+offset_top = -161.0
+offset_right = 172.0
+offset_bottom = -104.0
+theme_override_font_sizes/font_size = 41
+
+[node name="rarityLabel" type="Label" parent="rarityLabel"]
+layout_mode = 0
+offset_left = 132.0
+offset_top = -161.0
+offset_right = 172.0
+offset_bottom = -104.0
+theme_override_font_sizes/font_size = 41
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 13, 27)
+light_energy = 5.202
+spot_range = 59.2358
 
 [connection signal="pressed" from="Control/1spinButton" to="." method="_on_spin_button_pressed"]
 [connection signal="pressed" from="Control/debugPanel/VBoxContainer/resetbutton" to="." method="_on_resetbutton_pressed"]

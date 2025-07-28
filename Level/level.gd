@@ -1,7 +1,7 @@
 extends Node3D
 
 @onready var player: Node2D = $SubViewport/player
-var playerDIR: Vector2 = Vector2(0, -32)
+var playerDIR: Vector2 = Vector2(0, 32)
 @onready var curDIRLabel: Label = $Control/debugPanel/VBoxContainer/curDIRlabel/curDIR
 
 var obtainablePause: bool = false
@@ -10,12 +10,27 @@ var obtainablePause: bool = false
 var canSpin: bool = true
 var spinOptions: spinTables = spinTables.new()
 var effectOps: Array = spinOptions.spinOpTable
+
 var spinOps: Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+var obtainedItems: Array = []
+
 @export var money: int = 5
 @onready var money_label: Label = $Control/Panel/moneyLabel
 
 @onready var roll_result: Label = $Control/rollResult
 @onready var effect: Label = $Control/effect
+
+
+var lastObtained: int
+@onready var itemSprite: Sprite2D = $SubViewport/obtainedAnim/itemSprite
+@onready var itemAnims: AnimationPlayer = $SubViewport/obtainedAnim/AnimationPlayer
+@onready var itemName: Label = $SubViewport/obtainedAnim/itemname
+@onready var itemEffect: Label = $SubViewport/obtainedAnim/itemEffect
+@onready var commentLabel: Label = $SubViewport/obtainedAnim/commentLabel
+@onready var obtainedAnim: Node2D = $SubViewport/obtainedAnim
+
+
 
 
 # Set the money count to whatever it's supposed to be
@@ -48,14 +63,38 @@ func interpretSpin() -> void:
 		var rawSpin = spinSpinner()
 		var spinResult: int = spinOps[rawSpin]
 		
-		roll_result.text = str(spinResult)        #CULL
+		if obtainedItems.has(5) and spinResult == 0:           #TODO
+			var i = randi_range(0, 3)
+			if i < 1:
+															   #TODO make an animation for when you reroll a 0
+				interpretSpin()
+		
+		
+		roll_result.text = str(spinResult)                     #CULL
+		
 		
 		var distance: int = spinResult
+		
+		
+		if obtainedItems.has(1):
+			var i = randi_range(0, 9)
+			if i < 1:
+				itemBob(1)
+				distance += 1
+		if obtainedItems.has(3):
+			itemBob(3)
+			distance += 1
+		
+		if obtainedItems.has(6):
+			itemBob(6)
+			distance += 2
 
 		move(distance)
 		effect.text = "Move forward " + str(distance) + " spaces"
 
 
+func itemBob(item: int) -> void:
+	pass
 
 func move(distance: int) -> void:
 	if distance > 0:
@@ -73,24 +112,89 @@ func move(distance: int) -> void:
 
 
 func pauseForObtainable() -> void:
-	
+
 	while obtainablePause:
 		fadeRect.color.a = lerpf(fadeRect.color.a, 0.5, 1)
+		obtainableAnim()
+		
 		await get_tree().create_timer(5.0).timeout
 		fadeRect.color.a = lerpf(fadeRect.color.a, 0, 1)
+		obtainedAnim.hide()
+		itemAnims.stop()
 		obtainablePause = false
 		continue
 	
 
+func obtainableAnim():
+	match lastObtained:
+		0:
+			itemSprite.set_texture(preload("res://Assets/obtainables/obt001.png"))
+			itemName.text = "Leg Day"
+			itemEffect.text = "1 in 10 chance to move an extra space"
+			commentLabel.text = "Maybe hitting the gym isn't such a bad idea"
+		1:
+			itemSprite.set_texture(preload("res://Assets/obtainables/obt002.png"))
+			itemName.text = "Lucky Break"
+			itemEffect.text = "1 in 4 chance for +1 coins when you obtain coins"
+			commentLabel.text = "A one-leaf clover HAS to be lucky sometime, right?"
+		2:
+			itemSprite.set_texture(preload("res://Assets/obtainables/obt001.png"))
+			itemName.text = "Negative Negation"
+			itemEffect.text = "1 in 20 chance to negate a negative space effect"
+			commentLabel.text = "If I can't see it, it doesn't exist!"
+		3:
+			itemSprite.set_texture(preload("res://Assets/obtainables/obt001.png"))
+			itemName.text = "Leg Day+"
+			itemEffect.text = "Adds +1 to every spin"
+			commentLabel.text = "Those gains are really paying off, huh?"
+		4:
+			itemSprite.set_texture(preload("res://Assets/obtainables/obt001.png"))
+			itemName.text = "Cash Advance"
+			itemEffect.text = "When gaining/losing coins, 1 in 4 chance to double the amount"
+			commentLabel.text = "Bank error in your favor (or not)"
+		5:
+			itemSprite.set_texture(preload("res://Assets/obtainables/obt001.png"))
+			itemName.text = "Anywhere But Here"
+			itemEffect.text = "1 in 4 chance to reroll every 0"
+			commentLabel.text = "We've all cheated at least once, right?"
+		6:
+			itemSprite.set_texture(preload("res://Assets/obtainables/obt001.png"))
+			itemName.text = "Leg Day++"
+			itemEffect.text = "Adds +2 to every spin"
+			commentLabel.text = "What are they putting in your pre-workout, man?!"
+		7:
+			itemSprite.set_texture(preload("res://Assets/obtainables/obt001.png"))
+			itemName.text = "Two's Company"
+			itemEffect.text = "Doubles all effect, item and roll odds"
+			commentLabel.text = "Oops, All Sixes!"
+		8:
+			itemSprite.set_texture(preload("res://Assets/obtainables/obt001.png"))
+			itemName.text = "Scot-Free"
+			itemEffect.text = "Pay 10 coins to negate a negative space effect"
+			commentLabel.text = "Just like in real life!"
+		9:
+			itemSprite.set_texture(preload("res://Assets/obtainables/obt001.png"))
+			itemName.text = "Multiroll"
+			itemEffect.text = "Roll 3 times, last roll upgrades the space effect!"
+			commentLabel.text = "This is where the fun begins!"
+	
+	obtainedAnim.show()
+	itemAnims.play("blink_bob")
+
+
 func getObtainable(obtainable: int) -> void:
-	pauseForObtainable()
+	
 	match obtainable:
 		0, 1, 2:
-			print ("got common")
+			print (spinOptions.masterObtainablesList[obtainable])
+			lastObtained = obtainable
 		3, 4, 5:
-			print ("got rare!")
+			print (spinOptions.masterObtainablesList[obtainable])
+			lastObtained = obtainable
 		6, 7, 8:
-			print ("got ultra!!!!")
+			print (spinOptions.masterObtainablesList[obtainable])
+			lastObtained = obtainable
+	pauseForObtainable()
 
 
 
@@ -115,7 +219,7 @@ func _on_add10_button_pressed() -> void:
 
 
 func _on_posres_button_pressed() -> void:
-	player.position = Vector2(576, 474)
+	player.position = Vector2(954, 804)
 
 
 func _on_dir_up_pressed() -> void:

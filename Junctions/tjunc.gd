@@ -10,13 +10,14 @@ extends Node2D
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	#breakpoint
+	var reroll = false
 	var playerDIR = area.get_parent().get_parent().get_parent().playerDIR
-	area.get_parent().get_parent().get_parent().playerDIR = rollDIR(playerDIR)
+	area.get_parent().get_parent().get_parent().playerDIR = rollDIR(playerDIR, reroll)
 	
 
 
 
-func rollDIR(playerDIR) -> Vector2:
+func rollDIR(playerDIR, reroll: bool) -> Vector2:
 	randomize()
 	var i = randi_range(0, 2)
 	
@@ -29,20 +30,42 @@ func rollDIR(playerDIR) -> Vector2:
 					if playerDIR != Vector2(32, 0):
 							playerDIR = Vector2(-32, 0)
 							return playerDIR
-					else:
-						rollDIR(playerDIR)
+					elif !reroll:
+						reroll = true
+						rollDIR(playerDIR, reroll)
+					elif reroll:
+						var r = randi_range(0, 1)
+						if r > 0:
+							playerDIR = Vector2(-32, 0)
+						else:
+							playerDIR = Vector2(0, 32)
+							
 				1: # Down from point
 					if playerDIR != Vector2(0, -32):
 						playerDIR = Vector2(0, 32)
 						return playerDIR
-					else:
-						rollDIR(playerDIR)
+					elif !reroll:
+						reroll = true
+						rollDIR(playerDIR, reroll)
+					elif reroll:
+						var r = randi_range(0, 1)
+						if r > 0:
+							playerDIR = Vector2(0, 32)
+						else:
+							playerDIR = Vector2(0, -32)
 				2: # Right from point
 					if playerDIR != Vector2(-32, 0):
 						playerDIR = Vector2(32, 0)
 						return playerDIR
-					else:
-						rollDIR(playerDIR)
+					elif !reroll:
+						reroll = true
+						rollDIR(playerDIR, reroll)
+					elif reroll:
+						var r = randi_range(0, 1)
+						if r > 0:
+							playerDIR = Vector2(32, 0)
+						else:
+							playerDIR = Vector2(0, 32)
 		
 		1: # Left-pointing T shape
 			
@@ -51,20 +74,41 @@ func rollDIR(playerDIR) -> Vector2:
 					if playerDIR != Vector2(0, 32):
 							playerDIR = Vector2(0, -32)
 							return playerDIR
-					else:
-						rollDIR(playerDIR)
+					elif !reroll:
+						reroll = true
+						rollDIR(playerDIR, reroll)
+					elif reroll:
+						var r = randi_range(0, 1)
+						if r > 0:
+							playerDIR = Vector2(0, -32)
+						else:
+							playerDIR = Vector2(-32, 0)
 				1: # Down from point
 					if playerDIR != Vector2(32, 0):
 						playerDIR = Vector2(-32, 0)
 						return playerDIR
-					else:
-						rollDIR(playerDIR)
+					elif !reroll:
+						reroll = true
+						rollDIR(playerDIR, reroll)
+					elif reroll:
+						var r = randi_range(0, 1)
+						if r > 0:
+							playerDIR = Vector2(-32, 0)
+						else:
+							playerDIR = Vector2(0, -32)
 				2: # Right from point
 					if playerDIR != Vector2(0, -32):
 						playerDIR = Vector2(0, 32)
 						return playerDIR
-					else:
-						rollDIR(playerDIR)
+					elif !reroll:
+						reroll = true
+						rollDIR(playerDIR, reroll)
+					elif reroll:
+						var r = randi_range(0, 1)
+						if r > 0:
+							playerDIR = Vector2(32, 0)
+						else:
+							playerDIR = Vector2(0, 32)
 		
 		2: # Right-pointing T shape
 			
@@ -74,19 +118,22 @@ func rollDIR(playerDIR) -> Vector2:
 							playerDIR = Vector2(0, 32)
 							return playerDIR
 					else:
-						rollDIR(playerDIR)
+						reroll = true
+						rollDIR(playerDIR, reroll)
 				1: # Down from point
 					if playerDIR != Vector2(-32, 0):
 						playerDIR = Vector2(32, 0)
 						return playerDIR
 					else:
-						rollDIR(playerDIR)
+						reroll = true
+						rollDIR(playerDIR, reroll)
 				2: # Right from point
 					if playerDIR != Vector2(0, 32):
 						playerDIR = Vector2(0, -32)
 						return playerDIR
 					else:
-						rollDIR(playerDIR)
+						reroll = true
+						rollDIR(playerDIR, reroll)
 		
 		3: # Upside-Down T shape
 			
@@ -96,18 +143,21 @@ func rollDIR(playerDIR) -> Vector2:
 							playerDIR = Vector2(32, 0)
 							return playerDIR
 					else:
-						rollDIR(playerDIR)
+						reroll = true
+						rollDIR(playerDIR, reroll)
 				1: # Down from point
 					if playerDIR != Vector2(0, 32):
 						playerDIR = Vector2(0, -32)
 						return playerDIR
 					else:
-						rollDIR(playerDIR)
+						reroll = true
+						rollDIR(playerDIR, reroll)
 				2: # Right from point
 					if playerDIR != Vector2(32, 0):
 						playerDIR = Vector2(-32, 0)
 						return playerDIR
 					else:
-						rollDIR(playerDIR)
+						reroll = true
+						rollDIR(playerDIR, reroll)
 	
 	return playerDIR

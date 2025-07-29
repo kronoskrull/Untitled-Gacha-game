@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://drt1tip360qt7"]
+[gd_scene load_steps=37 format=3 uid="uid://drt1tip360qt7"]
 
 [ext_resource type="Texture2D" uid="uid://dhw6oc4h6i0ny" path="res://Assets/effects/hudBlock1.0.png" id="1_a7teg"]
 [ext_resource type="Script" path="res://Level/level.gd" id="1_rljoh"]
@@ -46,6 +46,11 @@ background_mode = 2
 sky = SubResource("Sky_0udfg")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xmeaq"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cb8bq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_htn7m"]
 size = Vector2(141.177, 141.176)
@@ -172,7 +177,7 @@ material = SubResource("ShaderMaterial_e1sik")
 script = ExtResource("3_thr51")
 
 [node name="Spinner(1)" type="MeshInstance3D" parent="lighting & env/spinnerPLACEHOLDER"]
-transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0, 0.0360735, 0.0891991)
+transform = Transform3D(0.004, 0, 0, 0, 0.004, 0, 0, 0, 0.004, 0, 0.036, 0)
 material_override = SubResource("StandardMaterial3D_54ae4")
 mesh = ExtResource("5_ynopn")
 skeleton = NodePath("../../..")
@@ -203,7 +208,19 @@ transform = Transform3D(31, 0, 0, 0, 31, 0, 0, 0, 31, 0, -6.39379, 13.0707)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="lighting & env"]
 environment = SubResource("Environment_tqm3s")
 
+[node name="CSGBox3D" type="CSGBox3D" parent="lighting & env"]
+transform = Transform3D(0.3, 0, 0, 0, 0.6, 0, 0, 0, 0.3, 0, -0.177715, 15.1717)
+size = Vector3(1, 1.37207, 1)
+material = SubResource("StandardMaterial3D_xmeaq")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="lighting & env"]
+transform = Transform3D(0.3, 0, 0, 0, -1.8621e-08, -0.3, 0, 0.426, -1.31134e-08, 0, 0.203744, 15.7813)
+radius = 0.349336
+height = 3.52089
+material = SubResource("StandardMaterial3D_cb8bq")
+
 [node name="SubViewport" type="SubViewport" parent="."]
+handle_input_locally = false
 size = Vector2i(1907, 847)
 
 [node name="HUDBlock" type="Sprite2D" parent="SubViewport"]
@@ -229,7 +246,6 @@ scale = Vector2(0.999999, 0.999999)
 shape = SubResource("RectangleShape2D_htn7m")
 
 [node name="Maze1_0" type="Sprite2D" parent="SubViewport"]
-visible = false
 material = SubResource("ShaderMaterial_tcoxg")
 position = Vector2(954, 423)
 scale = Vector2(2, 2)
@@ -262,6 +278,14 @@ scale = Vector2(2, 2)
 
 [node name="obtainable3" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
 position = Vector2(890, 516)
+scale = Vector2(2, 2)
+
+[node name="obtainable4" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(954, 772)
+scale = Vector2(2, 2)
+
+[node name="obtainable5" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(922, 740)
 scale = Vector2(2, 2)
 
 [node name="obtainedAnim" type="Node2D" parent="SubViewport"]
@@ -1202,7 +1226,36 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 light_energy = 5.202
 spot_range = 59.2358
 
+[node name="inv" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="inventoryPanel" type="PanelContainer" parent="inv"]
+layout_mode = 0
+offset_left = 173.0
+offset_top = 89.0
+offset_right = 374.0
+offset_bottom = 391.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="inv/inventoryPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="inv"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 19.0
+offset_right = 393.0
+offset_bottom = 67.0
+theme_override_fonts/font = ExtResource("18_7x8mt")
+theme_override_font_sizes/font_size = 31
+text = "Inventory"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="pressed" from="Control/1spinButton" to="." method="_on_spin_button_pressed"]
+[connection signal="pressed" from="Control/1spinButton" to="lighting & env/spinnerPLACEHOLDER" method="_on_spin_button_pressed"]
 [connection signal="pressed" from="Control/debugPanel/VBoxContainer/resetbutton" to="." method="_on_resetbutton_pressed"]
 [connection signal="pressed" from="Control/debugPanel/VBoxContainer/posresButton" to="." method="_on_posres_button_pressed"]
 [connection signal="pressed" from="Control/debugPanel/VBoxContainer/GridContainer/dirUP" to="." method="_on_dir_up_pressed"]

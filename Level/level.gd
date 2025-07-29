@@ -29,12 +29,22 @@ var lastObtained: int
 @onready var itemEffect: Label = $SubViewport/obtainedAnim/itemEffect
 @onready var commentLabel: Label = $SubViewport/obtainedAnim/commentLabel
 @onready var obtainedAnim: Node2D = $SubViewport/obtainedAnim
+var itemsActivating: Array = [0]
+var newItemIndex: int
+var newActLabel: String
+@onready var invItem = preload("res://invItem.tscn")
+@onready var inventory: VBoxContainer = $inv/inventoryPanel/VBoxContainer
+var invItemInstance
+var rarity: Color
 
-
+var common: Color = Color.GREEN_YELLOW
+var rare: Color = Color.SKY_BLUE
+var ultraRare: Color = Color.DARK_MAGENTA
 
 
 # Set the money count to whatever it's supposed to be
 func _ready() -> void:
+	
 	monUpdate()
 
 func _process(delta: float) -> void: 
@@ -50,10 +60,6 @@ func monUpdate() -> void:
 # starts, it spins a random number 0 - 9 inclusive. This value is an index thatr corresponds to one of 
 # the ten available positions on the player spinner.
 
-# The main attraction for this function is the match table, which will house all the different possible
-# effects. 0 - 9 correspond to the base movement of 0 or 5 spaces, base gain of 2, 3, or 5 coins, or
-# loss of 1 extra coin that the spinner defaults to at the start of a run, and everything following 
-# is some other effect in no particular order for now.
 
 func interpretSpin() -> void:
 	if money > 0 and canSpin:
@@ -66,7 +72,9 @@ func interpretSpin() -> void:
 		if obtainedItems.has(5) and spinResult == 0:           #TODO
 			var i = randi_range(0, 3)
 			if i < 1:
-															   #TODO make an animation for when you reroll a 0
+				itemsActivating.clear()
+				itemsActivating.append(5)
+				itemActivate(itemsActivating)
 				interpretSpin()
 		
 		
@@ -79,22 +87,31 @@ func interpretSpin() -> void:
 		if obtainedItems.has(1):
 			var i = randi_range(0, 9)
 			if i < 1:
-				itemBob(1)
+				itemsActivating.clear()
+				itemsActivating.append(1)
+				itemActivate(itemsActivating)
 				distance += 1
 		if obtainedItems.has(3):
-			itemBob(3)
+			itemsActivating.clear()
+			itemsActivating.append(3)
+			itemActivate(itemsActivating)
 			distance += 1
 		
 		if obtainedItems.has(6):
-			itemBob(6)
+			itemsActivating.clear()
+			itemsActivating.append(6)
+			itemActivate(itemsActivating)
 			distance += 2
 
 		move(distance)
 		effect.text = "Move forward " + str(distance) + " spaces"
 
 
-func itemBob(item: int) -> void:
-	pass
+func itemActivate(items: Array) -> void:
+	for c in inventory.get_children():
+		if items.has(c.index):
+			c.activate()
+		await get_tree().create_timer(0.1).timeout
 
 func move(distance: int) -> void:
 	if distance > 0:
@@ -114,76 +131,113 @@ func move(distance: int) -> void:
 func pauseForObtainable() -> void:
 
 	while obtainablePause:
+		
 		fadeRect.color.a = lerpf(fadeRect.color.a, 0.5, 1)
+		invItemInstance = invItem.instantiate()
 		obtainableAnim()
 		
 		await get_tree().create_timer(5.0).timeout
 		fadeRect.color.a = lerpf(fadeRect.color.a, 0, 1)
 		obtainedAnim.hide()
 		itemAnims.stop()
+		
+		
+		inventory.add_child(invItemInstance)
+		invItemInstance.z_index = 5
+		invItemInstance.index = newItemIndex
+		invItemInstance.itemName.text = itemName.text
+		invItemInstance.itemName.self_modulate = Color(rarity)
+		invItemInstance.itemSprite.texture = itemSprite.texture
+		invItemInstance.descLabel.text = itemEffect.text
+		invItemInstance.activateTipLabel.text = newActLabel
+		invItemInstance.show()
+		
 		obtainablePause = false
 		continue
 	
 
 func obtainableAnim():
+	
 	match lastObtained:
 		0:
 			itemSprite.set_texture(preload("res://Assets/obtainables/obt001.png"))
 			itemName.text = "Leg Day"
 			itemEffect.text = "1 in 10 chance to move an extra space"
 			commentLabel.text = "Maybe hitting the gym isn't such a bad idea"
+			newActLabel = "+1 to roll!"
+			rarity = common
+			
 		1:
 			itemSprite.set_texture(preload("res://Assets/obtainables/obt002.png"))
 			itemName.text = "Lucky Break"
-			itemEffect.text = "1 in 4 chance for +1 coins when you obtain coins"
+			itemEffect.text = "1 in 5 chance for +1 coins when you obtain coins"
 			commentLabel.text = "A one-leaf clover HAS to be lucky sometime, right?"
+			newActLabel = "+1 coin!"
+			rarity = common
 		2:
 			itemSprite.set_texture(preload("res://Assets/obtainables/obt001.png"))
 			itemName.text = "Negative Negation"
 			itemEffect.text = "1 in 20 chance to negate a negative space effect"
 			commentLabel.text = "If I can't see it, it doesn't exist!"
+			newActLabel = "Effect Negated!"
+			rarity = common
 		3:
 			itemSprite.set_texture(preload("res://Assets/obtainables/obt001.png"))
 			itemName.text = "Leg Day+"
 			itemEffect.text = "Adds +1 to every spin"
 			commentLabel.text = "Those gains are really paying off, huh?"
+			newActLabel = "+1 to roll!"
+			rarity = rare
 		4:
 			itemSprite.set_texture(preload("res://Assets/obtainables/obt001.png"))
-			itemName.text = "Cash Advance"
+			itemName.text = "Bank Error"
 			itemEffect.text = "When gaining/losing coins, 1 in 4 chance to double the amount"
 			commentLabel.text = "Bank error in your favor (or not)"
+			newActLabel = "ERR0R"
+			rarity = rare
 		5:
 			itemSprite.set_texture(preload("res://Assets/obtainables/obt001.png"))
 			itemName.text = "Anywhere But Here"
 			itemEffect.text = "1 in 4 chance to reroll every 0"
 			commentLabel.text = "We've all cheated at least once, right?"
+			newActLabel = "Reroll!"
+			rarity = rare
 		6:
 			itemSprite.set_texture(preload("res://Assets/obtainables/obt001.png"))
 			itemName.text = "Leg Day++"
 			itemEffect.text = "Adds +2 to every spin"
-			commentLabel.text = "What are they putting in your pre-workout, man?!"
+			commentLabel.text = "What are they putting in your pre-workout, dude?!"
+			newActLabel = "+2 to roll!"
+			rarity = ultraRare
 		7:
 			itemSprite.set_texture(preload("res://Assets/obtainables/obt001.png"))
 			itemName.text = "Two's Company"
 			itemEffect.text = "Doubles all effect, item and roll odds"
 			commentLabel.text = "Oops, All Sixes!"
+			rarity = ultraRare
 		8:
 			itemSprite.set_texture(preload("res://Assets/obtainables/obt001.png"))
 			itemName.text = "Scot-Free"
 			itemEffect.text = "Pay 10 coins to negate a negative space effect"
 			commentLabel.text = "Just like in real life!"
+			newActLabel = "Consequences Escaped!"
+			rarity = ultraRare
 		9:
 			itemSprite.set_texture(preload("res://Assets/obtainables/obt001.png"))
 			itemName.text = "Multiroll"
 			itemEffect.text = "Roll 3 times, last roll upgrades the space effect!"
 			commentLabel.text = "This is where the fun begins!"
+			newActLabel = "Multiroll!"
+			
+	
 	
 	obtainedAnim.show()
 	itemAnims.play("blink_bob")
 
 
 func getObtainable(obtainable: int) -> void:
-	
+	newItemIndex = obtainable
+	obtainedItems.append(obtainable)
 	match obtainable:
 		0, 1, 2:
 			print (spinOptions.masterObtainablesList[obtainable])

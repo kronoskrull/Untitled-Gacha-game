@@ -1,5 +1,7 @@
 extends CSGCylinder3D
 
+@onready var level: Node3D = $"../.."
+
 var spinning: bool = false
 var spin_velocity: float = 0
 var friction: float = 0.98
@@ -22,6 +24,6 @@ func _process(delta: float) -> void:
 				spinning = false
 			self.rotation = currentAngle
 
-func _on_spin_button_pressed() -> void:
+func spin():
 	spin_velocity = randf_range(200, 500)
 	spinning = true

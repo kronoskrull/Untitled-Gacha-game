@@ -60,32 +60,6 @@ size = Vector2(141.177, 141.176)
 [sub_resource type="ViewportTexture" id="ViewportTexture_g52lm"]
 viewport_path = NodePath("3Dlevel/SubViewport")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tcoxg"]
-shader = ExtResource("14_3swno")
-shader_parameter/overlay = true
-shader_parameter/scanlines_opacity = 0.4
-shader_parameter/scanlines_width = 0.449
-shader_parameter/grille_opacity = 0.3
-shader_parameter/resolution = Vector2(7628, 3388)
-shader_parameter/pixelate = true
-shader_parameter/roll = false
-shader_parameter/roll_speed = 8.0
-shader_parameter/roll_size = 0.0
-shader_parameter/roll_variation = 1.8
-shader_parameter/distort_intensity = 0.05
-shader_parameter/noise_opacity = 0.4
-shader_parameter/noise_speed = 5.0
-shader_parameter/static_noise_intensity = 0.166
-shader_parameter/variable_noise_intensity = true
-shader_parameter/aberration = 4.75e-08
-shader_parameter/aberration_variation = 0.008
-shader_parameter/brightness = 1.4
-shader_parameter/discolor = false
-shader_parameter/warp_amount = 1.0
-shader_parameter/clip_warp = false
-shader_parameter/vignette_intensity = 0.4
-shader_parameter/vignette_opacity = 0.0
-
 [sub_resource type="Animation" id="Animation_bne4e"]
 length = 0.001
 tracks/0/type = "value"
@@ -148,11 +122,37 @@ _data = {
 "blink_bob": SubResource("Animation_kl46q")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tcoxg"]
+shader = ExtResource("14_3swno")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.4
+shader_parameter/scanlines_width = 0.449
+shader_parameter/grille_opacity = 0.3
+shader_parameter/resolution = Vector2(7628, 3388)
+shader_parameter/pixelate = true
+shader_parameter/roll = false
+shader_parameter/roll_speed = 8.0
+shader_parameter/roll_size = 0.0
+shader_parameter/roll_variation = 1.8
+shader_parameter/distort_intensity = 0.05
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.166
+shader_parameter/variable_noise_intensity = true
+shader_parameter/aberration = 4.75e-08
+shader_parameter/aberration_variation = 0.008
+shader_parameter/brightness = 1.4
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 1.0
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.0
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_swrcy"]
 
 [node name="level" type="Node3D"]
 script = ExtResource("1_rljoh")
-money = 1000
+money = 10
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.914642, 0.404264, 0, -0.404264, 0.914642, 0, 3.16594, 10.8507)
@@ -281,6 +281,105 @@ scale = Vector2(2, 2)
 [node name="obtainable5" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
 position = Vector2(922, 740)
 scale = Vector2(2, 2)
+
+[node name="eventAnim" type="Node2D" parent="SubViewport"]
+visible = false
+
+[node name="eventName" type="Label" parent="SubViewport/eventAnim"]
+offset_left = 38.0
+offset_top = 137.0
+offset_right = 1926.0
+offset_bottom = 200.0
+theme_override_fonts/font = ExtResource("18_7x8mt")
+theme_override_font_sizes/font_size = 56
+text = "ENRICHMENT MODULE"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="eventStory" type="Label" parent="SubViewport/eventAnim"]
+offset_left = 557.0
+offset_top = 496.0
+offset_right = 1376.0
+offset_bottom = 638.0
+theme_override_colors/font_color = Color(0.91, 0.811265, 0.0637, 1)
+theme_override_fonts/font = ExtResource("20_fxtm5")
+theme_override_font_sizes/font_size = 26
+text = "EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="eventEffect" type="Label" parent="SubViewport/eventAnim"]
+offset_left = 548.0
+offset_top = 264.0
+offset_right = 1403.0
+offset_bottom = 322.0
+theme_override_fonts/font = ExtResource("20_fxtm5")
+theme_override_font_sizes/font_size = 32
+text = "EVENTEFFECT"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="obtainedAnim" type="Node2D" parent="SubViewport"]
+visible = false
+position = Vector2(954, 412)
+
+[node name="itemSprite" type="Sprite2D" parent="SubViewport/obtainedAnim"]
+position = Vector2(1, -59)
+scale = Vector2(3, 3)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/obtainedAnim"]
+libraries = {
+"": SubResource("AnimationLibrary_pfo23")
+}
+
+[node name="gotItem" type="Label" parent="SubViewport/obtainedAnim"]
+offset_left = -334.0
+offset_top = -297.0
+offset_right = 337.0
+offset_bottom = -228.0
+theme_override_fonts/font = ExtResource("18_7x8mt")
+theme_override_font_sizes/font_size = 61
+text = "You got an item!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="itemname" type="Label" parent="SubViewport/obtainedAnim"]
+offset_left = -320.0
+offset_top = -188.0
+offset_right = 313.0
+offset_bottom = -83.0
+theme_override_fonts/font = ExtResource("20_fxtm5")
+theme_override_font_sizes/font_size = 41
+text = "[itemname]"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="itemEffect" type="Label" parent="SubViewport/obtainedAnim"]
+offset_left = -325.0
+offset_top = 4.0
+offset_right = 326.0
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource("20_fxtm5")
+theme_override_font_sizes/font_size = 31
+text = "Adds +1 to every roll"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="commentLabel" type="Label" parent="SubViewport/obtainedAnim"]
+offset_left = -321.0
+offset_top = 143.0
+offset_right = 317.0
+offset_bottom = 247.0
+theme_override_fonts/font = ExtResource("20_fxtm5")
+theme_override_font_sizes/font_size = 26
+text = "Add1 to every roll"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="Maze1_0" type="Sprite2D" parent="SubViewport"]
 material = SubResource("ShaderMaterial_tcoxg")
@@ -981,100 +1080,6 @@ position = Vector2(576, 122)
 
 [node name="junction2" parent="SubViewport/junctions/4-wayJuncs" instance=ExtResource("12_2vg2p")]
 position = Vector2(464, 138)
-
-[node name="obtainedAnim" type="Node2D" parent="SubViewport"]
-visible = false
-position = Vector2(954, 412)
-
-[node name="itemSprite" type="Sprite2D" parent="SubViewport/obtainedAnim"]
-position = Vector2(1, -59)
-scale = Vector2(3, 3)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/obtainedAnim"]
-libraries = {
-"": SubResource("AnimationLibrary_pfo23")
-}
-
-[node name="gotItem" type="Label" parent="SubViewport/obtainedAnim"]
-offset_left = -334.0
-offset_top = -252.0
-offset_right = 337.0
-offset_bottom = -183.0
-theme_override_fonts/font = ExtResource("18_7x8mt")
-theme_override_font_sizes/font_size = 61
-text = "You got an item!"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="itemname" type="Label" parent="SubViewport/obtainedAnim"]
-offset_left = -216.0
-offset_top = -188.0
-offset_right = 211.0
-offset_bottom = -83.0
-theme_override_fonts/font = ExtResource("20_fxtm5")
-theme_override_font_sizes/font_size = 41
-text = "[itemname]"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="itemEffect" type="Label" parent="SubViewport/obtainedAnim"]
-offset_left = -325.0
-offset_top = 4.0
-offset_right = 326.0
-offset_bottom = 48.0
-theme_override_fonts/font = ExtResource("20_fxtm5")
-theme_override_font_sizes/font_size = 31
-text = "Adds +1 to every roll"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="commentLabel" type="Label" parent="SubViewport/obtainedAnim"]
-offset_left = -321.0
-offset_top = 143.0
-offset_right = 317.0
-offset_bottom = 247.0
-theme_override_fonts/font = ExtResource("20_fxtm5")
-theme_override_font_sizes/font_size = 26
-text = "Add1 to every roll"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="eventAnim" type="Node2D" parent="SubViewport"]
-visible = false
-
-[node name="eventName" type="Label" parent="SubViewport/eventAnim"]
-offset_left = 620.0
-offset_top = 246.0
-offset_right = 1297.0
-offset_bottom = 309.0
-theme_override_fonts/font = ExtResource("18_7x8mt")
-theme_override_font_sizes/font_size = 56
-text = "EVENTNAME"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="eventStory" type="Label" parent="SubViewport/eventAnim"]
-offset_left = 589.0
-offset_top = 357.0
-offset_right = 1346.0
-offset_bottom = 499.0
-theme_override_fonts/font = ExtResource("20_fxtm5")
-theme_override_font_sizes/font_size = 31
-text = "EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT"
-autowrap_mode = 2
-
-[node name="eventEffect" type="Label" parent="SubViewport/eventAnim"]
-offset_left = 723.0
-offset_top = 512.0
-offset_right = 1172.0
-offset_bottom = 570.0
-theme_override_fonts/font = ExtResource("20_fxtm5")
-theme_override_font_sizes/font_size = 31
-text = "EVENTEFFECT"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Control" type="Control" parent="."]
 z_index = 6

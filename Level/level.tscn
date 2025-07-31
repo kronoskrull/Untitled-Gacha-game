@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://drt1tip360qt7"]
+[gd_scene load_steps=90 format=3 uid="uid://drt1tip360qt7"]
 
 [ext_resource type="Texture2D" uid="uid://dhw6oc4h6i0ny" path="res://Assets/effects/hudBlock1.0.png" id="1_a7teg"]
 [ext_resource type="Script" path="res://Level/level.gd" id="1_rljoh"]
@@ -32,6 +32,22 @@
 [ext_resource type="Script" path="res://Level/item_menu.gd" id="22_r6gmn"]
 [ext_resource type="Texture2D" uid="uid://b7wvvb7j8inh6" path="res://Assets/effects/eff2-2.png" id="25_2xqgb"]
 [ext_resource type="Texture2D" uid="uid://btpjuy8i06fk0" path="res://Assets/effects/eff2-4.png" id="26_2gl0d"]
+[ext_resource type="Script" path="res://Level/loan_shark.gd" id="31_2uu44"]
+[ext_resource type="Texture2D" uid="uid://wp6bh4b4fd5a" path="res://Assets/effects/coin.png" id="33_0rops"]
+[ext_resource type="PackedScene" uid="uid://bunptani1d1eu" path="res://Assets/DialogueSystem/dialogue_area_2d.tscn" id="35_lpwu7"]
+[ext_resource type="Script" path="res://Assets/DialogueSystem/DialofueExportResource.gd" id="37_7j578"]
+[ext_resource type="Script" path="res://Assets/DialogueSystem/DialogueTextResource.gd" id="38_ai8s7"]
+[ext_resource type="Texture2D" uid="uid://d4cwh6bd86sps" path="res://Assets/LOANUTSPRITE.png" id="39_luuut"]
+[ext_resource type="Texture2D" uid="uid://57iybrvl7hjs" path="res://Assets/spinnerSprite.png" id="40_ijctb"]
+[ext_resource type="AudioStream" uid="uid://wa54e02ajq43" path="res://Assets/Audio/90s-game-ui-6-185099.mp3" id="40_j3ykj"]
+[ext_resource type="Script" path="res://Level/spinner_menu.gd" id="40_rfyt5"]
+[ext_resource type="AudioStream" uid="uid://drlpemysk3yt" path="res://Assets/Audio/loanSharkBite.mp3" id="40_rmqjj"]
+[ext_resource type="AudioStream" uid="uid://vtguar4jeq3u" path="res://Assets/Audio/computer-hum-78343.mp3" id="41_ky7q4"]
+[ext_resource type="Script" path="res://Level/spinnerMenuItem.gd" id="41_vruw2"]
+[ext_resource type="AudioStream" uid="uid://cdkdswpo3yvbh" path="res://Assets/Audio/bicycle-wheel-spinning-49716.mp3" id="42_hc1ex"]
+[ext_resource type="PackedScene" uid="uid://ducs5xy0swvpi" path="res://Level/slot_upgrade_notif.tscn" id="43_b3boj"]
+[ext_resource type="Script" path="res://Level/spin_1.gd" id="43_k7kmd"]
+[ext_resource type="AudioStream" uid="uid://chyxlwa18yc4y" path="res://Assets/Audio/coin-drops-and-spins-272429.mp3" id="43_vwx3i"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_3nx2p"]
 viewport_path = NodePath("SubViewport")
@@ -142,6 +158,21 @@ _data = {
 "blink_bob": SubResource("Animation_kl46q")
 }
 
+[sub_resource type="Animation" id="Animation_c24m2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("eventSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(960, 420)]
+}
+
 [sub_resource type="Animation" id="Animation_5rmf5"]
 resource_name = "bob"
 loop_mode = 1
@@ -159,54 +190,10 @@ tracks/0/keys = {
 "values": [Vector2(960, 450), Vector2(960, 430)]
 }
 
-[sub_resource type="Animation" id="Animation_c24m2"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("eventSprite:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(960, 420)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xum8k"]
 _data = {
 "RESET": SubResource("Animation_c24m2"),
 "bob": SubResource("Animation_5rmf5")
-}
-
-[sub_resource type="Animation" id="Animation_x7hum"]
-resource_name = "hover"
-length = 16.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(4, 12),
-"transitions": PackedFloat32Array(-2, -2),
-"update": 0,
-"values": [Vector2(0, 8), Vector2(0, -8)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(6.13333, 15.5667),
-"transitions": PackedFloat32Array(-2, -2),
-"update": 0,
-"values": [0.0349066, -0.0349066]
 }
 
 [sub_resource type="Animation" id="Animation_gcbii"]
@@ -246,34 +233,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(3, 3)]
-}
-
-[sub_resource type="Animation" id="Animation_xxp08"]
-resource_name = "die"
-length = 1.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 18.8496]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(3, 3), Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_6qyfp"]
@@ -318,12 +277,83 @@ tracks/2/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_xxp08"]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 18.8496]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(3, 3), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_x7hum"]
+resource_name = "hover"
+length = 16.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(4, 12),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0, 8), Vector2(0, -8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(6.13333, 15.5667),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [0.0349066, -0.0349066]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2mk88"]
 _data = {
 "RESET": SubResource("Animation_gcbii"),
 "appear": SubResource("Animation_6qyfp"),
 "die": SubResource("Animation_xxp08"),
 "hover": SubResource("Animation_x7hum")
+}
+
+[sub_resource type="Animation" id="Animation_8mvvs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("deathLabel:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_hpev1"]
@@ -357,26 +387,252 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_8mvvs"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_exyok"]
+_data = {
+"RESET": SubResource("Animation_8mvvs"),
+"wobble": SubResource("Animation_hpev1")
+}
+
+[sub_resource type="Animation" id="Animation_2weyw"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("deathLabel:rotation")
+tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
 "values": [0.0]
 }
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_exyok"]
-_data = {
-"RESET": SubResource("Animation_8mvvs"),
-"wobble": SubResource("Animation_hpev1")
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(4, 4)]
 }
+
+[sub_resource type="Animation" id="Animation_d4kem"]
+resource_name = "appear"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(3, 3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.666667, 0.8, 1.16667),
+"transitions": PackedFloat32Array(-2, -2, -2, 0.5),
+"update": 0,
+"values": [0.0, 12.5664, 12.5664, 6.28319]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"show"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_6d6ms"]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 18.8496]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(3, 3), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_mnnni"]
+resource_name = "hover"
+length = 16.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(4, 12),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0, 5), Vector2(0, -5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(6.13333, 15.5667),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [0.0349066, -0.0349066]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y8u0f"]
+_data = {
+"RESET": SubResource("Animation_2weyw"),
+"appear": SubResource("Animation_d4kem"),
+"die": SubResource("Animation_6d6ms"),
+"hover": SubResource("Animation_mnnni")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lbd2a"]
+size = Vector2(71, 121)
+
+[sub_resource type="Resource" id="Resource_yag6p"]
+script = ExtResource("38_ai8s7")
+speaker_name = "Loan Shark"
+speaker_img = ExtResource("39_luuut")
+speaker_img_Hframes = 2
+speaker_img_rest_frame = 0
+text = "Hey there, couldn't help but notice you're..."
+text_speed = 15.0
+text_sound = ExtResource("40_rmqjj")
+text_volume_db = 60
+text_volume_pitch_min = 0.85
+text_volume_pitch_max = 1.15
+camera_position = Vector2(999.999, 999.999)
+camera_transition_time = 1.0
+
+[sub_resource type="Resource" id="Resource_q8hcw"]
+script = ExtResource("38_ai8s7")
+speaker_name = "Loan Shark"
+speaker_img = ExtResource("39_luuut")
+speaker_img_Hframes = 2
+speaker_img_rest_frame = 0
+text = "...flat broke."
+text_speed = 15.0
+text_sound = ExtResource("40_rmqjj")
+text_volume_db = 20
+text_volume_pitch_min = 0.85
+text_volume_pitch_max = 1.15
+camera_position = Vector2(999.999, 999.999)
+camera_transition_time = 1.0
+
+[sub_resource type="Resource" id="Resource_emugd"]
+script = ExtResource("38_ai8s7")
+speaker_name = ""
+speaker_img = ExtResource("39_luuut")
+speaker_img_Hframes = 2
+speaker_img_rest_frame = 0
+text = "Luckily for you, I just so happen to have..."
+text_speed = 15.0
+text_sound = ExtResource("40_rmqjj")
+text_volume_db = 20
+text_volume_pitch_min = 0.85
+text_volume_pitch_max = 1.15
+camera_position = Vector2(999.999, 999.999)
+camera_transition_time = 1.0
+
+[sub_resource type="Resource" id="Resource_gniqk"]
+script = ExtResource("38_ai8s7")
+speaker_name = ""
+speaker_img = ExtResource("39_luuut")
+speaker_img_Hframes = 2
+speaker_img_rest_frame = 0
+text = "Just the solution to your problems!"
+text_speed = 15.0
+text_sound = ExtResource("40_rmqjj")
+text_volume_db = 20
+text_volume_pitch_min = 0.85
+text_volume_pitch_max = 1.15
+camera_position = Vector2(999.999, 999.999)
+camera_transition_time = 1.0
+
+[sub_resource type="Resource" id="Resource_ayycp"]
+script = ExtResource("38_ai8s7")
+speaker_name = ""
+speaker_img = ExtResource("39_luuut")
+speaker_img_Hframes = 2
+speaker_img_rest_frame = 0
+text = "I'll give ya a loan, on the house!"
+text_speed = 15.0
+text_sound = ExtResource("40_rmqjj")
+text_volume_db = 0
+text_volume_pitch_min = 0.85
+text_volume_pitch_max = 1.15
+camera_position = Vector2(999.999, 999.999)
+camera_transition_time = 1.0
+
+[sub_resource type="Resource" id="Resource_gxm60"]
+script = ExtResource("38_ai8s7")
+speaker_name = ""
+speaker_img = ExtResource("39_luuut")
+speaker_img_Hframes = 2
+speaker_img_rest_frame = 0
+text = "Don't spend it all in one place!"
+text_speed = 15.0
+text_sound = ExtResource("40_rmqjj")
+text_volume_db = 0
+text_volume_pitch_min = 0.85
+text_volume_pitch_max = 1.15
+camera_position = Vector2(999.999, 999.999)
+camera_transition_time = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0r3jn"]
+size = Vector2(73, 171)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tcoxg"]
 shader = ExtResource("14_3swno")
@@ -404,11 +660,9 @@ shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.4
 shader_parameter/vignette_opacity = 0.0
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_swrcy"]
-
 [node name="level" type="Node3D"]
 script = ExtResource("1_rljoh")
-money = 10
+money = 6
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.914642, 0.404264, 0, -0.404264, 0.914642, 0, 3.16594, 10.8507)
@@ -519,6 +773,151 @@ light_energy = 5.202
 spot_range = 19.5835
 spot_angle = 40.0165
 
+[node name="OmniLight3D2" type="OmniLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.0651, -0.114143, 15.2303)
+light_color = Color(0.00999999, 0.3235, 1, 1)
+light_energy = 0.73
+omni_range = 1.08408
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.0651, -0.114143, 16.843)
+light_color = Color(1, 0.00999999, 0.0264997, 1)
+light_energy = 0.09
+omni_range = 1.08408
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.86345, -0.114143, 16.8095)
+light_color = Color(1, 0.934, 0.00999999, 1)
+light_energy = 0.215
+omni_range = 1.08408
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.86345, -0.114143, 15.2363)
+light_color = Color(0.2575, 1, 0.00999999, 1)
+light_energy = 0.34
+omni_range = 1.08408
+
+[node name="OmniLight3D6" type="OmniLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.41335, 0.733178, 13)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D7" type="OmniLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.41335, 1.6002, 12.7047)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D8" type="OmniLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.41335, 2.53882, 12.3263)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D9" type="OmniLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.41335, 3.5338, 11.7609)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D10" type="OmniLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.41335, 4.32928, 11.2678)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D11" type="OmniLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.33469, 5.46129, 10.8724)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D12" type="OmniLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.28795, 0.733178, 13)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D18" type="OmniLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.97146, 0.0505127, 15.1721)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D19" type="OmniLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.97146, 0.0505127, 16.7788)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D20" type="OmniLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.03142, 0.0505127, 16.7788)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D21" type="OmniLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.23107, 0.0505127, 15.3028)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D22" type="OmniLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.12396, 8.61285, 13.6383)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+shadow_enabled = true
+omni_range = 2.72934
+
+[node name="OmniLight3D23" type="OmniLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.936165, 8.90057, 13.6383)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+shadow_enabled = true
+omni_range = 2.72934
+
+[node name="OmniLight3D24" type="OmniLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.34035, 8.90057, 13.6383)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+shadow_enabled = true
+omni_range = 2.72934
+
+[node name="OmniLight3D25" type="OmniLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.94457, 8.90057, 13.6383)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+shadow_enabled = true
+omni_range = 2.72934
+
+[node name="OmniLight3D26" type="OmniLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.30877, 9.43467, 13.6383)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+shadow_enabled = true
+omni_range = 2.72934
+
+[node name="OmniLight3D13" type="OmniLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.28795, 1.6002, 12.7047)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D14" type="OmniLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.28795, 2.53882, 12.3263)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D15" type="OmniLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.28795, 3.5338, 11.7609)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D16" type="OmniLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.28795, 4.32928, 11.2678)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D17" type="OmniLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.36661, 5.46129, 10.8724)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, -0.607154, 0.794584, 0, -0.794584, -0.607154, 0.0166435, 2.76153, 14.7341)
+light_energy = 4.075
+spot_range = 7.70424
+spot_angle = 38.5348
+
 [node name="SubViewport" type="SubViewport" parent="."]
 handle_input_locally = false
 size = Vector2i(1907, 847)
@@ -616,7 +1015,7 @@ scale = Vector2(2, 2)
 position = Vector2(666, 516)
 scale = Vector2(2, 2)
 
-[node name="player" type="Node2D" parent="SubViewport" groups=["player"]]
+[node name="player" type="Node2D" parent="SubViewport"]
 position = Vector2(954, 804)
 scale = Vector2(0.17, 0.17)
 
@@ -697,13 +1096,6 @@ text = "Add1 to every roll"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
-
-[node name="Loanshark-final" type="Sprite2D" parent="SubViewport"]
-visible = false
-position = Vector2(928, 321)
-scale = Vector2(2, 2)
-texture = ExtResource("12_x2e4q")
-hframes = 7
 
 [node name="eventAnim" type="Node2D" parent="SubViewport"]
 visible = false
@@ -1283,11 +1675,79 @@ libraries = {
 "": SubResource("AnimationLibrary_exyok")
 }
 
-[node name="Maze1_0" type="Sprite2D" parent="SubViewport"]
-material = SubResource("ShaderMaterial_tcoxg")
-position = Vector2(954, 423)
+[node name="coinNumber" type="Control" parent="SubViewport"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 257.0
+offset_top = 345.0
+offset_right = 297.0
+offset_bottom = 385.0
+scale = Vector2(1.5, 1.5)
+
+[node name="statusSprite" type="Control" parent="SubViewport/coinNumber"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("14_dc3qn")
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewport/coinNumber/statusSprite"]
+texture_filter = 1
+scale = Vector2(4, 4)
+texture = ExtResource("33_0rops")
+
+[node name="stimButton" type="Button" parent="SubViewport/coinNumber/statusSprite/Sprite2D"]
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+flat = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/coinNumber/statusSprite"]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_y8u0f")
+}
+
+[node name="moneyLabel" type="Label" parent="SubViewport/coinNumber/statusSprite"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 38.0
+offset_top = -22.6667
+offset_right = 77.0
+offset_bottom = 0.333332
 scale = Vector2(2, 2)
-texture = ExtResource("5_nn23b")
+theme_override_colors/font_color = Color(1, 0.878333, 0.27, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("18_7x8mt")
+theme_override_font_sizes/font_size = 16
+text = "10"
+autowrap_mode = 2
+
+[node name="loanShark" type="CharacterBody2D" parent="SubViewport" groups=["player"]]
+position = Vector2(-200, 174)
+scale = Vector2(2, 2)
+script = ExtResource("31_2uu44")
+
+[node name="Loanshark-final" type="Sprite2D" parent="SubViewport/loanShark"]
+texture = ExtResource("12_x2e4q")
+hframes = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewport/loanShark"]
+position = Vector2(25.5, 0.5)
+shape = SubResource("RectangleShape2D_lbd2a")
+
+[node name="targetNode" type="Node2D" parent="SubViewport/loanShark"]
+position = Vector2(330, 165)
+
+[node name="DialogueArea2D" parent="SubViewport" instance=ExtResource("35_lpwu7")]
+activate_instant = true
+override_dialogue_position = true
+override_position = Vector2(1147, 1034)
+dialogue = Array[ExtResource("37_7j578")]([SubResource("Resource_yag6p"), SubResource("Resource_q8hcw"), SubResource("Resource_emugd"), SubResource("Resource_gniqk"), SubResource("Resource_ayycp"), SubResource("Resource_gxm60")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewport/DialogueArea2D"]
+position = Vector2(468, 195)
+shape = SubResource("RectangleShape2D_0r3jn")
 
 [node name="junctions" type="Node2D" parent="SubViewport"]
 position = Vector2(-198, -112)
@@ -1927,6 +2387,27 @@ position = Vector2(432, 458)
 [node name="junction4" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
 position = Vector2(480, 442)
 
+[node name="junction21" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(480, 474)
+
+[node name="junction22" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(383.5, 362)
+
+[node name="junction23" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(785.5, 442.5)
+
+[node name="junction24" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(785.5, 217.5)
+
+[node name="junction25" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(785.5, 138)
+
+[node name="junction26" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(528, 282)
+
+[node name="junction27" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(592.5, 298)
+
 [node name="junction5" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
 position = Vector2(592, 458)
 
@@ -1983,6 +2464,12 @@ position = Vector2(576, 122)
 [node name="junction2" parent="SubViewport/junctions/4-wayJuncs" instance=ExtResource("12_2vg2p")]
 position = Vector2(464, 138)
 
+[node name="Maze1_0" type="Sprite2D" parent="SubViewport"]
+material = SubResource("ShaderMaterial_tcoxg")
+position = Vector2(954, 423)
+scale = Vector2(2, 2)
+texture = ExtResource("5_nn23b")
+
 [node name="Control" type="Control" parent="."]
 z_index = 6
 layout_mode = 3
@@ -2021,21 +2508,6 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 82
 text = "0"
-
-[node name="Panel" type="PanelContainer" parent="Control"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -296.0
-offset_right = 399.0
-grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_swrcy")
-
-[node name="moneyLabel" type="Label" parent="Control/Panel"]
-layout_mode = 2
-size_flags_vertical = 0
-text = "   MONS:  0"
 
 [node name="debugPanel" type="PanelContainer" parent="Control"]
 visible = false
@@ -2305,20 +2777,390 @@ text = "Loaded Dice"
 layout_mode = 2
 text = "Scot-Free"
 
-[node name="rarityLabel" type="Label" parent="."]
-offset_left = 132.0
-offset_top = -161.0
-offset_right = 172.0
-offset_bottom = -104.0
-theme_override_font_sizes/font_size = 41
-
-[node name="rarityLabel" type="Label" parent="rarityLabel"]
+[node name="spinnerMenu" type="Panel" parent="Control"]
 layout_mode = 0
-offset_left = 132.0
-offset_top = -161.0
-offset_right = 172.0
-offset_bottom = -104.0
-theme_override_font_sizes/font_size = 41
+offset_left = 789.0
+offset_top = 162.0
+offset_right = 1516.0
+offset_bottom = 852.0
+script = ExtResource("40_rfyt5")
+
+[node name="spinnerSprite" type="Control" parent="Control/spinnerMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Area2D" type="Sprite2D" parent="Control/spinnerMenu/spinnerSprite"]
+position = Vector2(21.5, 34)
+scale = Vector2(10, 10)
+texture = ExtResource("40_ijctb")
+
+[node name="spinnerSlot0" type="Control" parent="Control/spinnerMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 118.0
+offset_top = 302.0
+offset_right = -609.0
+offset_bottom = -388.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="item" type="Button" parent="Control/spinnerMenu/spinnerSlot0"]
+z_index = 5
+layout_mode = 0
+offset_left = -69.0
+offset_top = -20.0
+offset_right = 47.0
+offset_bottom = 18.0
+theme_override_fonts/font = ExtResource("18_7x8mt")
+theme_override_font_sizes/font_size = 20
+text = "0
+"
+script = ExtResource("41_vruw2")
+
+[node name="desc" type="Label" parent="Control/spinnerMenu/spinnerSlot0/item"]
+layout_mode = 0
+offset_left = -138.0
+offset_top = -50.0
+offset_right = 18.0
+offset_bottom = -20.0
+theme_override_font_sizes/font_size = 21
+text = "sampletext"
+autowrap_mode = 2
+
+[node name="spinnerSlot1" type="Control" parent="Control/spinnerMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 162.0
+offset_top = 163.0
+offset_right = -565.0
+offset_bottom = -527.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="item" type="Button" parent="Control/spinnerMenu/spinnerSlot1"]
+z_index = 5
+layout_mode = 0
+offset_left = -27.0
+offset_top = -16.0
+offset_right = 89.0
+offset_bottom = 22.0
+theme_override_fonts/font = ExtResource("18_7x8mt")
+theme_override_font_sizes/font_size = 20
+text = "1"
+script = ExtResource("41_vruw2")
+index = 1
+
+[node name="desc" type="Label" parent="Control/spinnerMenu/spinnerSlot1/item"]
+layout_mode = 0
+offset_left = -136.0
+offset_top = -56.0
+offset_right = 20.0
+offset_bottom = -26.0
+theme_override_font_sizes/font_size = 21
+text = "sampletext"
+autowrap_mode = 2
+
+[node name="spinnerSlot2" type="Control" parent="Control/spinnerMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 312.0
+offset_top = 549.0
+offset_right = -415.0
+offset_bottom = -141.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="item" type="Button" parent="Control/spinnerMenu/spinnerSlot2"]
+z_index = 5
+layout_mode = 0
+offset_left = -5.0
+offset_top = -480.0
+offset_right = 111.0
+offset_bottom = -442.0
+theme_override_fonts/font = ExtResource("18_7x8mt")
+theme_override_font_sizes/font_size = 20
+text = "2"
+script = ExtResource("41_vruw2")
+index = 2
+
+[node name="desc" type="Label" parent="Control/spinnerMenu/spinnerSlot2/item"]
+layout_mode = 0
+offset_left = -14.0
+offset_top = -64.0
+offset_right = 142.0
+offset_bottom = -34.0
+theme_override_font_sizes/font_size = 21
+text = "sampletext"
+autowrap_mode = 2
+
+[node name="spinnerSlot3" type="Control" parent="Control/spinnerMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 445.0
+offset_top = 481.0
+offset_right = -282.0
+offset_bottom = -209.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="item" type="Button" parent="Control/spinnerMenu/spinnerSlot3"]
+z_index = 5
+layout_mode = 0
+offset_left = 50.0
+offset_top = -337.0
+offset_right = 166.0
+offset_bottom = -299.0
+theme_override_fonts/font = ExtResource("18_7x8mt")
+theme_override_font_sizes/font_size = 20
+text = "3"
+script = ExtResource("41_vruw2")
+index = 3
+
+[node name="desc" type="Label" parent="Control/spinnerMenu/spinnerSlot3/item"]
+layout_mode = 0
+offset_left = 102.0
+offset_top = -59.0
+offset_right = 258.0
+offset_bottom = -29.0
+theme_override_font_sizes/font_size = 21
+text = "sampletext"
+autowrap_mode = 2
+
+[node name="spinnerSlot4" type="Control" parent="Control/spinnerMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 169.0
+offset_top = 483.0
+offset_right = -558.0
+offset_bottom = -207.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="item" type="Button" parent="Control/spinnerMenu/spinnerSlot4"]
+z_index = 5
+layout_mode = 0
+offset_left = 404.0
+offset_top = -195.0
+offset_right = 520.0
+offset_bottom = -157.0
+theme_override_fonts/font = ExtResource("18_7x8mt")
+theme_override_font_sizes/font_size = 20
+text = "4"
+script = ExtResource("41_vruw2")
+index = 4
+
+[node name="desc" type="Label" parent="Control/spinnerMenu/spinnerSlot4/item"]
+layout_mode = 0
+offset_left = 93.0
+offset_top = -57.0
+offset_right = 249.0
+offset_bottom = -27.0
+theme_override_font_sizes/font_size = 21
+text = "sampletext"
+autowrap_mode = 2
+
+[node name="spinnerSlot5" type="Control" parent="Control/spinnerMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 121.0
+offset_top = 381.0
+offset_right = -606.0
+offset_bottom = -309.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="item" type="Button" parent="Control/spinnerMenu/spinnerSlot5"]
+z_index = 5
+layout_mode = 0
+offset_left = 451.0
+offset_top = 15.0
+offset_right = 567.0
+offset_bottom = 53.0
+theme_override_fonts/font = ExtResource("18_7x8mt")
+theme_override_font_sizes/font_size = 20
+text = "5"
+script = ExtResource("41_vruw2")
+index = 5
+
+[node name="desc" type="Label" parent="Control/spinnerMenu/spinnerSlot5/item"]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 63.0
+offset_right = 218.0
+offset_bottom = 93.0
+theme_override_font_sizes/font_size = 21
+text = "sampletext"
+autowrap_mode = 2
+
+[node name="spinnerSlot6" type="Control" parent="Control/spinnerMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 511.0
+offset_top = 384.0
+offset_right = -216.0
+offset_bottom = -306.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="item" type="Button" parent="Control/spinnerMenu/spinnerSlot6"]
+z_index = 5
+layout_mode = 0
+offset_left = -34.0
+offset_top = 149.0
+offset_right = 82.0
+offset_bottom = 187.0
+theme_override_fonts/font = ExtResource("18_7x8mt")
+theme_override_font_sizes/font_size = 20
+text = "6"
+script = ExtResource("41_vruw2")
+index = 6
+
+[node name="desc" type="Label" parent="Control/spinnerMenu/spinnerSlot6/item"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 77.0
+offset_right = 236.0
+offset_bottom = 107.0
+theme_override_font_sizes/font_size = 21
+text = "sampletext"
+autowrap_mode = 2
+
+[node name="spinnerSlot7" type="Control" parent="Control/spinnerMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 514.0
+offset_top = 297.0
+offset_right = -213.0
+offset_bottom = -393.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="item" type="Button" parent="Control/spinnerMenu/spinnerSlot7"]
+z_index = 5
+layout_mode = 0
+offset_left = -212.0
+offset_top = 313.0
+offset_right = -96.0
+offset_bottom = 351.0
+theme_override_fonts/font = ExtResource("18_7x8mt")
+theme_override_font_sizes/font_size = 20
+text = "7"
+script = ExtResource("41_vruw2")
+index = 7
+
+[node name="desc" type="Label" parent="Control/spinnerMenu/spinnerSlot7/item"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 56.0
+offset_right = 154.0
+offset_bottom = 86.0
+theme_override_font_sizes/font_size = 21
+text = "sampletext"
+autowrap_mode = 2
+
+[node name="spinnerSlot8" type="Control" parent="Control/spinnerMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 452.0
+offset_top = 163.0
+offset_right = -275.0
+offset_bottom = -527.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="item" type="Button" parent="Control/spinnerMenu/spinnerSlot8"]
+z_index = 5
+layout_mode = 0
+offset_left = -343.0
+offset_top = 374.0
+offset_right = -227.0
+offset_bottom = 412.0
+theme_override_fonts/font = ExtResource("18_7x8mt")
+theme_override_font_sizes/font_size = 20
+text = "8"
+script = ExtResource("41_vruw2")
+index = 8
+
+[node name="desc" type="Label" parent="Control/spinnerMenu/spinnerSlot8/item"]
+layout_mode = 0
+offset_left = -97.0
+offset_top = 65.0
+offset_right = 59.0
+offset_bottom = 95.0
+theme_override_font_sizes/font_size = 21
+text = "sampletext"
+autowrap_mode = 2
+
+[node name="spinnerSlot9" type="Control" parent="Control/spinnerMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 308.0
+offset_top = 106.0
+offset_right = -419.0
+offset_bottom = -584.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="item" type="Button" parent="Control/spinnerMenu/spinnerSlot9"]
+z_index = 5
+layout_mode = 0
+offset_left = -262.0
+offset_top = 291.0
+offset_right = -146.0
+offset_bottom = 329.0
+theme_override_fonts/font = ExtResource("18_7x8mt")
+theme_override_font_sizes/font_size = 20
+text = "9"
+script = ExtResource("41_vruw2")
+index = 9
+
+[node name="desc" type="Label" parent="Control/spinnerMenu/spinnerSlot9/item"]
+layout_mode = 0
+offset_left = -143.0
+offset_top = 44.0
+offset_right = 13.0
+offset_bottom = 74.0
+theme_override_font_sizes/font_size = 21
+text = "sampletext"
+autowrap_mode = 2
+
+[node name="slotUpgradeNotif" parent="Control" instance=ExtResource("43_b3boj")]
+visible = false
+layout_mode = 1
+offset_left = 1292.0
+offset_top = 1170.0
+offset_right = -1012.0
+offset_bottom = -126.0
 
 [node name="inv" type="Control" parent="."]
 layout_mode = 3
@@ -2346,12 +3188,45 @@ text = "Inventory"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1152, 648)
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(301, 165)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7257, 12.0131)
+stream = ExtResource("40_j3ykj")
+max_polyphony = 1000
+
+[node name="ambience1" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("41_ky7q4")
+volume_db = 2.0
+autoplay = true
+max_polyphony = 1000
+
+[node name="spin1" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("42_hc1ex")
+volume_db = 3.0
+max_polyphony = 1000
+script = ExtResource("43_k7kmd")
+
+[node name="spin2" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("43_vwx3i")
+volume_db = 14.376
+max_polyphony = 1000
+
+[node name="spinSoundTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="animation_finished" from="SubViewport/status/PanelContainer/1-0/statusSprite/AnimationPlayer" to="SubViewport/status/PanelContainer/1-0/statusSprite" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="SubViewport/status/PanelContainer/1-2/statusSprite/AnimationPlayer" to="SubViewport/status/PanelContainer/1-2/statusSprite" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="SubViewport/status/PanelContainer/1-3/statusSprite/AnimationPlayer" to="SubViewport/status/PanelContainer/1-3/statusSprite" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="SubViewport/status/PanelContainer/1-5/statusSprite/AnimationPlayer" to="SubViewport/status/PanelContainer/1-5/statusSprite" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="SubViewport/status/PanelContainer/2-2/statusSprite/AnimationPlayer" to="SubViewport/status/PanelContainer/2-2/statusSprite" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="SubViewport/status/PanelContainer/2-4/statusSprite/AnimationPlayer" to="SubViewport/status/PanelContainer/2-4/statusSprite" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="SubViewport/coinNumber/statusSprite/AnimationPlayer" to="SubViewport/coinNumber/statusSprite" method="_on_animation_player_animation_finished"]
 [connection signal="pressed" from="Control/1spinButton" to="." method="_on_spin_button_pressed"]
 [connection signal="pressed" from="Control/1spinButton" to="lighting & env/spinnerPLACEHOLDER" method="_on_spin_button_pressed"]
 [connection signal="pressed" from="Control/debugPanel/VBoxContainer/resetbutton" to="." method="_on_resetbutton_pressed"]
@@ -2387,3 +3262,24 @@ vertical_alignment = 1
 [connection signal="pressed" from="Control/itemMenu/VBoxContainer/Button7" to="Control/itemMenu" method="_on_button_7_pressed"]
 [connection signal="pressed" from="Control/itemMenu/VBoxContainer/Button8" to="Control/itemMenu" method="_on_button_8_pressed"]
 [connection signal="pressed" from="Control/itemMenu/VBoxContainer/Button9" to="Control/itemMenu" method="_on_button_9_pressed"]
+[connection signal="button_down" from="Control/spinnerMenu/spinnerSlot0/item" to="Control/spinnerMenu/spinnerSlot0/item" method="_on_button_down"]
+[connection signal="button_up" from="Control/spinnerMenu/spinnerSlot0/item" to="Control/spinnerMenu/spinnerSlot0/item" method="_on_button_up"]
+[connection signal="button_down" from="Control/spinnerMenu/spinnerSlot1/item" to="Control/spinnerMenu/spinnerSlot1/item" method="_on_button_down"]
+[connection signal="button_up" from="Control/spinnerMenu/spinnerSlot1/item" to="Control/spinnerMenu/spinnerSlot1/item" method="_on_button_up"]
+[connection signal="button_down" from="Control/spinnerMenu/spinnerSlot2/item" to="Control/spinnerMenu/spinnerSlot2/item" method="_on_button_down"]
+[connection signal="button_up" from="Control/spinnerMenu/spinnerSlot2/item" to="Control/spinnerMenu/spinnerSlot2/item" method="_on_button_up"]
+[connection signal="button_down" from="Control/spinnerMenu/spinnerSlot3/item" to="Control/spinnerMenu/spinnerSlot3/item" method="_on_button_down"]
+[connection signal="button_up" from="Control/spinnerMenu/spinnerSlot3/item" to="Control/spinnerMenu/spinnerSlot3/item" method="_on_button_up"]
+[connection signal="button_down" from="Control/spinnerMenu/spinnerSlot4/item" to="Control/spinnerMenu/spinnerSlot4/item" method="_on_button_down"]
+[connection signal="button_up" from="Control/spinnerMenu/spinnerSlot4/item" to="Control/spinnerMenu/spinnerSlot4/item" method="_on_button_up"]
+[connection signal="button_down" from="Control/spinnerMenu/spinnerSlot5/item" to="Control/spinnerMenu/spinnerSlot5/item" method="_on_button_down"]
+[connection signal="button_up" from="Control/spinnerMenu/spinnerSlot5/item" to="Control/spinnerMenu/spinnerSlot5/item" method="_on_button_up"]
+[connection signal="button_down" from="Control/spinnerMenu/spinnerSlot6/item" to="Control/spinnerMenu/spinnerSlot6/item" method="_on_button_down"]
+[connection signal="button_up" from="Control/spinnerMenu/spinnerSlot6/item" to="Control/spinnerMenu/spinnerSlot6/item" method="_on_button_up"]
+[connection signal="button_down" from="Control/spinnerMenu/spinnerSlot7/item" to="Control/spinnerMenu/spinnerSlot7/item" method="_on_button_down"]
+[connection signal="button_up" from="Control/spinnerMenu/spinnerSlot7/item" to="Control/spinnerMenu/spinnerSlot7/item" method="_on_button_up"]
+[connection signal="button_down" from="Control/spinnerMenu/spinnerSlot8/item" to="Control/spinnerMenu/spinnerSlot8/item" method="_on_button_down"]
+[connection signal="button_up" from="Control/spinnerMenu/spinnerSlot8/item" to="Control/spinnerMenu/spinnerSlot8/item" method="_on_button_up"]
+[connection signal="button_down" from="Control/spinnerMenu/spinnerSlot9/item" to="Control/spinnerMenu/spinnerSlot9/item" method="_on_button_down"]
+[connection signal="button_up" from="Control/spinnerMenu/spinnerSlot9/item" to="Control/spinnerMenu/spinnerSlot9/item" method="_on_button_up"]
+[connection signal="timeout" from="spinSoundTimer" to="." method="_on_spin_sound_timer_timeout"]

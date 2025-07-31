@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bhmp3u1og6j0k" path="res://Assets/effects/eff1-0.png" id="2_ohfoq"]
 [ext_resource type="FontFile" uid="uid://0kpmyoip0ktj" path="res://Assets/ka1.ttf" id="3_fmxcn"]
 
-[sub_resource type="Animation" id="Animation_gcbii"]
+[sub_resource type="Animation" id="Animation_2weyw"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -40,10 +40,10 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(3, 3)]
+"values": [Vector2(4, 4)]
 }
 
-[sub_resource type="Animation" id="Animation_6qyfp"]
+[sub_resource type="Animation" id="Animation_d4kem"]
 resource_name = "appear"
 length = 1.5
 tracks/0/type = "value"
@@ -85,7 +85,7 @@ tracks/2/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_xxp08"]
+[sub_resource type="Animation" id="Animation_6d6ms"]
 resource_name = "die"
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -112,7 +112,7 @@ tracks/1/keys = {
 "values": [Vector2(3, 3), Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_x7hum"]
+[sub_resource type="Animation" id="Animation_mnnni"]
 resource_name = "hover"
 length = 16.0
 loop_mode = 1
@@ -126,7 +126,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(4, 12),
 "transitions": PackedFloat32Array(-2, -2),
 "update": 0,
-"values": [Vector2(0, 8), Vector2(0, -8)]
+"values": [Vector2(0, 5), Vector2(0, -5)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -141,12 +141,12 @@ tracks/1/keys = {
 "values": [0.0349066, -0.0349066]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2mk88"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y8u0f"]
 _data = {
-"RESET": SubResource("Animation_gcbii"),
-"appear": SubResource("Animation_6qyfp"),
-"die": SubResource("Animation_xxp08"),
-"hover": SubResource("Animation_x7hum")
+"RESET": SubResource("Animation_2weyw"),
+"appear": SubResource("Animation_d4kem"),
+"die": SubResource("Animation_6d6ms"),
+"hover": SubResource("Animation_mnnni")
 }
 
 [sub_resource type="Animation" id="Animation_8mvvs"]
@@ -207,13 +207,13 @@ anchors_preset = 0
 script = ExtResource("1_2tbqf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(3, 3)
+scale = Vector2(4, 4)
 texture = ExtResource("2_ohfoq")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
 libraries = {
-"": SubResource("AnimationLibrary_2mk88")
+"": SubResource("AnimationLibrary_y8u0f")
 }
 
 [node name="deathLabel" type="Label" parent="."]

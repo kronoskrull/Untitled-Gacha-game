@@ -13,13 +13,13 @@ var canSpin: bool = true
 var spinOptions: spinTables = spinTables.new()
 var effectOps: Array = spinOptions.spinOpTable
 
-var spinOps: Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
 
 var obtainedItems: Array = []
 
 @export var money: int = 5
 var deltaMoney: int = 0
-@onready var money_label: Label = $Control/Panel/moneyLabel
+@onready var money_label: Label = $SubViewport/coinNumber/statusSprite/moneyLabel
 
 @onready var roll_result: Label = $Control/rollResult
 
@@ -76,6 +76,20 @@ var eventPause: bool = false
 @onready var statusSprite2_4: Control = $"SubViewport/status/PanelContainer/2-4/statusSprite"
 
 
+@onready var spinner_slot_0: Control = $Control/spinnerMenu/spinnerSlot0
+@onready var spinner_slot_1: Control = $Control/spinnerMenu/spinnerSlot1
+@onready var spinner_slot_2: Control = $Control/spinnerMenu/spinnerSlot2
+@onready var spinner_slot_3: Control = $Control/spinnerMenu/spinnerSlot3
+@onready var spinner_slot_4: Control = $Control/spinnerMenu/spinnerSlot4
+@onready var spinner_slot_5: Control = $Control/spinnerMenu/spinnerSlot5
+@onready var spinner_slot_6: Control = $Control/spinnerMenu/spinnerSlot6
+@onready var spinner_slot_7: Control = $Control/spinnerMenu/spinnerSlot7
+@onready var spinner_slot_8: Control = $Control/spinnerMenu/spinnerSlot8
+@onready var spinner_slot_9: Control = $Control/spinnerMenu/spinnerSlot9
+
+@onready var spinOps: Array = [spinner_slot_0, spinner_slot_1, spinner_slot_2, spinner_slot_3, spinner_slot_4, 
+spinner_slot_5, spinner_slot_6, spinner_slot_7, spinner_slot_8, spinner_slot_9]
+
 var lastSpaceEffect: Vector2
 
 var debugSelect
@@ -83,6 +97,17 @@ var debugRarity: int = 0
 var debugX: int
 
 var flashMult: float = 4.0
+
+
+@onready var audioPlayer: AudioStreamPlayer3D = $AudioStreamPlayer3D
+@onready var spin_1Player: AudioStreamPlayer3D = $spin1
+@onready var spin_2Player: AudioStreamPlayer3D = $spin2
+
+
+@onready var loan_shark: CharacterBody2D = $SubViewport/loanShark
+var spinning: bool
+@onready var spinSoundTimer: Timer = $spinSoundTimer
+
 
 # Set the money count to whatever it's supposed to be
 func _ready() -> void:
@@ -94,11 +119,15 @@ func _process(delta: float) -> void:
 
 func monUpdate(delta) -> void:
 	money += delta
+	if delta > 0:
+		audioPlayer.stream = preload("res://Assets/Audio/90s-game-ui-6-185099.mp3")
+		audioPlayer.play()
+	#elif delta >= 7:
+		#audioPlayer.stream = preload("res://Assets/Audio/jackpot-slot-machine-coin-loop-11-216266.wav")
+		#audioPlayer.play()
 	deltaMoney = 0
-	if money > 0:
-		money_label.text = (" MONES:  " + str(money))
-	else:
-		money_label.text = (" BROKIE ALERT")
+	money_label.text = (str(money))
+		
 
 # This is the functio that will house the match table for all the different effects. When the function
 # starts, it spins a random number 0 - 9 inclusive. This value is an index thatr corresponds to one of 
@@ -107,12 +136,18 @@ func monUpdate(delta) -> void:
 
 func interpretSpin() -> void:
 	if money > 0 and canSpin:
+		spin_1Player.play()
+		spin_2Player.play()
 		spinner.spin()
 		canSpin = false
+		spinning = true
+		spinSoundTimer.start(2.0)
 		money -= 1
 		monUpdate(deltaMoney)
 		var rawSpin = spinSpinner()
-		var spinResult: int = spinOps[rawSpin]
+		var getIndex = spinOps[rawSpin]
+		getIndex.get_child(0).timesRolled += 1
+		var spinResult: int = getIndex.get_child(0).index
 		
 		if obtainedItems.has(5) and spinResult == 0:           #TODO
 			var i = randi_range(doubleChance, 4)
@@ -165,7 +200,8 @@ func move(distance: int) -> void:
 			if i > 0:
 				await pauseForEvent()
 				player.position = Vector2(player.position.x + playerDIR.x, player.position.y + playerDIR.y)
-				
+				audioPlayer.stream = preload("res://Assets/Audio/hitHurt (1).wav")
+				audioPlayer.play()
 				await get_tree().create_timer(0.6).timeout
 				locDistance -= 1
 		
@@ -215,7 +251,7 @@ func coinPerSpace(type: int, distance: int) -> void:
 					itemsActivating.append(4)
 					itemActivate(itemsActivating)
 			statusSprite2_2.status = 0
-			statusSprite2_2.type = 3
+			statusSprite2_2.type = 4
 			monUpdate(deltaMoney)
 		2:
 			deltaMoney = money - distance
@@ -239,7 +275,7 @@ func pauseForEvent() -> void:
 		invSeparatorInstance = invSeparator.instantiate()
 		obtainableAnim()
 		
-		await get_tree().create_timer(3.5).timeout
+		await get_tree().create_timer(4.5).timeout
 		fadeRect.color.a = lerpf(fadeRect.color.a, 0, 1)
 		obtainedAnim.hide()
 		itemAnims.stop()
@@ -269,8 +305,11 @@ func pauseForEvent() -> void:
 			statusSprite1_5.type = 1
 		fadeRect.color.a = lerpf(fadeRect.color.a, 0.7, 1)
 		eventAnim.show()
+		if lastSpaceEffect.y == 3 or lastSpaceEffect.y == 4 or lastSpaceEffect.y == 5:
+			audioPlayer.stream = preload("res://Assets/Audio/arcade-ui-28-229497.mp3")
+			audioPlayer.play()
 		triggerEvent()
-		await get_tree().create_timer(6.5).timeout
+		await get_tree().create_timer(5).timeout
 		eventSprite.hide()
 		eventAnim.hide()
 		match lastSpaceEffect:
@@ -291,6 +330,9 @@ func pauseForEvent() -> void:
 					statusSprite2_4.status = 1
 		fadeRect.color.a = lerpf(fadeRect.color.a, 0, 1)
 		eventPause = false
+	
+	if money <= 0:
+		loan_shark.enter()
 
 
 func spaceEvent() -> void:
@@ -1342,6 +1384,8 @@ func obtainableAnim():
 			commentLabel.text = "This is where the fun begins!"
 			newActLabel = "Multiroll!"
 	
+	audioPlayer.stream = preload("res://Assets/Audio/arcade-ui-24-229496.mp3")
+	audioPlayer.play()
 	obtainedAnim.show()
 	itemAnims.play("blink_bob")
 
@@ -1383,3 +1427,10 @@ func _on_dir_left_pressed() -> void:
 
 func _on_dir_right_pressed() -> void:
 	playerDIR = Vector2(32, 0)
+
+
+func _on_spin_sound_timer_timeout() -> void:
+	spinning = false
+	spin_1Player.stop()
+	spin_1Player.volume_db = 3
+	

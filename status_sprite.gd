@@ -31,7 +31,7 @@ func statusChanged():
 			3:
 				deathLabel.text = "MONEY LOST"
 			4:
-				deathLabel.text = "MONEY SECURED"
+				deathLabel.text = "MONEY GAINED"
 			5:
 				deathLabel.text = "NEGATIVE EFFECT DOUBLED"
 		deathAnims.play("wobble")

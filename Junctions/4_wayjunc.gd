@@ -12,7 +12,7 @@ func _process(delta: float) -> void:
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	var player = area.get_parent().get_parent()
+	var player = area.get_parent().get_parent().get_parent()
 	
 	player.playerDIR = rollDIR(player.playerDIR)
 	
@@ -23,29 +23,29 @@ func rollDIR(playerDIR) -> Vector2:
 	
 	match i:
 		0: # South
-			if playerDIR != Vector2(0, -16):
-				playerDIR = Vector2(0, 16)
+			if playerDIR != Vector2(0, -32):
+				playerDIR = Vector2(0, 32)
 				return playerDIR
 			else:
 				rollDIR(playerDIR)
 	
 		1: # West
-			if playerDIR != Vector2(16, 0):
-				playerDIR = Vector2(-16, 0)
+			if playerDIR != Vector2(32, 0):
+				playerDIR = Vector2(-32, 0)
 				return playerDIR
 			else:
 				rollDIR(playerDIR)
 		
 		2: # East
-			if playerDIR != Vector2(-16, 0):
-				playerDIR = Vector2(16, 0)
+			if playerDIR != Vector2(-32, 0):
+				playerDIR = Vector2(32, 0)
 				return playerDIR
 			else:
 				rollDIR(playerDIR)
 		
 		3: # North
-			if playerDIR != Vector2(0, 16):
-				playerDIR = Vector2(0, -16)
+			if playerDIR != Vector2(0, 32):
+				playerDIR = Vector2(0, -32)
 				return playerDIR
 			else:
 				rollDIR(playerDIR)

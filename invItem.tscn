@@ -1,0 +1,332 @@
+[gd_scene load_steps=13 format=3 uid="uid://dlbrvj56rjkc0"]
+
+[ext_resource type="Script" path="res://Level/inventoryItem.gd" id="1_mwd0l"]
+[ext_resource type="Texture2D" uid="uid://c84526k3vmba1" path="res://Assets/obtainables/obt001.png" id="2_lc06q"]
+
+[sub_resource type="Animation" id="Animation_ovrtn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(247, 16)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_g17f1"]
+resource_name = "hover"
+length = 8.0
+loop_mode = 1
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(2, 6),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(247, 8), Vector2(247, 24)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(3.06667, 7.78333),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [0.0349066, -0.0349066]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g660u"]
+_data = {
+"RESET": SubResource("Animation_ovrtn"),
+"hover": SubResource("Animation_g17f1")
+}
+
+[sub_resource type="Animation" id="Animation_2mpje"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3, 3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("activateTipLabel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("activateTipLabel:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(315, 8)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("activateTipLabel:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D:z_index")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_2q3je"]
+resource_name = "activateEffect"
+length = 0.400003
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.266667),
+"transitions": PackedFloat32Array(1, -2, -2),
+"update": 0,
+"values": [Vector2(3, 3), Vector2(4.215, 4.215), Vector2(3, 3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.2, 0.266667),
+"transitions": PackedFloat32Array(1, -2, -2, -2),
+"update": 0,
+"values": [0.0, -0.0872665, 0.0349066, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("activateTipLabel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("activateTipLabel:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.1, 0.400003),
+"transitions": PackedFloat32Array(1, 1, -2, -2),
+"update": 0,
+"values": [Vector2(345, 8), Vector2(345, 8), Vector2(345, -2), Vector2(345, 8)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("activateTipLabel:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.1, 0.333333),
+"transitions": PackedFloat32Array(1, 1, -2, -2),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(2, 2), Vector2(4, 4), Vector2(2, 2)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D:z_index")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 999, 0]
+}
+
+[sub_resource type="Animation" id="Animation_m6j65"]
+resource_name = "activateIdle"
+length = 0.26667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.266667),
+"transitions": PackedFloat32Array(1, -2, -2),
+"update": 0,
+"values": [Vector2(3, 3), Vector2(4.215, 4.215), Vector2(3, 3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.266667),
+"transitions": PackedFloat32Array(1, -2, -2, -2),
+"update": 0,
+"values": [0.0, -0.0872665, 0.0349066, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:z_index")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 999, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hvoxx"]
+_data = {
+"RESET": SubResource("Animation_2mpje"),
+"activateEffect": SubResource("Animation_2q3je"),
+"activateIdle": SubResource("Animation_m6j65")
+}
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i8stc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uu6na"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2tv88"]
+
+[node name="item" type="Button"]
+z_index = 5
+offset_right = 87.0
+offset_bottom = 38.0
+theme_override_font_sizes/font_size = 21
+text = "Leg Day"
+script = ExtResource("1_mwd0l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(247, 16)
+scale = Vector2(3, 3)
+texture = ExtResource("2_lc06q")
+
+[node name="desc" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -162.0
+offset_top = 3.0
+offset_right = -6.0
+offset_bottom = 26.0
+theme_override_font_sizes/font_size = 21
+text = "sampletext"
+autowrap_mode = 2
+
+[node name="hoverPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_g660u")
+}
+
+[node name="activateTipLabel" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 345.0
+offset_top = 7.99999
+offset_right = 432.0
+offset_bottom = 31.0
+rotation = -0.0387933
+text = "sampletext"
+
+[node name="activatePlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hvoxx")
+}
+
+[node name="stimButton" type="Button" parent="."]
+z_index = 5
+layout_mode = 0
+offset_left = 199.0
+offset_top = -17.0
+offset_right = 295.0
+offset_bottom = 43.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_i8stc")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_uu6na")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2tv88")
+flat = true
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_up" from="." to="." method="_on_button_up"]
+[connection signal="pressed" from="stimButton" to="." method="_on_stim_button_pressed"]

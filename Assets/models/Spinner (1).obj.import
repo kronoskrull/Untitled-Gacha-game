@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://d1lcl0yp5wud4"
+path="res://.godot/imported/Spinner (1).obj-d9ed2e2b1983c856125868e6dad421fd.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Spinner (1).obj-d9ed2e2b1983c856125868e6dad421fd.mesh"]
+
+source_file="res://Assets/models/Spinner (1).obj"
+dest_files=["res://.godot/imported/Spinner (1).obj-d9ed2e2b1983c856125868e6dad421fd.mesh", "res://.godot/imported/Spinner (1).obj-d9ed2e2b1983c856125868e6dad421fd.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

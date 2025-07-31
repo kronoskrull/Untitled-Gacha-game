@@ -35,8 +35,10 @@ var itemsActivating: Array = [0]
 var newItemIndex: int
 var newActLabel: String
 @onready var invItem = preload("res://invItem.tscn")
+@onready var invSeparator = preload("res://inv_separator.tscn")
 @onready var inventory: VBoxContainer = $inv/inventoryPanel/VBoxContainer
 var invItemInstance
+var invSeparatorInstance
 var rarity: Color
 
 var positive: Color = Color.LAWN_GREEN
@@ -48,6 +50,8 @@ var rare: Color = Color.SKY_BLUE
 var ultraRare: Color = Color.DARK_MAGENTA
 
 var chanceNegIncrease: bool = false
+var savingsAcc: bool = false
+var coinsSaved: int = 0
 
 var rareSpaceCoinLoss: bool = false
 var ultraSpaceCoinGain: bool = false
@@ -61,7 +65,22 @@ var eventPause: bool = false
 @onready var eventName: Label = $SubViewport/eventAnim/eventName
 @onready var eventStory: Label = $SubViewport/eventAnim/eventStory
 @onready var eventEffect: Label = $SubViewport/eventAnim/eventEffect
+@onready var eventSprite: Sprite2D = $SubViewport/eventAnim/eventSprite
+@onready var anims: AnimationPlayer = $SubViewport/eventAnim/AnimationPlayer
+
+@onready var statusSprite1_0: Control = $"SubViewport/status/PanelContainer/1-0/statusSprite"
+@onready var statusSprite1_2: Control = $"SubViewport/status/PanelContainer/1-2/statusSprite"
+@onready var statusSprite1_3: Control = $"SubViewport/status/PanelContainer/1-3/statusSprite"
+@onready var statusSprite1_5: Control = $"SubViewport/status/PanelContainer/1-5/statusSprite"
+@onready var statusSprite2_2: Control = $"SubViewport/status/PanelContainer/2-2/statusSprite"
+@onready var statusSprite2_4: Control = $"SubViewport/status/PanelContainer/2-4/statusSprite"
+
+
 var lastSpaceEffect: Vector2
+
+var debugSelect
+var debugRarity: int = 0
+var debugX: int
 
 
 # Set the money count to whatever it's supposed to be
@@ -127,7 +146,7 @@ func interpretSpin() -> void:
 			itemsActivating.clear()
 			itemsActivating.append(6)
 			itemActivate(itemsActivating)
-			distance += 2
+			distance += 3
 
 		move(distance)
 
@@ -135,7 +154,7 @@ func itemActivate(items: Array) -> void:
 	for c in inventory.get_children():
 		if items.has(c.index):
 			c.activate()
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(0.05).timeout
 
 func move(distance: int) -> void:
 	var locDistance: int = distance
@@ -157,19 +176,24 @@ func move(distance: int) -> void:
 			coinPerSpace(2, distance)
 		if insured:
 			insured = false
+			statusSprite1_0.status = 0
+			statusSprite1_0.type = 1
 		eventPause = true
 		spaceEvent()
 	else:
 		if insured:
 			insured = false
+			statusSprite1_0.status = 0
+			statusSprite1_0.type = 1
 		eventPause = true
 		spaceEvent()
 
 func coinPerSpace(type: int, distance: int) -> void:
+	var locDistance: int
 	match type:
 		0:
-			distance %= 2
-			deltaMoney = money - distance
+			locDistance = distance / 2
+			deltaMoney -= locDistance
 			if obtainedItems.has(4):
 				var i = randi_range(doubleChance, 4)
 				if i >= 4:
@@ -177,6 +201,8 @@ func coinPerSpace(type: int, distance: int) -> void:
 					itemsActivating.clear()
 					itemsActivating.append(4)
 					itemActivate(itemsActivating)
+			statusSprite1_3.status = 0
+			statusSprite1_3.type = 3
 			monUpdate(deltaMoney)
 		1:
 			deltaMoney += distance
@@ -187,6 +213,8 @@ func coinPerSpace(type: int, distance: int) -> void:
 					itemsActivating.clear()
 					itemsActivating.append(4)
 					itemActivate(itemsActivating)
+			statusSprite2_2.status = 0
+			statusSprite2_2.type = 3
 			monUpdate(deltaMoney)
 		2:
 			deltaMoney = money - distance
@@ -197,14 +225,17 @@ func coinPerSpace(type: int, distance: int) -> void:
 					itemsActivating.clear()
 					itemsActivating.append(4)
 					itemActivate(itemsActivating)
+			statusSprite2_4.status = 0
+			statusSprite2_4.type = 3
 			monUpdate(deltaMoney)
 
 func pauseForEvent() -> void:
 
 	while obtainablePause:
 		
-		fadeRect.color.a = lerpf(fadeRect.color.a, 0.5, 1)
+		fadeRect.color.a = lerpf(fadeRect.color.a, 0.7, 1)
 		invItemInstance = invItem.instantiate()
+		invSeparatorInstance = invSeparator.instantiate()
 		obtainableAnim()
 		
 		await get_tree().create_timer(3.5).timeout
@@ -214,6 +245,9 @@ func pauseForEvent() -> void:
 		
 		
 		inventory.add_child(invItemInstance)
+		inventory.add_child(invSeparatorInstance)
+		inventory.add_child(invSeparatorInstance)
+		inventory.add_child(invSeparatorInstance)
 		invItemInstance.z_index = 5
 		invItemInstance.index = newItemIndex
 		invItemInstance.itemName.text = itemName.text
@@ -229,11 +263,31 @@ func pauseForEvent() -> void:
 	
 	while eventPause:
 		
+		if statusSprite1_5.status == 1:
+			statusSprite1_5.status = 0
+			statusSprite1_5.type = 1
 		fadeRect.color.a = lerpf(fadeRect.color.a, 0.7, 1)
 		eventAnim.show()
 		triggerEvent()
 		await get_tree().create_timer(6.5).timeout
+		eventSprite.hide()
 		eventAnim.hide()
+		match lastSpaceEffect:
+			Vector2(1, 0):
+				statusSprite1_0.status = 1
+			Vector2(1, 2):
+				statusSprite1_2.status = 1
+			Vector2(1, 3):
+				if eventEffect.text != "EFFECT NEGATED":
+					statusSprite1_3.status = 1
+			Vector2(1, 5):
+				if eventEffect.text != "EFFECT NEGATED":
+					statusSprite1_5.status = 1
+			Vector2(2, 2):
+				statusSprite2_2.status = 1
+			Vector2(2, 4):
+				if eventEffect.text != "EFFECT NEGATED":
+					statusSprite2_4.status = 1
 		fadeRect.color.a = lerpf(fadeRect.color.a, 0, 1)
 		eventPause = false
 
@@ -242,20 +296,25 @@ func spaceEvent() -> void:
 	randomize()
 	var i = randi_range(0, 100)
 	var spaceRarity
-	if i >= 0 and i < 60:
+	if i >= 0 and i < 70:
 		spaceRarity = 0
-	if i >= 60 and i < 90:
+	if i >= 70 and i < 95:
 		spaceRarity = 1
-	if i >= 90 and i <= 100:
+	if i >= 95 and i <= 100:
 		spaceRarity = 2
 	
 	var s = randi_range(0, 5)
+	if debugSelect:
+		s = debugX
+	if debugSelect:
+		spaceRarity = debugRarity
+	
 	match spaceRarity:
 	
 		0:                                  # Common Effects
 			lastSpaceEffect.x = 0
 			eventName.self_modulate = common
-			match s:                   
+			match s:                  
 				0:        # +1
 					eventName.text = "Penny Pincher"
 					var x = randi_range(0, 2)
@@ -372,6 +431,9 @@ func spaceEvent() -> void:
 							better than a gun!"
 					eventEffect.text = "Can't lose coins the next turn"
 					eventEffect.self_modulate = positive
+					eventSprite.texture = preload("res://Assets/effects/eff1-0.png")
+					anims.play("bob")
+					eventSprite.show()
 					lastSpaceEffect.y = 0
 				1:        # +6 
 					eventName.text = "Investment Opportunity"
@@ -390,19 +452,33 @@ func spaceEvent() -> void:
 				2:        # Spend now, gain later
 					eventName.text = "Savings Account"
 					var x = randi_range(0, 2)
-					match x:
-						0:
-							eventStory.text = "Investing in victory..."
-						1:
-							eventStory.text = "A shady banker, a cardboard desk, and a painted sign...
-							 surely this pays off!"
-						2:
-							eventStory.text = "Now, I know it sounds crazy, but i swear leaving your money
-							under this conspicuously placed rock makes it magically double!"
-					eventEffect.text = "Lose up to 5 coins now, but gain double that amount the next
-					time you roll this effect."
-					eventEffect.self_modulate = positive
-					lastSpaceEffect.y = 2
+					if !savingsAcc:
+						match x:
+							0:
+								eventStory.text = "Investing in victory..."
+							1:
+								eventStory.text = "A shady banker, a cardboard desk, and a painted sign...
+								 surely this pays off!"
+							2:
+								eventStory.text = "Now, I know it sounds crazy, but i swear leaving your money
+								under this conspicuously placed rock makes it magically double!"
+						eventEffect.text = "Lose up to 5 coins now, for a positive bonus later..."
+						eventEffect.self_modulate = negative
+						eventSprite.texture = preload("res://Assets/effects/eff1-2.png")
+						anims.play("bob")
+						eventSprite.show()
+						lastSpaceEffect.y = 2
+					else:
+						match x:
+							0:
+								eventStory.text = "... means playing the long game!"
+							1:
+								eventStory.text = "Who said banks couldn't be trusted?"
+							2:
+								eventStory.text = "Surely you'll put this money to good use, right?"
+						eventEffect.text = "Gain double the coins you saved before!"
+						eventEffect.self_modulate = positive
+						lastSpaceEffect.y = 2
 				3:        # Lose a coin for every other space (2 turns)
 					eventName.text = "Delayed Detriment"
 					var x = randi_range(0, 2)
@@ -410,12 +486,15 @@ func spaceEvent() -> void:
 						0:
 							eventStory.text = "Unbeknownst to you, a hole magically appears in your wallet..."
 						1:
-							eventStory.text = "Maybe Flex Seal isn't all it was cracked up to be..."
+							eventStory.text = "Maybe Flex Seal isn't all it's cracked up to be..."
 						2:
 							eventStory.text = "Well if you don't like it, maybe you shouldn't have picked a road
 							with so many tolls!"
 					eventEffect.text = "Lose a coin for every other space you move on the next spin"
 					eventEffect.self_modulate = negative
+					eventSprite.texture = preload("res://Assets/effects/eff1-3.png")
+					eventSprite.show()
+					anims.play("bob")
 					lastSpaceEffect.y = 3
 				4:        # -6
 					eventName.text = "Investment Opportunity"
@@ -425,7 +504,7 @@ func spaceEvent() -> void:
 							eventStory.text = "You check your $HITCOIN wallet..."
 						1:
 							eventStory.text = "Seems like your scam call center was more work than that
-							Nigerian prince let in on..."
+							Nigerian prince made it out to be..."
 						2:
 							eventStory.text = "You invested in a pyramid scheme. How could you have known
 							they were actually building a pyramid?"
@@ -445,6 +524,9 @@ func spaceEvent() -> void:
 							eventStory.text = "You felt your sins crawling on your back."
 					eventEffect.text = "1 in 3 chance to double the next negative effect"
 					eventEffect.self_modulate = negative
+					eventSprite.texture = preload("res://Assets/effects/eff1-5.png")
+					eventSprite.show()
+					anims.play("bob")
 					lastSpaceEffect.y = 5
 	
 		2:                                 # UltraRare Effects
@@ -489,7 +571,7 @@ func spaceEvent() -> void:
 						2:
 							eventStory.text = "If I told you where leprachauns got their gold from, 
 							you'd never want it again."
-					eventEffect.text = "Gain a coin for every space you move for the next 2 turns"
+					eventEffect.text = "Gain a coin for every space you move on the next spin"
 					eventEffect.self_modulate = positive
 					lastSpaceEffect.y = 2
 				3:       # 1/2 coins
@@ -517,7 +599,7 @@ func spaceEvent() -> void:
 							 an extensive record of your search history. You agree to his blackmail immediately."
 						2:
 							eventStory.text = "When I said that they'd 'garnish your bread', I wasn't talking about food."
-					eventEffect.text = "Lose a coin for every space you move on your next 2 turns"
+					eventEffect.text = "Lose a coin for every space you move on your next spin"
 					eventEffect.self_modulate = negative
 					lastSpaceEffect.y = 4
 				5:       # Enrichment Module
@@ -527,7 +609,7 @@ func spaceEvent() -> void:
 						0:
 							eventStory.text = "Please enjoy the ENRICHMENT MODULE!"
 						1:
-							eventStory.text = "Thank you for 'voluntary' participation in the testing of the 
+							eventStory.text = "Thank you for your 'voluntary' participation in the testing of the 
 							ENRICHMENT MODULE!"
 						2:
 							eventStory.text = "ENRICHMENT MODULE!"
@@ -538,6 +620,7 @@ func spaceEvent() -> void:
 	await pauseForEvent()
 	canSpin = true
 	eventPause = false
+	debugSelect = false
 
 
 func triggerEvent() -> void:
@@ -616,10 +699,15 @@ func triggerEvent() -> void:
 									itemActivate(itemsActivating)
 							monUpdate(deltaMoney)
 						else:
-							money -= 10
+							deltaMoney -= 10
 							monUpdate(deltaMoney)
+							itemsActivating.clear()
+							itemsActivating.append(8)
+							itemActivate(itemsActivating)
 							eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
 					else:
+						statusSprite1_0.status = 0
+						statusSprite1_0.type = 0
 						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
 			else:
 				if !insured:
@@ -634,15 +722,23 @@ func triggerEvent() -> void:
 								itemActivate(itemsActivating)
 						monUpdate(deltaMoney)
 					else:
-						money -= 10
+						deltaMoney -= 10
 						monUpdate(deltaMoney)
+						itemsActivating.clear()
+						itemsActivating.append(8)
+						itemActivate(itemsActivating)
 						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
 				else:
+					insured = false
+					statusSprite1_0.status = 0
+					statusSprite1_0.type = 0
 					eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
 			if chanceNegIncrease:
 				chanceNegIncrease = false
 				var i = randi_range(doubleChance, 3)
 				if i >= 3:
+					statusSprite1_5.status = 0
+					statusSprite1_5.type = 5
 					if !insured:
 						if !scottFree or (scottFree and money < 11):
 							deltaMoney -= 1
@@ -655,11 +751,20 @@ func triggerEvent() -> void:
 									itemActivate(itemsActivating)
 							monUpdate(deltaMoney)
 						else:
-							money -= 10
+							deltaMoney -= 10
 							monUpdate(deltaMoney)
+							itemsActivating.clear()
+							itemsActivating.append(8)
+							itemActivate(itemsActivating)
 							eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
 					else:
+						insured = false
+						statusSprite1_0.status = 0
+						statusSprite1_0.type = 0
 						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
+				else:
+					statusSprite1_5.status = 0
+					statusSprite1_5.type = 1
 		Vector2(0, 4):
 			if obtainedItems.has(2):
 				var i = randi_range(doubleChance, 15)
@@ -681,11 +786,16 @@ func triggerEvent() -> void:
 									itemActivate(itemsActivating)
 							monUpdate(deltaMoney)
 						else:
-							money -= 10
+							deltaMoney -= 10
 							monUpdate(deltaMoney)
+							itemsActivating.clear()
+							itemsActivating.append(8)
+							itemActivate(itemsActivating)
 							eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
 					else:
 						insured = false
+						statusSprite1_0.status = 0
+						statusSprite1_0.type = 0
 						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
 			else:
 				if !insured:
@@ -700,17 +810,24 @@ func triggerEvent() -> void:
 								itemActivate(itemsActivating)
 						monUpdate(deltaMoney)
 					else:
-						money -= 10
+						deltaMoney -= 10
 						monUpdate(deltaMoney)
+						itemsActivating.clear()
+						itemsActivating.append(8)
+						itemActivate(itemsActivating)
 						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
 						
 				else:
 					insured = false
+					statusSprite1_0.status = 0
+					statusSprite1_0.type = 0
 					eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
 			if chanceNegIncrease:
 				chanceNegIncrease = false
 				var i = randi_range(doubleChance, 3)
 				if i >= 3:
+					statusSprite1_5.status = 0
+					statusSprite1_5.type = 5
 					if !insured:
 						if !scottFree or (scottFree and money < 11):
 							deltaMoney -= 2
@@ -723,12 +840,20 @@ func triggerEvent() -> void:
 									itemActivate(itemsActivating)
 							monUpdate(deltaMoney)
 						else:
-							money -= 10
+							deltaMoney -= 10
 							monUpdate(deltaMoney)
+							itemsActivating.clear()
+							itemsActivating.append(8)
+							itemActivate(itemsActivating)
 							eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
 					else:
 						insured = false
+						statusSprite1_0.status = 0
+						statusSprite1_0.type = 0
 						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
+				else:
+					statusSprite1_5.status = 0
+					statusSprite1_5.type = 1
 		Vector2(0, 5):
 			if obtainedItems.has(2):
 				var i = randi_range(doubleChance, 15)
@@ -750,11 +875,16 @@ func triggerEvent() -> void:
 									itemActivate(itemsActivating)
 							monUpdate(deltaMoney)
 						else:
-							money -= 10
+							deltaMoney -= 10
 							monUpdate(deltaMoney)
+							itemsActivating.clear()
+							itemsActivating.append(8)
+							itemActivate(itemsActivating)
 							eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
 					else:
 						insured = false
+						statusSprite1_0.status = 0
+						statusSprite1_0.type = 0
 						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
 			else:
 				if !insured:
@@ -769,16 +899,23 @@ func triggerEvent() -> void:
 								itemActivate(itemsActivating)
 						monUpdate(deltaMoney)
 					else:
-						money -= 10
+						deltaMoney -= 10
 						monUpdate(deltaMoney)
+						itemsActivating.clear()
+						itemsActivating.append(8)
+						itemActivate(itemsActivating)
 						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
 				else:
 					insured = false
+					statusSprite1_0.status = 0
+					statusSprite1_0.type = 0
 					eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
 			if chanceNegIncrease:
 				chanceNegIncrease = false
 				var i = randi_range(doubleChance, 3)
 				if i >= 3:
+					statusSprite1_5.status = 0
+					statusSprite1_5.type = 5
 					if !insured:
 						if !scottFree or (scottFree and money < 11):
 							deltaMoney -= 3
@@ -791,13 +928,20 @@ func triggerEvent() -> void:
 									itemActivate(itemsActivating)
 							monUpdate(deltaMoney)
 						else:
-							money -= 10
+							deltaMoney -= 10
 							monUpdate(deltaMoney)
+							itemsActivating.clear()
+							itemsActivating.append(8)
+							itemActivate(itemsActivating)
 							eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
 					else:
 						insured = false
+						statusSprite1_0.status = 0
+						statusSprite1_0.type = 0
 						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
-			
+				else:
+					statusSprite1_5.status = 0
+					statusSprite1_5.type = 1
 	
 		Vector2(1, 0):            # Rare
 			insured = true
@@ -819,7 +963,22 @@ func triggerEvent() -> void:
 					itemActivate(itemsActivating)
 			monUpdate(deltaMoney)
 		Vector2(1, 2):
-			pass
+			if !savingsAcc:
+				coinsSaved = 0
+				coinsSaved = randi_range(money, 5)
+				if coinsSaved > 5:
+					coinsSaved = 5
+				deltaMoney -= coinsSaved
+				savingsAcc = true
+				monUpdate(deltaMoney)
+																				 #TODO status effect
+			else:
+				deltaMoney += (coinsSaved * 2)
+				savingsAcc = false
+				statusSprite1_2.status = 0
+				statusSprite1_2.type = 2
+				monUpdate(deltaMoney)
+																				 #TODO status effect
 		Vector2(1, 3):
 			if obtainedItems.has(2):
 				var i = randi_range(doubleChance, 15)
@@ -832,13 +991,36 @@ func triggerEvent() -> void:
 					if !insured:
 						if !scottFree or (scottFree and money < 11):
 							rareSpaceCoinLoss = true
+							statusSprite1_3.status = 1
 						else:
-							money -= 10
+							deltaMoney -= 10
 							monUpdate(deltaMoney)
+							itemsActivating.clear()
+							itemsActivating.append(8)
+							itemActivate(itemsActivating)
 							eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
 					else:
 						insured = false
+						statusSprite1_0.status = 0
+						statusSprite1_0.type = 0
 						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
+			else:
+				if !insured:
+					if !scottFree or (scottFree and money < 11):
+						rareSpaceCoinLoss = true
+						statusSprite1_3.status = 1
+					else:
+						deltaMoney -= 10
+						monUpdate(deltaMoney)
+						itemsActivating.clear()
+						itemsActivating.append(8)
+						itemActivate(itemsActivating)
+						eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
+				else:
+					insured = false
+					statusSprite1_0.status = 0
+					statusSprite1_0.type = 0
+					eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
 		Vector2(1, 4):
 			if obtainedItems.has(2):
 				var i = randi_range(doubleChance, 15)
@@ -860,11 +1042,16 @@ func triggerEvent() -> void:
 									itemActivate(itemsActivating)
 							monUpdate(deltaMoney)
 						else:
-							money -= 10
+							deltaMoney -= 10
 							monUpdate(deltaMoney)
+							itemsActivating.clear()
+							itemsActivating.append(8)
+							itemActivate(itemsActivating)
 							eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
 					else:
 						insured = false
+						statusSprite1_0.status = 0
+						statusSprite1_0.type = 0
 						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
 			else:
 				if !insured:
@@ -879,16 +1066,23 @@ func triggerEvent() -> void:
 								itemActivate(itemsActivating)
 						monUpdate(deltaMoney)
 					else:
-						money -= 10
+						deltaMoney -= 10
 						monUpdate(deltaMoney)
+						itemsActivating.clear()
+						itemsActivating.append(8)
+						itemActivate(itemsActivating)
 						eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
 				else:
 					insured = false
+					statusSprite1_0.status = 0
+					statusSprite1_0.type = 0
 					eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
 			if chanceNegIncrease:
 				chanceNegIncrease = false
 				var i = randi_range(doubleChance, 3)
 				if i >= 3:
+					statusSprite1_5.status = 0
+					statusSprite1_5.type = 5
 					if !insured:
 						if !scottFree or (scottFree and money < 11):
 							deltaMoney -= 6
@@ -901,12 +1095,20 @@ func triggerEvent() -> void:
 									itemActivate(itemsActivating)
 							monUpdate(deltaMoney)
 						else:
-							money -= 10
+							deltaMoney -= 10
 							monUpdate(deltaMoney)
+							itemsActivating.clear()
+							itemsActivating.append(8)
+							itemActivate(itemsActivating)
 							eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
 					else:
 						insured = false
+						statusSprite1_0.status = 0
+						statusSprite1_0.type = 0
 						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
+				else:
+					statusSprite1_5.status = 0
+					statusSprite1_5.type = 1
 		Vector2(1, 5):
 			if obtainedItems.has(2):
 				var i = randi_range(doubleChance, 15)
@@ -916,16 +1118,30 @@ func triggerEvent() -> void:
 					itemsActivating.append(2)
 					itemActivate(itemsActivating)
 				else:
-					if !scottFree or (scottFree and money < 11): 
+					if !scottFree or (scottFree and money < 11):
 						chanceNegIncrease = true
 					else:
-						money -= 10
+						deltaMoney -= 10
 						monUpdate(deltaMoney)
-						eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
+						itemsActivating.clear()
+						itemsActivating.append(8)
+						itemActivate(itemsActivating)
+						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
+			else:
+				if !scottFree or (scottFree and money < 11):
+					chanceNegIncrease = true
+				else:
+					deltaMoney -= 10
+					monUpdate(deltaMoney)
+					itemsActivating.clear()
+					itemsActivating.append(8)
+					itemActivate(itemsActivating)
+					eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
+				
 
 	
 		Vector2(2, 0):             # Ultra Rare
-			deltaMoney *= 2
+			deltaMoney = money
 			if obtainedItems.has(1):
 				var i = randi_range(doubleChance, 5)
 				if i >= 5:
@@ -960,10 +1176,11 @@ func triggerEvent() -> void:
 			monUpdate(deltaMoney)
 		Vector2(2, 2):
 			ultraSpaceCoinGain = true
+			statusSprite2_2.status = 1
 		Vector2(2, 3):
 			if !insured:
 				if !scottFree or (scottFree and money < 11):
-					deltaMoney = money / 2
+					deltaMoney -= money / 2
 					if obtainedItems.has(4):
 						var i = randi_range(doubleChance, 4)
 						if i >= 4:
@@ -973,11 +1190,16 @@ func triggerEvent() -> void:
 							itemActivate(itemsActivating)
 					monUpdate(deltaMoney)
 				else:
-					money -= 10
+					deltaMoney -= 10
 					monUpdate(deltaMoney)
+					itemsActivating.clear()
+					itemsActivating.append(8)
+					itemActivate(itemsActivating)
 					eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
 			else:
 				insured = false
+				statusSprite1_0.status = 0
+				statusSprite1_0.type = 0
 				eventEffect.text = "EFFECT NEGATED"                              #TODO status effects
 		Vector2(2, 4):
 			if obtainedItems.has(2):
@@ -991,17 +1213,38 @@ func triggerEvent() -> void:
 					if !insured:
 						if !scottFree or (scottFree and money < 11):
 							ultraSpaceCoinLoss = true
+							statusSprite2_4.status = 1
 						else:
-							money -= 10
+							deltaMoney -= 10
 							monUpdate(deltaMoney)
+							itemsActivating.clear()
+							itemsActivating.append(8)
+							itemActivate(itemsActivating)
 							eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
 					else:
 						insured = false
+						statusSprite1_0.status = 0
+						statusSprite1_0.type = 0
 						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
+			else:
+				if !insured:
+					if !scottFree or (scottFree and money < 11):
+						ultraSpaceCoinLoss
+						statusSprite2_4.status = 1
+					else:
+						deltaMoney -= 10
+						monUpdate(deltaMoney)
+						itemsActivating.clear()
+						itemsActivating.append(8)
+						itemActivate(itemsActivating)
+						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
+				else:
+					insured = false
+					statusSprite1_0.status = 0
+					statusSprite1_0.type = 0
+					eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
 		Vector2(2, 5):
 			pass
-
-
 
 
 func obtainableAnim():
@@ -1014,9 +1257,8 @@ func obtainableAnim():
 			itemEffect.self_modulate = common
 			itemName.self_modulate = common
 			commentLabel.text = "Maybe hitting the gym isn't such a bad idea"
-			newActLabel = "+1 to roll!"
+			newActLabel = "+1 to roll... maybe!"
 			rarity = common
-			
 		1:
 			itemSprite.set_texture(preload("res://Assets/obtainables/obt002.png"))
 			itemName.text = "Lucky Break"
@@ -1027,7 +1269,7 @@ func obtainableAnim():
 			newActLabel = "+1 coin!"
 			rarity = common
 		2:
-			itemSprite.set_texture(preload("res://Assets/obtainables/obt001.png"))
+			itemSprite.set_texture(preload("res://Assets/obtainables/obt003.png"))
 			itemName.text = "Negative Negation"
 			itemEffect.text = "1 in 15 chance to negate a negative space effect"
 			itemEffect.self_modulate = common
@@ -1036,16 +1278,16 @@ func obtainableAnim():
 			newActLabel = "Effect Negated!"
 			rarity = common
 		3:
-			itemSprite.set_texture(preload("res://Assets/obtainables/obt001.png"))
+			itemSprite.set_texture(preload("res://Assets/obtainables/obt004.png"))
 			itemName.text = "Leg Day+"
-			itemEffect.text = "Adds +1 to every spin"
+			itemEffect.text = "Adds 1 to every spin"
 			itemEffect.self_modulate = rare
 			itemName.self_modulate = rare
 			commentLabel.text = "Those gains are really paying off, huh?"
 			newActLabel = "+1 to roll!"
 			rarity = rare
 		4:
-			itemSprite.set_texture(preload("res://Assets/obtainables/obt001.png"))
+			itemSprite.set_texture(preload("res://Assets/obtainables/obt005.png"))
 			itemName.text = "Bank Error"
 			itemEffect.text = "When gaining/losing coins, 1 in 4 chance to double the amount"
 			itemEffect.self_modulate = rare
@@ -1054,8 +1296,8 @@ func obtainableAnim():
 			newActLabel = "ERR0R"
 			rarity = rare
 		5:
-			itemSprite.set_texture(preload("res://Assets/obtainables/obt001.png"))
-			itemName.text = "Anywhere But Here"
+			itemSprite.set_texture(preload("res://Assets/obtainables/obt006.png"))
+			itemName.text = "Anywhere But Here!"
 			itemEffect.text = "1 in 4 chance to reroll every 0"
 			itemEffect.self_modulate = rare
 			itemName.self_modulate = rare
@@ -1063,25 +1305,25 @@ func obtainableAnim():
 			newActLabel = "Reroll!"
 			rarity = rare
 		6:
-			itemSprite.set_texture(preload("res://Assets/obtainables/obt001.png"))
+			itemSprite.set_texture(preload("res://Assets/obtainables/obt007.png"))
 			itemName.text = "Leg Day++"
-			itemEffect.text = "Adds +2 to every spin"
+			itemEffect.text = "Adds 3 to every spin"
 			itemEffect.self_modulate = ultraRare
 			itemName.self_modulate = ultraRare
 			commentLabel.text = "What are they putting in your pre-workout, dude?!"
-			newActLabel = "+2 to roll!"
+			newActLabel = "+3 to roll!"
 			rarity = ultraRare
 		7:
-			itemSprite.set_texture(preload("res://Assets/obtainables/obt001.png"))
+			itemSprite.set_texture(preload("res://Assets/obtainables/obt008.png"))
 			itemName.text = "Loaded Dice"
 			itemEffect.text = "Doubles all odds"
 			itemEffect.self_modulate = ultraRare
 			itemName.self_modulate = ultraRare
-			commentLabel.text = "Oops, All Sixes!"
+			commentLabel.text = "If you want a guarantee, buy a toaster. Or take this item, either works."
 			rarity = ultraRare
 			doubleChanceInc()
 		8:
-			itemSprite.set_texture(preload("res://Assets/obtainables/obt001.png"))
+			itemSprite.set_texture(preload("res://Assets/obtainables/obt009.png"))
 			itemName.text = "Scot-Free"
 			itemEffect.text = "Pay 10 coins to negate a negative space effect"
 			itemEffect.self_modulate = ultraRare
@@ -1098,8 +1340,6 @@ func obtainableAnim():
 			itemName.self_modulate = unique
 			commentLabel.text = "This is where the fun begins!"
 			newActLabel = "Multiroll!"
-			
-	
 	
 	obtainedAnim.show()
 	itemAnims.play("blink_bob")
@@ -1110,16 +1350,7 @@ func doubleChanceInc() -> void:
 func getObtainable(obtainable: int) -> void:
 	newItemIndex = obtainable
 	obtainedItems.append(obtainable)
-	match obtainable:
-		0, 1, 2:
-			print (spinOptions.masterObtainablesList[obtainable])
-			lastObtained = obtainable
-		3, 4, 5:
-			print (spinOptions.masterObtainablesList[obtainable])
-			lastObtained = obtainable
-		6, 7, 8:
-			print (spinOptions.masterObtainablesList[obtainable])
-			lastObtained = obtainable
+	lastObtained = obtainable
 	pauseForEvent()
 
 
@@ -1136,10 +1367,6 @@ func _on_spin_button_pressed() -> void:
 
 func _on_resetbutton_pressed() -> void:
 	get_tree().reload_current_scene()
-
-func _on_add10_button_pressed() -> void:
-	money += 10
-	monUpdate(deltaMoney)
 
 func _on_posres_button_pressed() -> void:
 	player.position = Vector2(954, 804)

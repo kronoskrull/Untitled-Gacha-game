@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://drt1tip360qt7"]
+[gd_scene load_steps=59 format=3 uid="uid://drt1tip360qt7"]
 
 [ext_resource type="Texture2D" uid="uid://dhw6oc4h6i0ny" path="res://Assets/effects/hudBlock1.0.png" id="1_a7teg"]
 [ext_resource type="Script" path="res://Level/level.gd" id="1_rljoh"]
@@ -9,17 +9,27 @@
 [ext_resource type="Texture2D" uid="uid://b05wrcfotqy8n" path="res://Assets/playerIcon_001.png" id="5_a7gi8"]
 [ext_resource type="Texture2D" uid="uid://dyithwdhvhtwv" path="res://Assets/maze1.0.png" id="5_nn23b"]
 [ext_resource type="ArrayMesh" uid="uid://d1lcl0yp5wud4" path="res://Assets/models/Spinner (1).obj" id="5_ynopn"]
-[ext_resource type="PackedScene" uid="uid://rwfyml6bh7va" path="res://Assets/models/Arcade (1).fbx" id="6_xd212"]
+[ext_resource type="PackedScene" uid="uid://dqld5dxfh26jc" path="res://arcadeFinalMaybe.tscn" id="6_mn3xb"]
 [ext_resource type="PackedScene" uid="uid://gvhpy1s1absr" path="res://Junctions/R-Dcornerjunc.tscn" id="7_r7vob"]
 [ext_resource type="PackedScene" uid="uid://br6hxiou2nh38" path="res://Junctions/L-Ucornerjunc.tscn" id="8_6yic6"]
 [ext_resource type="PackedScene" uid="uid://c5fn6ne537652" path="res://Junctions/R-Ucornerjunc.tscn" id="9_llhc3"]
 [ext_resource type="PackedScene" uid="uid://dwftc41qkrccg" path="res://Junctions/tjunc.tscn" id="10_15alu"]
 [ext_resource type="PackedScene" uid="uid://biirvrro4x38h" path="res://Junctions/Turnaroundjunc.tscn" id="11_j4p46"]
 [ext_resource type="PackedScene" uid="uid://bvdt4eqmecfd5" path="res://Junctions/4-Wayjunc.tscn" id="12_2vg2p"]
+[ext_resource type="Texture2D" uid="uid://ci7bvbp0d3qut" path="res://Assets/loanshark-final.png" id="12_x2e4q"]
+[ext_resource type="Texture2D" uid="uid://decqd8figo386" path="res://Assets/effects/eff1-2.png" id="13_1hduq"]
 [ext_resource type="PackedScene" uid="uid://chgxilpcrsci7" path="res://Interactables/obtainable.tscn" id="13_2xnj0"]
+[ext_resource type="Texture2D" uid="uid://cwnpeo0wiwen" path="res://Assets/effects/eff1-3.png" id="13_n248f"]
 [ext_resource type="Shader" path="res://Assets/shaders/better_crt.gdshader" id="14_3swno"]
+[ext_resource type="Script" path="res://status_sprite.gd" id="14_dc3qn"]
+[ext_resource type="Texture2D" uid="uid://c5decay8xjwbc" path="res://Assets/effects/eff1-5.png" id="17_44415"]
+[ext_resource type="Texture2D" uid="uid://bhmp3u1og6j0k" path="res://Assets/effects/eff1-0.png" id="17_es0wu"]
 [ext_resource type="FontFile" uid="uid://0kpmyoip0ktj" path="res://Assets/ka1.ttf" id="18_7x8mt"]
 [ext_resource type="FontFile" uid="uid://dmip7mk1p14dy" path="res://Assets/PrStart.ttf" id="20_fxtm5"]
+[ext_resource type="Script" path="res://Level/effect_menu.gd" id="21_pr0jc"]
+[ext_resource type="Script" path="res://Level/item_menu.gd" id="22_r6gmn"]
+[ext_resource type="Texture2D" uid="uid://b7wvvb7j8inh6" path="res://Assets/effects/eff2-2.png" id="25_2xqgb"]
+[ext_resource type="Texture2D" uid="uid://btpjuy8i06fk0" path="res://Assets/effects/eff2-4.png" id="26_2gl0d"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_3nx2p"]
 viewport_path = NodePath("SubViewport")
@@ -30,6 +40,9 @@ shader = ExtResource("2_osb5b")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_54ae4"]
 albedo_texture = ExtResource("4_57hlo")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2tokm"]
+albedo_color = Color(0.53, 0, 0, 1)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nemm3"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -52,13 +65,13 @@ albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cb8bq"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_htn7m"]
-size = Vector2(141.177, 141.176)
-
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7jfsy"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_g52lm"]
 viewport_path = NodePath("3Dlevel/SubViewport")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_htn7m"]
+size = Vector2(141.177, 141.176)
 
 [sub_resource type="Animation" id="Animation_bne4e"]
 length = 0.001
@@ -122,25 +135,261 @@ _data = {
 "blink_bob": SubResource("Animation_kl46q")
 }
 
+[sub_resource type="Animation" id="Animation_5rmf5"]
+resource_name = "bob"
+loop_mode = 1
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("eventSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.25, 0.75),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(960, 450), Vector2(960, 430)]
+}
+
+[sub_resource type="Animation" id="Animation_c24m2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("eventSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(960, 420)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xum8k"]
+_data = {
+"RESET": SubResource("Animation_c24m2"),
+"bob": SubResource("Animation_5rmf5")
+}
+
+[sub_resource type="Animation" id="Animation_x7hum"]
+resource_name = "hover"
+length = 16.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(4, 12),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0, 8), Vector2(0, -8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(6.13333, 15.5667),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [0.0349066, -0.0349066]
+}
+
+[sub_resource type="Animation" id="Animation_gcbii"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_xxp08"]
+resource_name = "die"
+length = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 18.8496]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(3, 3), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6qyfp"]
+resource_name = "appear"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(3, 3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.666667, 0.8, 1.16667),
+"transitions": PackedFloat32Array(-2, -2, -2, 0.5),
+"update": 0,
+"values": [0.0, 12.5664, 12.5664, 6.28319]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"show"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2mk88"]
+_data = {
+"RESET": SubResource("Animation_gcbii"),
+"appear": SubResource("Animation_6qyfp"),
+"die": SubResource("Animation_xxp08"),
+"hover": SubResource("Animation_x7hum")
+}
+
+[sub_resource type="Animation" id="Animation_hpev1"]
+resource_name = "wobble"
+length = 1.33334
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("deathLabel:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.666667, 1),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
+"update": 0,
+"values": [0.0610865, -0.0610865, 0.0610865, -0.0610865]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("deathLabel")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"show"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_8mvvs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("deathLabel:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_exyok"]
+_data = {
+"RESET": SubResource("Animation_8mvvs"),
+"wobble": SubResource("Animation_hpev1")
+}
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tcoxg"]
 shader = ExtResource("14_3swno")
 shader_parameter/overlay = true
-shader_parameter/scanlines_opacity = 0.4
+shader_parameter/scanlines_opacity = 0.164
 shader_parameter/scanlines_width = 0.449
-shader_parameter/grille_opacity = 0.3
-shader_parameter/resolution = Vector2(7628, 3388)
-shader_parameter/pixelate = true
-shader_parameter/roll = false
-shader_parameter/roll_speed = 8.0
+shader_parameter/grille_opacity = 0.1
+shader_parameter/resolution = Vector2(1907, 847)
+shader_parameter/pixelate = false
+shader_parameter/roll = true
+shader_parameter/roll_speed = 0.7
 shader_parameter/roll_size = 0.0
-shader_parameter/roll_variation = 1.8
-shader_parameter/distort_intensity = 0.05
+shader_parameter/roll_variation = 3.881
+shader_parameter/distort_intensity = 0.003
 shader_parameter/noise_opacity = 0.4
 shader_parameter/noise_speed = 5.0
-shader_parameter/static_noise_intensity = 0.166
+shader_parameter/static_noise_intensity = 0.323
 shader_parameter/variable_noise_intensity = true
 shader_parameter/aberration = 4.75e-08
-shader_parameter/aberration_variation = 0.008
+shader_parameter/aberration_variation = 0.01
 shader_parameter/brightness = 1.4
 shader_parameter/discolor = false
 shader_parameter/warp_amount = 1.0
@@ -194,6 +443,11 @@ size = Vector3(78, 54, 1)
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.51265, 33.0075, 17.389)
 size = Vector3(78, 54, 1)
 
+[node name="CSGBox3D8" type="CSGBox3D" parent="lighting & env"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.0240631, 7.25552, 4.80079)
+material_override = SubResource("StandardMaterial3D_2tokm")
+size = Vector3(18.0941, 9.1048, 0.474609)
+
 [node name="CSGBox3D5" type="CSGBox3D" parent="lighting & env"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 18.4873, 7.0075, 15.389)
 size = Vector3(78, 54, 1)
@@ -201,9 +455,6 @@ size = Vector3(78, 54, 1)
 [node name="CSGBox3D6" type="CSGBox3D" parent="lighting & env"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -20.5127, 7.0075, 15.389)
 size = Vector3(78, 54, 1)
-
-[node name="Arcade (1)" parent="lighting & env" instance=ExtResource("6_xd212")]
-transform = Transform3D(31, 0, 0, 0, 31, 0, 0, 0, 31, 0, -6.39379, 13.0707)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="lighting & env"]
 environment = SubResource("Environment_tqm3s")
@@ -219,6 +470,9 @@ radius = 0.349336
 height = 3.52089
 material = SubResource("StandardMaterial3D_cb8bq")
 
+[node name="Arcade (2)" parent="lighting & env" instance=ExtResource("6_mn3xb")]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, -7.02655, 13.9154)
+
 [node name="SubViewport" type="SubViewport" parent="."]
 handle_input_locally = false
 size = Vector2i(1907, 847)
@@ -227,6 +481,94 @@ size = Vector2i(1907, 847)
 position = Vector2(954, 536)
 scale = Vector2(2, 2)
 texture = ExtResource("1_a7teg")
+
+[node name="shaderregion" type="Sprite2D" parent="SubViewport"]
+material = SubResource("CanvasItemMaterial_7jfsy")
+position = Vector2(341.25, 129.25)
+scale = Vector2(683.5, 259.5)
+
+[node name="spinnerView" type="Sprite2D" parent="SubViewport"]
+position = Vector2(1157, 1144)
+scale = Vector2(2, 2)
+texture = SubResource("ViewportTexture_g52lm")
+
+[node name="obtainables" type="Node2D" parent="SubViewport"]
+
+[node name="obtainable" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(1114, 612)
+scale = Vector2(2, 2)
+
+[node name="obtainable2" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(666, 804)
+scale = Vector2(2, 2)
+
+[node name="obtainable3" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(890, 516)
+scale = Vector2(2, 2)
+
+[node name="obtainable4" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(986, 804)
+scale = Vector2(2, 2)
+
+[node name="obtainable6" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(1146, 388)
+scale = Vector2(2, 2)
+
+[node name="obtainable7" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(1338, 484)
+scale = Vector2(2, 2)
+
+[node name="obtainable8" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(570, 36)
+scale = Vector2(2, 2)
+
+[node name="obtainable9" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(634, 260)
+scale = Vector2(2, 2)
+
+[node name="obtainable10" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(890, 164)
+scale = Vector2(2, 2)
+
+[node name="obtainable11" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(1242, 36)
+scale = Vector2(2, 2)
+
+[node name="obtainable12" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(986, 292)
+scale = Vector2(2, 2)
+
+[node name="obtainable13" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(858, 356)
+scale = Vector2(2, 2)
+
+[node name="obtainable14" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(986, 580)
+scale = Vector2(2, 2)
+
+[node name="obtainable15" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(698, 740)
+scale = Vector2(2, 2)
+
+[node name="obtainable16" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(602, 740)
+scale = Vector2(2, 2)
+
+[node name="obtainable17" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(1178, 164)
+scale = Vector2(2, 2)
+
+[node name="obtainable18" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(1306, 292)
+scale = Vector2(2, 2)
+
+[node name="obtainable19" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(1306, 740)
+scale = Vector2(2, 2)
+
+[node name="obtainable5" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(666, 516)
+scale = Vector2(2, 2)
 
 [node name="player" type="Node2D" parent="SubViewport" groups=["player"]]
 position = Vector2(954, 804)
@@ -245,81 +587,10 @@ collision_mask = 6
 scale = Vector2(0.999999, 0.999999)
 shape = SubResource("RectangleShape2D_htn7m")
 
-[node name="shaderregion" type="Sprite2D" parent="SubViewport"]
-material = SubResource("CanvasItemMaterial_7jfsy")
-position = Vector2(341.25, 129.25)
-scale = Vector2(683.5, 259.5)
-
-[node name="spinnerView" type="Sprite2D" parent="SubViewport"]
-position = Vector2(1157, 1144)
-scale = Vector2(2, 2)
-texture = SubResource("ViewportTexture_g52lm")
-
 [node name="fadeRect" type="ColorRect" parent="SubViewport"]
 offset_right = 2304.0
 offset_bottom = 1296.0
 color = Color(0, 0, 0, 0)
-
-[node name="obtainables" type="Node2D" parent="SubViewport"]
-
-[node name="obtainable" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
-position = Vector2(1114, 612)
-scale = Vector2(2, 2)
-
-[node name="obtainable2" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
-position = Vector2(666, 804)
-scale = Vector2(2, 2)
-
-[node name="obtainable3" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
-position = Vector2(890, 516)
-scale = Vector2(2, 2)
-
-[node name="obtainable4" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
-position = Vector2(954, 772)
-scale = Vector2(2, 2)
-
-[node name="obtainable5" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
-position = Vector2(922, 740)
-scale = Vector2(2, 2)
-
-[node name="eventAnim" type="Node2D" parent="SubViewport"]
-visible = false
-
-[node name="eventName" type="Label" parent="SubViewport/eventAnim"]
-offset_left = 38.0
-offset_top = 137.0
-offset_right = 1926.0
-offset_bottom = 200.0
-theme_override_fonts/font = ExtResource("18_7x8mt")
-theme_override_font_sizes/font_size = 56
-text = "ENRICHMENT MODULE"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="eventStory" type="Label" parent="SubViewport/eventAnim"]
-offset_left = 557.0
-offset_top = 496.0
-offset_right = 1376.0
-offset_bottom = 638.0
-theme_override_colors/font_color = Color(0.91, 0.811265, 0.0637, 1)
-theme_override_fonts/font = ExtResource("20_fxtm5")
-theme_override_font_sizes/font_size = 26
-text = "EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="eventEffect" type="Label" parent="SubViewport/eventAnim"]
-offset_left = 548.0
-offset_top = 264.0
-offset_right = 1403.0
-offset_bottom = 322.0
-theme_override_fonts/font = ExtResource("20_fxtm5")
-theme_override_font_sizes/font_size = 32
-text = "EVENTEFFECT"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
 
 [node name="obtainedAnim" type="Node2D" parent="SubViewport"]
 visible = false
@@ -380,6 +651,591 @@ text = "Add1 to every roll"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="Loanshark-final" type="Sprite2D" parent="SubViewport"]
+visible = false
+position = Vector2(928, 321)
+scale = Vector2(2, 2)
+texture = ExtResource("12_x2e4q")
+hframes = 7
+
+[node name="eventAnim" type="Node2D" parent="SubViewport"]
+visible = false
+
+[node name="eventName" type="Label" parent="SubViewport/eventAnim"]
+offset_left = 38.0
+offset_top = 137.0
+offset_right = 1926.0
+offset_bottom = 200.0
+theme_override_fonts/font = ExtResource("18_7x8mt")
+theme_override_font_sizes/font_size = 56
+text = "ENRICHMENT MODULE"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="eventStory" type="Label" parent="SubViewport/eventAnim"]
+offset_left = 557.0
+offset_top = 528.0
+offset_right = 1376.0
+offset_bottom = 670.0
+theme_override_colors/font_color = Color(0.91, 0.811265, 0.0637, 1)
+theme_override_fonts/font = ExtResource("20_fxtm5")
+theme_override_font_sizes/font_size = 26
+text = "EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT EVENT"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="eventEffect" type="Label" parent="SubViewport/eventAnim"]
+offset_left = 548.0
+offset_top = 264.0
+offset_right = 1403.0
+offset_bottom = 322.0
+theme_override_fonts/font = ExtResource("20_fxtm5")
+theme_override_font_sizes/font_size = 32
+text = "EVENTEFFECT"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="eventSprite" type="Sprite2D" parent="SubViewport/eventAnim"]
+visible = false
+position = Vector2(960, 420)
+scale = Vector2(5, 5)
+texture = ExtResource("13_1hduq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/eventAnim"]
+libraries = {
+"": SubResource("AnimationLibrary_xum8k")
+}
+
+[node name="status" type="Control" parent="SubViewport"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 780.985
+offset_top = 165.875
+offset_right = 780.985
+offset_bottom = 165.875
+
+[node name="PanelContainer" type="VBoxContainer" parent="SubViewport/status"]
+layout_mode = 0
+offset_left = 622.0
+offset_top = 121.0
+offset_right = 1071.0
+offset_bottom = 457.0
+
+[node name="1-0" type="VBoxContainer" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="statusSprite" type="Control" parent="SubViewport/status/PanelContainer/1-0"]
+visible = false
+layout_mode = 2
+script = ExtResource("14_dc3qn")
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewport/status/PanelContainer/1-0/statusSprite"]
+scale = Vector2(3, 3)
+texture = ExtResource("17_es0wu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/status/PanelContainer/1-0/statusSprite"]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_2mk88")
+}
+
+[node name="deathLabel" type="Label" parent="SubViewport/status/PanelContainer/1-0/statusSprite"]
+visible = false
+layout_mode = 0
+offset_left = 77.0
+offset_top = -54.0
+offset_right = 164.0
+offset_bottom = -31.0
+scale = Vector2(2.5, 2.5)
+text = "dfasdsadsa"
+
+[node name="deathLabelAnims" type="AnimationPlayer" parent="SubViewport/status/PanelContainer/1-0/statusSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_exyok")
+}
+
+[node name="VSeparator" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator81" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator82" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator83" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator2" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator3" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator4" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator5" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator6" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator7" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator8" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator17" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator18" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator19" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator20" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator21" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator22" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator30" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator31" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator38" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator39" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="1-2" type="VBoxContainer" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="statusSprite" type="Control" parent="SubViewport/status/PanelContainer/1-2"]
+visible = false
+layout_mode = 2
+script = ExtResource("14_dc3qn")
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewport/status/PanelContainer/1-2/statusSprite"]
+scale = Vector2(3, 3)
+texture = ExtResource("13_1hduq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/status/PanelContainer/1-2/statusSprite"]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_2mk88")
+}
+
+[node name="deathLabel" type="Label" parent="SubViewport/status/PanelContainer/1-2/statusSprite"]
+visible = false
+layout_mode = 0
+offset_left = 77.0
+offset_top = -54.0
+offset_right = 164.0
+offset_bottom = -31.0
+scale = Vector2(2.5, 2.5)
+text = "dfasdsadsa"
+
+[node name="deathLabelAnims" type="AnimationPlayer" parent="SubViewport/status/PanelContainer/1-2/statusSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_exyok")
+}
+
+[node name="VSeparator9" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator10" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator11" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator12" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator13" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator14" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator15" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator16" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator23" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator24" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator25" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator26" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator27" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator32" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator33" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator34" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator36" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator37" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="1-3" type="VBoxContainer" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="statusSprite" type="Control" parent="SubViewport/status/PanelContainer/1-3"]
+visible = false
+layout_mode = 2
+script = ExtResource("14_dc3qn")
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewport/status/PanelContainer/1-3/statusSprite"]
+scale = Vector2(3, 3)
+texture = ExtResource("13_n248f")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/status/PanelContainer/1-3/statusSprite"]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_2mk88")
+}
+
+[node name="deathLabel" type="Label" parent="SubViewport/status/PanelContainer/1-3/statusSprite"]
+visible = false
+layout_mode = 0
+offset_left = 77.0
+offset_top = -54.0
+offset_right = 164.0
+offset_bottom = -31.0
+scale = Vector2(2.5, 2.5)
+text = "dfasdsadsa"
+
+[node name="deathLabelAnims" type="AnimationPlayer" parent="SubViewport/status/PanelContainer/1-3/statusSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_exyok")
+}
+
+[node name="VSeparator41" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator42" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator43" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator44" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator45" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator46" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator47" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator48" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator49" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator50" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator51" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator52" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator53" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator54" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator55" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator56" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator57" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator58" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator59" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator84" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator85" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator86" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator60" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="1-5" type="VBoxContainer" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="statusSprite" type="Control" parent="SubViewport/status/PanelContainer/1-5"]
+visible = false
+layout_mode = 2
+script = ExtResource("14_dc3qn")
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewport/status/PanelContainer/1-5/statusSprite"]
+scale = Vector2(3, 3)
+texture = ExtResource("17_44415")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/status/PanelContainer/1-5/statusSprite"]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_2mk88")
+}
+
+[node name="deathLabel" type="Label" parent="SubViewport/status/PanelContainer/1-5/statusSprite"]
+visible = false
+layout_mode = 0
+offset_left = 77.0
+offset_top = -54.0
+offset_right = 164.0
+offset_bottom = -31.0
+scale = Vector2(2.5, 2.5)
+text = "dfasdsadsa"
+
+[node name="deathLabelAnims" type="AnimationPlayer" parent="SubViewport/status/PanelContainer/1-5/statusSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_exyok")
+}
+
+[node name="VSeparator87" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator88" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator89" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator90" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator91" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator92" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator93" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator94" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator95" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator96" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator97" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator98" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator99" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator100" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator101" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator102" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator103" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator104" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator105" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator106" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator107" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator108" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator109" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="2-2" type="VBoxContainer" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="statusSprite" type="Control" parent="SubViewport/status/PanelContainer/2-2"]
+visible = false
+layout_mode = 2
+script = ExtResource("14_dc3qn")
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewport/status/PanelContainer/2-2/statusSprite"]
+scale = Vector2(3, 3)
+texture = ExtResource("25_2xqgb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/status/PanelContainer/2-2/statusSprite"]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_2mk88")
+}
+
+[node name="deathLabel" type="Label" parent="SubViewport/status/PanelContainer/2-2/statusSprite"]
+visible = false
+layout_mode = 0
+offset_left = 77.0
+offset_top = -54.0
+offset_right = 164.0
+offset_bottom = -31.0
+scale = Vector2(2.5, 2.5)
+text = "dfasdsadsa"
+
+[node name="deathLabelAnims" type="AnimationPlayer" parent="SubViewport/status/PanelContainer/2-2/statusSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_exyok")
+}
+
+[node name="VSeparator61" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator62" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator63" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator64" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator65" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator66" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator67" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator68" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator69" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator70" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator71" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator72" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator73" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator74" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator75" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator76" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator77" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator78" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator79" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="VSeparator80" type="Control" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="2-4" type="VBoxContainer" parent="SubViewport/status/PanelContainer"]
+layout_mode = 2
+
+[node name="statusSprite" type="Control" parent="SubViewport/status/PanelContainer/2-4"]
+visible = false
+layout_mode = 2
+script = ExtResource("14_dc3qn")
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewport/status/PanelContainer/2-4/statusSprite"]
+scale = Vector2(3, 3)
+texture = ExtResource("26_2gl0d")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/status/PanelContainer/2-4/statusSprite"]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_2mk88")
+}
+
+[node name="deathLabel" type="Label" parent="SubViewport/status/PanelContainer/2-4/statusSprite"]
+visible = false
+layout_mode = 0
+offset_left = 77.0
+offset_top = -54.0
+offset_right = 164.0
+offset_bottom = -31.0
+scale = Vector2(2.5, 2.5)
+text = "dfasdsadsa"
+
+[node name="deathLabelAnims" type="AnimationPlayer" parent="SubViewport/status/PanelContainer/2-4/statusSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_exyok")
+}
 
 [node name="Maze1_0" type="Sprite2D" parent="SubViewport"]
 material = SubResource("ShaderMaterial_tcoxg")
@@ -1136,10 +1992,11 @@ size_flags_vertical = 0
 text = "   MONS:  0"
 
 [node name="debugPanel" type="PanelContainer" parent="Control"]
+visible = false
 layout_mode = 0
-offset_left = 1957.0
+offset_left = 1603.0
 offset_top = 32.0
-offset_right = 2164.0
+offset_right = 1810.0
 offset_bottom = 318.0
 scale = Vector2(1.5, 1.5)
 
@@ -1197,12 +2054,8 @@ size_flags_horizontal = 3
 text = "Right
 "
 
-[node name="+10button" type="Button" parent="Control/debugPanel/VBoxContainer"]
-layout_mode = 2
-text = "+10 coins
-"
-
 [node name="Label" type="Label" parent="Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -1214,6 +2067,197 @@ grow_horizontal = 2
 theme_override_fonts/font = ExtResource("18_7x8mt")
 theme_override_font_sizes/font_size = 62
 text = "GACHA PWN"
+
+[node name="effectMenu" type="PanelContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -344.0
+offset_top = 32.0
+offset_right = -35.0
+offset_bottom = 461.0
+grow_horizontal = 0
+script = ExtResource("21_pr0jc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/effectMenu"]
+layout_mode = 2
+
+[node name="nameLabel" type="Label" parent="Control/effectMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Effect Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Control/effectMenu/VBoxContainer"]
+layout_mode = 2
+
+[node name="commonLabel" type="Label" parent="Control/effectMenu/VBoxContainer"]
+layout_mode = 2
+text = "Common Effects
+"
+
+[node name="Button" type="Button" parent="Control/effectMenu/VBoxContainer"]
+layout_mode = 2
+text = "+1 Coin"
+
+[node name="Button2" type="Button" parent="Control/effectMenu/VBoxContainer"]
+layout_mode = 2
+text = "+2 Coin"
+
+[node name="Button3" type="Button" parent="Control/effectMenu/VBoxContainer"]
+layout_mode = 2
+text = "+3 Coin"
+
+[node name="Button4" type="Button" parent="Control/effectMenu/VBoxContainer"]
+layout_mode = 2
+text = "-1 Coin"
+
+[node name="Button5" type="Button" parent="Control/effectMenu/VBoxContainer"]
+layout_mode = 2
+text = "-2 Coin"
+
+[node name="Button6" type="Button" parent="Control/effectMenu/VBoxContainer"]
+layout_mode = 2
+text = "-3 Coin"
+
+[node name="HSeparator2" type="HSeparator" parent="Control/effectMenu/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/effectMenu/VBoxContainer"]
+layout_mode = 2
+text = "Rare Effects"
+
+[node name="Button7" type="Button" parent="Control/effectMenu/VBoxContainer"]
+layout_mode = 2
+text = "Coinsurance"
+
+[node name="Button8" type="Button" parent="Control/effectMenu/VBoxContainer"]
+layout_mode = 2
+text = "+6 Coin"
+
+[node name="Button9" type="Button" parent="Control/effectMenu/VBoxContainer"]
+layout_mode = 2
+text = "Savings Account"
+
+[node name="Button10" type="Button" parent="Control/effectMenu/VBoxContainer"]
+layout_mode = 2
+text = "Delayed Detriment"
+
+[node name="Button11" type="Button" parent="Control/effectMenu/VBoxContainer"]
+layout_mode = 2
+text = "-6 Coin"
+
+[node name="Button12" type="Button" parent="Control/effectMenu/VBoxContainer"]
+layout_mode = 2
+text = "Double Negative"
+
+[node name="HSeparator3" type="HSeparator" parent="Control/effectMenu/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Control/effectMenu/VBoxContainer"]
+layout_mode = 2
+text = "Ultra Rare Effects"
+
+[node name="Button13" type="Button" parent="Control/effectMenu/VBoxContainer"]
+layout_mode = 2
+text = "2X Coin"
+
+[node name="Button14" type="Button" parent="Control/effectMenu/VBoxContainer"]
+layout_mode = 2
+text = "+10 Coin"
+
+[node name="Button15" type="Button" parent="Control/effectMenu/VBoxContainer"]
+layout_mode = 2
+text = "Money Trail"
+
+[node name="Button16" type="Button" parent="Control/effectMenu/VBoxContainer"]
+layout_mode = 2
+text = "1/2 Coin"
+
+[node name="Button17" type="Button" parent="Control/effectMenu/VBoxContainer"]
+layout_mode = 2
+text = "Highway Robbery"
+
+[node name="Button18" type="Button" parent="Control/effectMenu/VBoxContainer"]
+layout_mode = 2
+text = "ENRICHMENT MODULE"
+
+[node name="itemMenu" type="PanelContainer" parent="Control"]
+layout_mode = 0
+offset_left = 1959.0
+offset_top = 814.0
+offset_right = 2270.0
+offset_bottom = 1270.0
+script = ExtResource("22_r6gmn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/itemMenu"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/itemMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Item Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Control/itemMenu/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Control/itemMenu/VBoxContainer"]
+layout_mode = 2
+text = "Common Items"
+
+[node name="Button" type="Button" parent="Control/itemMenu/VBoxContainer"]
+layout_mode = 2
+text = "Leg Day"
+
+[node name="Button2" type="Button" parent="Control/itemMenu/VBoxContainer"]
+layout_mode = 2
+text = "Lucky Break"
+
+[node name="Button3" type="Button" parent="Control/itemMenu/VBoxContainer"]
+layout_mode = 2
+text = "Negative Negation"
+
+[node name="HSeparator2" type="HSeparator" parent="Control/itemMenu/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="Control/itemMenu/VBoxContainer"]
+layout_mode = 2
+text = "Rare Items"
+
+[node name="Button4" type="Button" parent="Control/itemMenu/VBoxContainer"]
+layout_mode = 2
+text = "Leg Day+"
+
+[node name="Button5" type="Button" parent="Control/itemMenu/VBoxContainer"]
+layout_mode = 2
+text = "Bank Error"
+
+[node name="Button6" type="Button" parent="Control/itemMenu/VBoxContainer"]
+layout_mode = 2
+text = "Anywhere But Here"
+
+[node name="HSeparator3" type="HSeparator" parent="Control/itemMenu/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="Control/itemMenu/VBoxContainer"]
+layout_mode = 2
+text = "Ultra Rare Items"
+
+[node name="Button7" type="Button" parent="Control/itemMenu/VBoxContainer"]
+layout_mode = 2
+text = "Leg Day++"
+
+[node name="Button8" type="Button" parent="Control/itemMenu/VBoxContainer"]
+layout_mode = 2
+text = "Loaded Dice"
+
+[node name="Button9" type="Button" parent="Control/itemMenu/VBoxContainer"]
+layout_mode = 2
+text = "Scot-Free"
 
 [node name="rarityLabel" type="Label" parent="."]
 offset_left = 132.0
@@ -1238,15 +2282,13 @@ spot_range = 59.2358
 [node name="inv" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="inventoryPanel" type="PanelContainer" parent="inv"]
 layout_mode = 0
 offset_left = 173.0
 offset_top = 89.0
 offset_right = 374.0
-offset_bottom = 391.0
+offset_bottom = 89.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="inv/inventoryPanel"]
 layout_mode = 2
@@ -1263,6 +2305,12 @@ text = "Inventory"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[connection signal="animation_finished" from="SubViewport/status/PanelContainer/1-0/statusSprite/AnimationPlayer" to="SubViewport/status/PanelContainer/1-0/statusSprite" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="SubViewport/status/PanelContainer/1-2/statusSprite/AnimationPlayer" to="SubViewport/status/PanelContainer/1-2/statusSprite" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="SubViewport/status/PanelContainer/1-3/statusSprite/AnimationPlayer" to="SubViewport/status/PanelContainer/1-3/statusSprite" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="SubViewport/status/PanelContainer/1-5/statusSprite/AnimationPlayer" to="SubViewport/status/PanelContainer/1-5/statusSprite" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="SubViewport/status/PanelContainer/2-2/statusSprite/AnimationPlayer" to="SubViewport/status/PanelContainer/2-2/statusSprite" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="SubViewport/status/PanelContainer/2-4/statusSprite/AnimationPlayer" to="SubViewport/status/PanelContainer/2-4/statusSprite" method="_on_animation_player_animation_finished"]
 [connection signal="pressed" from="Control/1spinButton" to="." method="_on_spin_button_pressed"]
 [connection signal="pressed" from="Control/1spinButton" to="lighting & env/spinnerPLACEHOLDER" method="_on_spin_button_pressed"]
 [connection signal="pressed" from="Control/debugPanel/VBoxContainer/resetbutton" to="." method="_on_resetbutton_pressed"]
@@ -1271,4 +2319,30 @@ vertical_alignment = 1
 [connection signal="pressed" from="Control/debugPanel/VBoxContainer/GridContainer/dirDown" to="." method="_on_dir_down_pressed"]
 [connection signal="pressed" from="Control/debugPanel/VBoxContainer/GridContainer/dirLeft" to="." method="_on_dir_left_pressed"]
 [connection signal="pressed" from="Control/debugPanel/VBoxContainer/GridContainer/dirRight" to="." method="_on_dir_right_pressed"]
-[connection signal="pressed" from="Control/debugPanel/VBoxContainer/+10button" to="." method="_on_add10_button_pressed"]
+[connection signal="pressed" from="Control/effectMenu/VBoxContainer/Button" to="Control/effectMenu" method="_on_button_pressed"]
+[connection signal="pressed" from="Control/effectMenu/VBoxContainer/Button2" to="Control/effectMenu" method="_on_button_2_pressed"]
+[connection signal="pressed" from="Control/effectMenu/VBoxContainer/Button3" to="Control/effectMenu" method="_on_button_3_pressed"]
+[connection signal="pressed" from="Control/effectMenu/VBoxContainer/Button4" to="Control/effectMenu" method="_on_button_4_pressed"]
+[connection signal="pressed" from="Control/effectMenu/VBoxContainer/Button5" to="Control/effectMenu" method="_on_button_5_pressed"]
+[connection signal="pressed" from="Control/effectMenu/VBoxContainer/Button6" to="Control/effectMenu" method="_on_button_6_pressed"]
+[connection signal="pressed" from="Control/effectMenu/VBoxContainer/Button7" to="Control/effectMenu" method="_on_button_7_pressed"]
+[connection signal="pressed" from="Control/effectMenu/VBoxContainer/Button8" to="Control/effectMenu" method="_on_button_8_pressed"]
+[connection signal="pressed" from="Control/effectMenu/VBoxContainer/Button9" to="Control/effectMenu" method="_on_button_9_pressed"]
+[connection signal="pressed" from="Control/effectMenu/VBoxContainer/Button10" to="Control/effectMenu" method="_on_button_10_pressed"]
+[connection signal="pressed" from="Control/effectMenu/VBoxContainer/Button11" to="Control/effectMenu" method="_on_button_11_pressed"]
+[connection signal="pressed" from="Control/effectMenu/VBoxContainer/Button12" to="Control/effectMenu" method="_on_button_12_pressed"]
+[connection signal="pressed" from="Control/effectMenu/VBoxContainer/Button13" to="Control/effectMenu" method="_on_button_13_pressed"]
+[connection signal="pressed" from="Control/effectMenu/VBoxContainer/Button14" to="Control/effectMenu" method="_on_button_14_pressed"]
+[connection signal="pressed" from="Control/effectMenu/VBoxContainer/Button15" to="Control/effectMenu" method="_on_button_15_pressed"]
+[connection signal="pressed" from="Control/effectMenu/VBoxContainer/Button16" to="Control/effectMenu" method="_on_button_16_pressed"]
+[connection signal="pressed" from="Control/effectMenu/VBoxContainer/Button17" to="Control/effectMenu" method="_on_button_17_pressed"]
+[connection signal="pressed" from="Control/effectMenu/VBoxContainer/Button18" to="Control/effectMenu" method="_on_button_18_pressed"]
+[connection signal="pressed" from="Control/itemMenu/VBoxContainer/Button" to="Control/itemMenu" method="_on_button_pressed"]
+[connection signal="pressed" from="Control/itemMenu/VBoxContainer/Button2" to="Control/itemMenu" method="_on_button_2_pressed"]
+[connection signal="pressed" from="Control/itemMenu/VBoxContainer/Button3" to="Control/itemMenu" method="_on_button_3_pressed"]
+[connection signal="pressed" from="Control/itemMenu/VBoxContainer/Button4" to="Control/itemMenu" method="_on_button_4_pressed"]
+[connection signal="pressed" from="Control/itemMenu/VBoxContainer/Button5" to="Control/itemMenu" method="_on_button_5_pressed"]
+[connection signal="pressed" from="Control/itemMenu/VBoxContainer/Button6" to="Control/itemMenu" method="_on_button_6_pressed"]
+[connection signal="pressed" from="Control/itemMenu/VBoxContainer/Button7" to="Control/itemMenu" method="_on_button_7_pressed"]
+[connection signal="pressed" from="Control/itemMenu/VBoxContainer/Button8" to="Control/itemMenu" method="_on_button_8_pressed"]
+[connection signal="pressed" from="Control/itemMenu/VBoxContainer/Button9" to="Control/itemMenu" method="_on_button_9_pressed"]

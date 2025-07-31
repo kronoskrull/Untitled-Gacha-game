@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqld5dxfh26jc"]
+
+[ext_resource type="PackedScene" uid="uid://dn8m0yab84c76" path="res://Assets/models/Arcade (2).fbx" id="1_n2q3w"]
+[ext_resource type="Texture2D" uid="uid://dvjy08qi4ina4" path="res://Assets/Arcade_tex.jpg" id="2_d4nxe"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xmt01"]
+albedo_texture = ExtResource("2_d4nxe")
+
+[node name="Arcade (2)" instance=ExtResource("1_n2q3w")]
+
+[node name="Spinner" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_xmt01")

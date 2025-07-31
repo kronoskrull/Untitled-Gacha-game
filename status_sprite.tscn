@@ -1,36 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://dqqdfl684aak4"]
+[gd_scene load_steps=12 format=3 uid="uid://dqqdfl684aak4"]
 
 [ext_resource type="Script" path="res://status_sprite.gd" id="1_2tbqf"]
 [ext_resource type="Texture2D" uid="uid://bhmp3u1og6j0k" path="res://Assets/effects/eff1-0.png" id="2_ohfoq"]
-
-[sub_resource type="Animation" id="Animation_x7hum"]
-resource_name = "hover"
-length = 16.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(4, 12),
-"transitions": PackedFloat32Array(-2, -2),
-"update": 0,
-"values": [Vector2(0, 8), Vector2(0, -8)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(6.13333, 15.5667),
-"transitions": PackedFloat32Array(-2, -2),
-"update": 0,
-"values": [0.0349066, -0.0349066]
-}
+[ext_resource type="FontFile" uid="uid://0kpmyoip0ktj" path="res://Assets/ka1.ttf" id="3_fmxcn"]
 
 [sub_resource type="Animation" id="Animation_gcbii"]
 length = 0.001
@@ -69,34 +41,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(3, 3)]
-}
-
-[sub_resource type="Animation" id="Animation_xxp08"]
-resource_name = "die"
-length = 1.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 18.8496]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(3, 3), Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_6qyfp"]
@@ -141,12 +85,83 @@ tracks/2/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_xxp08"]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 18.8496]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(3, 3), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_x7hum"]
+resource_name = "hover"
+length = 16.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(4, 12),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0, 8), Vector2(0, -8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(6.13333, 15.5667),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [0.0349066, -0.0349066]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2mk88"]
 _data = {
 "RESET": SubResource("Animation_gcbii"),
 "appear": SubResource("Animation_6qyfp"),
 "die": SubResource("Animation_xxp08"),
 "hover": SubResource("Animation_x7hum")
+}
+
+[sub_resource type="Animation" id="Animation_8mvvs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("deathLabel:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_hpev1"]
@@ -180,21 +195,6 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_8mvvs"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("deathLabel:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_exyok"]
 _data = {
 "RESET": SubResource("Animation_8mvvs"),
@@ -218,11 +218,13 @@ libraries = {
 
 [node name="deathLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 77.0
-offset_top = -54.0
-offset_right = 164.0
-offset_bottom = -31.0
+offset_left = 65.0
+offset_top = -21.0
+offset_right = 171.0
+offset_bottom = 2.0
 scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("3_fmxcn")
+theme_override_font_sizes/font_size = 10
 text = "dfasdsadsa"
 autowrap_mode = 2
 

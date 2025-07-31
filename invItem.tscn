@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://dlbrvj56rjkc0"]
+[gd_scene load_steps=14 format=3 uid="uid://dlbrvj56rjkc0"]
 
 [ext_resource type="Script" path="res://Level/inventoryItem.gd" id="1_mwd0l"]
+[ext_resource type="FontFile" uid="uid://0kpmyoip0ktj" path="res://Assets/ka1.ttf" id="1_taruh"]
 [ext_resource type="Texture2D" uid="uid://c84526k3vmba1" path="res://Assets/obtainables/obt001.png" id="2_lc06q"]
 
 [sub_resource type="Animation" id="Animation_ovrtn"]
@@ -45,7 +46,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(2, 6),
 "transitions": PackedFloat32Array(-2, -2),
 "update": 0,
-"values": [Vector2(247, 8), Vector2(247, 24)]
+"values": [Vector2(300, 8), Vector2(300, 24)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -274,7 +275,8 @@ _data = {
 z_index = 5
 offset_right = 87.0
 offset_bottom = 38.0
-theme_override_font_sizes/font_size = 21
+theme_override_fonts/font = ExtResource("1_taruh")
+theme_override_font_sizes/font_size = 20
 text = "Leg Day"
 script = ExtResource("1_mwd0l")
 
@@ -303,9 +305,9 @@ libraries = {
 [node name="activateTipLabel" type="Label" parent="."]
 visible = false
 layout_mode = 0
-offset_left = 345.0
-offset_top = 7.99999
-offset_right = 432.0
+offset_left = 315.0
+offset_top = 8.0
+offset_right = 402.0
 offset_bottom = 31.0
 rotation = -0.0387933
 text = "sampletext"

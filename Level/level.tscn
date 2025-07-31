@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://drt1tip360qt7"]
+[gd_scene load_steps=62 format=3 uid="uid://drt1tip360qt7"]
 
 [ext_resource type="Texture2D" uid="uid://dhw6oc4h6i0ny" path="res://Assets/effects/hudBlock1.0.png" id="1_a7teg"]
 [ext_resource type="Script" path="res://Level/level.gd" id="1_rljoh"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://dyithwdhvhtwv" path="res://Assets/maze1.0.png" id="5_nn23b"]
 [ext_resource type="ArrayMesh" uid="uid://d1lcl0yp5wud4" path="res://Assets/models/Spinner (1).obj" id="5_ynopn"]
 [ext_resource type="PackedScene" uid="uid://dqld5dxfh26jc" path="res://arcadeFinalMaybe.tscn" id="6_mn3xb"]
+[ext_resource type="Script" path="res://Level/flashlight.gd" id="7_e8di8"]
+[ext_resource type="PackedScene" uid="uid://d0sfuvyon2ptq" path="res://arrow.tscn" id="7_p2lt6"]
 [ext_resource type="PackedScene" uid="uid://gvhpy1s1absr" path="res://Junctions/R-Dcornerjunc.tscn" id="7_r7vob"]
 [ext_resource type="PackedScene" uid="uid://br6hxiou2nh38" path="res://Junctions/L-Ucornerjunc.tscn" id="8_6yic6"]
 [ext_resource type="PackedScene" uid="uid://c5fn6ne537652" path="res://Junctions/R-Ucornerjunc.tscn" id="9_llhc3"]
@@ -44,6 +46,9 @@ albedo_texture = ExtResource("4_57hlo")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2tokm"]
 albedo_color = Color(0.53, 0, 0, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xmeaq"]
+albedo_color = Color(0, 0, 0, 1)
+
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nemm3"]
 sky_top_color = Color(0, 0, 0, 1)
 sky_horizon_color = Color(0.5, 0.5, 0.5, 1)
@@ -60,10 +65,12 @@ sky = SubResource("Sky_0udfg")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xmeaq"]
-albedo_color = Color(0, 0, 0, 1)
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8cm07"]
+noise_type = 0
+frequency = 0.069
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cb8bq"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3bsj4"]
+noise = SubResource("FastNoiseLite_8cm07")
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7jfsy"]
 
@@ -413,10 +420,6 @@ fov = 83.0
 
 [node name="lighting & env" type="Node3D" parent="."]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="lighting & env"]
-transform = Transform3D(-0.866024, -0.475921, -0.153307, 0, -0.306611, 0.951835, -0.500003, 0.824311, 0.265532, 0, 0, 0)
-shadow_enabled = true
-
 [node name="spinnerPLACEHOLDER" type="CSGCylinder3D" parent="lighting & env"]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, -0.516094, 17.7286)
 radius = 3.24137
@@ -431,47 +434,90 @@ material_override = SubResource("StandardMaterial3D_54ae4")
 mesh = ExtResource("5_ynopn")
 skeleton = NodePath("../../..")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="lighting & env"]
+[node name="env" type="Node3D" parent="lighting & env"]
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="lighting & env/env"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.51265, 7.0075, -8.611)
 size = Vector3(78, 54, 1)
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="lighting & env"]
+[node name="CSGBox3D4" type="CSGBox3D" parent="lighting & env/env"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.51265, 7.0075, 38.389)
 size = Vector3(78, 54, 1)
 
-[node name="CSGBox3D7" type="CSGBox3D" parent="lighting & env"]
+[node name="CSGBox3D7" type="CSGBox3D" parent="lighting & env/env"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.51265, 33.0075, 17.389)
 size = Vector3(78, 54, 1)
 
-[node name="CSGBox3D8" type="CSGBox3D" parent="lighting & env"]
+[node name="CSGBox3D8" type="CSGBox3D" parent="lighting & env/env"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.0240631, 7.25552, 4.80079)
 material_override = SubResource("StandardMaterial3D_2tokm")
 size = Vector3(18.0941, 9.1048, 0.474609)
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="lighting & env"]
+[node name="CSGBox3D5" type="CSGBox3D" parent="lighting & env/env"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 18.4873, 7.0075, 15.389)
 size = Vector3(78, 54, 1)
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="lighting & env"]
+[node name="CSGBox3D6" type="CSGBox3D" parent="lighting & env/env"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -20.5127, 7.0075, 15.389)
 size = Vector3(78, 54, 1)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="lighting & env"]
-environment = SubResource("Environment_tqm3s")
-
-[node name="CSGBox3D" type="CSGBox3D" parent="lighting & env"]
-transform = Transform3D(0.3, 0, 0, 0, 0.6, 0, 0, 0, 0.3, 0, -0.177715, 15.1717)
+[node name="CSGBox3D" type="CSGBox3D" parent="lighting & env/env"]
+transform = Transform3D(0.3, 0, 0, 0, 0.6, 0, 0, 0, 0.3, 0, -0.532511, 15.1717)
 size = Vector3(1, 1.37207, 1)
 material = SubResource("StandardMaterial3D_xmeaq")
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="lighting & env"]
-transform = Transform3D(0.3, 0, 0, 0, -1.8621e-08, -0.3, 0, 0.426, -1.31134e-08, 0, 0.203744, 15.7813)
-radius = 0.349336
-height = 3.52089
-material = SubResource("StandardMaterial3D_cb8bq")
-
-[node name="Arcade (2)" parent="lighting & env" instance=ExtResource("6_mn3xb")]
+[node name="Arcade (2)" parent="lighting & env/env" instance=ExtResource("6_mn3xb")]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, -7.02655, 13.9154)
+
+[node name="Arrow" parent="lighting & env/env" instance=ExtResource("7_p2lt6")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.0039162, -1.41887, 15.6708)
+
+[node name="lights" type="Node3D" parent="lighting & env"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="lighting & env/lights"]
+transform = Transform3D(-0.866024, -0.47592, -0.153306, 0, -0.306611, 0.951835, -0.500003, 0.824312, 0.265532, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="lighting & env/lights"]
+environment = SubResource("Environment_tqm3s")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.66291, 13.5183)
+light_energy = 2.939
+shadow_enabled = true
+omni_range = 10.2165
+script = ExtResource("7_e8di8")
+noise = SubResource("NoiseTexture2D_3bsj4")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 24.464, 16.6618)
+light_color = Color(1, 0.995333, 0.72, 1)
+light_energy = 1.808
+shadow_enabled = true
+spot_range = 59.2358
+spot_angle = 24.3536
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="lighting & env/lights"]
+transform = Transform3D(0.218177, 0.705715, -0.674066, 0, 0.690706, 0.723136, 0.975909, -0.157772, 0.150696, -15.5217, 6.93077, 17.6416)
+light_color = Color(0, 0.0833333, 1, 1)
+light_energy = 5.202
+shadow_enabled = true
+spot_range = 62.3816
+spot_angle = 35.3799
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="lighting & env/lights"]
+transform = Transform3D(0.218143, -0.705556, 0.674244, 0, 0.690882, 0.722967, -0.975917, -0.15771, 0.150711, 15.52, 6.931, 17.642)
+light_color = Color(0, 0.0833333, 1, 1)
+light_energy = 5.202
+shadow_enabled = true
+spot_range = 62.3816
+spot_angle = 35.3799
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 0.922316, 0.386437, 0, -0.386437, 0.922316, 0, 13.5646, 27.6618)
+light_energy = 5.202
+spot_range = 19.5835
+spot_angle = 40.0165
 
 [node name="SubViewport" type="SubViewport" parent="."]
 handle_input_locally = false
@@ -2273,11 +2319,6 @@ offset_top = -161.0
 offset_right = 172.0
 offset_bottom = -104.0
 theme_override_font_sizes/font_size = 41
-
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 13, 27)
-light_energy = 5.202
-spot_range = 59.2358
 
 [node name="inv" type="Control" parent="."]
 layout_mode = 3

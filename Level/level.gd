@@ -82,6 +82,7 @@ var debugSelect
 var debugRarity: int = 0
 var debugX: int
 
+var flashMult: float = 4.0
 
 # Set the money count to whatever it's supposed to be
 func _ready() -> void:

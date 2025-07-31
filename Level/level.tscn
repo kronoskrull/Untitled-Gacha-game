@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=3 uid="uid://drt1tip360qt7"]
+[gd_scene load_steps=92 format=3 uid="uid://drt1tip360qt7"]
 
 [ext_resource type="Texture2D" uid="uid://dhw6oc4h6i0ny" path="res://Assets/effects/hudBlock1.0.png" id="1_a7teg"]
 [ext_resource type="Script" path="res://Level/level.gd" id="1_rljoh"]
@@ -48,6 +48,8 @@
 [ext_resource type="PackedScene" uid="uid://ducs5xy0swvpi" path="res://Level/slot_upgrade_notif.tscn" id="43_b3boj"]
 [ext_resource type="Script" path="res://Level/spin_1.gd" id="43_k7kmd"]
 [ext_resource type="AudioStream" uid="uid://chyxlwa18yc4y" path="res://Assets/Audio/coin-drops-and-spins-272429.mp3" id="43_vwx3i"]
+[ext_resource type="AudioStream" uid="uid://vj15swfcs701" path="res://Assets/Audio/level-up-bonus-sequence-2-186891.mp3" id="45_waqyb"]
+[ext_resource type="AudioStream" uid="uid://fhdim5212qyb" path="res://Assets/Audio/cave themeb4.mp3" id="47_cxyms"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_3nx2p"]
 viewport_path = NodePath("SubViewport")
@@ -754,7 +756,7 @@ spot_angle = 24.3536
 [node name="SpotLight3D3" type="SpotLight3D" parent="lighting & env/lights"]
 transform = Transform3D(0.218177, 0.705715, -0.674066, 0, 0.690706, 0.723136, 0.975909, -0.157772, 0.150696, -15.5217, 6.93077, 17.6416)
 light_color = Color(0, 0.0833333, 1, 1)
-light_energy = 5.202
+light_energy = 8.0
 shadow_enabled = true
 spot_range = 62.3816
 spot_angle = 35.3799
@@ -762,7 +764,7 @@ spot_angle = 35.3799
 [node name="SpotLight3D4" type="SpotLight3D" parent="lighting & env/lights"]
 transform = Transform3D(0.218143, -0.705556, 0.674244, 0, 0.690882, 0.722967, -0.975917, -0.15771, 0.150711, 15.52, 6.931, 17.642)
 light_color = Color(0, 0.0833333, 1, 1)
-light_energy = 5.202
+light_energy = 8.0
 shadow_enabled = true
 spot_range = 62.3816
 spot_angle = 35.3799
@@ -926,6 +928,1018 @@ size = Vector2i(1907, 847)
 position = Vector2(954, 536)
 scale = Vector2(2, 2)
 texture = ExtResource("1_a7teg")
+
+[node name="junctions" type="Node2D" parent="SubViewport"]
+position = Vector2(-198, -112)
+scale = Vector2(2, 2)
+
+[node name="L-DJuncs" type="Node2D" parent="SubViewport/junctions"]
+
+[node name="junction3" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(576, 426)
+
+[node name="junction4" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(720, 410)
+
+[node name="junction5" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(768, 378)
+
+[node name="junction6" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(768, 314)
+
+[node name="junction7" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(720, 266)
+
+[node name="junction8" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(672, 266)
+
+[node name="junction9" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(656, 250)
+
+[node name="junction10" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(608, 250)
+
+[node name="junction11" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(576, 250)
+
+[node name="junction12" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(528, 234)
+
+[node name="junction13" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(480, 202)
+
+[node name="junction14" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(512, 266)
+
+[node name="junction15" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(560, 266)
+
+[node name="junction16" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(640, 282)
+
+[node name="junction17" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(624, 314)
+
+[node name="junction18" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(736, 378)
+
+[node name="junction19" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(416, 410)
+
+[node name="junction20" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(432, 330)
+
+[node name="junction21" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(480, 314)
+
+[node name="junction22" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(432, 298)
+
+[node name="junction23" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(448, 154)
+
+[node name="junction24" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(448, 106)
+
+[node name="junction25" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(464, 74)
+
+[node name="junction26" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(544, 74)
+
+[node name="junction27" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(624, 74)
+
+[node name="junction28" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(752, 106)
+
+[node name="junction29" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(736, 122)
+
+[node name="junction30" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(736, 154)
+
+[node name="junction31" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(704, 202)
+
+[node name="junction32" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(608, 202)
+
+[node name="junction33" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(752, 234)
+
+[node name="junction34" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(736, 250)
+
+[node name="junction35" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(768, 122)
+
+[node name="junction" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
+position = Vector2(608, 410)
+
+[node name="R-DJuncs" type="Node2D" parent="SubViewport/junctions"]
+
+[node name="junction" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(384, 410)
+
+[node name="junction2" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(592, 410)
+
+[node name="junction3" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(400, 282)
+
+[node name="junction4" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(448, 202)
+
+[node name="junction5" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(432, 170)
+
+[node name="junction6" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(416, 122)
+
+[node name="junction7" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(432, 106)
+
+[node name="junction8" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(496, 74)
+
+[node name="junction9" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(528, 106)
+
+[node name="junction10" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(656, 74)
+
+[node name="junction11" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(672, 90)
+
+[node name="junction12" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(720, 138)
+
+[node name="junction13" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(704, 122)
+
+[node name="junction14" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(752, 138)
+
+[node name="junction15" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(720, 170)
+
+[node name="junction16" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(720, 202)
+
+[node name="junction17" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(688, 202)
+
+[node name="junction18" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(640, 186)
+
+[node name="junction19" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(576, 202)
+
+[node name="junction20" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(624, 250)
+
+[node name="junction21" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(592, 250)
+
+[node name="junction22" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(688, 282)
+
+[node name="junction23" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(704, 266)
+
+[node name="junction24" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(704, 378)
+
+[node name="junction25" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(752, 378)
+
+[node name="junction26" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(720, 362)
+
+[node name="junction27" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(672, 346)
+
+[node name="junction28" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(544, 282)
+
+[node name="junction29" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(528, 266)
+
+[node name="junction30" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(576, 282)
+
+[node name="junction31" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(448, 314)
+
+[node name="junction32" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(416, 298)
+
+[node name="junction33" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(608, 74)
+
+[node name="junction34" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(400, 74)
+
+[node name="junction35" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(384, 218)
+
+[node name="junction36" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
+position = Vector2(736, 426)
+
+[node name="L-UJuncs" type="Node2D" parent="SubViewport/junctions"]
+
+[node name="junction" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(720, 442)
+
+[node name="junction3" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(432, 362)
+
+[node name="junction4" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(560, 330)
+
+[node name="junction5" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(672, 426)
+
+[node name="junction6" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(752, 426)
+
+[node name="junction7" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(768, 458)
+
+[node name="junction8" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(768, 362)
+
+[node name="junction9" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(736, 346)
+
+[node name="junction10" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(720, 314)
+
+[node name="junction11" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(688, 298)
+
+[node name="junction12" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(704, 282)
+
+[node name="junction13" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(752, 186)
+
+[node name="junction14" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(704, 186)
+
+[node name="junction15" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(640, 218)
+
+[node name="junction16" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(688, 234)
+
+[node name="junction17" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(688, 170)
+
+[node name="junction18" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(672, 138)
+
+[node name="junction19" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(624, 170)
+
+[node name="junction20" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(608, 122)
+
+[node name="junction21" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(544, 154)
+
+[node name="junction22" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(544, 106)
+
+[node name="junction23" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(496, 186)
+
+[node name="junction24" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(432, 186)
+
+[node name="junction25" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(448, 170)
+
+[node name="junction26" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(448, 250)
+
+[node name="junction27" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(576, 218)
+
+[node name="junction28" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(736, 170)
+
+[node name="junction29" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(736, 138)
+
+[node name="junction30" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(624, 266)
+
+[node name="junction31" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(592, 266)
+
+[node name="junction32" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(560, 282)
+
+[node name="junction2" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
+position = Vector2(512, 458)
+
+[node name="R-UJuncs" type="Node2D" parent="SubViewport/junctions"]
+
+[node name="junction" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(384, 442)
+
+[node name="junction3" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(400, 458)
+
+[node name="junction4" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(448, 458)
+
+[node name="junction5" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(400, 394)
+
+[node name="junction6" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(416, 330)
+
+[node name="junction7" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(480, 378)
+
+[node name="junction8" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(512, 330)
+
+[node name="junction9" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(592, 346)
+
+[node name="junction10" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(576, 314)
+
+[node name="junction11" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(544, 298)
+
+[node name="junction12" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(704, 410)
+
+[node name="junction13" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(736, 394)
+
+[node name="junction14" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(624, 442)
+
+[node name="junction15" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(608, 458)
+
+[node name="junction16" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(384, 266)
+
+[node name="junction17" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(400, 250)
+
+[node name="junction18" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(384, 186)
+
+[node name="junction19" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(416, 154)
+
+[node name="junction20" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(448, 138)
+
+[node name="junction21" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(464, 186)
+
+[node name="junction22" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(608, 218)
+
+[node name="junction23" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(720, 154)
+
+[node name="junction24" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(720, 186)
+
+[node name="junction25" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(752, 122)
+
+[node name="junction26" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(720, 106)
+
+[node name="junction27" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(656, 106)
+
+[node name="junction28" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(656, 170)
+
+[node name="junction29" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(720, 218)
+
+[node name="junction30" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(656, 266)
+
+[node name="junction31" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(608, 266)
+
+[node name="junction32" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(576, 266)
+
+[node name="junction33" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(528, 250)
+
+[node name="junction34" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(480, 234)
+
+[node name="junction40" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(528, 218)
+
+[node name="junction41" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(544, 234)
+
+[node name="junction42" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(672, 298)
+
+[node name="junction35" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(528, 314)
+
+[node name="junction36" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(736, 442)
+
+[node name="junction37" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(752, 314)
+
+[node name="junction38" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(640, 426)
+
+[node name="junction39" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(704, 234)
+
+[node name="junction2" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
+position = Vector2(416, 442)
+
+[node name="TJuncs" type="Node2D" parent="SubViewport/junctions"]
+
+[node name="T -types" type="Node2D" parent="SubViewport/junctions/TJuncs"]
+
+[node name="junction" parent="SubViewport/junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
+position = Vector2(544, 330)
+
+[node name="junction2" parent="SubViewport/junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
+position = Vector2(560, 298)
+
+[node name="junction3" parent="SubViewport/junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
+position = Vector2(592, 314)
+
+[node name="junction4" parent="SubViewport/junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
+position = Vector2(688, 314)
+
+[node name="junction5" parent="SubViewport/junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
+position = Vector2(544, 218)
+
+[node name="junction6" parent="SubViewport/junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
+position = Vector2(528, 170)
+
+[node name="junction7" parent="SubViewport/junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
+position = Vector2(592, 170)
+
+[node name="junction8" parent="SubViewport/junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
+position = Vector2(656, 138)
+
+[node name="junction9" parent="SubViewport/junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
+position = Vector2(720, 90)
+
+[node name="junction10" parent="SubViewport/junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
+position = Vector2(512, 426)
+
+[node name="-| -types" type="Node2D" parent="SubViewport/junctions/TJuncs"]
+
+[node name="junction" parent="SubViewport/junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
+position = Vector2(400, 442)
+rotation = 1.57079
+dirType = 1
+
+[node name="junction2" parent="SubViewport/junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
+position = Vector2(448, 442)
+rotation = 1.57079
+dirType = 1
+
+[node name="junction3" parent="SubViewport/junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
+position = Vector2(448, 394)
+rotation = 1.57079
+dirType = 1
+
+[node name="junction4" parent="SubViewport/junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
+position = Vector2(624, 378)
+rotation = 1.57079
+dirType = 1
+
+[node name="junction5" parent="SubViewport/junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
+position = Vector2(768, 138)
+rotation = 1.57079
+dirType = 1
+
+[node name="junction6" parent="SubViewport/junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
+position = Vector2(672, 106)
+rotation = 1.57079
+dirType = 1
+
+[node name="junction7" parent="SubViewport/junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
+position = Vector2(400, 218)
+rotation = 1.57079
+dirType = 1
+
+[node name="junction8" parent="SubViewport/junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
+position = Vector2(400, 186)
+rotation = 1.57079
+dirType = 1
+
+[node name="junction9" parent="SubViewport/junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
+position = Vector2(768, 442)
+rotation = 1.57079
+dirType = 1
+
+[node name="junction13" parent="SubViewport/junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
+position = Vector2(752, 394)
+rotation = 1.57079
+dirType = 1
+
+[node name="junction10" parent="SubViewport/junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
+position = Vector2(768, 218)
+rotation = 1.57079
+dirType = 1
+
+[node name="junction11" parent="SubViewport/junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
+position = Vector2(576, 298)
+rotation = 1.57079
+dirType = 1
+
+[node name="junction12" parent="SubViewport/junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
+position = Vector2(512, 282)
+rotation = 1.57079
+dirType = 1
+
+[node name="junction14" parent="SubViewport/junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
+position = Vector2(624, 346)
+rotation = 1.57079
+dirType = 1
+
+[node name="|- -types" type="Node2D" parent="SubViewport/junctions/TJuncs"]
+
+[node name="junction" parent="SubViewport/junctions/TJuncs/|- -types" instance=ExtResource("10_15alu")]
+position = Vector2(400, 362)
+rotation = -1.57079
+dirType = 2
+
+[node name="junction2" parent="SubViewport/junctions/TJuncs/|- -types" instance=ExtResource("10_15alu")]
+position = Vector2(448, 426)
+rotation = -1.57079
+dirType = 2
+
+[node name="junction4" parent="SubViewport/junctions/TJuncs/|- -types" instance=ExtResource("10_15alu")]
+position = Vector2(656, 330)
+rotation = -1.57079
+dirType = 2
+
+[node name="junction5" parent="SubViewport/junctions/TJuncs/|- -types" instance=ExtResource("10_15alu")]
+position = Vector2(656, 314)
+rotation = -1.57079
+dirType = 2
+
+[node name="junction6" parent="SubViewport/junctions/TJuncs/|- -types" instance=ExtResource("10_15alu")]
+position = Vector2(624, 138)
+rotation = -1.57079
+dirType = 2
+
+[node name="junction7" parent="SubViewport/junctions/TJuncs/|- -types" instance=ExtResource("10_15alu")]
+position = Vector2(528, 122)
+rotation = -1.57079
+dirType = 2
+
+[node name="junction8" parent="SubViewport/junctions/TJuncs/|- -types" instance=ExtResource("10_15alu")]
+position = Vector2(496, 170)
+rotation = -1.57079
+dirType = 2
+
+[node name="Upside down-types" type="Node2D" parent="SubViewport/junctions/TJuncs"]
+
+[node name="junction" parent="SubViewport/junctions/TJuncs/Upside down-types" instance=ExtResource("10_15alu")]
+position = Vector2(720, 378)
+rotation = -3.14159
+dirType = 3
+
+[node name="junction2" parent="SubViewport/junctions/TJuncs/Upside down-types" instance=ExtResource("10_15alu")]
+position = Vector2(480, 458)
+rotation = -3.14159
+dirType = 3
+
+[node name="junction3" parent="SubViewport/junctions/TJuncs/Upside down-types" instance=ExtResource("10_15alu")]
+position = Vector2(688, 346)
+rotation = -3.14159
+dirType = 3
+
+[node name="junction4" parent="SubViewport/junctions/TJuncs/Upside down-types" instance=ExtResource("10_15alu")]
+position = Vector2(592, 202)
+rotation = -3.14159
+dirType = 3
+
+[node name="junction5" parent="SubViewport/junctions/TJuncs/Upside down-types" instance=ExtResource("10_15alu")]
+position = Vector2(528, 154)
+rotation = -3.14159
+dirType = 3
+
+[node name="junction6" parent="SubViewport/junctions/TJuncs/Upside down-types" instance=ExtResource("10_15alu")]
+position = Vector2(576, 170)
+rotation = -3.14159
+dirType = 3
+
+[node name="junction7" parent="SubViewport/junctions/TJuncs/Upside down-types" instance=ExtResource("10_15alu")]
+position = Vector2(544, 378)
+rotation = -3.14159
+dirType = 3
+
+[node name="TurnaroundJuncs" type="Node2D" parent="SubViewport/junctions"]
+
+[node name="junction" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(384, 74)
+
+[node name="junction2" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(400, 426)
+
+[node name="junction3" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(432, 458)
+
+[node name="junction4" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(480, 442)
+
+[node name="junction21" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(480, 474)
+
+[node name="junction28" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(496, 474)
+
+[node name="junction29" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(511, 474)
+
+[node name="junction30" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(527, 474)
+
+[node name="junction31" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(544.5, 474)
+
+[node name="junction32" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(561.5, 474)
+
+[node name="junction33" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(576.5, 474)
+
+[node name="junction34" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(591.5, 473.5)
+
+[node name="junction35" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(365, 442)
+
+[node name="junction101" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(365.5, 427.5)
+
+[node name="junction102" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(384, 56.5)
+
+[node name="junction104" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(400.5, 56)
+
+[node name="junction105" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(417.5, 56.5)
+
+[node name="junction106" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(435, 56)
+
+[node name="junction107" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(451, 56)
+
+[node name="junction108" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(467, 56)
+
+[node name="junction109" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(483.5, 56)
+
+[node name="junction110" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(498.5, 57)
+
+[node name="junction111" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(514, 57)
+
+[node name="junction112" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(529.5, 57.5)
+
+[node name="junction113" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(545, 57)
+
+[node name="junction114" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(560.5, 57.5)
+
+[node name="junction115" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(594.5, 58)
+
+[node name="junction116" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(611.5, 57)
+
+[node name="junction117" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(627, 57)
+
+[node name="junction118" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(642.5, 55.5)
+
+[node name="junction119" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(658.5, 55.5)
+
+[node name="junction120" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(674.5, 55.5)
+
+[node name="junction121" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(689, 56)
+
+[node name="junction122" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(705.5, 55.5)
+
+[node name="junction123" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(722.5, 56)
+
+[node name="junction124" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(740, 55.5)
+
+[node name="junction125" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(756, 55.5)
+
+[node name="junction126" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(772, 55.5)
+
+[node name="junction103" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(366, 411)
+
+[node name="junction36" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(369, 474.5)
+
+[node name="junction79" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(366.5, 54)
+
+[node name="junction37" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(384, 474.5)
+
+[node name="junction38" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(400, 474.5)
+
+[node name="junction39" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(417.5, 474.5)
+
+[node name="junction40" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(434.5, 474.5)
+
+[node name="junction41" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(449.5, 474.5)
+
+[node name="junction42" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(464.5, 474)
+
+[node name="junction43" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(607, 474)
+
+[node name="junction44" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(623, 474)
+
+[node name="junction45" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(638, 474)
+
+[node name="junction46" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(654, 474)
+
+[node name="junction47" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(671.5, 474)
+
+[node name="junction48" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(688.5, 474)
+
+[node name="junction49" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(703.5, 474)
+
+[node name="junction50" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(718.5, 473.5)
+
+[node name="junction51" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(734.5, 475)
+
+[node name="junction52" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(750.5, 475)
+
+[node name="junction53" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(765.5, 475)
+
+[node name="junction54" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(781.5, 475)
+
+[node name="junction55" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(786, 459.5)
+
+[node name="junction56" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(786, 427)
+
+[node name="junction57" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(785, 411.5)
+
+[node name="junction58" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(787, 395.5)
+
+[node name="junction22" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(383.5, 362)
+
+[node name="junction23" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(785.5, 442.5)
+
+[node name="junction59" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(783, 379.5)
+
+[node name="junction60" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(787.5, 364)
+
+[node name="junction61" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(787.5, 331.5)
+
+[node name="junction62" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(786.5, 316)
+
+[node name="junction63" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(788.5, 300)
+
+[node name="junction64" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(787, 347)
+
+[node name="junction65" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(785, 286)
+
+[node name="junction66" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(786, 270.5)
+
+[node name="junction68" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(788, 153)
+
+[node name="junction71" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(790, 137)
+
+[node name="junction72" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(788.5, 184)
+
+[node name="junction73" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(786.5, 123)
+
+[node name="junction74" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(787.5, 107.5)
+
+[node name="junction75" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(787, 72.5)
+
+[node name="junction76" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(789.5, 165)
+
+[node name="junction77" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(788, 89.5)
+
+[node name="junction78" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(787, 56.5)
+
+[node name="junction25" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(366, 457.5)
+
+[node name="junction80" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(365, 392.5)
+
+[node name="junction81" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(364.5, 375)
+
+[node name="junction82" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(364.5, 344.5)
+
+[node name="junction83" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(363.5, 329)
+
+[node name="junction84" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(363.5, 313)
+
+[node name="junction85" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(364, 360)
+
+[node name="junction86" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(363, 298.5)
+
+[node name="junction87" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(363, 283.5)
+
+[node name="junction88" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(361, 166.5)
+
+[node name="junction89" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(363, 150.5)
+
+[node name="junction90" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(361.5, 197.5)
+
+[node name="junction91" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(363.5, 137)
+
+[node name="junction92" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(364, 121.5)
+
+[node name="junction93" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(365.5, 87.5)
+
+[node name="junction94" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(362.5, 178.5)
+
+[node name="junction95" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(364.5, 105)
+
+[node name="junction96" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(366, 71)
+
+[node name="junction97" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(363, 215)
+
+[node name="junction98" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(362.5, 233)
+
+[node name="junction99" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(363.5, 251)
+
+[node name="junction100" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(364, 267)
+
+[node name="junction67" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(786.5, 237.5)
+
+[node name="junction69" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(787, 201.5)
+
+[node name="junction70" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(785.5, 254)
+
+[node name="junction24" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(785.5, 217.5)
+
+[node name="junction26" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(528, 282)
+
+[node name="junction27" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(592.5, 298)
+
+[node name="junction5" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(592, 458)
+
+[node name="junction20" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(576, 458)
+
+[node name="junction6" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(656, 362)
+
+[node name="junction7" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(672, 330)
+
+[node name="junction8" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(656, 282)
+
+[node name="junction9" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(768, 298)
+
+[node name="junction10" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(752, 202)
+
+[node name="junction11" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(688, 138)
+
+[node name="junction12" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(752, 90)
+
+[node name="junction13" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(720, 74)
+
+[node name="junction14" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(480, 138)
+
+[node name="junction15" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(416, 186)
+
+[node name="junction16" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(512, 154)
+
+[node name="junction17" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(544, 138)
+
+[node name="junction18" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(432, 314)
+
+[node name="junction19" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
+position = Vector2(544, 314)
+
+[node name="4-wayJuncs" type="Node2D" parent="SubViewport/junctions"]
+
+[node name="junction" parent="SubViewport/junctions/4-wayJuncs" instance=ExtResource("12_2vg2p")]
+position = Vector2(576, 122)
+
+[node name="junction2" parent="SubViewport/junctions/4-wayJuncs" instance=ExtResource("12_2vg2p")]
+position = Vector2(464, 138)
 
 [node name="shaderregion" type="Sprite2D" parent="SubViewport"]
 material = SubResource("CanvasItemMaterial_7jfsy")
@@ -1717,7 +2731,6 @@ offset_right = 77.0
 offset_bottom = 0.333332
 scale = Vector2(2, 2)
 theme_override_colors/font_color = Color(1, 0.878333, 0.27, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("18_7x8mt")
 theme_override_font_sizes/font_size = 16
 text = "10"
@@ -1749,721 +2762,6 @@ dialogue = Array[ExtResource("37_7j578")]([SubResource("Resource_yag6p"), SubRes
 position = Vector2(468, 195)
 shape = SubResource("RectangleShape2D_0r3jn")
 
-[node name="junctions" type="Node2D" parent="SubViewport"]
-position = Vector2(-198, -112)
-scale = Vector2(2, 2)
-
-[node name="L-DJuncs" type="Node2D" parent="SubViewport/junctions"]
-
-[node name="junction3" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(576, 426)
-
-[node name="junction4" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(720, 410)
-
-[node name="junction5" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(768, 378)
-
-[node name="junction6" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(768, 314)
-
-[node name="junction7" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(720, 266)
-
-[node name="junction8" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(672, 266)
-
-[node name="junction9" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(656, 250)
-
-[node name="junction10" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(608, 250)
-
-[node name="junction11" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(576, 250)
-
-[node name="junction12" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(528, 234)
-
-[node name="junction13" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(480, 202)
-
-[node name="junction14" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(512, 266)
-
-[node name="junction15" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(560, 266)
-
-[node name="junction16" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(640, 282)
-
-[node name="junction17" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(624, 314)
-
-[node name="junction18" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(736, 378)
-
-[node name="junction19" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(416, 410)
-
-[node name="junction20" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(432, 330)
-
-[node name="junction21" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(480, 314)
-
-[node name="junction22" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(432, 298)
-
-[node name="junction23" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(448, 154)
-
-[node name="junction24" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(448, 106)
-
-[node name="junction25" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(464, 74)
-
-[node name="junction26" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(544, 74)
-
-[node name="junction27" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(624, 74)
-
-[node name="junction28" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(752, 106)
-
-[node name="junction29" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(736, 122)
-
-[node name="junction30" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(736, 154)
-
-[node name="junction31" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(704, 202)
-
-[node name="junction32" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(608, 202)
-
-[node name="junction33" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(752, 234)
-
-[node name="junction34" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(736, 250)
-
-[node name="junction35" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(768, 122)
-
-[node name="junction" parent="SubViewport/junctions/L-DJuncs" instance=ExtResource("4_1v6ax")]
-position = Vector2(608, 410)
-
-[node name="R-DJuncs" type="Node2D" parent="SubViewport/junctions"]
-
-[node name="junction" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(384, 410)
-
-[node name="junction2" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(592, 410)
-
-[node name="junction3" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(400, 282)
-
-[node name="junction4" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(448, 202)
-
-[node name="junction5" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(432, 170)
-
-[node name="junction6" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(416, 122)
-
-[node name="junction7" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(432, 106)
-
-[node name="junction8" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(496, 74)
-
-[node name="junction9" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(528, 106)
-
-[node name="junction10" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(656, 74)
-
-[node name="junction11" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(672, 90)
-
-[node name="junction12" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(720, 138)
-
-[node name="junction13" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(704, 122)
-
-[node name="junction14" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(752, 138)
-
-[node name="junction15" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(720, 170)
-
-[node name="junction16" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(720, 202)
-
-[node name="junction17" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(688, 202)
-
-[node name="junction18" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(640, 186)
-
-[node name="junction19" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(576, 202)
-
-[node name="junction20" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(624, 250)
-
-[node name="junction21" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(592, 250)
-
-[node name="junction22" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(688, 282)
-
-[node name="junction23" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(704, 266)
-
-[node name="junction24" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(704, 378)
-
-[node name="junction25" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(752, 378)
-
-[node name="junction26" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(720, 362)
-
-[node name="junction27" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(672, 346)
-
-[node name="junction28" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(544, 282)
-
-[node name="junction29" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(528, 266)
-
-[node name="junction30" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(576, 282)
-
-[node name="junction31" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(448, 314)
-
-[node name="junction32" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(416, 298)
-
-[node name="junction33" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(608, 74)
-
-[node name="junction34" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(400, 74)
-
-[node name="junction35" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(384, 218)
-
-[node name="junction36" parent="SubViewport/junctions/R-DJuncs" instance=ExtResource("7_r7vob")]
-position = Vector2(736, 426)
-
-[node name="L-UJuncs" type="Node2D" parent="SubViewport/junctions"]
-
-[node name="junction" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(720, 442)
-
-[node name="junction3" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(432, 362)
-
-[node name="junction4" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(560, 330)
-
-[node name="junction5" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(672, 426)
-
-[node name="junction6" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(752, 426)
-
-[node name="junction7" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(768, 458)
-
-[node name="junction8" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(768, 362)
-
-[node name="junction9" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(736, 346)
-
-[node name="junction10" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(720, 314)
-
-[node name="junction11" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(688, 298)
-
-[node name="junction12" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(704, 282)
-
-[node name="junction13" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(752, 186)
-
-[node name="junction14" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(704, 186)
-
-[node name="junction15" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(640, 218)
-
-[node name="junction16" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(688, 234)
-
-[node name="junction17" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(688, 170)
-
-[node name="junction18" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(672, 138)
-
-[node name="junction19" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(624, 170)
-
-[node name="junction20" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(608, 122)
-
-[node name="junction21" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(544, 154)
-
-[node name="junction22" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(544, 106)
-
-[node name="junction23" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(496, 186)
-
-[node name="junction24" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(432, 186)
-
-[node name="junction25" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(448, 170)
-
-[node name="junction26" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(448, 250)
-
-[node name="junction27" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(576, 218)
-
-[node name="junction28" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(736, 170)
-
-[node name="junction29" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(736, 138)
-
-[node name="junction30" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(624, 266)
-
-[node name="junction31" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(592, 266)
-
-[node name="junction32" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(560, 282)
-
-[node name="junction2" parent="SubViewport/junctions/L-UJuncs" instance=ExtResource("8_6yic6")]
-position = Vector2(512, 458)
-
-[node name="R-UJuncs" type="Node2D" parent="SubViewport/junctions"]
-
-[node name="junction" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(384, 442)
-
-[node name="junction3" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(400, 458)
-
-[node name="junction4" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(448, 458)
-
-[node name="junction5" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(400, 394)
-
-[node name="junction6" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(416, 330)
-
-[node name="junction7" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(480, 378)
-
-[node name="junction8" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(512, 330)
-
-[node name="junction9" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(592, 346)
-
-[node name="junction10" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(576, 314)
-
-[node name="junction11" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(544, 298)
-
-[node name="junction12" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(704, 410)
-
-[node name="junction13" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(736, 394)
-
-[node name="junction14" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(624, 442)
-
-[node name="junction15" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(608, 458)
-
-[node name="junction16" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(384, 266)
-
-[node name="junction17" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(400, 250)
-
-[node name="junction18" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(384, 186)
-
-[node name="junction19" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(416, 154)
-
-[node name="junction20" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(448, 138)
-
-[node name="junction21" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(464, 186)
-
-[node name="junction22" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(608, 218)
-
-[node name="junction23" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(720, 154)
-
-[node name="junction24" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(720, 186)
-
-[node name="junction25" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(752, 122)
-
-[node name="junction26" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(720, 106)
-
-[node name="junction27" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(656, 106)
-
-[node name="junction28" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(656, 170)
-
-[node name="junction29" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(720, 218)
-
-[node name="junction30" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(656, 266)
-
-[node name="junction31" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(608, 266)
-
-[node name="junction32" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(576, 266)
-
-[node name="junction33" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(528, 250)
-
-[node name="junction34" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(480, 234)
-
-[node name="junction40" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(528, 218)
-
-[node name="junction41" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(544, 234)
-
-[node name="junction42" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(672, 298)
-
-[node name="junction35" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(528, 314)
-
-[node name="junction36" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(736, 442)
-
-[node name="junction37" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(752, 314)
-
-[node name="junction38" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(640, 426)
-
-[node name="junction39" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(704, 234)
-
-[node name="junction2" parent="SubViewport/junctions/R-UJuncs" instance=ExtResource("9_llhc3")]
-position = Vector2(416, 442)
-
-[node name="TJuncs" type="Node2D" parent="SubViewport/junctions"]
-
-[node name="T -types" type="Node2D" parent="SubViewport/junctions/TJuncs"]
-
-[node name="junction" parent="SubViewport/junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
-position = Vector2(544, 330)
-
-[node name="junction2" parent="SubViewport/junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
-position = Vector2(560, 298)
-
-[node name="junction3" parent="SubViewport/junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
-position = Vector2(592, 314)
-
-[node name="junction4" parent="SubViewport/junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
-position = Vector2(688, 314)
-
-[node name="junction5" parent="SubViewport/junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
-position = Vector2(544, 218)
-
-[node name="junction6" parent="SubViewport/junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
-position = Vector2(528, 170)
-
-[node name="junction7" parent="SubViewport/junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
-position = Vector2(592, 170)
-
-[node name="junction8" parent="SubViewport/junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
-position = Vector2(656, 138)
-
-[node name="junction9" parent="SubViewport/junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
-position = Vector2(720, 90)
-
-[node name="junction10" parent="SubViewport/junctions/TJuncs/T -types" instance=ExtResource("10_15alu")]
-position = Vector2(512, 426)
-
-[node name="-| -types" type="Node2D" parent="SubViewport/junctions/TJuncs"]
-
-[node name="junction" parent="SubViewport/junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
-position = Vector2(400, 442)
-rotation = 1.57079
-dirType = 1
-
-[node name="junction2" parent="SubViewport/junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
-position = Vector2(448, 442)
-rotation = 1.57079
-dirType = 1
-
-[node name="junction3" parent="SubViewport/junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
-position = Vector2(448, 394)
-rotation = 1.57079
-dirType = 1
-
-[node name="junction4" parent="SubViewport/junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
-position = Vector2(624, 378)
-rotation = 1.57079
-dirType = 1
-
-[node name="junction5" parent="SubViewport/junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
-position = Vector2(768, 138)
-rotation = 1.57079
-dirType = 1
-
-[node name="junction6" parent="SubViewport/junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
-position = Vector2(672, 106)
-rotation = 1.57079
-dirType = 1
-
-[node name="junction7" parent="SubViewport/junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
-position = Vector2(400, 218)
-rotation = 1.57079
-dirType = 1
-
-[node name="junction8" parent="SubViewport/junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
-position = Vector2(400, 186)
-rotation = 1.57079
-dirType = 1
-
-[node name="junction9" parent="SubViewport/junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
-position = Vector2(768, 442)
-rotation = 1.57079
-dirType = 1
-
-[node name="junction13" parent="SubViewport/junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
-position = Vector2(752, 394)
-rotation = 1.57079
-dirType = 1
-
-[node name="junction10" parent="SubViewport/junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
-position = Vector2(768, 218)
-rotation = 1.57079
-dirType = 1
-
-[node name="junction11" parent="SubViewport/junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
-position = Vector2(576, 298)
-rotation = 1.57079
-dirType = 1
-
-[node name="junction12" parent="SubViewport/junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
-position = Vector2(512, 282)
-rotation = 1.57079
-dirType = 1
-
-[node name="junction14" parent="SubViewport/junctions/TJuncs/-| -types" instance=ExtResource("10_15alu")]
-position = Vector2(624, 346)
-rotation = 1.57079
-dirType = 1
-
-[node name="|- -types" type="Node2D" parent="SubViewport/junctions/TJuncs"]
-
-[node name="junction" parent="SubViewport/junctions/TJuncs/|- -types" instance=ExtResource("10_15alu")]
-position = Vector2(400, 362)
-rotation = -1.57079
-dirType = 2
-
-[node name="junction2" parent="SubViewport/junctions/TJuncs/|- -types" instance=ExtResource("10_15alu")]
-position = Vector2(448, 426)
-rotation = -1.57079
-dirType = 2
-
-[node name="junction4" parent="SubViewport/junctions/TJuncs/|- -types" instance=ExtResource("10_15alu")]
-position = Vector2(656, 330)
-rotation = -1.57079
-dirType = 2
-
-[node name="junction5" parent="SubViewport/junctions/TJuncs/|- -types" instance=ExtResource("10_15alu")]
-position = Vector2(656, 314)
-rotation = -1.57079
-dirType = 2
-
-[node name="junction6" parent="SubViewport/junctions/TJuncs/|- -types" instance=ExtResource("10_15alu")]
-position = Vector2(624, 138)
-rotation = -1.57079
-dirType = 2
-
-[node name="junction7" parent="SubViewport/junctions/TJuncs/|- -types" instance=ExtResource("10_15alu")]
-position = Vector2(528, 122)
-rotation = -1.57079
-dirType = 2
-
-[node name="junction8" parent="SubViewport/junctions/TJuncs/|- -types" instance=ExtResource("10_15alu")]
-position = Vector2(496, 170)
-rotation = -1.57079
-dirType = 2
-
-[node name="Upside down-types" type="Node2D" parent="SubViewport/junctions/TJuncs"]
-
-[node name="junction" parent="SubViewport/junctions/TJuncs/Upside down-types" instance=ExtResource("10_15alu")]
-position = Vector2(720, 378)
-rotation = -3.14159
-dirType = 3
-
-[node name="junction2" parent="SubViewport/junctions/TJuncs/Upside down-types" instance=ExtResource("10_15alu")]
-position = Vector2(480, 458)
-rotation = -3.14159
-dirType = 3
-
-[node name="junction3" parent="SubViewport/junctions/TJuncs/Upside down-types" instance=ExtResource("10_15alu")]
-position = Vector2(688, 346)
-rotation = -3.14159
-dirType = 3
-
-[node name="junction4" parent="SubViewport/junctions/TJuncs/Upside down-types" instance=ExtResource("10_15alu")]
-position = Vector2(592, 202)
-rotation = -3.14159
-dirType = 3
-
-[node name="junction5" parent="SubViewport/junctions/TJuncs/Upside down-types" instance=ExtResource("10_15alu")]
-position = Vector2(528, 154)
-rotation = -3.14159
-dirType = 3
-
-[node name="junction6" parent="SubViewport/junctions/TJuncs/Upside down-types" instance=ExtResource("10_15alu")]
-position = Vector2(576, 170)
-rotation = -3.14159
-dirType = 3
-
-[node name="junction7" parent="SubViewport/junctions/TJuncs/Upside down-types" instance=ExtResource("10_15alu")]
-position = Vector2(544, 378)
-rotation = -3.14159
-dirType = 3
-
-[node name="TurnaroundJuncs" type="Node2D" parent="SubViewport/junctions"]
-
-[node name="junction" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(384, 74)
-
-[node name="junction2" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(400, 426)
-
-[node name="junction3" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(432, 458)
-
-[node name="junction4" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(480, 442)
-
-[node name="junction21" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(480, 474)
-
-[node name="junction22" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(383.5, 362)
-
-[node name="junction23" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(785.5, 442.5)
-
-[node name="junction24" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(785.5, 217.5)
-
-[node name="junction25" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(785.5, 138)
-
-[node name="junction26" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(528, 282)
-
-[node name="junction27" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(592.5, 298)
-
-[node name="junction5" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(592, 458)
-
-[node name="junction20" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(576, 458)
-
-[node name="junction6" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(656, 362)
-
-[node name="junction7" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(672, 330)
-
-[node name="junction8" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(656, 282)
-
-[node name="junction9" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(768, 298)
-
-[node name="junction10" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(752, 202)
-
-[node name="junction11" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(688, 138)
-
-[node name="junction12" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(752, 90)
-
-[node name="junction13" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(720, 74)
-
-[node name="junction14" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(480, 138)
-
-[node name="junction15" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(416, 186)
-
-[node name="junction16" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(512, 154)
-
-[node name="junction17" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(544, 138)
-
-[node name="junction18" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(432, 314)
-
-[node name="junction19" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(544, 314)
-
-[node name="4-wayJuncs" type="Node2D" parent="SubViewport/junctions"]
-
-[node name="junction" parent="SubViewport/junctions/4-wayJuncs" instance=ExtResource("12_2vg2p")]
-position = Vector2(576, 122)
-
-[node name="junction2" parent="SubViewport/junctions/4-wayJuncs" instance=ExtResource("12_2vg2p")]
-position = Vector2(464, 138)
-
 [node name="Maze1_0" type="Sprite2D" parent="SubViewport"]
 material = SubResource("ShaderMaterial_tcoxg")
 position = Vector2(954, 423)
@@ -2484,10 +2782,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -1134.0
-offset_top = -116.0
-offset_right = -510.0
-offset_bottom = -25.0
+offset_left = -309.0
+offset_top = -385.0
+offset_right = 315.0
+offset_bottom = -294.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("18_7x8mt")
@@ -2587,6 +2885,7 @@ theme_override_font_sizes/font_size = 62
 text = "GACHA PWN"
 
 [node name="effectMenu" type="PanelContainer" parent="Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -2703,6 +3002,7 @@ layout_mode = 2
 text = "ENRICHMENT MODULE"
 
 [node name="itemMenu" type="PanelContainer" parent="Control"]
+visible = false
 layout_mode = 0
 offset_left = 1959.0
 offset_top = 814.0
@@ -2778,6 +3078,7 @@ layout_mode = 2
 text = "Scot-Free"
 
 [node name="spinnerMenu" type="Panel" parent="Control"]
+visible = false
 layout_mode = 0
 offset_left = 789.0
 offset_top = 162.0
@@ -3157,10 +3458,10 @@ autowrap_mode = 2
 [node name="slotUpgradeNotif" parent="Control" instance=ExtResource("43_b3boj")]
 visible = false
 layout_mode = 1
-offset_left = 1292.0
-offset_top = 1170.0
-offset_right = -1012.0
-offset_bottom = -126.0
+offset_left = 1371.0
+offset_top = 1128.0
+offset_right = -933.0
+offset_bottom = -168.0
 
 [node name="inv" type="Control" parent="."]
 layout_mode = 3
@@ -3199,9 +3500,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7257, 12.0131)
 stream = ExtResource("40_j3ykj")
 max_polyphony = 1000
 
+[node name="levelUp" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7257, 12.0131)
+stream = ExtResource("45_waqyb")
+max_polyphony = 1000
+
 [node name="ambience1" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("41_ky7q4")
 volume_db = 2.0
+autoplay = true
+max_polyphony = 1000
+
+[node name="music" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("47_cxyms")
+volume_db = -2.652
 autoplay = true
 max_polyphony = 1000
 

@@ -6,6 +6,7 @@ extends Control
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 @onready var timer: Timer = $Timer
+@onready var level_up: AudioStreamPlayer3D = $"../../levelUp"
 
 
 
@@ -21,6 +22,7 @@ func upgrade(index: int, rarity: String):
 		"ultraRare":
 			label.self_modulate = ultraRare
 	animation_player.play("upgrade")
+	level_up.play()
 	timer.start()
 	show()
 

@@ -24,12 +24,12 @@ func _process(delta: float) -> void:
 	else:
 		descLabel.hide()
 	
-	if timesRolled < 1:
+	if timesRolled < 10:
 		descLabel.text = "Common: Move " + str(index) + " spaces."
 		descLabel.self_modulate = common
 		itemName.self_modulate = common
 	
-	if timesRolled >= 1:
+	if timesRolled >= 10:
 		if notyetRare:
 			slot_upgrade_notif.upgrade(index, "rare")
 			notyetRare = false
@@ -37,7 +37,7 @@ func _process(delta: float) -> void:
 		descLabel.self_modulate = rare
 		itemName.self_modulate = rare
 	
-	if timesRolled >= 2:
+	if timesRolled >= 20:
 		if notyetUltraRare:
 			slot_upgrade_notif.upgrade(index, "ultraRare")
 			notyetUltraRare = false

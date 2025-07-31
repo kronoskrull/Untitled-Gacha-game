@@ -206,10 +206,13 @@ func move(distance: int) -> void:
 				locDistance -= 1
 		
 		if rareSpaceCoinLoss:
+			rareSpaceCoinLoss = false
 			coinPerSpace(0, distance)
 		if ultraSpaceCoinGain:
+			ultraSpaceCoinGain = false
 			coinPerSpace(1, distance)
 		if ultraSpaceCoinLoss:
+			ultraSpaceCoinLoss = false
 			coinPerSpace(2, distance)
 		if insured:
 			insured = false

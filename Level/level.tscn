@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=3 uid="uid://drt1tip360qt7"]
+[gd_scene load_steps=93 format=3 uid="uid://drt1tip360qt7"]
 
 [ext_resource type="Texture2D" uid="uid://dhw6oc4h6i0ny" path="res://Assets/effects/hudBlock1.0.png" id="1_a7teg"]
 [ext_resource type="Script" path="res://Level/level.gd" id="1_rljoh"]
@@ -50,6 +50,7 @@
 [ext_resource type="AudioStream" uid="uid://chyxlwa18yc4y" path="res://Assets/Audio/coin-drops-and-spins-272429.mp3" id="43_vwx3i"]
 [ext_resource type="AudioStream" uid="uid://vj15swfcs701" path="res://Assets/Audio/level-up-bonus-sequence-2-186891.mp3" id="45_waqyb"]
 [ext_resource type="AudioStream" uid="uid://fhdim5212qyb" path="res://Assets/Audio/cave themeb4.mp3" id="47_cxyms"]
+[ext_resource type="Script" path="res://Level/music.gd" id="48_f87m5"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_3nx2p"]
 viewport_path = NodePath("SubViewport")
@@ -3513,9 +3514,10 @@ max_polyphony = 1000
 
 [node name="music" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("47_cxyms")
-volume_db = -2.652
+volume_db = -5.0
 autoplay = true
 max_polyphony = 1000
+script = ExtResource("48_f87m5")
 
 [node name="spin1" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("42_hc1ex")
@@ -3594,4 +3596,5 @@ one_shot = true
 [connection signal="button_up" from="Control/spinnerMenu/spinnerSlot8/item" to="Control/spinnerMenu/spinnerSlot8/item" method="_on_button_up"]
 [connection signal="button_down" from="Control/spinnerMenu/spinnerSlot9/item" to="Control/spinnerMenu/spinnerSlot9/item" method="_on_button_down"]
 [connection signal="button_up" from="Control/spinnerMenu/spinnerSlot9/item" to="Control/spinnerMenu/spinnerSlot9/item" method="_on_button_up"]
+[connection signal="finished" from="music" to="music" method="_on_finished"]
 [connection signal="timeout" from="spinSoundTimer" to="." method="_on_spin_sound_timer_timeout"]

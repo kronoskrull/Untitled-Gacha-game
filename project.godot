@@ -37,6 +37,12 @@ folder_colors={
 
 player=""
 
+[importer_defaults]
+
+texture={
+"compress/mode": 3
+}
+
 [input]
 
 ui_accept={

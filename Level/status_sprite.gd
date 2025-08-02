@@ -23,7 +23,7 @@ func statusChanged():
 	else:
 		match type:
 			0:
-				deathLabel.text = "EXPENDED"
+				deathLabel.text = "SAVED"
 			1:
 				deathLabel.text = "UNUSED"
 			2:

@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=3 uid="uid://dlbrvj56rjkc0"]
 
-[ext_resource type="FontFile" uid="uid://0kpmyoip0ktj" path="res://Assets/ka1.ttf" id="1_taruh"]
-[ext_resource type="Script" path="res://Level/inventoryItem.gd" id="2_4absy"]
-[ext_resource type="Texture2D" uid="uid://c84526k3vmba1" path="res://Assets/obtainables/obt001.png" id="2_lc06q"]
+[ext_resource type="FontFile" uid="uid://0kpmyoip0ktj" path="res://Assets/ka1.ttf" id="1_sng6o"]
+[ext_resource type="Script" path="res://Level/inventoryItem.gd" id="2_xkxrs"]
+[ext_resource type="Texture2D" uid="uid://c84526k3vmba1" path="res://Assets/obtainables/obt001.png" id="3_avf5t"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i8stc"]
 
@@ -147,6 +147,18 @@ tracks/5/keys = {
 "update": 0,
 "values": [Vector2(3, 3)]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite2D:z_index")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_2q3je"]
 resource_name = "activateEffect"
@@ -211,6 +223,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(2, 2), Vector2(2, 2), Vector2(4, 4), Vector2(3, 3)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D:z_index")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 999, 0]
+}
 
 [sub_resource type="Animation" id="Animation_m6j65"]
 resource_name = "activateIdle"
@@ -239,6 +263,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(2, 2), Vector2(2, 2), Vector2(4, 4), Vector2(3, 3)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:z_index")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 999, 0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hvoxx"]
 _data = {
@@ -251,16 +287,16 @@ _data = {
 z_index = 5
 offset_right = 87.0
 offset_bottom = 38.0
-theme_override_fonts/font = ExtResource("1_taruh")
+theme_override_fonts/font = ExtResource("1_sng6o")
 theme_override_font_sizes/font_size = 20
 text = "Leg Day"
-script = ExtResource("2_4absy")
+script = ExtResource("2_xkxrs")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(247, 16)
 scale = Vector2(3, 3)
-texture = ExtResource("2_lc06q")
+texture = ExtResource("3_avf5t")
 
 [node name="stimButton" type="Button" parent="Sprite2D"]
 z_index = 5
@@ -293,9 +329,9 @@ libraries = {
 visible = false
 layout_mode = 0
 offset_left = 345.0
-offset_top = 8.0
+offset_top = 5.77769
 offset_right = 432.0
-offset_bottom = 31.0
+offset_bottom = 28.7777
 rotation = -0.0387933
 text = "sampletext"
 

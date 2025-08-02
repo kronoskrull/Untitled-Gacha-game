@@ -58,5 +58,6 @@ visible = false
 layout_mode = 2
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer3D" parent="."]
+volume_db = -10.0
 max_polyphony = 1000
 playback_type = 1

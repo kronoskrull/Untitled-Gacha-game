@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://ducs5xy0swvpi"]
 
-[ext_resource type="Script" path="res://slot_upgrade_notif.gd" id="1_stk1d"]
+[ext_resource type="Script" path="res://Level/slot_upgrade_notif.gd" id="1_stk1d"]
 [ext_resource type="Texture2D" uid="uid://bptxwo7xu1wny" path="res://Assets/effects/slotUpgrade.png" id="2_omlfp"]
 [ext_resource type="FontFile" uid="uid://0kpmyoip0ktj" path="res://Assets/ka1.ttf" id="3_671l0"]
 

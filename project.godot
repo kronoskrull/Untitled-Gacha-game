@@ -22,6 +22,17 @@ window/size/viewport_height=1296
 window/size/mode=3
 window/stretch/mode="viewport"
 
+[file_customization]
+
+folder_colors={
+"res://Assets/": "red",
+"res://Interactables/": "yellow",
+"res://Junctions/": "green",
+"res://Level/": "teal",
+"res://Spinner/": "blue",
+"res://game/": "orange"
+}
+
 [global_group]
 
 player=""

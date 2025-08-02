@@ -161,7 +161,7 @@ func _text_resource(i: DialogueText) -> void:
 			DialogueLabel.visible_characters += 1
 			if character != " ":
 				$AudioStreamPlayer2D.pitch_scale = randf_range(i.text_volume_pitch_min, i.text_volume_pitch_max)
-				$AudioStreamPlayer2D.play
+				$AudioStreamPlayer2D.play()
 				if i.speaker_img_Hframes != 1:
 					if SpeakerSprite.frame < i.speaker_img_Hframes - 1:
 						SpeakerSprite.frame += 1

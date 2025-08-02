@@ -7,12 +7,18 @@ var lerpSpeed: float = 5
 var entering: bool = false
 var exiting: bool = false
 @onready var target_node: Node2D = $targetNode
+@onready var sprite: Sprite2D = $"Loanshark-final"
+
+@onready var curFrame: int = 0
 
 var interactions: int = 0
 
 func _ready() -> void:
 	pass
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
+func _process(_delta: float) -> void:
+	sprite.frame = curFrame
+
 func _physics_process(delta: float) -> void:
 	
 	print (entering)

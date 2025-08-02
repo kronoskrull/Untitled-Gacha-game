@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=3 uid="uid://drt1tip360qt7"]
+[gd_scene load_steps=100 format=3 uid="uid://drt1tip360qt7"]
 
 [ext_resource type="Texture2D" uid="uid://dhw6oc4h6i0ny" path="res://Assets/effects/hudBlock1.0.png" id="1_a7teg"]
 [ext_resource type="Script" path="res://Level/level.gd" id="1_rljoh"]
@@ -9,9 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://b05wrcfotqy8n" path="res://Assets/playerIcon_001.png" id="5_a7gi8"]
 [ext_resource type="Texture2D" uid="uid://dyithwdhvhtwv" path="res://Assets/maze1.0.png" id="5_nn23b"]
 [ext_resource type="ArrayMesh" uid="uid://d1lcl0yp5wud4" path="res://Assets/models/Spinner (1).obj" id="5_ynopn"]
-[ext_resource type="PackedScene" uid="uid://dqld5dxfh26jc" path="res://arcadeFinalMaybe.tscn" id="6_mn3xb"]
+[ext_resource type="PackedScene" uid="uid://dqld5dxfh26jc" path="res://Assets/models/arcadeFinalMaybe.tscn" id="6_mn3xb"]
 [ext_resource type="Script" path="res://Level/flashlight.gd" id="7_e8di8"]
-[ext_resource type="PackedScene" uid="uid://d0sfuvyon2ptq" path="res://arrow.tscn" id="7_p2lt6"]
+[ext_resource type="PackedScene" uid="uid://d0sfuvyon2ptq" path="res://Assets/models/arrow.tscn" id="7_p2lt6"]
 [ext_resource type="PackedScene" uid="uid://gvhpy1s1absr" path="res://Junctions/R-Dcornerjunc.tscn" id="7_r7vob"]
 [ext_resource type="PackedScene" uid="uid://br6hxiou2nh38" path="res://Junctions/L-Ucornerjunc.tscn" id="8_6yic6"]
 [ext_resource type="PackedScene" uid="uid://c5fn6ne537652" path="res://Junctions/R-Ucornerjunc.tscn" id="9_llhc3"]
@@ -23,7 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://chgxilpcrsci7" path="res://Interactables/obtainable.tscn" id="13_2xnj0"]
 [ext_resource type="Texture2D" uid="uid://cwnpeo0wiwen" path="res://Assets/effects/eff1-3.png" id="13_n248f"]
 [ext_resource type="Shader" path="res://Assets/shaders/better_crt.gdshader" id="14_3swno"]
-[ext_resource type="Script" path="res://status_sprite.gd" id="14_dc3qn"]
+[ext_resource type="Script" path="res://Level/status_sprite.gd" id="14_dc3qn"]
 [ext_resource type="Texture2D" uid="uid://c5decay8xjwbc" path="res://Assets/effects/eff1-5.png" id="17_44415"]
 [ext_resource type="Texture2D" uid="uid://bhmp3u1og6j0k" path="res://Assets/effects/eff1-0.png" id="17_es0wu"]
 [ext_resource type="FontFile" uid="uid://0kpmyoip0ktj" path="res://Assets/ka1.ttf" id="18_7x8mt"]
@@ -33,9 +33,11 @@
 [ext_resource type="Texture2D" uid="uid://b7wvvb7j8inh6" path="res://Assets/effects/eff2-2.png" id="25_2xqgb"]
 [ext_resource type="Texture2D" uid="uid://btpjuy8i06fk0" path="res://Assets/effects/eff2-4.png" id="26_2gl0d"]
 [ext_resource type="Script" path="res://Level/loan_shark.gd" id="31_2uu44"]
+[ext_resource type="Script" path="res://Level/loanshark_final.gd" id="31_pivh8"]
 [ext_resource type="Texture2D" uid="uid://wp6bh4b4fd5a" path="res://Assets/effects/coin.png" id="33_0rops"]
 [ext_resource type="PackedScene" uid="uid://bunptani1d1eu" path="res://Assets/DialogueSystem/dialogue_area_2d.tscn" id="35_lpwu7"]
 [ext_resource type="Script" path="res://Assets/DialogueSystem/DialofueExportResource.gd" id="37_7j578"]
+[ext_resource type="Script" path="res://Assets/DialogueSystem/DialogueFunctionResource.gd" id="37_e3647"]
 [ext_resource type="Script" path="res://Assets/DialogueSystem/DialogueTextResource.gd" id="38_ai8s7"]
 [ext_resource type="Texture2D" uid="uid://d4cwh6bd86sps" path="res://Assets/LOANUTSPRITE.png" id="39_luuut"]
 [ext_resource type="Texture2D" uid="uid://57iybrvl7hjs" path="res://Assets/spinnerSprite.png" id="40_ijctb"]
@@ -551,13 +553,21 @@ speaker_img = ExtResource("39_luuut")
 speaker_img_Hframes = 2
 speaker_img_rest_frame = 0
 text = "Hey there, couldn't help but notice you're..."
-text_speed = 15.0
+text_speed = 12.0
 text_sound = ExtResource("40_rmqjj")
-text_volume_db = 60
+text_volume_db = 0
 text_volume_pitch_min = 0.85
 text_volume_pitch_max = 1.15
 camera_position = Vector2(999.999, 999.999)
 camera_transition_time = 1.0
+
+[sub_resource type="Resource" id="Resource_77s4o"]
+script = ExtResource("37_e3647")
+target_path = NodePath("..")
+function_name = "changeSharkFrame"
+function_arguments = [2]
+hide_dialogue_box = false
+wait_for_signal_to_continue = ""
 
 [sub_resource type="Resource" id="Resource_q8hcw"]
 script = ExtResource("38_ai8s7")
@@ -566,13 +576,21 @@ speaker_img = ExtResource("39_luuut")
 speaker_img_Hframes = 2
 speaker_img_rest_frame = 0
 text = "...flat broke."
-text_speed = 15.0
+text_speed = 12.0
 text_sound = ExtResource("40_rmqjj")
-text_volume_db = 20
+text_volume_db = 0
 text_volume_pitch_min = 0.85
 text_volume_pitch_max = 1.15
 camera_position = Vector2(999.999, 999.999)
 camera_transition_time = 1.0
+
+[sub_resource type="Resource" id="Resource_3k81x"]
+script = ExtResource("37_e3647")
+target_path = NodePath("..")
+function_name = "changeSharkFrame"
+function_arguments = [3]
+hide_dialogue_box = false
+wait_for_signal_to_continue = ""
 
 [sub_resource type="Resource" id="Resource_emugd"]
 script = ExtResource("38_ai8s7")
@@ -581,13 +599,21 @@ speaker_img = ExtResource("39_luuut")
 speaker_img_Hframes = 2
 speaker_img_rest_frame = 0
 text = "Luckily for you, I just so happen to have..."
-text_speed = 15.0
+text_speed = 12.0
 text_sound = ExtResource("40_rmqjj")
-text_volume_db = 20
+text_volume_db = 0
 text_volume_pitch_min = 0.85
 text_volume_pitch_max = 1.15
 camera_position = Vector2(999.999, 999.999)
 camera_transition_time = 1.0
+
+[sub_resource type="Resource" id="Resource_cge0d"]
+script = ExtResource("37_e3647")
+target_path = NodePath("..")
+function_name = "changeSharkFrame"
+function_arguments = [1]
+hide_dialogue_box = false
+wait_for_signal_to_continue = ""
 
 [sub_resource type="Resource" id="Resource_gniqk"]
 script = ExtResource("38_ai8s7")
@@ -595,14 +621,22 @@ speaker_name = ""
 speaker_img = ExtResource("39_luuut")
 speaker_img_Hframes = 2
 speaker_img_rest_frame = 0
-text = "Just the solution to your problems!"
-text_speed = 15.0
+text = "Just the thing you need!"
+text_speed = 12.0
 text_sound = ExtResource("40_rmqjj")
-text_volume_db = 20
+text_volume_db = 0
 text_volume_pitch_min = 0.85
 text_volume_pitch_max = 1.15
 camera_position = Vector2(999.999, 999.999)
 camera_transition_time = 1.0
+
+[sub_resource type="Resource" id="Resource_7jtav"]
+script = ExtResource("37_e3647")
+target_path = NodePath("..")
+function_name = "changeSharkFrame"
+function_arguments = [3]
+hide_dialogue_box = false
+wait_for_signal_to_continue = ""
 
 [sub_resource type="Resource" id="Resource_ayycp"]
 script = ExtResource("38_ai8s7")
@@ -611,13 +645,21 @@ speaker_img = ExtResource("39_luuut")
 speaker_img_Hframes = 2
 speaker_img_rest_frame = 0
 text = "I'll give ya a loan, on the house!"
-text_speed = 15.0
+text_speed = 12.0
 text_sound = ExtResource("40_rmqjj")
 text_volume_db = 0
 text_volume_pitch_min = 0.85
 text_volume_pitch_max = 1.15
 camera_position = Vector2(999.999, 999.999)
 camera_transition_time = 1.0
+
+[sub_resource type="Resource" id="Resource_031fw"]
+script = ExtResource("37_e3647")
+target_path = NodePath("..")
+function_name = "changeSharkFrame"
+function_arguments = [2]
+hide_dialogue_box = false
+wait_for_signal_to_continue = ""
 
 [sub_resource type="Resource" id="Resource_gxm60"]
 script = ExtResource("38_ai8s7")
@@ -626,7 +668,7 @@ speaker_img = ExtResource("39_luuut")
 speaker_img_Hframes = 2
 speaker_img_rest_frame = 0
 text = "Don't spend it all in one place!"
-text_speed = 15.0
+text_speed = 12.0
 text_sound = ExtResource("40_rmqjj")
 text_volume_db = 0
 text_volume_pitch_min = 0.85
@@ -665,7 +707,7 @@ shader_parameter/vignette_opacity = 0.0
 
 [node name="level" type="Node3D"]
 script = ExtResource("1_rljoh")
-money = 6
+money = 2
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.914642, 0.404264, 0, -0.404264, 0.914642, 0, 3.16594, 10.8507)
@@ -2745,6 +2787,7 @@ script = ExtResource("31_2uu44")
 [node name="Loanshark-final" type="Sprite2D" parent="SubViewport/loanShark"]
 texture = ExtResource("12_x2e4q")
 hframes = 7
+script = ExtResource("31_pivh8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewport/loanShark"]
 position = Vector2(25.5, 0.5)
@@ -2757,7 +2800,7 @@ position = Vector2(330, 165)
 activate_instant = true
 override_dialogue_position = true
 override_position = Vector2(1147, 1034)
-dialogue = Array[ExtResource("37_7j578")]([SubResource("Resource_yag6p"), SubResource("Resource_q8hcw"), SubResource("Resource_emugd"), SubResource("Resource_gniqk"), SubResource("Resource_ayycp"), SubResource("Resource_gxm60")])
+dialogue = Array[ExtResource("37_7j578")]([SubResource("Resource_yag6p"), SubResource("Resource_77s4o"), SubResource("Resource_q8hcw"), SubResource("Resource_3k81x"), SubResource("Resource_emugd"), SubResource("Resource_cge0d"), SubResource("Resource_gniqk"), SubResource("Resource_7jtav"), SubResource("Resource_ayycp"), SubResource("Resource_031fw"), SubResource("Resource_gxm60")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewport/DialogueArea2D"]
 position = Vector2(468, 195)
@@ -2886,7 +2929,6 @@ theme_override_font_sizes/font_size = 62
 text = "GACHA PWN"
 
 [node name="effectMenu" type="PanelContainer" parent="Control"]
-visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -3527,7 +3569,7 @@ script = ExtResource("43_k7kmd")
 
 [node name="spin2" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("43_vwx3i")
-volume_db = 14.376
+volume_db = 7.0
 max_polyphony = 1000
 
 [node name="spinSoundTimer" type="Timer" parent="."]

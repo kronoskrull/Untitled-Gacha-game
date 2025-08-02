@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://brpxyw2jftpjo"]
 
-[ext_resource type="Script" path="res://inv_separator.gd" id="1_n86s6"]
+[ext_resource type="Script" path="res://Level/inv_separator.gd" id="1_n86s6"]
 
 [node name="invSeparator" type="HSeparator"]
 anchors_preset = 15

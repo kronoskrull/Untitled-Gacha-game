@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://dqqdfl684aak4"]
 
-[ext_resource type="Script" path="res://status_sprite.gd" id="1_2tbqf"]
+[ext_resource type="Script" path="res://Level/status_sprite.gd" id="1_2tbqf"]
 [ext_resource type="Texture2D" uid="uid://bhmp3u1og6j0k" path="res://Assets/effects/eff1-0.png" id="2_ohfoq"]
 [ext_resource type="FontFile" uid="uid://0kpmyoip0ktj" path="res://Assets/ka1.ttf" id="3_fmxcn"]
 

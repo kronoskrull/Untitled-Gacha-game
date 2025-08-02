@@ -34,8 +34,8 @@ var lastObtained: int
 var itemsActivating: Array = [0]
 var newItemIndex: int
 var newActLabel: String
-@onready var invItem = preload("res://invItem.tscn")
-@onready var invSeparator = preload("res://inv_separator.tscn")
+@onready var invItem = preload("res://Level/invItem.tscn")
+@onready var invSeparator = preload("res://Level/inv_separator.tscn")
 @onready var inventory: VBoxContainer = $inv/inventoryPanel/VBoxContainer
 var invItemInstance
 var invSeparatorInstance
@@ -116,6 +116,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	curDIRLabel.text = str(playerDIR)
+	print(lastSpaceEffect)
 
 func monUpdate(delta) -> void:
 	money += delta
@@ -136,6 +137,7 @@ func monUpdate(delta) -> void:
 
 func interpretSpin() -> void:
 	if money > 0 and canSpin:
+		itemsActivating.clear()
 		spin_1Player.play()
 		spin_2Player.play()
 		spinner.spin()
@@ -167,23 +169,20 @@ func interpretSpin() -> void:
 		
 		if obtainedItems.has(0):
 			var i = randi_range(doubleChance, 10)
-			if i <= 10:
-				itemsActivating.clear()
+			if i >= 10:
 				itemsActivating.append(0)
-				itemActivate(itemsActivating)
 				distance += 1
+		
 		if obtainedItems.has(3):
-			itemsActivating.clear()
 			itemsActivating.append(3)
-			itemActivate(itemsActivating)
 			distance += 1
+			
 		
 		if obtainedItems.has(6):
-			itemsActivating.clear()
 			itemsActivating.append(6)
-			itemActivate(itemsActivating)
 			distance += 3
-
+		
+		itemActivate(itemsActivating)
 		move(distance)
 
 func itemActivate(items: Array) -> void:
@@ -667,7 +666,6 @@ func spaceEvent() -> void:
 	canSpin = true
 	eventPause = false
 	debugSelect = false
-
 
 func triggerEvent() -> void:
 	#breakpoint
@@ -1292,7 +1290,7 @@ func triggerEvent() -> void:
 		Vector2(2, 5):
 			pass
 
-
+#region Obtainables Stuff
 func obtainableAnim():
 	
 	match lastObtained:
@@ -1400,9 +1398,9 @@ func getObtainable(obtainable: int) -> void:
 	obtainedItems.append(obtainable)
 	lastObtained = obtainable
 	pauseForEvent()
+#endregion
 
-
-
+#region Buttons
 func spinSpinner() -> int:
 	var spinResult: int
 	
@@ -1436,4 +1434,8 @@ func _on_spin_sound_timer_timeout() -> void:
 	spinning = false
 	spin_1Player.stop()
 	spin_1Player.volume_db = 3
-	
+
+#endregion
+
+func changeSharkFrame(frame: int) -> void:
+	loan_shark.curFrame = frame

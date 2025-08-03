@@ -1,5 +1,8 @@
 extends Node3D
 
+
+@export var eUtils: eventUtils
+
 @onready var player: Node2D = $SubViewport/player
 var playerDIR: Vector2 = Vector2(0, 32)
 @onready var curDIRLabel: Label = $Control/debugPanel/VBoxContainer/curDIRlabel/curDIR
@@ -13,13 +16,13 @@ var canSpin: bool = true
 var spinOptions: spinTables = spinTables.new()
 var effectOps: Array = spinOptions.spinOpTable
 
-var spinOps: Array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
 
 var obtainedItems: Array = []
 
 @export var money: int = 5
 var deltaMoney: int = 0
-@onready var money_label: Label = $Control/Panel/moneyLabel
+@onready var money_label: Label = $SubViewport/coinNumber/statusSprite/moneyLabel
 
 @onready var roll_result: Label = $Control/rollResult
 
@@ -34,8 +37,8 @@ var lastObtained: int
 var itemsActivating: Array = [0]
 var newItemIndex: int
 var newActLabel: String
-@onready var invItem = preload("res://invItem.tscn")
-@onready var invSeparator = preload("res://inv_separator.tscn")
+@onready var invItem = preload("res://Level/invItem.tscn")
+@onready var invSeparator = preload("res://Level/inv_separator.tscn")
 @onready var inventory: VBoxContainer = $inv/inventoryPanel/VBoxContainer
 var invItemInstance
 var invSeparatorInstance
@@ -76,11 +79,37 @@ var eventPause: bool = false
 @onready var statusSprite2_4: Control = $"SubViewport/status/PanelContainer/2-4/statusSprite"
 
 
+@onready var spinner_slot_0: Control = $Control/spinnerMenu/spinnerSlot0
+@onready var spinner_slot_1: Control = $Control/spinnerMenu/spinnerSlot1
+@onready var spinner_slot_2: Control = $Control/spinnerMenu/spinnerSlot2
+@onready var spinner_slot_3: Control = $Control/spinnerMenu/spinnerSlot3
+@onready var spinner_slot_4: Control = $Control/spinnerMenu/spinnerSlot4
+@onready var spinner_slot_5: Control = $Control/spinnerMenu/spinnerSlot5
+@onready var spinner_slot_6: Control = $Control/spinnerMenu/spinnerSlot6
+@onready var spinner_slot_7: Control = $Control/spinnerMenu/spinnerSlot7
+@onready var spinner_slot_8: Control = $Control/spinnerMenu/spinnerSlot8
+@onready var spinner_slot_9: Control = $Control/spinnerMenu/spinnerSlot9
+
+@onready var spinOps: Array = [spinner_slot_0, spinner_slot_1, spinner_slot_2, spinner_slot_3, spinner_slot_4, 
+spinner_slot_5, spinner_slot_6, spinner_slot_7, spinner_slot_8, spinner_slot_9]
+
 var lastSpaceEffect: Vector2
 
 var debugSelect
 var debugRarity: int = 0
 var debugX: int
+
+var flashMult: float = 4.0
+
+
+@onready var audioPlayer: AudioStreamPlayer3D = $AudioStreamPlayer3D
+@onready var spin_1Player: AudioStreamPlayer3D = $spin1
+@onready var spin_2Player: AudioStreamPlayer3D = $spin2
+
+
+@onready var loan_shark: CharacterBody2D = $SubViewport/loanShark
+var spinning: bool
+@onready var spinSoundTimer: Timer = $spinSoundTimer
 
 
 # Set the money count to whatever it's supposed to be
@@ -90,14 +119,19 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	curDIRLabel.text = str(playerDIR)
+	print(lastSpaceEffect)
 
 func monUpdate(delta) -> void:
 	money += delta
+	if delta > 0:
+		audioPlayer.stream = preload("res://Assets/Audio/90s-game-ui-6-185099.mp3")
+		audioPlayer.play()
+	#elif delta >= 7:
+		#audioPlayer.stream = preload("res://Assets/Audio/jackpot-slot-machine-coin-loop-11-216266.wav")
+		#audioPlayer.play()
 	deltaMoney = 0
-	if money > 0:
-		money_label.text = (" MONES:  " + str(money))
-	else:
-		money_label.text = (" BROKIE ALERT")
+	money_label.text = (str(money))
+		
 
 # This is the functio that will house the match table for all the different effects. When the function
 # starts, it spins a random number 0 - 9 inclusive. This value is an index thatr corresponds to one of 
@@ -106,21 +140,29 @@ func monUpdate(delta) -> void:
 
 func interpretSpin() -> void:
 	if money > 0 and canSpin:
+		itemsActivating.clear()
+		spin_1Player.play()
+		spin_2Player.play()
 		spinner.spin()
 		canSpin = false
+		spinning = true
+		spinSoundTimer.start(2.0)
 		money -= 1
 		monUpdate(deltaMoney)
 		var rawSpin = spinSpinner()
-		var spinResult: int = spinOps[rawSpin]
+		var getIndex = spinOps[rawSpin]
+		getIndex.get_child(0).timesRolled += 1
+		var spinResult: int = getIndex.get_child(0).index
 		
-		if obtainedItems.has(5) and spinResult == 0:           #TODO
-			var i = randi_range(doubleChance, 4)
-			if i >= 4:
-				itemsActivating.clear()
-				itemsActivating.append(5)
-				itemActivate(itemsActivating)
-				canSpin = true
-				interpretSpin()
+		for x in obtainedItems:
+			if x == 5 and spinResult == 0:
+				var i = randi_range(doubleChance, 4)
+				if i >= 4:
+					itemsActivating.clear()
+					itemsActivating.append(5)
+					itemActivate(itemsActivating)
+					canSpin = true
+					interpretSpin()
 		
 		
 		roll_result.text = str(spinResult)                     #CULL
@@ -129,25 +171,25 @@ func interpretSpin() -> void:
 		var distance: int = spinResult
 		
 		
-		if obtainedItems.has(0):
-			var i = randi_range(doubleChance, 10)
-			if i <= 10:
-				itemsActivating.clear()
-				itemsActivating.append(0)
-				itemActivate(itemsActivating)
-				distance += 1
-		if obtainedItems.has(3):
-			itemsActivating.clear()
-			itemsActivating.append(3)
-			itemActivate(itemsActivating)
-			distance += 1
+		for i in obtainedItems:
+			if i == 0:
+				var x = randi_range(doubleChance, 10)
+				if x >= 10:
+					itemsActivating.append(0)
+					distance += 1
 		
-		if obtainedItems.has(6):
-			itemsActivating.clear()
-			itemsActivating.append(6)
-			itemActivate(itemsActivating)
-			distance += 3
-
+		for i in obtainedItems:
+			if i == 3:
+				itemsActivating.append(3)
+				distance += 1
+			
+		
+		for i in obtainedItems:
+			if i == 6:
+				itemsActivating.append(6)
+				distance += 3
+		
+		itemActivate(itemsActivating)
 		move(distance)
 
 func itemActivate(items: Array) -> void:
@@ -164,27 +206,24 @@ func move(distance: int) -> void:
 			if i > 0:
 				await pauseForEvent()
 				player.position = Vector2(player.position.x + playerDIR.x, player.position.y + playerDIR.y)
-				
+				audioPlayer.stream = preload("res://Assets/Audio/hitHurt (1).wav")
+				audioPlayer.play()
 				await get_tree().create_timer(0.6).timeout
 				locDistance -= 1
-		
+			
 		if rareSpaceCoinLoss:
+			rareSpaceCoinLoss = false
 			coinPerSpace(0, distance)
 		if ultraSpaceCoinGain:
+			ultraSpaceCoinGain = false
 			coinPerSpace(1, distance)
 		if ultraSpaceCoinLoss:
+			ultraSpaceCoinLoss = false
 			coinPerSpace(2, distance)
-		if insured:
-			insured = false
-			statusSprite1_0.status = 0
-			statusSprite1_0.type = 1
+		
 		eventPause = true
 		spaceEvent()
 	else:
-		if insured:
-			insured = false
-			statusSprite1_0.status = 0
-			statusSprite1_0.type = 1
 		eventPause = true
 		spaceEvent()
 
@@ -194,40 +233,25 @@ func coinPerSpace(type: int, distance: int) -> void:
 		0:
 			locDistance = distance / 2
 			deltaMoney -= locDistance
-			if obtainedItems.has(4):
-				var i = randi_range(doubleChance, 4)
-				if i >= 4:
-					deltaMoney *= 2
-					itemsActivating.clear()
-					itemsActivating.append(4)
-					itemActivate(itemsActivating)
 			statusSprite1_3.status = 0
 			statusSprite1_3.type = 3
-			monUpdate(deltaMoney)
 		1:
 			deltaMoney += distance
-			if obtainedItems.has(4):
-				var i = randi_range(doubleChance, 4)
-				if i >= 4:
-					deltaMoney *= 2
-					itemsActivating.clear()
-					itemsActivating.append(4)
-					itemActivate(itemsActivating)
 			statusSprite2_2.status = 0
-			statusSprite2_2.type = 3
-			monUpdate(deltaMoney)
+			statusSprite2_2.type = 4
 		2:
 			deltaMoney = money - distance
-			if obtainedItems.has(4):
-				var i = randi_range(doubleChance, 4)
-				if i >= 4:
-					deltaMoney *= 2
-					itemsActivating.clear()
-					itemsActivating.append(4)
-					itemActivate(itemsActivating)
 			statusSprite2_4.status = 0
 			statusSprite2_4.type = 3
-			monUpdate(deltaMoney)
+	
+	if obtainedItems.has(4):
+		var i = randi_range(doubleChance, 4)
+		if i >= 4:
+			deltaMoney *= 2
+			itemsActivating.clear()
+			itemsActivating.append(4)
+			itemActivate(itemsActivating)
+	monUpdate(deltaMoney)
 
 func pauseForEvent() -> void:
 
@@ -238,7 +262,7 @@ func pauseForEvent() -> void:
 		invSeparatorInstance = invSeparator.instantiate()
 		obtainableAnim()
 		
-		await get_tree().create_timer(3.5).timeout
+		await get_tree().create_timer(4.5).timeout
 		fadeRect.color.a = lerpf(fadeRect.color.a, 0, 1)
 		obtainedAnim.hide()
 		itemAnims.stop()
@@ -262,36 +286,29 @@ func pauseForEvent() -> void:
 	
 	
 	while eventPause:
-		
-		if statusSprite1_5.status == 1:
-			statusSprite1_5.status = 0
-			statusSprite1_5.type = 1
 		fadeRect.color.a = lerpf(fadeRect.color.a, 0.7, 1)
 		eventAnim.show()
-		triggerEvent()
-		await get_tree().create_timer(6.5).timeout
+		eventTrigger()
+		await get_tree().create_timer(5).timeout
 		eventSprite.hide()
 		eventAnim.hide()
-		match lastSpaceEffect:
-			Vector2(1, 0):
-				statusSprite1_0.status = 1
-			Vector2(1, 2):
-				statusSprite1_2.status = 1
-			Vector2(1, 3):
-				if eventEffect.text != "EFFECT NEGATED":
-					statusSprite1_3.status = 1
-			Vector2(1, 5):
-				if eventEffect.text != "EFFECT NEGATED":
-					statusSprite1_5.status = 1
-			Vector2(2, 2):
-				statusSprite2_2.status = 1
-			Vector2(2, 4):
-				if eventEffect.text != "EFFECT NEGATED":
-					statusSprite2_4.status = 1
 		fadeRect.color.a = lerpf(fadeRect.color.a, 0, 1)
 		eventPause = false
+		if money <= 0:
+			loan_shark.enter()
+	
+	
 
 
+# This function determines based on probability the rarity of the effect,
+# then picks a random effect from that rarity. This system does not differentiate
+# from positive or negative, as both have an equal chance of triggering. To this
+# end, the number of positive and negative effects in a given rarity should stay
+# roughly even, but as the number of effects increases this will become less of an
+# issue.
+
+# To add more effects, simply continue in the same format that the other effects
+# are, adding the new effect to the end of the list.
 func spaceEvent() -> void:
 	randomize()
 	var i = randi_range(0, 100)
@@ -418,7 +435,7 @@ func spaceEvent() -> void:
 			lastSpaceEffect.x = 1
 			eventName.self_modulate = rare
 			match s:                   
-				0:        # Can't lose coins next turn
+				0:        # Can't lose coins next time you would
 					eventName.text = "Coinsurance"
 					var x = randi_range(0, 2)
 					match x:
@@ -429,7 +446,7 @@ func spaceEvent() -> void:
 						2:
 							eventStory.text = "Nothing protects your personal space (and your wallet)
 							better than a gun!"
-					eventEffect.text = "Can't lose coins the next turn"
+					eventEffect.text = "Can't lose coins the next time you would"
 					eventEffect.self_modulate = positive
 					eventSprite.texture = preload("res://Assets/effects/eff1-0.png")
 					anims.play("bob")
@@ -511,7 +528,7 @@ func spaceEvent() -> void:
 					eventEffect.text = "Lose 6 Coins"
 					eventEffect.self_modulate = negative
 					lastSpaceEffect.y = 4
-				5:        # 1 in 3 to double negative effect
+				5:        # 1 in 3 to double next negative effect
 					eventName.text = "Double Negative"
 					var x = randi_range(0, 2)
 					match x:
@@ -623,630 +640,150 @@ func spaceEvent() -> void:
 	debugSelect = false
 
 
-func triggerEvent() -> void:
-	#breakpoint
-	match lastSpaceEffect:
-		
-		Vector2(0, 0):            # Common
-			deltaMoney += 1
-			if obtainedItems.has(1):
-				var i = randi_range(doubleChance, 5)
-				if i >= 5:
-					deltaMoney += 1
-					itemsActivating.clear()
-					itemsActivating.append(1)
-					itemActivate(itemsActivating)
-			if obtainedItems.has(4):
-				var i = randi_range(doubleChance, 4)
-				if i >= 4:
-					deltaMoney *= 2
-					itemsActivating.clear()
-					itemsActivating.append(4)
-					itemActivate(itemsActivating)
-			monUpdate(deltaMoney)
-		Vector2(0, 1):
-			deltaMoney += 2
-			if obtainedItems.has(1):
-				var i = randi_range(doubleChance, 5)
-				if i >= 5:
-					deltaMoney += 1
-					itemsActivating.clear()
-					itemsActivating.append(1)
-					itemActivate(itemsActivating)
-			if obtainedItems.has(4):
-				var i = randi_range(doubleChance, 4)
-				if i >= 4:
-					deltaMoney *= 2
-					itemsActivating.clear()
-					itemsActivating.append(4)
-					itemActivate(itemsActivating)
-			monUpdate(deltaMoney)
-		Vector2(0, 2):
-			deltaMoney += 3
-			if obtainedItems.has(1):
-				var i = randi_range(doubleChance, 5)
-				if i >= 5:
-					deltaMoney += 1
-					itemsActivating.clear()
-					itemsActivating.append(1)
-					itemActivate(itemsActivating)
-			if obtainedItems.has(4):
-				var i = randi_range(doubleChance, 4)
-				if i >= 4:
-					deltaMoney *= 2
-					itemsActivating.clear()
-					itemsActivating.append(4)
-					itemActivate(itemsActivating)
-			monUpdate(deltaMoney)
-		Vector2(0, 3):
-			if obtainedItems.has(2):
-				var i = randi_range(doubleChance, 15)
-				if i >= 15:
-					eventEffect.text = "EFFECT NEGATED"
-					itemsActivating.clear()
-					itemsActivating.append(2)
-					itemActivate(itemsActivating)
-				else:
-					if !insured:
-						if !scottFree or (scottFree and money < 11):
-							deltaMoney -= 1
-							if obtainedItems.has(4):
-								var x = randi_range(doubleChance, 4)
-								if i >= 4:
-									deltaMoney *= 2
-									itemsActivating.clear()
-									itemsActivating.append(4)
-									itemActivate(itemsActivating)
-							monUpdate(deltaMoney)
-						else:
-							deltaMoney -= 10
-							monUpdate(deltaMoney)
-							itemsActivating.clear()
-							itemsActivating.append(8)
-							itemActivate(itemsActivating)
-							eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
-					else:
-						statusSprite1_0.status = 0
-						statusSprite1_0.type = 0
-						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
-			else:
-				if !insured:
-					if !scottFree or (scottFree and money < 11):
-						deltaMoney -= 1
-						if obtainedItems.has(4):
-							var i = randi_range(doubleChance, 4)
-							if i >= 4:
-								deltaMoney *= 2
-								itemsActivating.clear()
-								itemsActivating.append(4)
-								itemActivate(itemsActivating)
-						monUpdate(deltaMoney)
-					else:
-						deltaMoney -= 10
-						monUpdate(deltaMoney)
-						itemsActivating.clear()
-						itemsActivating.append(8)
-						itemActivate(itemsActivating)
-						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
-				else:
-					insured = false
-					statusSprite1_0.status = 0
-					statusSprite1_0.type = 0
-					eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
-			if chanceNegIncrease:
-				chanceNegIncrease = false
-				var i = randi_range(doubleChance, 3)
-				if i >= 3:
-					statusSprite1_5.status = 0
-					statusSprite1_5.type = 5
-					if !insured:
-						if !scottFree or (scottFree and money < 11):
-							deltaMoney -= 1
-							if obtainedItems.has(4):
-								var x = randi_range(doubleChance, 4)
-								if x >= 4:
-									deltaMoney *= 2
-									itemsActivating.clear()
-									itemsActivating.append(4)
-									itemActivate(itemsActivating)
-							monUpdate(deltaMoney)
-						else:
-							deltaMoney -= 10
-							monUpdate(deltaMoney)
-							itemsActivating.clear()
-							itemsActivating.append(8)
-							itemActivate(itemsActivating)
-							eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
-					else:
-						insured = false
-						statusSprite1_0.status = 0
-						statusSprite1_0.type = 0
-						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
-				else:
-					statusSprite1_5.status = 0
-					statusSprite1_5.type = 1
-		Vector2(0, 4):
-			if obtainedItems.has(2):
-				var i = randi_range(doubleChance, 15)
-				if i >= 15:
-					eventEffect.text = "EFFECT NEGATED"
-					itemsActivating.clear()
-					itemsActivating.append(2)
-					itemActivate(itemsActivating)
-				else:
-					if !insured:
-						if !scottFree or (scottFree and money < 11):
-							deltaMoney -= 2
-							if obtainedItems.has(4):
-								var x = randi_range(doubleChance, 4)
-								if x >= 4:
-									deltaMoney *= 2
-									itemsActivating.clear()
-									itemsActivating.append(4)
-									itemActivate(itemsActivating)
-							monUpdate(deltaMoney)
-						else:
-							deltaMoney -= 10
-							monUpdate(deltaMoney)
-							itemsActivating.clear()
-							itemsActivating.append(8)
-							itemActivate(itemsActivating)
-							eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
-					else:
-						insured = false
-						statusSprite1_0.status = 0
-						statusSprite1_0.type = 0
-						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
-			else:
-				if !insured:
-					if !scottFree or (scottFree and money < 11):
-						deltaMoney -= 2
-						if obtainedItems.has(4):
-							var i = randi_range(doubleChance, 4)
-							if i >= 4:
-								deltaMoney *= 2
-								itemsActivating.clear()
-								itemsActivating.append(4)
-								itemActivate(itemsActivating)
-						monUpdate(deltaMoney)
-					else:
-						deltaMoney -= 10
-						monUpdate(deltaMoney)
-						itemsActivating.clear()
-						itemsActivating.append(8)
-						itemActivate(itemsActivating)
-						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
-						
-				else:
-					insured = false
-					statusSprite1_0.status = 0
-					statusSprite1_0.type = 0
-					eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
-			if chanceNegIncrease:
-				chanceNegIncrease = false
-				var i = randi_range(doubleChance, 3)
-				if i >= 3:
-					statusSprite1_5.status = 0
-					statusSprite1_5.type = 5
-					if !insured:
-						if !scottFree or (scottFree and money < 11):
-							deltaMoney -= 2
-							if obtainedItems.has(4):
-								var x = randi_range(doubleChance, 4)
-								if x >= 4:
-									deltaMoney *= 2
-									itemsActivating.clear()
-									itemsActivating.append(4)
-									itemActivate(itemsActivating)
-							monUpdate(deltaMoney)
-						else:
-							deltaMoney -= 10
-							monUpdate(deltaMoney)
-							itemsActivating.clear()
-							itemsActivating.append(8)
-							itemActivate(itemsActivating)
-							eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
-					else:
-						insured = false
-						statusSprite1_0.status = 0
-						statusSprite1_0.type = 0
-						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
-				else:
-					statusSprite1_5.status = 0
-					statusSprite1_5.type = 1
-		Vector2(0, 5):
-			if obtainedItems.has(2):
-				var i = randi_range(doubleChance, 15)
-				if i >= 15:
-					eventEffect.text = "EFFECT NEGATED"
-					itemsActivating.clear()
-					itemsActivating.append(2)
-					itemActivate(itemsActivating)
-				else:
-					if !insured:
-						if !scottFree or (scottFree and money < 11):
-							deltaMoney -= 3
-							if obtainedItems.has(4):
-								var x = randi_range(doubleChance, 4)
-								if x >= 4:
-									deltaMoney *= 2
-									itemsActivating.clear()
-									itemsActivating.append(4)
-									itemActivate(itemsActivating)
-							monUpdate(deltaMoney)
-						else:
-							deltaMoney -= 10
-							monUpdate(deltaMoney)
-							itemsActivating.clear()
-							itemsActivating.append(8)
-							itemActivate(itemsActivating)
-							eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
-					else:
-						insured = false
-						statusSprite1_0.status = 0
-						statusSprite1_0.type = 0
-						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
-			else:
-				if !insured:
-					if !scottFree or (scottFree and money < 11):
-						deltaMoney -= 3
-						if obtainedItems.has(4):
-							var i = randi_range(doubleChance, 4)
-							if i >= 4:
-								deltaMoney *= 2
-								itemsActivating.clear()
-								itemsActivating.append(4)
-								itemActivate(itemsActivating)
-						monUpdate(deltaMoney)
-					else:
-						deltaMoney -= 10
-						monUpdate(deltaMoney)
-						itemsActivating.clear()
-						itemsActivating.append(8)
-						itemActivate(itemsActivating)
-						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
-				else:
-					insured = false
-					statusSprite1_0.status = 0
-					statusSprite1_0.type = 0
-					eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
-			if chanceNegIncrease:
-				chanceNegIncrease = false
-				var i = randi_range(doubleChance, 3)
-				if i >= 3:
-					statusSprite1_5.status = 0
-					statusSprite1_5.type = 5
-					if !insured:
-						if !scottFree or (scottFree and money < 11):
-							deltaMoney -= 3
-							if obtainedItems.has(4):
-								var x = randi_range(doubleChance, 4)
-								if x >= 4:
-									deltaMoney *= 2
-									itemsActivating.clear()
-									itemsActivating.append(4)
-									itemActivate(itemsActivating)
-							monUpdate(deltaMoney)
-						else:
-							deltaMoney -= 10
-							monUpdate(deltaMoney)
-							itemsActivating.clear()
-							itemsActivating.append(8)
-							itemActivate(itemsActivating)
-							eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
-					else:
-						insured = false
-						statusSprite1_0.status = 0
-						statusSprite1_0.type = 0
-						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
-				else:
-					statusSprite1_5.status = 0
-					statusSprite1_5.type = 1
+# Get the latest space event, then get its related modifier info. Then, iterate through the list.
+# For all effects in a given event's eventInfo, go through them and apply them if they
+# are applicable. To force specific modifiers to trigger before certain events, the
+# event itself is a modifier tied to a match statement for each event Vector2, and tied
+# to the match int 999
+
+func eventTrigger() -> void:
+	var event: Vector2 = lastSpaceEffect
+	var eventInfo: Array = eUtils.eventID[str(event)]
+	var locDeltaMoney: int = 0
 	
-		Vector2(1, 0):            # Rare
-			insured = true
-		Vector2(1, 1):
-			deltaMoney += 6
-			if obtainedItems.has(1):
-				var i = randi_range(doubleChance, 5)
-				if i >= 5:
-					deltaMoney += 1
-					itemsActivating.clear()
-					itemsActivating.append(1)
-					itemActivate(itemsActivating)
-			if obtainedItems.has(4):
-				var i = randi_range(doubleChance, 4)
-				if i >= 4:
-					deltaMoney *= 2
-					itemsActivating.clear()
-					itemsActivating.append(4)
-					itemActivate(itemsActivating)
-			monUpdate(deltaMoney)
-		Vector2(1, 2):
-			if !savingsAcc:
-				coinsSaved = 0
-				coinsSaved = randi_range(money, 5)
-				if coinsSaved > 5:
-					coinsSaved = 5
-				deltaMoney -= coinsSaved
-				savingsAcc = true
-				monUpdate(deltaMoney)
-																				 #TODO status effect
-			else:
-				deltaMoney += (coinsSaved * 2)
-				savingsAcc = false
-				statusSprite1_2.status = 0
-				statusSprite1_2.type = 2
-				monUpdate(deltaMoney)
-																				 #TODO status effect
-		Vector2(1, 3):
-			if obtainedItems.has(2):
-				var i = randi_range(doubleChance, 15)
-				if i >= 15:
-					eventEffect.text = "EFFECT NEGATED"
-					itemsActivating.clear()
-					itemsActivating.append(2)
-					itemActivate(itemsActivating)
-				else:
-					if !insured:
-						if !scottFree or (scottFree and money < 11):
-							rareSpaceCoinLoss = true
-							statusSprite1_3.status = 1
+	# Iterate through the event's modifiers, then apply it appropriately
+	itemsActivating.clear()
+	for m in eventInfo:
+		match m:
+			999:
+				match event:
+					Vector2(0, 0):            # Common
+						locDeltaMoney += 1
+					Vector2(0, 1):
+						locDeltaMoney += 2
+					Vector2(0, 2):
+						locDeltaMoney += 3
+					Vector2(0, 3):
+						locDeltaMoney -= 1
+						audioPlayer.stream = preload("res://Assets/Audio/arcade-ui-28-229497.mp3")
+						audioPlayer.play()
+					Vector2(0, 4):
+						locDeltaMoney -= 2
+						audioPlayer.stream = preload("res://Assets/Audio/arcade-ui-28-229497.mp3")
+						audioPlayer.play()
+					Vector2(0, 5):
+						locDeltaMoney -= 3
+						audioPlayer.stream = preload("res://Assets/Audio/arcade-ui-28-229497.mp3")
+						audioPlayer.play()
+					
+					Vector2(1, 0):           # Rare
+						insured = true
+						statusSprite1_0.status = 1
+					Vector2(1, 1):
+						locDeltaMoney += 6
+					Vector2(1, 2):
+						if !savingsAcc:
+							coinsSaved = 0
+							coinsSaved = randi_range(money, 5)
+							if coinsSaved > 5:
+								coinsSaved = 5
+							locDeltaMoney -= coinsSaved
+							savingsAcc = true
+							statusSprite1_2.status = 1
 						else:
-							deltaMoney -= 10
-							monUpdate(deltaMoney)
-							itemsActivating.clear()
-							itemsActivating.append(8)
-							itemActivate(itemsActivating)
-							eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
-					else:
-						insured = false
-						statusSprite1_0.status = 0
-						statusSprite1_0.type = 0
-						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
-			else:
-				if !insured:
-					if !scottFree or (scottFree and money < 11):
+							locDeltaMoney += (coinsSaved * 2)
+							savingsAcc = false
+							statusSprite1_2.status = 0
+							statusSprite1_2.type = 2
+					Vector2(1, 3):
 						rareSpaceCoinLoss = true
 						statusSprite1_3.status = 1
-					else:
-						deltaMoney -= 10
-						monUpdate(deltaMoney)
-						itemsActivating.clear()
-						itemsActivating.append(8)
-						itemActivate(itemsActivating)
-						eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
-				else:
-					insured = false
-					statusSprite1_0.status = 0
-					statusSprite1_0.type = 0
-					eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
-		Vector2(1, 4):
-			if obtainedItems.has(2):
-				var i = randi_range(doubleChance, 15)
-				if i >= 15:
-					eventEffect.text = "EFFECT NEGATED"
-					itemsActivating.clear()
-					itemsActivating.append(2)
-					itemActivate(itemsActivating)
-				else:
-					if !insured:
-						if !scottFree or (scottFree and money < 11):
-							deltaMoney -= 6
-							if obtainedItems.has(4):
-								var x = randi_range(doubleChance, 4)
-								if x >= 4:
-									deltaMoney *= 2
-									itemsActivating.clear()
-									itemsActivating.append(4)
-									itemActivate(itemsActivating)
-							monUpdate(deltaMoney)
-						else:
-							deltaMoney -= 10
-							monUpdate(deltaMoney)
-							itemsActivating.clear()
-							itemsActivating.append(8)
-							itemActivate(itemsActivating)
-							eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
-					else:
-						insured = false
-						statusSprite1_0.status = 0
-						statusSprite1_0.type = 0
-						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
-			else:
-				if !insured:
-					if !scottFree or (scottFree and money < 11):
-						deltaMoney -= 6
-						if obtainedItems.has(4):
-							var i = randi_range(doubleChance, 4)
-							if i >= 4:
-								deltaMoney *= 2
-								itemsActivating.clear()
-								itemsActivating.append(4)
-								itemActivate(itemsActivating)
-						monUpdate(deltaMoney)
-					else:
-						deltaMoney -= 10
-						monUpdate(deltaMoney)
-						itemsActivating.clear()
-						itemsActivating.append(8)
-						itemActivate(itemsActivating)
-						eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
-				else:
-					insured = false
-					statusSprite1_0.status = 0
-					statusSprite1_0.type = 0
-					eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
-			if chanceNegIncrease:
-				chanceNegIncrease = false
-				var i = randi_range(doubleChance, 3)
-				if i >= 3:
-					statusSprite1_5.status = 0
-					statusSprite1_5.type = 5
-					if !insured:
-						if !scottFree or (scottFree and money < 11):
-							deltaMoney -= 6
-							if obtainedItems.has(4):
-								var x = randi_range(doubleChance, 4)
-								if x >= 4:
-									deltaMoney *= 2
-									itemsActivating.clear()
-									itemsActivating.append(4)
-									itemActivate(itemsActivating)
-							monUpdate(deltaMoney)
-						else:
-							deltaMoney -= 10
-							monUpdate(deltaMoney)
-							itemsActivating.clear()
-							itemsActivating.append(8)
-							itemActivate(itemsActivating)
-							eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
-					else:
-						insured = false
-						statusSprite1_0.status = 0
-						statusSprite1_0.type = 0
-						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
-				else:
-					statusSprite1_5.status = 0
-					statusSprite1_5.type = 1
-		Vector2(1, 5):
-			if obtainedItems.has(2):
-				var i = randi_range(doubleChance, 15)
-				if i >= 15:
-					eventEffect.text = "EFFECT NEGATED"
-					itemsActivating.clear()
-					itemsActivating.append(2)
-					itemActivate(itemsActivating)
-				else:
-					if !scottFree or (scottFree and money < 11):
+						audioPlayer.stream = preload("res://Assets/Audio/arcade-ui-28-229497.mp3")
+						audioPlayer.play()
+					Vector2(1, 4):
+						locDeltaMoney -= 6
+						audioPlayer.stream = preload("res://Assets/Audio/arcade-ui-28-229497.mp3")
+						audioPlayer.play()
+					Vector2(1, 5):
 						chanceNegIncrease = true
-					else:
-						deltaMoney -= 10
-						monUpdate(deltaMoney)
-						itemsActivating.clear()
-						itemsActivating.append(8)
-						itemActivate(itemsActivating)
-						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
-			else:
-				if !scottFree or (scottFree and money < 11):
-					chanceNegIncrease = true
-				else:
-					deltaMoney -= 10
-					monUpdate(deltaMoney)
-					itemsActivating.clear()
-					itemsActivating.append(8)
-					itemActivate(itemsActivating)
-					eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
-				
-
-	
-		Vector2(2, 0):             # Ultra Rare
-			deltaMoney = money
-			if obtainedItems.has(1):
-				var i = randi_range(doubleChance, 5)
-				if i >= 5:
-					deltaMoney += 1
-					itemsActivating.clear()
-					itemsActivating.append(1)
-					itemActivate(itemsActivating)
-			if obtainedItems.has(4):
-				var i = randi_range(doubleChance, 4)
-				if i >= 4:
-					deltaMoney *= 2
-					itemsActivating.clear()
-					itemsActivating.append(4)
-					itemActivate(itemsActivating)
-			monUpdate(deltaMoney)
-		Vector2(2, 1):
-			deltaMoney += 10
-			if obtainedItems.has(1):
-				var i = randi_range(doubleChance, 5)
-				if i >= 5:
-					deltaMoney += 1
-					itemsActivating.clear()
-					itemsActivating.append(1)
-					itemActivate(itemsActivating)
-			if obtainedItems.has(4):
-				var i = randi_range(doubleChance, 4)
-				if i >= 4:
-					deltaMoney *= 2
-					itemsActivating.clear()
-					itemsActivating.append(4)
-					itemActivate(itemsActivating)
-			monUpdate(deltaMoney)
-		Vector2(2, 2):
-			ultraSpaceCoinGain = true
-			statusSprite2_2.status = 1
-		Vector2(2, 3):
-			if !insured:
-				if !scottFree or (scottFree and money < 11):
-					deltaMoney -= money / 2
-					if obtainedItems.has(4):
-						var i = randi_range(doubleChance, 4)
-						if i >= 4:
-							deltaMoney *= 2
-							itemsActivating.clear()
-							itemsActivating.append(4)
-							itemActivate(itemsActivating)
-					monUpdate(deltaMoney)
-				else:
-					deltaMoney -= 10
-					monUpdate(deltaMoney)
-					itemsActivating.clear()
-					itemsActivating.append(8)
-					itemActivate(itemsActivating)
-					eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
-			else:
-				insured = false
-				statusSprite1_0.status = 0
-				statusSprite1_0.type = 0
-				eventEffect.text = "EFFECT NEGATED"                              #TODO status effects
-		Vector2(2, 4):
-			if obtainedItems.has(2):
-				var i = randi_range(doubleChance, 15)
-				if i >= 15:
-					eventEffect.text = "EFFECT NEGATED"
-					itemsActivating.clear()
-					itemsActivating.append(2)
-					itemActivate(itemsActivating)
-				else:
-					if !insured:
-						if !scottFree or (scottFree and money < 11):
-							ultraSpaceCoinLoss = true
-							statusSprite2_4.status = 1
-						else:
-							deltaMoney -= 10
-							monUpdate(deltaMoney)
-							itemsActivating.clear()
-							itemsActivating.append(8)
-							itemActivate(itemsActivating)
-							eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
-					else:
-						insured = false
-						statusSprite1_0.status = 0
-						statusSprite1_0.type = 0
-						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
-			else:
-				if !insured:
-					if !scottFree or (scottFree and money < 11):
-						ultraSpaceCoinLoss
+						statusSprite1_5.status = 1
+						audioPlayer.stream = preload("res://Assets/Audio/arcade-ui-28-229497.mp3")
+						audioPlayer.play()
+					
+					Vector2(2, 0):            # Ultra Rare
+						locDeltaMoney = money * 2
+					Vector2(2, 1):
+						locDeltaMoney += 10
+					Vector2(2, 2):
+						ultraSpaceCoinGain = true
+						statusSprite2_2.status = 1
+					Vector2(2, 3):
+						locDeltaMoney -= (money / 2)
+						audioPlayer.stream = preload("res://Assets/Audio/arcade-ui-28-229497.mp3")
+						audioPlayer.play()
+					Vector2(2, 4):
+						ultraSpaceCoinLoss = true
 						statusSprite2_4.status = 1
-					else:
-						deltaMoney -= 10
-						monUpdate(deltaMoney)
-						itemsActivating.clear()
-						itemsActivating.append(8)
-						itemActivate(itemsActivating)
-						eventEffect.text = "EFFECT NEGATED"                      #TODO status effects
-				else:
+						audioPlayer.stream = preload("res://Assets/Audio/arcade-ui-28-229497.mp3")
+						audioPlayer.play()
+					Vector2(2, 5):
+						pass
+			0: # LUCKY BREAK
+					for i in obtainedItems:
+						if i == 1:
+							var x = randi_range(doubleChance, 5)
+							if x >= 5:
+								locDeltaMoney += 1
+								itemsActivating.append(1)
+			1: # NEGATIVE NEGATION
+				for i in obtainedItems:
+					if i == 2:
+						var x = randi_range(doubleChance, 15)
+						if x >= 15:
+							locDeltaMoney = 0
+							eventEffect.text = "EFFECT NEGATED"
+							eventInfo.erase(999)
+							itemsActivating.append(2)
+			2: # BANK ERROR
+				for i in obtainedItems:
+					if i == 4:
+						var x = randi_range(doubleChance, 4)
+						if x >= 4:
+							locDeltaMoney *= 2
+							itemsActivating.append(4)
+			3: # SCOT-FREE
+				if scottFree:
+					locDeltaMoney -= 10
+					itemsActivating.append(8)
+					eventEffect.text = "EFFECT NEGATED"
+					eventInfo.erase(999)
+			4: # COINSURANCE
+				if insured:
 					insured = false
 					statusSprite1_0.status = 0
 					statusSprite1_0.type = 0
-					eventEffect.text = "EFFECT NEGATED"                          #TODO status effects
-		Vector2(2, 5):
-			pass
+					eventEffect.text = "EFFECT NEGATED"
+					eventInfo.erase(3)
+					eventInfo.erase(2)
+					eventInfo.erase(999)
+					
+			5: # DOUBLE NEGATIVE
+				if chanceNegIncrease:
+					var x = randi_range(doubleChance, 3)
+					if x >= 3:
+						chanceNegIncrease = false
+						statusSprite1_5.status = 0
+						statusSprite1_5.type = 5
+						eventTrigger()
+					else:
+						chanceNegIncrease = false
+						statusSprite1_5.status = 0
+						statusSprite1_5.type = 1
+	
+	monUpdate(locDeltaMoney)
+	itemActivate(itemsActivating)
 
-
+#region Obtainables Stuff
 func obtainableAnim():
 	
 	match lastObtained:
@@ -1341,6 +878,8 @@ func obtainableAnim():
 			commentLabel.text = "This is where the fun begins!"
 			newActLabel = "Multiroll!"
 	
+	audioPlayer.stream = preload("res://Assets/Audio/arcade-ui-24-229496.mp3")
+	audioPlayer.play()
 	obtainedAnim.show()
 	itemAnims.play("blink_bob")
 
@@ -1352,9 +891,9 @@ func getObtainable(obtainable: int) -> void:
 	obtainedItems.append(obtainable)
 	lastObtained = obtainable
 	pauseForEvent()
+#endregion
 
-
-
+#region Buttons
 func spinSpinner() -> int:
 	var spinResult: int
 	
@@ -1382,3 +921,14 @@ func _on_dir_left_pressed() -> void:
 
 func _on_dir_right_pressed() -> void:
 	playerDIR = Vector2(32, 0)
+
+
+func _on_spin_sound_timer_timeout() -> void:
+	spinning = false
+	spin_1Player.stop()
+	spin_1Player.volume_db = 3
+
+#endregion
+
+func changeSharkFrame(frame: int) -> void:
+	loan_shark.curFrame = frame

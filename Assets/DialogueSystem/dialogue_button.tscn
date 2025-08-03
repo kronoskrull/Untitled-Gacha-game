@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://x0cm0hckejef"]
+
+[ext_resource type="FontFile" uid="uid://dmip7mk1p14dy" path="res://Assets/PrStart.ttf" id="1_px4ay"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kp23g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_em8rg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kipwt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hjcf2"]
+
+[node name="DialogueButton" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+size_flags_horizontal = 3
+theme_override_colors/font_hover_color = Color(1, 1, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 0, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_px4ay")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kp23g")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_em8rg")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_kipwt")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hjcf2")

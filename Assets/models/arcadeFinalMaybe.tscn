@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqld5dxfh26jc"]
+
+[ext_resource type="PackedScene" uid="uid://dn8m0yab84c76" path="res://Assets/models/Arcade (2).fbx" id="1_n2q3w"]
+[ext_resource type="Texture2D" uid="uid://bl5jdgnkt6l85" path="res://Assets/Arcade_texALBEDO.jpg" id="2_38shn"]
+[ext_resource type="Texture2D" uid="uid://kfntfk6ab56a" path="res://Assets/Arcade_tex_METALLIC.jpg" id="3_lplwk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tfrd5"]
+albedo_texture = ExtResource("2_38shn")
+metallic = 1.0
+metallic_texture = ExtResource("3_lplwk")
+
+[node name="Arcade (2)" instance=ExtResource("1_n2q3w")]
+
+[node name="Spinner" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_tfrd5")

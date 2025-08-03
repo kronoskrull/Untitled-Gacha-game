@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bj2eeeh005rlu"]
-
-[ext_resource type="PackedScene" uid="uid://b5muj8v4w4fcw" path="res://Assets/models/Arcade.fbx" id="1_j38s8"]
-
-[node name="Arcade" instance=ExtResource("1_j38s8")]
-
-[node name="Spinner" parent="." index="0"]
-unique_name_in_owner = true

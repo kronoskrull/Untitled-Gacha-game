@@ -154,14 +154,15 @@ func interpretSpin() -> void:
 		getIndex.get_child(0).timesRolled += 1
 		var spinResult: int = getIndex.get_child(0).index
 		
-		if obtainedItems.has(5) and spinResult == 0:           #TODO
-			var i = randi_range(doubleChance, 4)
-			if i >= 4:
-				itemsActivating.clear()
-				itemsActivating.append(5)
-				itemActivate(itemsActivating)
-				canSpin = true
-				interpretSpin()
+		for x in obtainedItems:
+			if x == 5 and spinResult == 0:
+				var i = randi_range(doubleChance, 4)
+				if i >= 4:
+					itemsActivating.clear()
+					itemsActivating.append(5)
+					itemActivate(itemsActivating)
+					canSpin = true
+					interpretSpin()
 		
 		
 		roll_result.text = str(spinResult)                     #CULL
@@ -170,20 +171,23 @@ func interpretSpin() -> void:
 		var distance: int = spinResult
 		
 		
-		if obtainedItems.has(0):
-			var i = randi_range(doubleChance, 10)
-			if i >= 10:
-				itemsActivating.append(0)
-				distance += 1
+		for i in obtainedItems:
+			if i == 0:
+				var x = randi_range(doubleChance, 10)
+				if x >= 10:
+					itemsActivating.append(0)
+					distance += 1
 		
-		if obtainedItems.has(3):
-			itemsActivating.append(3)
-			distance += 1
+		for i in obtainedItems:
+			if i == 3:
+				itemsActivating.append(3)
+				distance += 1
 			
 		
-		if obtainedItems.has(6):
-			itemsActivating.append(6)
-			distance += 3
+		for i in obtainedItems:
+			if i == 6:
+				itemsActivating.append(6)
+				distance += 3
 		
 		itemActivate(itemsActivating)
 		move(distance)
@@ -725,28 +729,31 @@ func eventTrigger() -> void:
 					Vector2(2, 5):
 						pass
 			0: # LUCKY BREAK
-				if obtainedItems.has(1):
-					var x = randi_range(doubleChance, 5)
-					if x >= 5:
-						locDeltaMoney += 1
-						itemsActivating.append(1)
+					for i in obtainedItems:
+						if i == 1:
+							var x = randi_range(doubleChance, 5)
+							if x >= 5:
+								locDeltaMoney += 1
+								itemsActivating.append(1)
 			1: # NEGATIVE NEGATION
-				if obtainedItems.has(2):
-					var x = randi_range(doubleChance, 15)
-					if x >= 15:
-						locDeltaMoney = 0
-						eventEffect.text = "EFFECT NEGATED"
-						eventInfo.erase(999)
-						itemsActivating.append(2)
+				for i in obtainedItems:
+					if i == 2:
+						var x = randi_range(doubleChance, 15)
+						if x >= 15:
+							locDeltaMoney = 0
+							eventEffect.text = "EFFECT NEGATED"
+							eventInfo.erase(999)
+							itemsActivating.append(2)
 			2: # BANK ERROR
-				if obtainedItems.has(4):
-					var x = randi_range(doubleChance, 4)
-					if x >= 4:
-						locDeltaMoney *= 2
-						itemsActivating.append(4)
+				for i in obtainedItems:
+					if i == 4:
+						var x = randi_range(doubleChance, 4)
+						if x >= 4:
+							locDeltaMoney *= 2
+							itemsActivating.append(4)
 			3: # SCOT-FREE
 				if scottFree:
-					locDeltaMoney-= 10
+					locDeltaMoney -= 10
 					itemsActivating.append(8)
 					eventEffect.text = "EFFECT NEGATED"
 					eventInfo.erase(999)

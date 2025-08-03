@@ -175,7 +175,7 @@ func _text_resource(i: DialogueText) -> void:
 	while true:
 		await get_tree().process_frame
 		if DialogueLabel.visible_characters == total_characters:
-			if Input.is_action_just_pressed("ui_accept"):
+			if Input.is_action_just_pressed("interact"):
 				current_dialogue_item += 1
 				next_item = true
 

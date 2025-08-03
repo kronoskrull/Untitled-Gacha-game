@@ -229,40 +229,25 @@ func coinPerSpace(type: int, distance: int) -> void:
 		0:
 			locDistance = distance / 2
 			deltaMoney -= locDistance
-			if obtainedItems.has(4):
-				var i = randi_range(doubleChance, 4)
-				if i >= 4:
-					deltaMoney *= 2
-					itemsActivating.clear()
-					itemsActivating.append(4)
-					itemActivate(itemsActivating)
 			statusSprite1_3.status = 0
 			statusSprite1_3.type = 3
-			monUpdate(deltaMoney)
 		1:
 			deltaMoney += distance
-			if obtainedItems.has(4):
-				var i = randi_range(doubleChance, 4)
-				if i >= 4:
-					deltaMoney *= 2
-					itemsActivating.clear()
-					itemsActivating.append(4)
-					itemActivate(itemsActivating)
 			statusSprite2_2.status = 0
 			statusSprite2_2.type = 4
-			monUpdate(deltaMoney)
 		2:
 			deltaMoney = money - distance
-			if obtainedItems.has(4):
-				var i = randi_range(doubleChance, 4)
-				if i >= 4:
-					deltaMoney *= 2
-					itemsActivating.clear()
-					itemsActivating.append(4)
-					itemActivate(itemsActivating)
 			statusSprite2_4.status = 0
 			statusSprite2_4.type = 3
-			monUpdate(deltaMoney)
+	
+	if obtainedItems.has(4):
+		var i = randi_range(doubleChance, 4)
+		if i >= 4:
+			deltaMoney *= 2
+			itemsActivating.clear()
+			itemsActivating.append(4)
+			itemActivate(itemsActivating)
+	monUpdate(deltaMoney)
 
 func pauseForEvent() -> void:
 
@@ -305,9 +290,10 @@ func pauseForEvent() -> void:
 		eventAnim.hide()
 		fadeRect.color.a = lerpf(fadeRect.color.a, 0, 1)
 		eventPause = false
+		if money <= 0:
+			loan_shark.enter()
 	
-	if money <= 0:
-		loan_shark.enter()
+	
 
 
 # This function determines based on probability the rarity of the effect,
@@ -659,6 +645,7 @@ func spaceEvent() -> void:
 func eventTrigger() -> void:
 	var event: Vector2 = lastSpaceEffect
 	var eventInfo: Array = eUtils.eventID[str(event)]
+	var locDeltaMoney: int = 0
 	
 	# Iterate through the event's modifiers, then apply it appropriately
 	itemsActivating.clear()
@@ -667,60 +654,50 @@ func eventTrigger() -> void:
 			999:
 				match event:
 					Vector2(0, 0):            # Common
-						deltaMoney += 1
-						monUpdate(deltaMoney)
+						locDeltaMoney += 1
 					Vector2(0, 1):
-						deltaMoney += 2
-						monUpdate(deltaMoney)
+						locDeltaMoney += 2
 					Vector2(0, 2):
-						deltaMoney += 3
-						monUpdate(deltaMoney)
+						locDeltaMoney += 3
 					Vector2(0, 3):
-						deltaMoney -= 1
+						locDeltaMoney -= 1
 						audioPlayer.stream = preload("res://Assets/Audio/arcade-ui-28-229497.mp3")
 						audioPlayer.play()
-						monUpdate(deltaMoney)
 					Vector2(0, 4):
-						deltaMoney -= 2
+						locDeltaMoney -= 2
 						audioPlayer.stream = preload("res://Assets/Audio/arcade-ui-28-229497.mp3")
 						audioPlayer.play()
-						monUpdate(deltaMoney)
 					Vector2(0, 5):
-						deltaMoney -= 3
+						locDeltaMoney -= 3
 						audioPlayer.stream = preload("res://Assets/Audio/arcade-ui-28-229497.mp3")
 						audioPlayer.play()
-						monUpdate(deltaMoney)
 					
 					Vector2(1, 0):           # Rare
 						insured = true
 						statusSprite1_0.status = 1
 					Vector2(1, 1):
-						deltaMoney += 6
-						monUpdate(deltaMoney)
+						locDeltaMoney += 6
 					Vector2(1, 2):
 						if !savingsAcc:
 							coinsSaved = 0
 							coinsSaved = randi_range(money, 5)
 							if coinsSaved > 5:
 								coinsSaved = 5
-							deltaMoney -= coinsSaved
+							locDeltaMoney -= coinsSaved
 							savingsAcc = true
 							statusSprite1_2.status = 1
-							monUpdate(deltaMoney)
 						else:
-							deltaMoney += (coinsSaved * 2)
+							locDeltaMoney += (coinsSaved * 2)
 							savingsAcc = false
 							statusSprite1_2.status = 0
 							statusSprite1_2.type = 2
-							monUpdate(deltaMoney)
 					Vector2(1, 3):
 						rareSpaceCoinLoss = true
 						statusSprite1_3.status = 1
 						audioPlayer.stream = preload("res://Assets/Audio/arcade-ui-28-229497.mp3")
 						audioPlayer.play()
 					Vector2(1, 4):
-						deltaMoney -= 6
-						monUpdate(deltaMoney)
+						locDeltaMoney -= 6
 						audioPlayer.stream = preload("res://Assets/Audio/arcade-ui-28-229497.mp3")
 						audioPlayer.play()
 					Vector2(1, 5):
@@ -730,19 +707,16 @@ func eventTrigger() -> void:
 						audioPlayer.play()
 					
 					Vector2(2, 0):            # Ultra Rare
-						deltaMoney = money * 2
-						monUpdate(deltaMoney)
+						locDeltaMoney = money * 2
 					Vector2(2, 1):
-						deltaMoney += 10
-						monUpdate(deltaMoney)
+						locDeltaMoney += 10
 					Vector2(2, 2):
 						ultraSpaceCoinGain = true
 						statusSprite2_2.status = 1
 					Vector2(2, 3):
-						deltaMoney = money / 2
+						locDeltaMoney -= (money / 2)
 						audioPlayer.stream = preload("res://Assets/Audio/arcade-ui-28-229497.mp3")
 						audioPlayer.play()
-						monUpdate(deltaMoney)
 					Vector2(2, 4):
 						ultraSpaceCoinLoss = true
 						statusSprite2_4.status = 1
@@ -750,35 +724,33 @@ func eventTrigger() -> void:
 						audioPlayer.play()
 					Vector2(2, 5):
 						pass
-			0:
+			0: # LUCKY BREAK
 				if obtainedItems.has(1):
 					var x = randi_range(doubleChance, 5)
 					if x >= 5:
-						deltaMoney += 1
+						locDeltaMoney += 1
 						itemsActivating.append(1)
-						monUpdate(deltaMoney)
-			1:
+			1: # NEGATIVE NEGATION
 				if obtainedItems.has(2):
 					var x = randi_range(doubleChance, 15)
 					if x >= 15:
-						deltaMoney = 0
+						locDeltaMoney = 0
 						eventEffect.text = "EFFECT NEGATED"
 						eventInfo.erase(999)
 						itemsActivating.append(2)
-			2:
+			2: # BANK ERROR
 				if obtainedItems.has(4):
 					var x = randi_range(doubleChance, 4)
 					if x >= 4:
-						deltaMoney *= 2
+						locDeltaMoney *= 2
 						itemsActivating.append(4)
-			3:
+			3: # SCOT-FREE
 				if scottFree:
-					deltaMoney -= 10
+					locDeltaMoney-= 10
 					itemsActivating.append(8)
 					eventEffect.text = "EFFECT NEGATED"
 					eventInfo.erase(999)
-					monUpdate(deltaMoney)
-			4:
+			4: # COINSURANCE
 				if insured:
 					insured = false
 					statusSprite1_0.status = 0
@@ -788,7 +760,7 @@ func eventTrigger() -> void:
 					eventInfo.erase(2)
 					eventInfo.erase(999)
 					
-			5:
+			5: # DOUBLE NEGATIVE
 				if chanceNegIncrease:
 					var x = randi_range(doubleChance, 3)
 					if x >= 3:
@@ -801,6 +773,7 @@ func eventTrigger() -> void:
 						statusSprite1_5.status = 0
 						statusSprite1_5.type = 1
 	
+	monUpdate(locDeltaMoney)
 	itemActivate(itemsActivating)
 
 #region Obtainables Stuff

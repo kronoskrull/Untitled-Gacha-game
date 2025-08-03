@@ -1,0 +1,11 @@
+This is a fully functional and feature-complete UNDERTALE-like dialogue system.
+Because of it having been written at 5AM with no sleep, it has some... issues.
+When exporting it to a different project, keep a few things in mind:
+	- The AudioStream3D in the base dialogue_system.tscn should be changed
+	depending on context of the new project
+	- In the base dialogue_area_2d.gd on lines 41 and 53 there are references
+	to the player and the root scene, respectively. These need to be changed
+	to reflect the new player and root in the new project.
+	- In the base dialogue_system.gd on line 178 there is a reference to an input
+	that changes to the next dialogue item. This needs to be changed depending on
+	the context for the project.

@@ -1035,7 +1035,7 @@ tracks/1/path = NodePath(".:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(5.23333, 13.3333),
+"times": PackedFloat32Array(4.03333, 12.4),
 "transitions": PackedFloat32Array(-2, -2),
 "update": 0,
 "values": [Vector2(380, 125), Vector2(380, 115)]
@@ -1047,7 +1047,7 @@ tracks/2/path = NodePath(".:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(3.66667, 11.6667),
+"times": PackedFloat32Array(6.36664, 14.7),
 "transitions": PackedFloat32Array(-2, -2),
 "update": 0,
 "values": [-0.0261799, 0.0261799]
@@ -2629,7 +2629,7 @@ position = Vector2(688, 106)
 position = Vector2(544, 394)
 
 [node name="junction135" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(719.5, 394)
+position = Vector2(720, 394)
 
 [node name="junction136" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
 position = Vector2(464, 394)
@@ -2672,9 +2672,6 @@ position = Vector2(785.5, 254)
 
 [node name="junction24" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
 position = Vector2(785.5, 217.5)
-
-[node name="junction26" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
-position = Vector2(528, 282)
 
 [node name="junction27" parent="SubViewport/junctions/TurnaroundJuncs" instance=ExtResource("11_j4p46")]
 position = Vector2(592, 298)
@@ -3565,7 +3562,6 @@ position = Vector2(468, 195)
 shape = SubResource("RectangleShape2D_0r3jn")
 
 [node name="Maze1_0" type="Sprite2D" parent="SubViewport"]
-visible = false
 material = SubResource("ShaderMaterial_tcoxg")
 position = Vector2(954, 423)
 scale = Vector2(2, 2)
@@ -3700,7 +3696,6 @@ theme_override_font_sizes/font_size = 62
 text = "GACHA PWN"
 
 [node name="effectMenu" type="PanelContainer" parent="Control"]
-visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -4424,6 +4419,7 @@ layout_mode = 2
 
 [node name="newgame" type="Button" parent="Menu/mainOptions/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.833333, 0, 1)
 theme_override_fonts/font = ExtResource("18_7x8mt")
 theme_override_font_sizes/font_size = 30
 theme_override_styles/focus = SubResource("StyleBoxEmpty_nhvkq")
@@ -4464,6 +4460,11 @@ layout_mode = 2
 
 [node name="standardMode" type="Button" parent="Menu/subOptions/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(1, 0.843137, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 0.843137, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.843137, 0, 1)
+theme_override_colors/font_focus_color = Color(1, 0.843137, 0, 1)
+theme_override_colors/font_color = Color(0.433333, 1, 0, 1)
 theme_override_fonts/font = ExtResource("18_7x8mt")
 theme_override_font_sizes/font_size = 30
 theme_override_styles/focus = SubResource("StyleBoxEmpty_f8uhe")
@@ -4515,6 +4516,11 @@ libraries = {
 
 [node name="challengeMode" type="Button" parent="Menu/subOptions/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(1, 0.843137, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 0.843137, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.843137, 0, 1)
+theme_override_colors/font_focus_color = Color(1, 0.843137, 0, 1)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_fonts/font = ExtResource("18_7x8mt")
 theme_override_font_sizes/font_size = 30
 theme_override_styles/focus = SubResource("StyleBoxEmpty_ta2ky")

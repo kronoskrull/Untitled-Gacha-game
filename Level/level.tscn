@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=3 uid="uid://drt1tip360qt7"]
+[gd_scene load_steps=148 format=3 uid="uid://drt1tip360qt7"]
 
 [ext_resource type="Texture2D" uid="uid://dhw6oc4h6i0ny" path="res://Assets/effects/hudBlock1.0.png" id="1_a7teg"]
 [ext_resource type="Script" path="res://Level/level.gd" id="1_rljoh"]
@@ -35,7 +35,7 @@
 [ext_resource type="Texture2D" uid="uid://btpjuy8i06fk0" path="res://Assets/effects/eff2-4.png" id="26_2gl0d"]
 [ext_resource type="Script" path="res://Level/loan_shark.gd" id="31_2uu44"]
 [ext_resource type="Script" path="res://Level/loanshark_final.gd" id="31_pivh8"]
-[ext_resource type="Texture2D" uid="uid://wp6bh4b4fd5a" path="res://Assets/effects/coin.png" id="33_0rops"]
+[ext_resource type="Texture2D" uid="uid://wp6bh4b4fd5a" path="res://Assets/effects/high_contrastCoin.png" id="33_0rops"]
 [ext_resource type="PackedScene" uid="uid://bunptani1d1eu" path="res://Assets/DialogueSystem/dialogue_area_2d.tscn" id="35_lpwu7"]
 [ext_resource type="Script" path="res://Assets/DialogueSystem/DialofueExportResource.gd" id="37_7j578"]
 [ext_resource type="Script" path="res://Assets/DialogueSystem/DialogueFunctionResource.gd" id="37_e3647"]
@@ -45,6 +45,7 @@
 [ext_resource type="AudioStream" uid="uid://wa54e02ajq43" path="res://Assets/Audio/90s-game-ui-6-185099.mp3" id="40_j3ykj"]
 [ext_resource type="Script" path="res://Level/spinner_menu.gd" id="40_rfyt5"]
 [ext_resource type="AudioStream" uid="uid://drlpemysk3yt" path="res://Assets/Audio/loanSharkBite.mp3" id="40_rmqjj"]
+[ext_resource type="Script" path="res://Level/outer_fade_rect.gd" id="41_jketd"]
 [ext_resource type="AudioStream" uid="uid://vtguar4jeq3u" path="res://Assets/Audio/computer-hum-78343.mp3" id="41_ky7q4"]
 [ext_resource type="Script" path="res://Level/spinnerMenuItem.gd" id="41_vruw2"]
 [ext_resource type="AudioStream" uid="uid://cdkdswpo3yvbh" path="res://Assets/Audio/bicycle-wheel-spinning-49716.mp3" id="42_hc1ex"]
@@ -54,6 +55,18 @@
 [ext_resource type="AudioStream" uid="uid://vj15swfcs701" path="res://Assets/Audio/level-up-bonus-sequence-2-186891.mp3" id="45_waqyb"]
 [ext_resource type="AudioStream" uid="uid://fhdim5212qyb" path="res://Assets/Audio/cave themeb4.mp3" id="47_cxyms"]
 [ext_resource type="Script" path="res://Level/music.gd" id="48_f87m5"]
+[ext_resource type="Script" path="res://Level/menu.gd" id="55_mhfh2"]
+[ext_resource type="Texture2D" uid="uid://cy4mhv5sfs1ay" path="res://Assets/effects/titleSprite.png" id="56_5cj55"]
+[ext_resource type="Script" path="res://Level/standard_mode.gd" id="56_sfhuv"]
+[ext_resource type="Script" path="res://Level/title_sprite.gd" id="57_ck147"]
+[ext_resource type="Texture2D" uid="uid://hjjxos6ml8dw" path="res://Assets/effects/low_contrastCoin.png" id="57_fl41h"]
+[ext_resource type="Script" path="res://Level/desc_sprite.gd" id="57_qim8h"]
+[ext_resource type="Script" path="res://Level/dancing_node.gd" id="58_k6ufh"]
+[ext_resource type="Script" path="res://Level/sandbox_mode.gd" id="58_ogrcu"]
+[ext_resource type="Texture2D" uid="uid://rcgppns2n67c" path="res://Assets/effects/evilCoin.png" id="60_ecobq"]
+[ext_resource type="Texture2D" uid="uid://b04iclufyt57y" path="res://Assets/buttonArcadeSprite.png" id="60_y1flv"]
+[ext_resource type="AudioStream" uid="uid://oqr0r32td0lj" path="res://Assets/Audio/blipSelect.wav" id="63_octud"]
+[ext_resource type="Texture2D" uid="uid://en2gq0if3n5b" path="res://Assets/buttonArcadeSpriteGreen.png" id="65_ooakc"]
 
 [sub_resource type="Resource" id="Resource_rctjk"]
 script = ExtResource("2_d2tcv")
@@ -81,6 +94,43 @@ eventID = {
 [sub_resource type="ViewportTexture" id="ViewportTexture_3nx2p"]
 viewport_path = NodePath("SubViewport")
 
+[sub_resource type="Animation" id="Animation_me5tm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.000522056, 4.34272, 32.7707)]
+}
+
+[sub_resource type="Animation" id="Animation_w2ayg"]
+resource_name = "gotoPlay"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector3(-0.000522056, 4.34272, 32.7707), Vector3(-0.000522056, 4.34272, 21.4108)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kqxwm"]
+_data = {
+"RESET": SubResource("Animation_me5tm"),
+"gotoPlay": SubResource("Animation_w2ayg")
+}
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e1sik"]
 render_priority = 0
 shader = ExtResource("2_osb5b")
@@ -88,11 +138,11 @@ shader = ExtResource("2_osb5b")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_54ae4"]
 albedo_texture = ExtResource("4_57hlo")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vqa8a"]
+albedo_color = Color(0, 0, 0, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2tokm"]
 albedo_color = Color(0.53, 0, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xmeaq"]
-albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nemm3"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -109,6 +159,10 @@ background_mode = 2
 sky = SubResource("Sky_0udfg")
 tonemap_mode = 2
 glow_enabled = true
+fog_light_color = Color(0.1708, 0.33916, 0.61, 1)
+fog_light_energy = 0.05
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.02
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8cm07"]
 noise_type = 0
@@ -599,7 +653,7 @@ speaker_name = "Loan Shark"
 speaker_img = ExtResource("39_luuut")
 speaker_img_Hframes = 2
 speaker_img_rest_frame = 0
-text = "...flat broke."
+text = "[rainbow][wave]Flat Broke![/wave][/rainbow]"
 text_speed = 12.0
 text_sound = ExtResource("40_rmqjj")
 text_volume_db = 0
@@ -729,17 +783,464 @@ shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.4
 shader_parameter/vignette_opacity = 0.0
 
+[sub_resource type="Animation" id="Animation_gw4nn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8a31l"]
+resource_name = "fade"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(-2, 2),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_53u0m"]
+resource_name = "return"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6l5cl"]
+_data = {
+"RESET": SubResource("Animation_gw4nn"),
+"fade": SubResource("Animation_8a31l"),
+"return": SubResource("Animation_53u0m")
+}
+
+[sub_resource type="Animation" id="Animation_apr0s"]
+resource_name = "lights"
+length = 16.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5, 14, 14.5, 15, 15.5, 16),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(5.23333, 13.3333),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(370, 125), Vector2(370, 115)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(3.66667, 11.6667),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [-0.0261799, 0.0261799]
+}
+
+[sub_resource type="Animation" id="Animation_jh7v6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(370, 120)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lwsti"]
+_data = {
+"RESET": SubResource("Animation_jh7v6"),
+"lights": SubResource("Animation_apr0s")
+}
+
+[sub_resource type="Animation" id="Animation_mjv31"]
+resource_name = "dance"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2jrtu"]
+_data = {
+"dance": SubResource("Animation_mjv31")
+}
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_45vvb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nhvkq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vsy6t"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v7whx"]
+
+[sub_resource type="Animation" id="Animation_dm7tx"]
+resource_name = "pressed"
+length = 0.16667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_wvu5r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2j2jm"]
+_data = {
+"RESET": SubResource("Animation_wvu5r"),
+"pressed": SubResource("Animation_dm7tx")
+}
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1sgx2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f8uhe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fcplq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_18bji"]
+
+[sub_resource type="Animation" id="Animation_102lt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_klqyc"]
+resource_name = "dance"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [-0.0872665, 0.0872665]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4rxyo"]
+_data = {
+"RESET": SubResource("Animation_102lt"),
+"dance": SubResource("Animation_klqyc")
+}
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ta2ky"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_150vu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ivdae"]
+
+[sub_resource type="Animation" id="Animation_egklq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(460, 523)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../modeSelectLabel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../modeSelectLabel:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_3a6ms"]
+resource_name = "appear"
+length = 0.66667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.666667),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.666667),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(3, 1036), Vector2(460, 1036)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../modeSelectLabel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../modeSelectLabel:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.0333333, 0.666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"hide"
+}, {
+"args": [],
+"method": &"show"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_tlq3o"]
+resource_name = "disappear"
+length = 0.66667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.666667),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.666667),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(3, 1036), Vector2(460, 1036)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../modeSelectLabel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../modeSelectLabel:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.0333333, 0.666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"hide"
+}, {
+"args": [],
+"method": &"show"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ut1pv"]
+_data = {
+"RESET": SubResource("Animation_egklq"),
+"appear": SubResource("Animation_3a6ms"),
+"disappear": SubResource("Animation_tlq3o")
+}
+
 [node name="level" type="Node3D"]
 script = ExtResource("1_rljoh")
 eUtils = SubResource("Resource_rctjk")
+money = 10
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.914642, 0.404264, 0, -0.404264, 0.914642, 0, 3.16594, 10.8507)
 texture = SubResource("ViewportTexture_3nx2p")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.982871, 0.184294, 0, -0.184294, 0.982871, -0.000522056, 4.34272, 21.4383)
+transform = Transform3D(1, 0, 0, 0, 0.982871, 0.184294, 0, -0.184294, 0.982871, -0.000522056, 4.34272, 32.7707)
 fov = 83.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera3D"]
+libraries = {
+"": SubResource("AnimationLibrary_kqxwm")
+}
 
 [node name="lighting & env" type="Node3D" parent="."]
 
@@ -761,15 +1262,23 @@ skeleton = NodePath("../../..")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="lighting & env/env"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.51265, 7.0075, -8.611)
+material_override = SubResource("StandardMaterial3D_vqa8a")
 size = Vector3(78, 54, 1)
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="lighting & env/env"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.51265, 7.0075, 38.389)
+material_override = SubResource("StandardMaterial3D_vqa8a")
 size = Vector3(78, 54, 1)
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="lighting & env/env"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.51265, 33.0075, 17.389)
+material_override = SubResource("StandardMaterial3D_vqa8a")
 size = Vector3(78, 54, 1)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="lighting & env/env"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.51265, -20.1561, 17.8076)
+material_override = SubResource("StandardMaterial3D_vqa8a")
+size = Vector3(78, 142.155, 1)
 
 [node name="CSGBox3D8" type="CSGBox3D" parent="lighting & env/env"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.0240631, 7.25552, 4.80079)
@@ -778,16 +1287,13 @@ size = Vector3(18.0941, 9.1048, 0.474609)
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="lighting & env/env"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 18.4873, 7.0075, 15.389)
+material_override = SubResource("StandardMaterial3D_vqa8a")
 size = Vector3(78, 54, 1)
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="lighting & env/env"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -20.5127, 7.0075, 15.389)
+material_override = SubResource("StandardMaterial3D_vqa8a")
 size = Vector3(78, 54, 1)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="lighting & env/env"]
-transform = Transform3D(0.3, 0, 0, 0, 0.6, 0, 0, 0, 0.3, 0, -0.532511, 15.1717)
-size = Vector3(1, 1.37207, 1)
-material = SubResource("StandardMaterial3D_xmeaq")
 
 [node name="Arcade (2)" parent="lighting & env/env" instance=ExtResource("6_mn3xb")]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, -7.02655, 13.9154)
@@ -804,7 +1310,190 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="lighting & env/lights"]
 environment = SubResource("Environment_tqm3s")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="lighting & env/lights"]
+[node name="SpotLight3D" type="SpotLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 24.464, 16.6618)
+light_color = Color(0.56, 0.714, 1, 1)
+light_energy = 4.228
+light_volumetric_fog_energy = 0.519
+shadow_enabled = true
+spot_range = 59.2358
+spot_angle = 38.7112
+
+[node name="backLight" type="SpotLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, -0.56074, -0.827992, 0, 0.827992, -0.56074, 0, -10.4486, -7.56635)
+visible = false
+light_color = Color(0.56, 0.714, 1, 1)
+light_energy = 16.0
+light_volumetric_fog_energy = 1.963
+light_specular = 0.0
+shadow_enabled = true
+spot_range = 59.2358
+spot_angle = 46.5721
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, 0.922316, 0.386437, 0, -0.386437, 0.922316, 0, 13.5646, 27.6618)
+light_energy = 5.202
+light_volumetric_fog_energy = 0.038
+spot_range = 19.5835
+spot_angle = 40.0165
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="lighting & env/lights"]
+transform = Transform3D(1, 0, 0, 0, -0.700337, 0.713813, 0, -0.713813, -0.700337, 0.0166435, 7.02298, 11.2452)
+light_energy = 4.075
+light_specular = 2.305
+shadow_enabled = true
+shadow_transmittance_bias = -6.687
+spot_range = 12.9919
+spot_angle = 25.7528
+
+[node name="hideLights" type="Node3D" parent="lighting & env/lights"]
+visible = false
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="lighting & env/lights/hideLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.0651, -0.114143, 15.2303)
+light_color = Color(0.00999999, 0.3235, 1, 1)
+light_energy = 0.73
+omni_range = 1.08408
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="lighting & env/lights/hideLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.0651, -0.114143, 16.843)
+light_color = Color(1, 0.00999999, 0.0264997, 1)
+light_energy = 0.09
+omni_range = 1.08408
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="lighting & env/lights/hideLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.86345, -0.114143, 16.8095)
+light_color = Color(1, 0.934, 0.00999999, 1)
+light_energy = 0.215
+omni_range = 1.08408
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="lighting & env/lights/hideLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.86345, -0.114143, 15.2363)
+light_color = Color(0.2575, 1, 0.00999999, 1)
+light_energy = 0.34
+omni_range = 1.08408
+
+[node name="OmniLight3D6" type="OmniLight3D" parent="lighting & env/lights/hideLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.41335, 0.733178, 13)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D7" type="OmniLight3D" parent="lighting & env/lights/hideLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.41335, 1.6002, 12.7047)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D8" type="OmniLight3D" parent="lighting & env/lights/hideLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.41335, 2.53882, 12.3263)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D9" type="OmniLight3D" parent="lighting & env/lights/hideLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.41335, 3.5338, 11.7609)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D10" type="OmniLight3D" parent="lighting & env/lights/hideLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.41335, 4.32928, 11.2678)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D11" type="OmniLight3D" parent="lighting & env/lights/hideLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.33469, 5.46129, 10.8724)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D12" type="OmniLight3D" parent="lighting & env/lights/hideLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.28795, 0.733178, 13)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D18" type="OmniLight3D" parent="lighting & env/lights/hideLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.97146, 0.0505127, 15.1721)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D19" type="OmniLight3D" parent="lighting & env/lights/hideLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.97146, 0.0505127, 16.7788)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D20" type="OmniLight3D" parent="lighting & env/lights/hideLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.03142, 0.0505127, 16.7788)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D21" type="OmniLight3D" parent="lighting & env/lights/hideLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.23107, 0.0505127, 15.3028)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D22" type="OmniLight3D" parent="lighting & env/lights/hideLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.12396, 8.61285, 13.6383)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 1.2
+light_indirect_energy = 0.0
+shadow_enabled = true
+omni_range = 2.72934
+
+[node name="OmniLight3D23" type="OmniLight3D" parent="lighting & env/lights/hideLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.936165, 8.90057, 13.6383)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 1.2
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+omni_range = 2.72934
+
+[node name="OmniLight3D24" type="OmniLight3D" parent="lighting & env/lights/hideLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.34035, 8.90057, 13.6383)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 1.2
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+omni_range = 2.72934
+
+[node name="OmniLight3D25" type="OmniLight3D" parent="lighting & env/lights/hideLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.94457, 8.90057, 13.6383)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 1.2
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+omni_range = 2.72934
+
+[node name="OmniLight3D26" type="OmniLight3D" parent="lighting & env/lights/hideLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.30877, 9.43467, 13.6383)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 1.2
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+omni_range = 2.72934
+
+[node name="OmniLight3D13" type="OmniLight3D" parent="lighting & env/lights/hideLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.28795, 1.6002, 12.7047)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D14" type="OmniLight3D" parent="lighting & env/lights/hideLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.28795, 2.53882, 12.3263)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D15" type="OmniLight3D" parent="lighting & env/lights/hideLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.28795, 3.5338, 11.7609)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D16" type="OmniLight3D" parent="lighting & env/lights/hideLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.28795, 4.32928, 11.2678)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D17" type="OmniLight3D" parent="lighting & env/lights/hideLights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.36661, 5.46129, 10.8724)
+light_color = Color(0.8185, 1, 0.00999999, 1)
+light_energy = 0.56
+
+[node name="OmniLight3D" type="OmniLight3D" parent="lighting & env/lights/hideLights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.66291, 13.5183)
 light_energy = 2.939
 shadow_enabled = true
@@ -812,180 +1501,23 @@ omni_range = 10.2165
 script = ExtResource("7_e8di8")
 noise = SubResource("NoiseTexture2D_3bsj4")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="lighting & env/lights"]
-transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 24.464, 16.6618)
-light_color = Color(1, 0.995333, 0.72, 1)
-light_energy = 1.808
-shadow_enabled = true
-spot_range = 59.2358
-spot_angle = 24.3536
+[node name="modeLights" type="Node3D" parent="lighting & env/lights/hideLights"]
 
-[node name="SpotLight3D3" type="SpotLight3D" parent="lighting & env/lights"]
+[node name="SpotLight3D3" type="SpotLight3D" parent="lighting & env/lights/hideLights/modeLights"]
 transform = Transform3D(0.218177, 0.705715, -0.674066, 0, 0.690706, 0.723136, 0.975909, -0.157772, 0.150696, -15.5217, 6.93077, 17.6416)
 light_color = Color(0, 0.0833333, 1, 1)
 light_energy = 8.0
 shadow_enabled = true
-spot_range = 62.3816
+spot_range = 31.1996
 spot_angle = 35.3799
 
-[node name="SpotLight3D4" type="SpotLight3D" parent="lighting & env/lights"]
+[node name="SpotLight3D4" type="SpotLight3D" parent="lighting & env/lights/hideLights/modeLights"]
 transform = Transform3D(0.218143, -0.705556, 0.674244, 0, 0.690882, 0.722967, -0.975917, -0.15771, 0.150711, 15.52, 6.931, 17.642)
 light_color = Color(0, 0.0833333, 1, 1)
 light_energy = 8.0
 shadow_enabled = true
-spot_range = 62.3816
+spot_range = 35.431
 spot_angle = 35.3799
-
-[node name="SpotLight3D2" type="SpotLight3D" parent="lighting & env/lights"]
-transform = Transform3D(1, 0, 0, 0, 0.922316, 0.386437, 0, -0.386437, 0.922316, 0, 13.5646, 27.6618)
-light_energy = 5.202
-spot_range = 19.5835
-spot_angle = 40.0165
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="lighting & env/lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.0651, -0.114143, 15.2303)
-light_color = Color(0.00999999, 0.3235, 1, 1)
-light_energy = 0.73
-omni_range = 1.08408
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="lighting & env/lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.0651, -0.114143, 16.843)
-light_color = Color(1, 0.00999999, 0.0264997, 1)
-light_energy = 0.09
-omni_range = 1.08408
-
-[node name="OmniLight3D4" type="OmniLight3D" parent="lighting & env/lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.86345, -0.114143, 16.8095)
-light_color = Color(1, 0.934, 0.00999999, 1)
-light_energy = 0.215
-omni_range = 1.08408
-
-[node name="OmniLight3D5" type="OmniLight3D" parent="lighting & env/lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.86345, -0.114143, 15.2363)
-light_color = Color(0.2575, 1, 0.00999999, 1)
-light_energy = 0.34
-omni_range = 1.08408
-
-[node name="OmniLight3D6" type="OmniLight3D" parent="lighting & env/lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.41335, 0.733178, 13)
-light_color = Color(0.8185, 1, 0.00999999, 1)
-light_energy = 0.56
-
-[node name="OmniLight3D7" type="OmniLight3D" parent="lighting & env/lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.41335, 1.6002, 12.7047)
-light_color = Color(0.8185, 1, 0.00999999, 1)
-light_energy = 0.56
-
-[node name="OmniLight3D8" type="OmniLight3D" parent="lighting & env/lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.41335, 2.53882, 12.3263)
-light_color = Color(0.8185, 1, 0.00999999, 1)
-light_energy = 0.56
-
-[node name="OmniLight3D9" type="OmniLight3D" parent="lighting & env/lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.41335, 3.5338, 11.7609)
-light_color = Color(0.8185, 1, 0.00999999, 1)
-light_energy = 0.56
-
-[node name="OmniLight3D10" type="OmniLight3D" parent="lighting & env/lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.41335, 4.32928, 11.2678)
-light_color = Color(0.8185, 1, 0.00999999, 1)
-light_energy = 0.56
-
-[node name="OmniLight3D11" type="OmniLight3D" parent="lighting & env/lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.33469, 5.46129, 10.8724)
-light_color = Color(0.8185, 1, 0.00999999, 1)
-light_energy = 0.56
-
-[node name="OmniLight3D12" type="OmniLight3D" parent="lighting & env/lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.28795, 0.733178, 13)
-light_color = Color(0.8185, 1, 0.00999999, 1)
-light_energy = 0.56
-
-[node name="OmniLight3D18" type="OmniLight3D" parent="lighting & env/lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.97146, 0.0505127, 15.1721)
-light_color = Color(0.8185, 1, 0.00999999, 1)
-light_energy = 0.56
-
-[node name="OmniLight3D19" type="OmniLight3D" parent="lighting & env/lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.97146, 0.0505127, 16.7788)
-light_color = Color(0.8185, 1, 0.00999999, 1)
-light_energy = 0.56
-
-[node name="OmniLight3D20" type="OmniLight3D" parent="lighting & env/lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.03142, 0.0505127, 16.7788)
-light_color = Color(0.8185, 1, 0.00999999, 1)
-light_energy = 0.56
-
-[node name="OmniLight3D21" type="OmniLight3D" parent="lighting & env/lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.23107, 0.0505127, 15.3028)
-light_color = Color(0.8185, 1, 0.00999999, 1)
-light_energy = 0.56
-
-[node name="OmniLight3D22" type="OmniLight3D" parent="lighting & env/lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.12396, 8.61285, 13.6383)
-light_color = Color(0.8185, 1, 0.00999999, 1)
-light_energy = 0.56
-shadow_enabled = true
-omni_range = 2.72934
-
-[node name="OmniLight3D23" type="OmniLight3D" parent="lighting & env/lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.936165, 8.90057, 13.6383)
-light_color = Color(0.8185, 1, 0.00999999, 1)
-light_energy = 0.56
-shadow_enabled = true
-omni_range = 2.72934
-
-[node name="OmniLight3D24" type="OmniLight3D" parent="lighting & env/lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.34035, 8.90057, 13.6383)
-light_color = Color(0.8185, 1, 0.00999999, 1)
-light_energy = 0.56
-shadow_enabled = true
-omni_range = 2.72934
-
-[node name="OmniLight3D25" type="OmniLight3D" parent="lighting & env/lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.94457, 8.90057, 13.6383)
-light_color = Color(0.8185, 1, 0.00999999, 1)
-light_energy = 0.56
-shadow_enabled = true
-omni_range = 2.72934
-
-[node name="OmniLight3D26" type="OmniLight3D" parent="lighting & env/lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.30877, 9.43467, 13.6383)
-light_color = Color(0.8185, 1, 0.00999999, 1)
-light_energy = 0.56
-shadow_enabled = true
-omni_range = 2.72934
-
-[node name="OmniLight3D13" type="OmniLight3D" parent="lighting & env/lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.28795, 1.6002, 12.7047)
-light_color = Color(0.8185, 1, 0.00999999, 1)
-light_energy = 0.56
-
-[node name="OmniLight3D14" type="OmniLight3D" parent="lighting & env/lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.28795, 2.53882, 12.3263)
-light_color = Color(0.8185, 1, 0.00999999, 1)
-light_energy = 0.56
-
-[node name="OmniLight3D15" type="OmniLight3D" parent="lighting & env/lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.28795, 3.5338, 11.7609)
-light_color = Color(0.8185, 1, 0.00999999, 1)
-light_energy = 0.56
-
-[node name="OmniLight3D16" type="OmniLight3D" parent="lighting & env/lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.28795, 4.32928, 11.2678)
-light_color = Color(0.8185, 1, 0.00999999, 1)
-light_energy = 0.56
-
-[node name="OmniLight3D17" type="OmniLight3D" parent="lighting & env/lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.36661, 5.46129, 10.8724)
-light_color = Color(0.8185, 1, 0.00999999, 1)
-light_energy = 0.56
-
-[node name="SpotLight3D5" type="SpotLight3D" parent="lighting & env/lights"]
-transform = Transform3D(1, 0, 0, 0, -0.607154, 0.794584, 0, -0.794584, -0.607154, 0.0166435, 2.76153, 14.7341)
-light_energy = 4.075
-spot_range = 7.70424
-spot_angle = 38.5348
 
 [node name="SubViewport" type="SubViewport" parent="."]
 handle_input_locally = false
@@ -2170,7 +2702,7 @@ shape = SubResource("RectangleShape2D_htn7m")
 [node name="fadeRect" type="ColorRect" parent="SubViewport"]
 offset_right = 2304.0
 offset_bottom = 1296.0
-color = Color(0, 0, 0, 0)
+color = Color(0, 0, 0, 1)
 
 [node name="obtainedAnim" type="Node2D" parent="SubViewport"]
 visible = false
@@ -2811,6 +3343,7 @@ libraries = {
 }
 
 [node name="coinNumber" type="Control" parent="SubViewport"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 257.0
@@ -2885,12 +3418,25 @@ position = Vector2(468, 195)
 shape = SubResource("RectangleShape2D_0r3jn")
 
 [node name="Maze1_0" type="Sprite2D" parent="SubViewport"]
+visible = false
 material = SubResource("ShaderMaterial_tcoxg")
 position = Vector2(954, 423)
 scale = Vector2(2, 2)
 texture = ExtResource("5_nn23b")
 
+[node name="outerFadeRect" type="ColorRect" parent="."]
+offset_right = 2304.0
+offset_bottom = 1296.0
+color = Color(0, 0, 0, 0)
+script = ExtResource("41_jketd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="outerFadeRect"]
+libraries = {
+"": SubResource("AnimationLibrary_6l5cl")
+}
+
 [node name="Control" type="Control" parent="."]
+visible = false
 z_index = 6
 layout_mode = 3
 anchors_preset = 0
@@ -3007,6 +3553,7 @@ theme_override_font_sizes/font_size = 62
 text = "GACHA PWN"
 
 [node name="effectMenu" type="PanelContainer" parent="Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -3123,6 +3670,7 @@ layout_mode = 2
 text = "ENRICHMENT MODULE"
 
 [node name="itemMenu" type="PanelContainer" parent="Control"]
+visible = false
 layout_mode = 0
 offset_left = 1959.0
 offset_top = 814.0
@@ -3584,6 +4132,7 @@ offset_right = -933.0
 offset_bottom = -168.0
 
 [node name="inv" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 
@@ -3628,7 +4177,6 @@ max_polyphony = 1000
 [node name="ambience1" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("41_ky7q4")
 volume_db = 4.0
-autoplay = true
 max_polyphony = 1000
 script = ExtResource("48_f87m5")
 
@@ -3654,6 +4202,277 @@ max_polyphony = 1000
 wait_time = 2.0
 one_shot = true
 
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 2304.0
+offset_bottom = 1296.0
+script = ExtResource("55_mhfh2")
+
+[node name="titleSprite" type="Sprite2D" parent="Menu"]
+position = Vector2(370, 120)
+scale = Vector2(4, 4)
+texture = ExtResource("56_5cj55")
+hframes = 2
+script = ExtResource("57_ck147")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/titleSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_lwsti")
+}
+
+[node name="titleLabel" type="RichTextLabel" parent="Menu"]
+layout_mode = 1
+offset_left = 94.0
+offset_top = 75.0
+offset_right = 813.0
+offset_bottom = 183.0
+scale = Vector2(0.8, 0.8)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("18_7x8mt")
+theme_override_fonts/mono_font = ExtResource("18_7x8mt")
+theme_override_fonts/italics_font = ExtResource("18_7x8mt")
+theme_override_fonts/bold_italics_font = ExtResource("18_7x8mt")
+theme_override_fonts/bold_font = ExtResource("18_7x8mt")
+theme_override_font_sizes/bold_italics_font_size = 96
+theme_override_font_sizes/italics_font_size = 96
+theme_override_font_sizes/mono_font_size = 96
+theme_override_font_sizes/normal_font_size = 96
+theme_override_font_sizes/bold_font_size = 96
+bbcode_enabled = true
+text = "[color=gold][wave freq=2.5 amp=60]Gacha Pwn[/wave][/color]"
+
+[node name="creditsLabel" type="RichTextLabel" parent="Menu"]
+layout_mode = 0
+offset_left = 119.0
+offset_top = 241.0
+offset_right = 627.0
+offset_bottom = 298.0
+theme_override_fonts/normal_font = ExtResource("20_fxtm5")
+bbcode_enabled = true
+text = "a [rainbow freq=0.2]Cntrl+Alt+Elite Studios[/rainbow] Game
+
+     [color=dark_goldenrod]Pirate Software Jam 17[/color]"
+script = ExtResource("58_k6ufh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/creditsLabel"]
+libraries = {
+"": SubResource("AnimationLibrary_2jrtu")
+}
+
+[node name="mainOptions" type="PanelContainer" parent="Menu"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 3.0
+offset_top = 388.0
+offset_right = 433.0
+offset_bottom = 501.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_45vvb")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/mainOptions"]
+layout_mode = 2
+
+[node name="newgame" type="Button" parent="Menu/mainOptions/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("18_7x8mt")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nhvkq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vsy6t")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_v7whx")
+text = "
+New Game
+ "
+flat = true
+
+[node name="buttonSprite" type="Sprite2D" parent="Menu/mainOptions/VBoxContainer/newgame"]
+show_behind_parent = true
+position = Vector2(220, 64)
+scale = Vector2(3, 3)
+texture = ExtResource("60_y1flv")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/mainOptions/VBoxContainer/newgame/buttonSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_2j2jm")
+}
+
+[node name="subOptions" type="PanelContainer" parent="Menu"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 460.0
+offset_top = -125.0
+offset_right = 890.0
+offset_bottom = 105.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_1sgx2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/subOptions"]
+layout_mode = 2
+
+[node name="standardMode" type="Button" parent="Menu/subOptions/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("18_7x8mt")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_f8uhe")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_fcplq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_18bji")
+text = " 
+Standard
+ "
+flat = true
+script = ExtResource("56_sfhuv")
+
+[node name="buttonSprite" type="Sprite2D" parent="Menu/subOptions/VBoxContainer/standardMode" groups=["exempt"]]
+position = Vector2(38, 52)
+scale = Vector2(2, 2)
+texture = ExtResource("65_ooakc")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/subOptions/VBoxContainer/standardMode/buttonSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_2j2jm")
+}
+
+[node name="desclabel" type="RichTextLabel" parent="Menu/subOptions/VBoxContainer/standardMode"]
+visible = false
+layout_mode = 0
+offset_left = 766.0
+offset_right = 1502.0
+offset_bottom = 227.0
+theme_override_fonts/normal_font = ExtResource("20_fxtm5")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "
+[wave][color=lime]Standard Gacha Pwn Experience[/color][/wave]
+
+Experience cool events, find cool items, and bask in the glory of our creation."
+autowrap_mode = 2
+
+[node name="descSprite" type="Sprite2D" parent="Menu/subOptions/VBoxContainer/standardMode"]
+visible = false
+position = Vector2(607, 89)
+scale = Vector2(9, 9)
+texture = ExtResource("57_fl41h")
+script = ExtResource("57_qim8h")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/subOptions/VBoxContainer/standardMode/descSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_4rxyo")
+}
+
+[node name="challengeMode" type="Button" parent="Menu/subOptions/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("18_7x8mt")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ta2ky")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_150vu")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ivdae")
+text = " 
+Serious
+ "
+flat = true
+script = ExtResource("58_ogrcu")
+
+[node name="buttonSprite" type="Sprite2D" parent="Menu/subOptions/VBoxContainer/challengeMode" groups=["exempt"]]
+position = Vector2(38, 58)
+scale = Vector2(2, 2)
+texture = ExtResource("60_y1flv")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/subOptions/VBoxContainer/challengeMode/buttonSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_2j2jm")
+}
+
+[node name="desclabel2" type="RichTextLabel" parent="Menu/subOptions/VBoxContainer/challengeMode"]
+visible = false
+layout_mode = 0
+offset_left = 774.0
+offset_top = -183.0
+offset_right = 1558.0
+offset_bottom = 134.0
+theme_override_fonts/normal_font = ExtResource("20_fxtm5")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "[wave]Survival is not guaranteed[/wave]
+
+[color=lime]Choose your item loadout and start with double coins[/color]
+
+[color=gold]Space effects are supercharged, and all odds are doubled by default[/color]
+
+[color=red]No items appear in the maze, the Loan Shark cannot save you[/color]"
+autowrap_mode = 2
+
+[node name="descSprite2" type="Sprite2D" parent="Menu/subOptions/VBoxContainer/challengeMode"]
+visible = false
+position = Vector2(607, -28)
+scale = Vector2(9, 9)
+texture = ExtResource("60_ecobq")
+script = ExtResource("57_qim8h")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/subOptions/VBoxContainer/challengeMode/descSprite2"]
+libraries = {
+"": SubResource("AnimationLibrary_4rxyo")
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/subOptions"]
+libraries = {
+"": SubResource("AnimationLibrary_ut1pv")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Menu"]
+stream = ExtResource("63_octud")
+
+[node name="versionLabel" type="Label" parent="Menu"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -2021.0
+offset_top = 306.0
+offset_right = -1854.0
+offset_bottom = 336.0
+grow_horizontal = 0
+text = "Version: Nightly 1.01c"
+
+[node name="modeSelectLabel" type="RichTextLabel" parent="Menu"]
+visible = false
+layout_mode = 0
+offset_left = 543.0
+offset_top = 968.0
+offset_right = 832.0
+offset_bottom = 1027.0
+theme_override_fonts/normal_font = ExtResource("20_fxtm5")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "
+[wave]Mode Select"
+
+[node name="warningLabel" type="RichTextLabel" parent="Menu"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -290.0
+offset_top = -64.5
+offset_right = 290.0
+offset_bottom = 64.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("20_fxtm5")
+theme_override_font_sizes/normal_font_size = 35
+bbcode_enabled = true
+text = "Are you sure? This isn't even [wave][color=red]remotely fair...[/color][/wave]"
+
 [connection signal="animation_finished" from="SubViewport/status/PanelContainer/1-0/statusSprite/AnimationPlayer" to="SubViewport/status/PanelContainer/1-0/statusSprite" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="SubViewport/status/PanelContainer/1-2/statusSprite/AnimationPlayer" to="SubViewport/status/PanelContainer/1-2/statusSprite" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="SubViewport/status/PanelContainer/1-3/statusSprite/AnimationPlayer" to="SubViewport/status/PanelContainer/1-3/statusSprite" method="_on_animation_player_animation_finished"]
@@ -3661,6 +4480,7 @@ one_shot = true
 [connection signal="animation_finished" from="SubViewport/status/PanelContainer/2-2/statusSprite/AnimationPlayer" to="SubViewport/status/PanelContainer/2-2/statusSprite" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="SubViewport/status/PanelContainer/2-4/statusSprite/AnimationPlayer" to="SubViewport/status/PanelContainer/2-4/statusSprite" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="SubViewport/coinNumber/statusSprite/AnimationPlayer" to="SubViewport/coinNumber/statusSprite" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="outerFadeRect/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="pressed" from="Control/1spinButton" to="." method="_on_spin_button_pressed"]
 [connection signal="pressed" from="Control/1spinButton" to="lighting & env/spinnerPLACEHOLDER" method="_on_spin_button_pressed"]
 [connection signal="pressed" from="Control/debugPanel/VBoxContainer/resetbutton" to="." method="_on_resetbutton_pressed"]
@@ -3719,3 +4539,11 @@ one_shot = true
 [connection signal="finished" from="ambience1" to="ambience1" method="_on_finished"]
 [connection signal="finished" from="music" to="music" method="_on_finished"]
 [connection signal="timeout" from="spinSoundTimer" to="." method="_on_spin_sound_timer_timeout"]
+[connection signal="pressed" from="Menu/mainOptions/VBoxContainer/newgame" to="Menu" method="_on_newgame_pressed"]
+[connection signal="focus_entered" from="Menu/subOptions/VBoxContainer/standardMode" to="Menu/subOptions/VBoxContainer/standardMode" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/subOptions/VBoxContainer/standardMode" to="Menu/subOptions/VBoxContainer/standardMode" method="_on_focus_exited"]
+[connection signal="pressed" from="Menu/subOptions/VBoxContainer/standardMode" to="." method="_on_standard_mode_pressed"]
+[connection signal="focus_entered" from="Menu/subOptions/VBoxContainer/challengeMode" to="Menu/subOptions/VBoxContainer/challengeMode" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/subOptions/VBoxContainer/challengeMode" to="Menu/subOptions/VBoxContainer/challengeMode" method="_on_focus_exited"]
+[connection signal="pressed" from="Menu/subOptions/VBoxContainer/challengeMode" to="." method="_on_challenge_mode_pressed"]
+[connection signal="animation_finished" from="Menu/subOptions/AnimationPlayer" to="Menu" method="_on_animation_player_animation_finished"]

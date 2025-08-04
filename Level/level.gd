@@ -111,6 +111,11 @@ var flashMult: float = 4.0
 var spinning: bool
 @onready var spinSoundTimer: Timer = $spinSoundTimer
 
+var chalMode: bool
+var firstSpin: bool = true
+var standPressed: int = 0
+var serPress: int = 0
+
 
 # Set the money count to whatever it's supposed to be
 func _ready() -> void:
@@ -119,7 +124,6 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	curDIRLabel.text = str(playerDIR)
-	print(lastSpaceEffect)
 
 func monUpdate(delta) -> void:
 	money += delta
@@ -140,6 +144,9 @@ func monUpdate(delta) -> void:
 
 func interpretSpin() -> void:
 	if money > 0 and canSpin:
+		if firstSpin:
+			firstSpin = false
+			$Control/itemMenu.hide()
 		itemsActivating.clear()
 		spin_1Player.play()
 		spin_2Player.play()
@@ -932,3 +939,62 @@ func _on_spin_sound_timer_timeout() -> void:
 
 func changeSharkFrame(frame: int) -> void:
 	loan_shark.curFrame = frame
+
+
+func bootUp(chal: bool) -> void:
+	chalMode = chal
+	$outerFadeRect/AnimationPlayer.play("fade")
+	$Camera3D/AnimationPlayer.play("gotoPlay")
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	match anim_name:
+		"fade":
+			inventory.show()
+			$Control.show()
+			$SubViewport/Maze1_0.show()
+			$SubViewport/coinNumber.show()
+			$inv.show()
+			$"lighting & env/lights/hideLights".show()
+			
+			fadeRect.color.a = 0.0
+			$ambience1.play()
+			$outerFadeRect/AnimationPlayer.play("return")
+			if chalMode:
+				for c in $"lighting & env/lights/hideLights/modeLights".get_children():
+					c.light_color = Color.RED
+				$Control/itemMenu.show()
+				money = money * 2
+				$SubViewport/coinNumber/statusSprite/moneyLabel.text = str(money)
+
+func _on_standard_mode_pressed() -> void:
+	$Menu/AudioStreamPlayer2D.play()
+	$Menu/subOptions/VBoxContainer/standardMode/buttonSprite/AnimationPlayer.play("pressed")
+	standPressed += 1
+	serPress = 0
+	$Menu/warningLabel.hide()
+	if standPressed >= 2:
+		audioPlayer.stream = preload("res://Assets/Audio/game-start-317318.mp3")
+		audioPlayer.play()
+		for c in $SubViewport/obtainables.get_children():
+			c.disable()
+		bootUp(false)
+		$Menu.hide()
+
+
+func _on_challenge_mode_pressed() -> void:
+	$Menu/AudioStreamPlayer2D.play()
+	$Menu/subOptions/VBoxContainer/challengeMode/buttonSprite/AnimationPlayer.play("pressed")
+	serPress += 1
+	standPressed = 0
+	if serPress >= 2:
+		$Menu/warningLabel.show()
+	if serPress >= 3:
+		audioPlayer.stream = preload("res://Assets/Audio/evilLaughChurchBellUpdated.mp3")
+		audioPlayer.play()
+		for c in $SubViewport/obtainables.get_children():
+			c.enable()
+		$SubViewport/obtainables.hide()
+		chalMode = true
+		$Menu.hide()
+		bootUp(true)

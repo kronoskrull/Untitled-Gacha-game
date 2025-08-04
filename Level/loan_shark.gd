@@ -21,7 +21,6 @@ func _process(_delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	
-	print (entering)
 	if entering:
 		position.x = lerpf(position.x, target_node.position.x, lerpSpeed * delta)
 		if position.x > target_node.position.x - 10.0:

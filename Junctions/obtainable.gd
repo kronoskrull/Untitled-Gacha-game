@@ -9,10 +9,11 @@ var spintables = spinTables.new()
 func _ready() -> void:
 	anims.play("obtBob")
 
+func disable():
+	$Area2D.monitoring = false
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func enable():
+	$Area2D.monitoring = true
 
 # Choose
 func _on_area_2d_area_entered(area: Area2D) -> void:

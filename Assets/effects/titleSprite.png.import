@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wp6bh4b4fd5a"
-path="res://.godot/imported/coin.png-6a40c06bf24f716a6d78d020810673e7.ctex"
+uid="uid://cy4mhv5sfs1ay"
+path="res://.godot/imported/titleSprite.png-6fa8e3ad58c4108114f751a8145c10fe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/effects/coin.png"
-dest_files=["res://.godot/imported/coin.png-6a40c06bf24f716a6d78d020810673e7.ctex"]
+source_file="res://Assets/effects/titleSprite.png"
+dest_files=["res://.godot/imported/titleSprite.png-6fa8e3ad58c4108114f751a8145c10fe.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=3
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

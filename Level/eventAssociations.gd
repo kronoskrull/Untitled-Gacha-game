@@ -7,7 +7,7 @@ class_name eventUtils
 # Because of this, all applicable effects are consolidated into one referencable list.
 # The effects referenced by index are as follows beginning with 0:
 
-# Lucky break, Negative Negation, Bank Error, Scot-Free, Coinsurance, Double Negative
+# Lucky Break, Negative Negation, Bank Error, Scot-Free, Coinsurance, Double Negative
 
 @export var eventID: Dictionary = {
 	"(0, 0)": [0, 999, 2],

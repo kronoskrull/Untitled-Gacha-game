@@ -6,7 +6,6 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tfrd5"]
 albedo_texture = ExtResource("2_38shn")
-metallic = 1.0
 metallic_texture = ExtResource("3_lplwk")
 rim = 0.15
 rim_tint = 0.37

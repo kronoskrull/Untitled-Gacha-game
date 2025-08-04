@@ -124,6 +124,10 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	curDIRLabel.text = str(playerDIR)
+	if canSpin:
+		$"Control/1spinButton".show()
+	else:
+		$"Control/1spinButton".hide()
 
 func monUpdate(delta) -> void:
 	money += delta
@@ -735,6 +739,7 @@ func eventTrigger() -> void:
 						audioPlayer.play()
 					Vector2(2, 5):
 						pass
+						
 			0: # LUCKY BREAK
 					for i in obtainedItems:
 						if i == 1:
@@ -742,6 +747,7 @@ func eventTrigger() -> void:
 							if x >= 5:
 								locDeltaMoney += 1
 								itemsActivating.append(1)
+								
 			1: # NEGATIVE NEGATION
 				for i in obtainedItems:
 					if i == 2:
@@ -751,6 +757,7 @@ func eventTrigger() -> void:
 							eventEffect.text = "EFFECT NEGATED"
 							eventInfo.erase(999)
 							itemsActivating.append(2)
+							
 			2: # BANK ERROR
 				for i in obtainedItems:
 					if i == 4:
@@ -758,12 +765,15 @@ func eventTrigger() -> void:
 						if x >= 4:
 							locDeltaMoney *= 2
 							itemsActivating.append(4)
+							
 			3: # SCOT-FREE
 				if scottFree:
 					locDeltaMoney -= 10
 					itemsActivating.append(8)
 					eventEffect.text = "EFFECT NEGATED"
 					eventInfo.erase(999)
+					eventInfo.erase(2)
+					
 			4: # COINSURANCE
 				if insured:
 					insured = false

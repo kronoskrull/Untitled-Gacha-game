@@ -863,7 +863,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(5.23333, 13.3333),
 "transitions": PackedFloat32Array(-2, -2),
 "update": 0,
-"values": [Vector2(370, 125), Vector2(370, 115)]
+"values": [Vector2(380, 125), Vector2(380, 115)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -902,7 +902,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(370, 120)]
+"values": [Vector2(380, 120)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -4210,7 +4210,7 @@ offset_bottom = 1296.0
 script = ExtResource("55_mhfh2")
 
 [node name="titleSprite" type="Sprite2D" parent="Menu"]
-position = Vector2(370, 120)
+position = Vector2(380, 120)
 scale = Vector2(4, 4)
 texture = ExtResource("56_5cj55")
 hframes = 2

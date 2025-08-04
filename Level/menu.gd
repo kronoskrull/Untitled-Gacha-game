@@ -13,11 +13,19 @@ func _on_newgame_pressed() -> void:
 		$mainOptions/VBoxContainer/newgame/buttonSprite/AnimationPlayer.play("pressed")
 		$AudioStreamPlayer2D.play()
 		$subOptions/AnimationPlayer.play("appear")
+		$"../lighting & env/lights/modeLights/SpotLight3D3/AnimationPlayer".play("modeColorChange")
+		$"../lighting & env/lights/modeLights/SpotLight3D4/AnimationPlayer2".play("modeColorChange")
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("menu"):
 		if menuOpen:
 			if subOpen:
+				if $"..".serPress > $"..".standPressed:
+					$"../lighting & env/lights/modeLights/SpotLight3D3/AnimationPlayer".play("serMenuChange")
+					$"../lighting & env/lights/modeLights/SpotLight3D4/AnimationPlayer2".play("serMenuChange")
+				else:
+					$"../lighting & env/lights/modeLights/SpotLight3D3/AnimationPlayer".play_backwards("modeColorChange")
+					$"../lighting & env/lights/modeLights/SpotLight3D4/AnimationPlayer2".play_backwards("modeColorChange")
 				$"..".serPress = 0
 				$"..".standPressed = 0
 				subAnims.play_backwards("disappear")

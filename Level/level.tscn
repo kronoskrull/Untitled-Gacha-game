@@ -1,4 +1,4 @@
-[gd_scene load_steps=148 format=3 uid="uid://drt1tip360qt7"]
+[gd_scene load_steps=158 format=3 uid="uid://drt1tip360qt7"]
 
 [ext_resource type="Texture2D" uid="uid://dhw6oc4h6i0ny" path="res://Assets/effects/hudBlock1.0.png" id="1_a7teg"]
 [ext_resource type="Script" path="res://Level/level.gd" id="1_rljoh"]
@@ -170,6 +170,142 @@ frequency = 0.069
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3bsj4"]
 noise = SubResource("FastNoiseLite_8cm07")
+
+[sub_resource type="Animation" id="Animation_gr3oq"]
+resource_name = "modeColorChange"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0.0833333, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_q837t"]
+resource_name = "colorSwap"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0.0833333, 1, 1), Color(1, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_a4gx6"]
+resource_name = "serMenuChange"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_07pa7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rf2mu"]
+_data = {
+"RESET": SubResource("Animation_07pa7"),
+"colorSwap": SubResource("Animation_q837t"),
+"modeColorChange": SubResource("Animation_gr3oq"),
+"serMenuChange": SubResource("Animation_a4gx6")
+}
+
+[sub_resource type="Animation" id="Animation_pasnp"]
+resource_name = "modeColorChange"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../SpotLight3D4:light_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0.0833333, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_r85w7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../SpotLight3D4:light_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5reox"]
+resource_name = "colorSwap"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../SpotLight3D4:light_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0.0833333, 1, 1), Color(1, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0xgl5"]
+resource_name = "serMenuChange"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../SpotLight3D4:light_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_inuk2"]
+_data = {
+"RESET": SubResource("Animation_r85w7"),
+"colorSwap": SubResource("Animation_5reox"),
+"modeColorChange": SubResource("Animation_pasnp"),
+"serMenuChange": SubResource("Animation_0xgl5")
+}
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7jfsy"]
 
@@ -837,6 +973,45 @@ _data = {
 "return": SubResource("Animation_53u0m")
 }
 
+[sub_resource type="Animation" id="Animation_jh7v6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(380, 120)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_apr0s"]
 resource_name = "lights"
 length = 16.0
@@ -878,45 +1053,6 @@ tracks/2/keys = {
 "values": [-0.0261799, 0.0261799]
 }
 
-[sub_resource type="Animation" id="Animation_jh7v6"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(380, 120)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lwsti"]
 _data = {
 "RESET": SubResource("Animation_jh7v6"),
@@ -939,6 +1075,21 @@ _data = {
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v7whx"]
 
+[sub_resource type="Animation" id="Animation_wvu5r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_dm7tx"]
 resource_name = "pressed"
 length = 0.16667
@@ -953,21 +1104,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [1, 0]
-}
-
-[sub_resource type="Animation" id="Animation_wvu5r"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2j2jm"]
@@ -1501,23 +1637,34 @@ omni_range = 10.2165
 script = ExtResource("7_e8di8")
 noise = SubResource("NoiseTexture2D_3bsj4")
 
-[node name="modeLights" type="Node3D" parent="lighting & env/lights/hideLights"]
+[node name="modeLights" type="Node3D" parent="lighting & env/lights"]
 
-[node name="SpotLight3D3" type="SpotLight3D" parent="lighting & env/lights/hideLights/modeLights"]
+[node name="SpotLight3D3" type="SpotLight3D" parent="lighting & env/lights/modeLights"]
 transform = Transform3D(0.218177, 0.705715, -0.674066, 0, 0.690706, 0.723136, 0.975909, -0.157772, 0.150696, -15.5217, 6.93077, 17.6416)
-light_color = Color(0, 0.0833333, 1, 1)
+light_color = Color(0, 0, 0, 1)
 light_energy = 8.0
 shadow_enabled = true
 spot_range = 31.1996
 spot_angle = 35.3799
 
-[node name="SpotLight3D4" type="SpotLight3D" parent="lighting & env/lights/hideLights/modeLights"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="lighting & env/lights/modeLights/SpotLight3D3"]
+libraries = {
+"": SubResource("AnimationLibrary_rf2mu")
+}
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="lighting & env/lights/modeLights"]
 transform = Transform3D(0.218143, -0.705556, 0.674244, 0, 0.690882, 0.722967, -0.975917, -0.15771, 0.150711, 15.52, 6.931, 17.642)
-light_color = Color(0, 0.0833333, 1, 1)
+light_color = Color(0, 0, 0, 1)
 light_energy = 8.0
 shadow_enabled = true
 spot_range = 35.431
 spot_angle = 35.3799
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="lighting & env/lights/modeLights/SpotLight3D4"]
+root_node = NodePath("../../SpotLight3D3")
+libraries = {
+"": SubResource("AnimationLibrary_inuk2")
+}
 
 [node name="SubViewport" type="SubViewport" parent="."]
 handle_input_locally = false

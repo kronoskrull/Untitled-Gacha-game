@@ -961,7 +961,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			$ambience1.play()
 			$outerFadeRect/AnimationPlayer.play("return")
 			if chalMode:
-				for c in $"lighting & env/lights/hideLights/modeLights".get_children():
+				for c in $"lighting & env/lights/modeLights".get_children(false):
 					c.light_color = Color.RED
 				$Control/itemMenu.show()
 				money = money * 2
@@ -970,6 +970,9 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 func _on_standard_mode_pressed() -> void:
 	$Menu/AudioStreamPlayer2D.play()
 	$Menu/subOptions/VBoxContainer/standardMode/buttonSprite/AnimationPlayer.play("pressed")
+	if serPress > 0:
+		$"lighting & env/lights/modeLights/SpotLight3D3/AnimationPlayer".play_backwards("colorSwap")
+		$"lighting & env/lights/modeLights/SpotLight3D4/AnimationPlayer2".play_backwards("colorSwap")
 	standPressed += 1
 	serPress = 0
 	$Menu/warningLabel.hide()
@@ -985,6 +988,9 @@ func _on_standard_mode_pressed() -> void:
 func _on_challenge_mode_pressed() -> void:
 	$Menu/AudioStreamPlayer2D.play()
 	$Menu/subOptions/VBoxContainer/challengeMode/buttonSprite/AnimationPlayer.play("pressed")
+	if standPressed >= 0 and $"lighting & env/lights/modeLights/SpotLight3D3".light_color != Color.RED:
+		$"lighting & env/lights/modeLights/SpotLight3D3/AnimationPlayer".play("colorSwap")
+		$"lighting & env/lights/modeLights/SpotLight3D4/AnimationPlayer2".play("colorSwap")
 	serPress += 1
 	standPressed = 0
 	if serPress >= 2:

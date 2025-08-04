@@ -718,7 +718,7 @@ shader_parameter/roll_variation = 3.881
 shader_parameter/distort_intensity = 0.003
 shader_parameter/noise_opacity = 0.4
 shader_parameter/noise_speed = 5.0
-shader_parameter/static_noise_intensity = 0.323
+shader_parameter/static_noise_intensity = 0.312
 shader_parameter/variable_noise_intensity = true
 shader_parameter/aberration = 4.75e-08
 shader_parameter/aberration_variation = 0.01
@@ -3627,9 +3627,10 @@ max_polyphony = 1000
 
 [node name="ambience1" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("41_ky7q4")
-volume_db = 2.0
+volume_db = 4.0
 autoplay = true
 max_polyphony = 1000
+script = ExtResource("48_f87m5")
 
 [node name="music" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("47_cxyms")
@@ -3715,5 +3716,6 @@ one_shot = true
 [connection signal="button_up" from="Control/spinnerMenu/spinnerSlot8/item" to="Control/spinnerMenu/spinnerSlot8/item" method="_on_button_up"]
 [connection signal="button_down" from="Control/spinnerMenu/spinnerSlot9/item" to="Control/spinnerMenu/spinnerSlot9/item" method="_on_button_down"]
 [connection signal="button_up" from="Control/spinnerMenu/spinnerSlot9/item" to="Control/spinnerMenu/spinnerSlot9/item" method="_on_button_up"]
+[connection signal="finished" from="ambience1" to="ambience1" method="_on_finished"]
 [connection signal="finished" from="music" to="music" method="_on_finished"]
 [connection signal="timeout" from="spinSoundTimer" to="." method="_on_spin_sound_timer_timeout"]

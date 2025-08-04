@@ -240,7 +240,7 @@ func coinPerSpace(type: int, distance: int) -> void:
 			statusSprite2_2.status = 0
 			statusSprite2_2.type = 4
 		2:
-			deltaMoney = money - distance
+			deltaMoney -= distance
 			statusSprite2_4.status = 0
 			statusSprite2_4.type = 3
 	

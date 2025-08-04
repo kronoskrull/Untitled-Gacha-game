@@ -980,7 +980,7 @@ func _on_standard_mode_pressed() -> void:
 		audioPlayer.stream = preload("res://Assets/Audio/game-start-317318.mp3")
 		audioPlayer.play()
 		for c in $SubViewport/obtainables.get_children():
-			c.disable()
+			c.enable()
 		bootUp(false)
 		$Menu.hide()
 
@@ -999,7 +999,7 @@ func _on_challenge_mode_pressed() -> void:
 		audioPlayer.stream = preload("res://Assets/Audio/evilLaughChurchBellUpdated.mp3")
 		audioPlayer.play()
 		for c in $SubViewport/obtainables.get_children():
-			c.enable()
+			c.disable()
 		$SubViewport/obtainables.hide()
 		chalMode = true
 		$Menu.hide()

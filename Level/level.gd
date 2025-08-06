@@ -117,10 +117,10 @@ var standPressed: int = 0
 var serPress: int = 0
 
 
-# Set the money count to whatever it's supposed to be
+@onready var monUpdateTag = $SubViewport/coinNumber/statusSprite/moneyLabel/monUpdate
+
 func _ready() -> void:
-	
-	monUpdate(deltaMoney)
+	money_label.text = str(money)
 
 func _process(delta: float) -> void:
 	curDIRLabel.text = str(playerDIR)
@@ -129,17 +129,18 @@ func _process(delta: float) -> void:
 	else:
 		$"Control/1spinButton".hide()
 
-func monUpdate(delta) -> void:
-	money += delta
-	if delta > 0:
+func monUpdate(Delta: int) -> void:
+	money += Delta
+	if Delta > 0:
 		audioPlayer.stream = preload("res://Assets/Audio/90s-game-ui-6-185099.mp3")
 		audioPlayer.play()
-	#elif delta >= 7:
-		#audioPlayer.stream = preload("res://Assets/Audio/jackpot-slot-machine-coin-loop-11-216266.wav")
-		#audioPlayer.play()
-	deltaMoney = 0
+	
 	money_label.text = (str(money))
-		
+	monUpdateTag.num = Delta
+	monUpdateTag.show()
+	monUpdateTag.deathTimer.start()
+	
+	deltaMoney = 0
 
 # This is the functio that will house the match table for all the different effects. When the function
 # starts, it spins a random number 0 - 9 inclusive. This value is an index thatr corresponds to one of 
@@ -269,8 +270,7 @@ func pauseForEvent() -> void:
 	while obtainablePause:
 		
 		fadeRect.color.a = lerpf(fadeRect.color.a, 0.7, 1)
-		invItemInstance = invItem.instantiate()
-		invSeparatorInstance = invSeparator.instantiate()
+		
 		obtainableAnim()
 		
 		await get_tree().create_timer(4.5).timeout
@@ -278,7 +278,8 @@ func pauseForEvent() -> void:
 		obtainedAnim.hide()
 		itemAnims.stop()
 		
-		
+		invItemInstance = invItem.instantiate()
+		invSeparatorInstance = invSeparator.instantiate()
 		inventory.add_child(invItemInstance)
 		inventory.add_child(invSeparatorInstance)
 		inventory.add_child(invSeparatorInstance)
@@ -950,6 +951,10 @@ func _on_spin_sound_timer_timeout() -> void:
 func changeSharkFrame(frame: int) -> void:
 	loan_shark.curFrame = frame
 
+func cull_system():
+	for c in $".".get_children(false):
+		if c.is_in_group("dialogue_system"):
+			c.segmented_cull()
 
 func bootUp(chal: bool) -> void:
 	chalMode = chal
@@ -980,13 +985,10 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 func _on_standard_mode_pressed() -> void:
 	$Menu/AudioStreamPlayer2D.play()
 	$Menu/subOptions/VBoxContainer/standardMode/buttonSprite/AnimationPlayer.play("pressed")
-	if serPress > 0:
-		$"lighting & env/lights/modeLights/SpotLight3D3/AnimationPlayer".play_backwards("colorSwap")
-		$"lighting & env/lights/modeLights/SpotLight3D4/AnimationPlayer2".play_backwards("colorSwap")
 	standPressed += 1
 	serPress = 0
 	$Menu/warningLabel.hide()
-	if standPressed >= 2:
+	if standPressed >= 1:
 		audioPlayer.stream = preload("res://Assets/Audio/game-start-317318.mp3")
 		audioPlayer.play()
 		for c in $SubViewport/obtainables.get_children():
@@ -1003,9 +1005,9 @@ func _on_challenge_mode_pressed() -> void:
 		$"lighting & env/lights/modeLights/SpotLight3D4/AnimationPlayer2".play("colorSwap")
 	serPress += 1
 	standPressed = 0
-	if serPress >= 2:
+	if serPress >= 1:
 		$Menu/warningLabel.show()
-	if serPress >= 3:
+	if serPress >= 2:
 		audioPlayer.stream = preload("res://Assets/Audio/evilLaughChurchBellUpdated.mp3")
 		audioPlayer.play()
 		for c in $SubViewport/obtainables.get_children():
@@ -1014,3 +1016,7 @@ func _on_challenge_mode_pressed() -> void:
 		chalMode = true
 		$Menu.hide()
 		bootUp(true)
+
+
+func _on_dialogue_skip_button_pressed() -> void:
+	cull_system()

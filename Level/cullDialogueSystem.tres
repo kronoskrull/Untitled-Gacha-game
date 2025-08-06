@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DialogueFunction" load_steps=2 format=3 uid="uid://bvif4morv33fl"]
+
+[ext_resource type="Script" path="res://Assets/DialogueSystem/DialogueFunctionResource.gd" id="1_kp7yn"]
+
+[resource]
+script = ExtResource("1_kp7yn")
+target_path = NodePath("..")
+function_name = "cull_system"
+function_arguments = []
+hide_dialogue_box = false
+wait_for_signal_to_continue = ""

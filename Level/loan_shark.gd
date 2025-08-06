@@ -12,6 +12,9 @@ var exiting: bool = false
 @onready var curFrame: int = 0
 
 var interactions: int = 0
+var dialogueStartPos: int = 0
+
+@onready var dialogue_skip_button: Button = $"../../Control/dialogueSkipButton"
 
 func _ready() -> void:
 	pass
@@ -38,13 +41,39 @@ func exit():
 	if !entering:
 		entering = false
 		exiting = true
-		level.money = 10
+		level.deltaMoney = 10 + abs(level.money)
 		level.monUpdate(level.deltaMoney)
+		level.canSpin = true
+		dialogue_skip_button.hide()
 
 func enter():
 	if !exiting:
 		entering = true
 		exiting = false
+
+func get_dialogue_start_pos() -> int:
+	level.canSpin = false
+	dialogue_skip_button.show()
+	if interactions == 0:
+		dialogueStartPos = 0
+		interactions += 1
+	elif interactions == 1:
+		dialogueStartPos = 12
+		interactions += 1
+	else:
+		var x = randi_range(0, 4)
+		match x:
+			0:
+				dialogueStartPos = 21
+			1:
+				dialogueStartPos = 33
+			2:
+				dialogueStartPos = 12
+			3:
+				dialogueStartPos = 12
+			4:
+				dialogueStartPos = 12
+	return dialogueStartPos
 
 
 func change_frame(frame: int) -> void:

@@ -36,6 +36,7 @@ folder_colors={
 [global_group]
 
 player=""
+dialogue_system="Group for the dialogue system"
 
 [importer_defaults]
 

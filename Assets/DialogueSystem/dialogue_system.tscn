@@ -14,7 +14,7 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[node name="DialogueSystem" type="Node2D"]
+[node name="DialogueSystem" type="Node2D" groups=["dialogue_system"]]
 z_index = 4096
 scale = Vector2(3, 3)
 script = ExtResource("1_wnaov")

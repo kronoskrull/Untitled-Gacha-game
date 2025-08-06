@@ -46,9 +46,10 @@ func _process(delta: float) -> void:
 		itemName.self_modulate = ultraRare
 
 
-func _on_button_down() -> void:
+
+func _on_mouse_entered() -> void:
 	is_focused = true
 
 
-func _on_button_up() -> void:
+func _on_mouse_exited() -> void:
 	is_focused = false

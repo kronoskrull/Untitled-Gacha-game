@@ -18,6 +18,9 @@ func _ready() -> void:
 	for i in get_tree().get_nodes_in_group("player"):
 		player_node = i
 	
+	# CULL This is custom code for Gacha Pwn
+	current_dialogue_item = player_node.get_dialogue_start_pos()
+	
 
 func _process(_delta: float) -> void:
 	if current_dialogue_item == dialogue.size():
@@ -26,7 +29,7 @@ func _process(_delta: float) -> void:
 				player_node = i
 			return
 		player_node.get_parent().get_parent().canSpin = true
-		player_node.exit()
+		player_node.exit()                                     #CULL Gacha Pwn custom code
 		queue_free()
 		return
 	
@@ -199,3 +202,9 @@ func _text_without_square_brackets(text: String) -> String:
 			result += i
 	
 	return result
+
+
+func segmented_cull() -> void:
+	player_node.get_parent().get_parent().canSpin = true
+	player_node.exit()
+	queue_free()

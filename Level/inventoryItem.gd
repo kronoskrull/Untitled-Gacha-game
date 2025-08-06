@@ -28,13 +28,13 @@ func activate():
 	activatePlayer.play("activateEffect")
 
 
-func _on_button_down() -> void:
+func _on_stim_button_pressed() -> void:
+	activatePlayer.play("activateIdle")
+
+
+func _on_mouse_entered() -> void:
 	is_focused = true
 
 
-func _on_button_up() -> void:
+func _on_mouse_exited() -> void:
 	is_focused = false
-
-
-func _on_stim_button_pressed() -> void:
-	activatePlayer.play("activateIdle")

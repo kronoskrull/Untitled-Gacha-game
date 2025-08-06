@@ -1,0 +1,74 @@
+[gd_scene load_steps=6 format=3 uid="uid://dsjuh3hai7n08"]
+
+[ext_resource type="Script" path="res://mon_update.gd" id="1_mkxp2"]
+[ext_resource type="FontFile" uid="uid://dmip7mk1p14dy" path="res://Assets/PrStart.ttf" id="2_n38cu"]
+
+[sub_resource type="Animation" id="Animation_nl8q4"]
+resource_name = "dance"
+length = 0.66667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [-0.0523599, 0.0523599]
+}
+
+[sub_resource type="Animation" id="Animation_36hki"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l40av"]
+_data = {
+"RESET": SubResource("Animation_36hki"),
+"dance": SubResource("Animation_nl8q4")
+}
+
+[node name="monUpdate" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -2304.0
+offset_bottom = -1296.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+script = ExtResource("1_mkxp2")
+
+[node name="Label" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_right = 199.0
+offset_bottom = 17.0
+theme_override_fonts/normal_font = ExtResource("2_n38cu")
+bbcode_enabled = true
+text = "[rainbow]+ 99 coins![/rainbow]"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_l40av")
+}
+
+[node name="deathTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[connection signal="timeout" from="deathTimer" to="." method="_on_death_timer_timeout"]

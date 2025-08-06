@@ -5,21 +5,39 @@ extends Node2D
 # must be specified
 
 @export var dirType: int = 0
+var rerollFail: int
+var dirRoll: Vector2
+var rolling: bool
 
-
+var newDIR: Vector2
+var nextDIR: Vector2
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	#breakpoint
 	var reroll = false
-	var playerDIR = area.get_parent().get_parent().get_parent().playerDIR
-	area.get_parent().get_parent().get_parent().playerDIR = rollDIR(playerDIR, reroll)
-	
-
-
-
-func rollDIR(playerDIR, reroll: bool) -> Vector2:
-	randomize()
+	var player = area.get_parent().get_parent().get_parent()
 	var i = randi_range(0, 2)
+	if !rolling:
+		rolling = true
+		dirRoll = rollDIR(i, player.playerDIR, reroll, rerollFail)
+	rolling = false
+	player.playerDIR = dirRoll
+
+
+
+func rollDIR(randI: int, playerDIR, reroll: bool, rerollInt: int) -> Vector2:
+	randomize()
+	if reroll:
+		match randI:
+			0:
+				randI = [1, 2].pick_random()
+			1:
+				randI = [0, 2].pick_random()
+			2:
+				randI = [0, 1].pick_random()
+	
+	var i = randI
+	
 	
 	match dirType:
 		
@@ -28,136 +46,100 @@ func rollDIR(playerDIR, reroll: bool) -> Vector2:
 			match i:
 				0: # Left from point
 					if playerDIR != Vector2(32, 0):
-							playerDIR = Vector2(-32, 0)
-							return playerDIR
+							newDIR = Vector2(-32, 0)
 					elif !reroll:
 						reroll = true
-						rollDIR(playerDIR, reroll)
-					elif reroll:
-						var r = randi_range(0, 1)
-						if r > 0:
-							playerDIR = Vector2(-32, 0)
-						else:
-							playerDIR = Vector2(0, 32)
+						rerollFail = 0
+						rollDIR(randI, playerDIR, reroll, rerollFail)
 							
 				1: # Down from point
 					if playerDIR != Vector2(0, -32):
-						playerDIR = Vector2(0, 32)
-						return playerDIR
+						newDIR = Vector2(0, 32)
 					elif !reroll:
 						reroll = true
-						rollDIR(playerDIR, reroll)
-					elif reroll:
-						var r = randi_range(0, 1)
-						if r > 0:
-							playerDIR = Vector2(0, 32)
-						else:
-							playerDIR = Vector2(0, -32)
+						rerollFail = 1
+						rollDIR(randI, playerDIR, reroll, rerollFail)
 				2: # Right from point
 					if playerDIR != Vector2(-32, 0):
-						playerDIR = Vector2(32, 0)
-						return playerDIR
+						newDIR = Vector2(32, 0)
 					elif !reroll:
 						reroll = true
-						rollDIR(playerDIR, reroll)
-					elif reroll:
-						var r = randi_range(0, 1)
-						if r > 0:
-							playerDIR = Vector2(32, 0)
-						else:
-							playerDIR = Vector2(0, 32)
+						rerollFail = 2
+						rollDIR(randI, playerDIR, reroll, rerollFail)
 		
 		1: # Left-pointing T shape
 			
 			match i:
 				0: # Left from point
 					if playerDIR != Vector2(0, 32):
-							playerDIR = Vector2(0, -32)
-							return playerDIR
+							newDIR = Vector2(0, -32)
 					elif !reroll:
 						reroll = true
-						rollDIR(playerDIR, reroll)
-					elif reroll:
-						var r = randi_range(0, 1)
-						if r > 0:
-							playerDIR = Vector2(0, -32)
-						else:
-							playerDIR = Vector2(-32, 0)
+						rerollFail = 0
+						rollDIR(randI, playerDIR, reroll, rerollFail)
 				1: # Down from point
 					if playerDIR != Vector2(32, 0):
-						playerDIR = Vector2(-32, 0)
-						return playerDIR
+						newDIR = Vector2(-32, 0)
 					elif !reroll:
 						reroll = true
-						rollDIR(playerDIR, reroll)
-					elif reroll:
-						var r = randi_range(0, 1)
-						if r > 0:
-							playerDIR = Vector2(-32, 0)
-						else:
-							playerDIR = Vector2(0, -32)
+						rerollFail = 1
+						rollDIR(randI, playerDIR, reroll, rerollFail)
 				2: # Right from point
 					if playerDIR != Vector2(0, -32):
-						playerDIR = Vector2(0, 32)
-						return playerDIR
+						newDIR = Vector2(0, 32)
 					elif !reroll:
 						reroll = true
-						rollDIR(playerDIR, reroll)
-					elif reroll:
-						var r = randi_range(0, 1)
-						if r > 0:
-							playerDIR = Vector2(32, 0)
-						else:
-							playerDIR = Vector2(0, 32)
+						rerollFail = 2
+						rollDIR(randI, playerDIR, reroll, rerollFail)
 		
 		2: # Right-pointing T shape
 			
 			match i:
 				0: # Left from point
 					if playerDIR != Vector2(0, -32):
-							playerDIR = Vector2(0, 32)
-							return playerDIR
+						newDIR = Vector2(0, 32)
 					else:
 						reroll = true
-						rollDIR(playerDIR, reroll)
+						rerollFail = 0
+						rollDIR(randI, playerDIR, reroll, rerollFail)
 				1: # Down from point
 					if playerDIR != Vector2(-32, 0):
-						playerDIR = Vector2(32, 0)
-						return playerDIR
+						newDIR = Vector2(32, 0)
 					else:
 						reroll = true
-						rollDIR(playerDIR, reroll)
+						rerollFail = 1
+						rollDIR(randI, playerDIR, reroll, rerollFail)
 				2: # Right from point
 					if playerDIR != Vector2(0, 32):
-						playerDIR = Vector2(0, -32)
-						return playerDIR
+						newDIR = Vector2(0, -32)
 					else:
 						reroll = true
-						rollDIR(playerDIR, reroll)
+						rerollFail = 2
+						rollDIR(randI, playerDIR, reroll, rerollFail)
 		
 		3: # Upside-Down T shape
 			
 			match i:
 				0: # Left from point
 					if playerDIR != Vector2(-32, 0):
-							playerDIR = Vector2(32, 0)
-							return playerDIR
+						newDIR = Vector2(32, 0)
 					else:
 						reroll = true
-						rollDIR(playerDIR, reroll)
+						rerollFail = 0
+						rollDIR(randI, playerDIR, reroll, rerollFail)
 				1: # Down from point
 					if playerDIR != Vector2(0, 32):
-						playerDIR = Vector2(0, -32)
-						return playerDIR
+						newDIR = Vector2(0, -32)
 					else:
 						reroll = true
-						rollDIR(playerDIR, reroll)
+						rerollFail = 1
+						rollDIR(randI, playerDIR, reroll, rerollFail)
 				2: # Right from point
 					if playerDIR != Vector2(32, 0):
-						playerDIR = Vector2(-32, 0)
-						return playerDIR
+						newDIR = Vector2(-32, 0)
 					else:
 						reroll = true
-						rollDIR(playerDIR, reroll)
-	
-	return playerDIR
+						rerollFail = 2
+						rollDIR(randI, playerDIR, reroll, rerollFail)
+	nextDIR = newDIR
+	return nextDIR

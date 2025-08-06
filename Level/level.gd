@@ -159,7 +159,7 @@ func interpretSpin() -> void:
 		canSpin = false
 		spinning = true
 		spinSoundTimer.start(2.0)
-		money -= 1
+		deltaMoney -= 1
 		monUpdate(deltaMoney)
 		var rawSpin = spinSpinner()
 		var getIndex = spinOps[rawSpin]
@@ -273,11 +273,10 @@ func pauseForEvent() -> void:
 		
 		obtainableAnim()
 		
-		await get_tree().create_timer(4.5).timeout
+		await get_tree().process_frame
 		fadeRect.color.a = lerpf(fadeRect.color.a, 0, 1)
 		obtainedAnim.hide()
 		itemAnims.stop()
-		
 		invItemInstance = invItem.instantiate()
 		invSeparatorInstance = invSeparator.instantiate()
 		inventory.add_child(invItemInstance)

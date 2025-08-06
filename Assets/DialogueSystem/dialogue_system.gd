@@ -154,7 +154,7 @@ func _text_resource(i: DialogueText) -> void:
 	var total_characters: int = text_without_square_brackets.length()
 	var character_timer: float = 0.0
 	while DialogueLabel.visible_characters < total_characters:
-		if Input.is_action_just_pressed("ui_cancel"):
+		if Input.is_action_just_pressed("interact"):
 			DialogueLabel.visible_characters = total_characters
 			break
 		

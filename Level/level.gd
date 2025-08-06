@@ -137,10 +137,11 @@ func monUpdate(Delta: int) -> void:
 		audioPlayer.stream = preload("res://Assets/Audio/90s-game-ui-6-185099.mp3")
 		audioPlayer.play()
 	
-	money_label.text = (str(money))
-	monUpdateTag.num = Delta
-	monUpdateTag.show()
-	monUpdateTag.deathTimer.start()
+	if Delta != 0:
+		money_label.text = (str(money))
+		monUpdateTag.num = Delta
+		monUpdateTag.show()
+		monUpdateTag.deathTimer.start()
 	
 	deltaMoney = 0
 

@@ -328,10 +328,10 @@ libraries = {
 [node name="activateTipLabel" type="Label" parent="."]
 visible = false
 layout_mode = 0
-offset_left = 345.0
-offset_top = 5.77769
-offset_right = 432.0
-offset_bottom = 28.7777
+offset_left = 335.0
+offset_top = 8.0
+offset_right = 422.0
+offset_bottom = 31.0
 rotation = -0.0387933
 text = "sampletext"
 
@@ -339,6 +339,8 @@ text = "sampletext"
 libraries = {
 "": SubResource("AnimationLibrary_hvoxx")
 }
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

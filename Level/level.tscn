@@ -1994,6 +1994,84 @@ position = Vector2(954, 536)
 scale = Vector2(2, 2)
 texture = ExtResource("1_a7teg")
 
+[node name="obtainables" type="Node2D" parent="SubViewport"]
+
+[node name="obtainable" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(1114, 612)
+scale = Vector2(2, 2)
+
+[node name="obtainable2" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(666, 804)
+scale = Vector2(2, 2)
+
+[node name="obtainable3" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(890, 516)
+scale = Vector2(2, 2)
+
+[node name="obtainable4" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(954, 772)
+scale = Vector2(2, 2)
+
+[node name="obtainable6" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(1146, 388)
+scale = Vector2(2, 2)
+
+[node name="obtainable7" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(1338, 484)
+scale = Vector2(2, 2)
+
+[node name="obtainable8" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(570, 36)
+scale = Vector2(2, 2)
+
+[node name="obtainable9" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(634, 260)
+scale = Vector2(2, 2)
+
+[node name="obtainable10" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(890, 164)
+scale = Vector2(2, 2)
+
+[node name="obtainable11" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(1242, 36)
+scale = Vector2(2, 2)
+
+[node name="obtainable12" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(986, 292)
+scale = Vector2(2, 2)
+
+[node name="obtainable13" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(858, 356)
+scale = Vector2(2, 2)
+
+[node name="obtainable14" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(986, 580)
+scale = Vector2(2, 2)
+
+[node name="obtainable15" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(698, 740)
+scale = Vector2(2, 2)
+
+[node name="obtainable16" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(602, 740)
+scale = Vector2(2, 2)
+
+[node name="obtainable17" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(1178, 164)
+scale = Vector2(2, 2)
+
+[node name="obtainable18" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(1306, 292)
+scale = Vector2(2, 2)
+
+[node name="obtainable19" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(1306, 740)
+scale = Vector2(2, 2)
+
+[node name="obtainable5" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
+position = Vector2(666, 516)
+scale = Vector2(2, 2)
+
 [node name="junctions" type="Node2D" parent="SubViewport"]
 position = Vector2(-198, -112)
 scale = Vector2(2, 2)
@@ -3067,84 +3145,6 @@ position = Vector2(1157, 1144)
 scale = Vector2(2, 2)
 texture = SubResource("ViewportTexture_g52lm")
 
-[node name="obtainables" type="Node2D" parent="SubViewport"]
-
-[node name="obtainable" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
-position = Vector2(1114, 612)
-scale = Vector2(2, 2)
-
-[node name="obtainable2" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
-position = Vector2(666, 804)
-scale = Vector2(2, 2)
-
-[node name="obtainable3" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
-position = Vector2(890, 516)
-scale = Vector2(2, 2)
-
-[node name="obtainable4" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
-position = Vector2(986, 804)
-scale = Vector2(2, 2)
-
-[node name="obtainable6" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
-position = Vector2(1146, 388)
-scale = Vector2(2, 2)
-
-[node name="obtainable7" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
-position = Vector2(1338, 484)
-scale = Vector2(2, 2)
-
-[node name="obtainable8" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
-position = Vector2(570, 36)
-scale = Vector2(2, 2)
-
-[node name="obtainable9" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
-position = Vector2(634, 260)
-scale = Vector2(2, 2)
-
-[node name="obtainable10" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
-position = Vector2(890, 164)
-scale = Vector2(2, 2)
-
-[node name="obtainable11" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
-position = Vector2(1242, 36)
-scale = Vector2(2, 2)
-
-[node name="obtainable12" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
-position = Vector2(986, 292)
-scale = Vector2(2, 2)
-
-[node name="obtainable13" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
-position = Vector2(858, 356)
-scale = Vector2(2, 2)
-
-[node name="obtainable14" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
-position = Vector2(986, 580)
-scale = Vector2(2, 2)
-
-[node name="obtainable15" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
-position = Vector2(698, 740)
-scale = Vector2(2, 2)
-
-[node name="obtainable16" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
-position = Vector2(602, 740)
-scale = Vector2(2, 2)
-
-[node name="obtainable17" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
-position = Vector2(1178, 164)
-scale = Vector2(2, 2)
-
-[node name="obtainable18" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
-position = Vector2(1306, 292)
-scale = Vector2(2, 2)
-
-[node name="obtainable19" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
-position = Vector2(1306, 740)
-scale = Vector2(2, 2)
-
-[node name="obtainable5" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
-position = Vector2(666, 516)
-scale = Vector2(2, 2)
-
 [node name="player" type="Node2D" parent="SubViewport"]
 position = Vector2(954, 804)
 scale = Vector2(0.17, 0.17)
@@ -3958,7 +3958,6 @@ theme_override_font_sizes/font_size = 82
 text = "0"
 
 [node name="debugPanel" type="PanelContainer" parent="Control"]
-visible = false
 layout_mode = 0
 offset_left = 1603.0
 offset_top = 32.0
@@ -4624,6 +4623,7 @@ theme_override_font_sizes/font_size = 41
 text = "Skip Dialogue"
 
 [node name="inv" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 

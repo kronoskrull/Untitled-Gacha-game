@@ -118,6 +118,8 @@ var serPress: int = 0
 
 
 @onready var monUpdateTag = $SubViewport/coinNumber/statusSprite/moneyLabel/monUpdate
+var ITEM_GET = preload("res://itemGet.tscn")
+var itemGetInstance
 
 func _ready() -> void:
 	money_label.text = str(money)
@@ -159,7 +161,7 @@ func interpretSpin() -> void:
 		canSpin = false
 		spinning = true
 		spinSoundTimer.start(2.0)
-		money -= 1
+		deltaMoney -= 1
 		monUpdate(deltaMoney)
 		var rawSpin = spinSpinner()
 		var getIndex = spinOps[rawSpin]
@@ -277,7 +279,6 @@ func pauseForEvent() -> void:
 		fadeRect.color.a = lerpf(fadeRect.color.a, 0, 1)
 		obtainedAnim.hide()
 		itemAnims.stop()
-		
 		invItemInstance = invItem.instantiate()
 		invSeparatorInstance = invSeparator.instantiate()
 		inventory.add_child(invItemInstance)
@@ -291,7 +292,6 @@ func pauseForEvent() -> void:
 		invItemInstance.itemSprite.texture = itemSprite.texture
 		invItemInstance.descLabel.text = itemEffect.text
 		invItemInstance.activateTipLabel.text = newActLabel
-		invItemInstance.show()
 		
 		obtainablePause = false
 		continue

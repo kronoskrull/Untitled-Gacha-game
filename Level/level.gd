@@ -118,6 +118,8 @@ var serPress: int = 0
 
 
 @onready var monUpdateTag = $SubViewport/coinNumber/statusSprite/moneyLabel/monUpdate
+var ITEM_GET = preload("res://itemGet.tscn")
+var itemGetInstance
 
 func _ready() -> void:
 	money_label.text = str(money)
@@ -273,7 +275,7 @@ func pauseForEvent() -> void:
 		
 		obtainableAnim()
 		
-		await get_tree().process_frame
+		await get_tree().create_timer(4.5).timeout
 		fadeRect.color.a = lerpf(fadeRect.color.a, 0, 1)
 		obtainedAnim.hide()
 		itemAnims.stop()
@@ -290,7 +292,6 @@ func pauseForEvent() -> void:
 		invItemInstance.itemSprite.texture = itemSprite.texture
 		invItemInstance.descLabel.text = itemEffect.text
 		invItemInstance.activateTipLabel.text = newActLabel
-		invItemInstance.show()
 		
 		obtainablePause = false
 		continue

@@ -8,13 +8,13 @@ var index: int
 @onready var hoverPlayer: AnimationPlayer = $hoverPlayer
 @onready var activatePlayer: AnimationPlayer = $activatePlayer
 @onready var activateTipLabel: Label = $activateTipLabel
+@onready var audioPlayer: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 
 var is_focused: bool = false
 
 func _ready() -> void:
 	hoverPlayer.play("hover")
-	hide()
 
 
 func _process(delta: float) -> void:
@@ -30,6 +30,11 @@ func activate():
 
 func _on_stim_button_pressed() -> void:
 	activatePlayer.play("activateIdle")
+	match index:
+		0:
+			pass
+		1:
+			pass
 
 
 func _on_mouse_entered() -> void:
@@ -38,3 +43,7 @@ func _on_mouse_entered() -> void:
 
 func _on_mouse_exited() -> void:
 	is_focused = false
+
+
+func _on_timer_timeout() -> void:
+	$desc.hide()

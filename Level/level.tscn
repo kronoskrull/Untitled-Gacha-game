@@ -2009,7 +2009,7 @@ position = Vector2(890, 516)
 scale = Vector2(2, 2)
 
 [node name="obtainable4" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
-position = Vector2(954, 772)
+position = Vector2(986, 804)
 scale = Vector2(2, 2)
 
 [node name="obtainable6" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
@@ -3905,6 +3905,7 @@ libraries = {
 }
 
 [node name="Control" type="Control" parent="."]
+visible = false
 z_index = 6
 layout_mode = 3
 anchors_preset = 0
@@ -3958,6 +3959,7 @@ theme_override_font_sizes/font_size = 82
 text = "0"
 
 [node name="debugPanel" type="PanelContainer" parent="Control"]
+visible = false
 layout_mode = 0
 offset_left = 1603.0
 offset_top = 32.0
@@ -4034,6 +4036,7 @@ theme_override_font_sizes/font_size = 62
 text = "GACHA PWN"
 
 [node name="effectMenu" type="PanelContainer" parent="Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -4150,6 +4153,7 @@ layout_mode = 2
 text = "ENRICHMENT MODULE"
 
 [node name="itemMenu" type="PanelContainer" parent="Control"]
+visible = false
 layout_mode = 0
 offset_left = 1959.0
 offset_top = 814.0

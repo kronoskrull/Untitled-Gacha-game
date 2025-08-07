@@ -13,6 +13,7 @@ var obtainablePause: bool = false
 var canSpin: bool = true
 @onready var spinner: CSGCylinder3D = $"lighting & env/spinnerPLACEHOLDER"
 
+var spinResult: int = 0
 var spinOptions: spinTables = spinTables.new()
 var effectOps: Array = spinOptions.spinOpTable
 
@@ -24,7 +25,9 @@ var obtainedItems: Array = []
 var deltaMoney: int = 0
 @onready var money_label: Label = $SubViewport/coinNumber/statusSprite/moneyLabel
 
-@onready var roll_result: Label = $Control/rollResult
+@onready var roll_result: Label = $Control/rollResult/Sprite2D/resultLabel
+@onready var rollResult: Control = $Control/rollResult
+
 
 
 var lastObtained: int
@@ -127,9 +130,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	curDIRLabel.text = str(playerDIR)
 	if canSpin:
-		$"Control/1spinButton".show()
+		$"Control/spinButton".show()
 	else:
-		$"Control/1spinButton".hide()
+		$"Control/spinButton".hide()
+	
+	roll_result.text = str(spinResult)                     #CULL
 
 func monUpdate(Delta: int) -> void:
 	money += Delta
@@ -161,6 +166,7 @@ func interpretSpin() -> void:
 		spinner.spin()
 		canSpin = false
 		spinning = true
+		rollResult.show()
 		spinSoundTimer.start(2.0)
 		deltaMoney -= 1
 		monUpdate(deltaMoney)
@@ -180,7 +186,7 @@ func interpretSpin() -> void:
 					interpretSpin()
 		
 		
-		roll_result.text = str(spinResult)                     #CULL
+		
 		
 		
 		var distance: int = spinResult
@@ -276,7 +282,7 @@ func pauseForEvent() -> void:
 		
 		obtainableAnim()
 		
-		await get_tree().create_timer(4.5).timeout
+		await get_tree().create_timer(5.0).timeout
 		fadeRect.color.a = lerpf(fadeRect.color.a, 0, 1)
 		obtainedAnim.hide()
 		itemAnims.stop()
@@ -302,7 +308,7 @@ func pauseForEvent() -> void:
 		fadeRect.color.a = lerpf(fadeRect.color.a, 0.7, 1)
 		eventAnim.show()
 		eventTrigger()
-		await get_tree().create_timer(5).timeout
+		await get_tree().create_timer(5.0).timeout
 		eventSprite.hide()
 		eventAnim.hide()
 		fadeRect.color.a = lerpf(fadeRect.color.a, 0, 1)
@@ -909,13 +915,11 @@ func getObtainable(obtainable: int) -> void:
 	newItemIndex = obtainable
 	obtainedItems.append(obtainable)
 	lastObtained = obtainable
-	pauseForEvent()
+	#pauseForEvent()
 #endregion
 
 #region Buttons
 func spinSpinner() -> int:
-	var spinResult: int
-	
 	spinResult = randi_range(0, 9)
 	
 	return spinResult
@@ -944,6 +948,7 @@ func _on_dir_right_pressed() -> void:
 
 func _on_spin_sound_timer_timeout() -> void:
 	spinning = false
+	rollResult.hide()
 	spin_1Player.stop()
 	spin_1Player.volume_db = 3
 

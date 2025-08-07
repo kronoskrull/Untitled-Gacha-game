@@ -1,4 +1,4 @@
-[gd_scene load_steps=184 format=3 uid="uid://drt1tip360qt7"]
+[gd_scene load_steps=188 format=3 uid="uid://drt1tip360qt7"]
 
 [ext_resource type="Texture2D" uid="uid://dhw6oc4h6i0ny" path="res://Assets/effects/hudBlock1.0.png" id="1_a7teg"]
 [ext_resource type="Script" path="res://Level/level.gd" id="1_rljoh"]
@@ -58,6 +58,7 @@
 [ext_resource type="AudioStream" uid="uid://vj15swfcs701" path="res://Assets/Audio/level-up-bonus-sequence-2-186891.mp3" id="45_waqyb"]
 [ext_resource type="AudioStream" uid="uid://fhdim5212qyb" path="res://Assets/Audio/cave themeb4.mp3" id="47_cxyms"]
 [ext_resource type="Script" path="res://Level/music.gd" id="48_f87m5"]
+[ext_resource type="Texture2D" uid="uid://cq7xvtn725ckl" path="res://Assets/effects/smallDisplaySprite.png" id="52_768l3"]
 [ext_resource type="Script" path="res://Level/menu.gd" id="55_mhfh2"]
 [ext_resource type="Texture2D" uid="uid://cy4mhv5sfs1ay" path="res://Assets/effects/titleSprite.png" id="56_5cj55"]
 [ext_resource type="Script" path="res://Level/standard_mode.gd" id="56_sfhuv"]
@@ -1229,7 +1230,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(204, 48)]
+"values": [Vector2(258, 68)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -1267,10 +1268,10 @@ tracks/1/path = NodePath(".:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(3, 10.9333),
+"times": PackedFloat32Array(3, 10.8),
 "transitions": PackedFloat32Array(-2, -2),
 "update": 0,
-"values": [Vector2(204, 43), Vector2(204, 53)]
+"values": [Vector2(258, 58), Vector2(258, 78)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -1290,6 +1291,36 @@ _data = {
 "RESET": SubResource("Animation_2m4rg"),
 "blink": SubResource("Animation_8bmmd")
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n51mi"]
+shader = ExtResource("14_3swno")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.4
+shader_parameter/scanlines_width = 0.25
+shader_parameter/grille_opacity = 0.3
+shader_parameter/resolution = Vector2(8000, 4000)
+shader_parameter/pixelate = true
+shader_parameter/roll = true
+shader_parameter/roll_speed = 2.115
+shader_parameter/roll_size = 7.012
+shader_parameter/roll_variation = 1.8
+shader_parameter/distort_intensity = 0.006
+shader_parameter/noise_opacity = 0.0
+shader_parameter/noise_speed = 15.665
+shader_parameter/static_noise_intensity = 0.418
+shader_parameter/variable_noise_intensity = true
+shader_parameter/aberration = 4.75e-08
+shader_parameter/aberration_variation = 0.05
+shader_parameter/brightness = 1.4
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 0.228
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qpgfv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oc2hr"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y06rg"]
 
@@ -3912,51 +3943,73 @@ anchors_preset = 0
 offset_right = 2304.0
 offset_bottom = 1296.0
 
-[node name="1spinButton" type="Button" parent="Control"]
+[node name="spinButton" type="Control" parent="Control"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -204.0
-offset_top = -390.0
-offset_right = 205.0
-offset_bottom = -299.0
+offset_left = -263.0
+offset_top = -434.0
+offset_right = -223.0
+offset_bottom = -394.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_fonts/font = ExtResource("18_7x8mt")
-theme_override_font_sizes/font_size = 40
-text = "SPIN SPIN SPIN!"
-flat = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Control/1spinButton"]
+[node name="Sprite2D" type="Sprite2D" parent="Control/spinButton"]
 show_behind_parent = true
-position = Vector2(204, 48)
+position = Vector2(258, 68)
 scale = Vector2(3, 3)
 texture = ExtResource("56_5cj55")
 hframes = 2
 script = ExtResource("43_nemvr")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/1spinButton/Sprite2D"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/spinButton/Sprite2D"]
 libraries = {
 "": SubResource("AnimationLibrary_11cuq")
 }
 
-[node name="rollResult" type="Label" parent="Control"]
-layout_mode = 1
+[node name="Label" type="Label" parent="Control/spinButton/Sprite2D"]
+offset_left = -66.0
+offset_top = -7.0
+offset_right = 67.0
+offset_bottom = 7.0
+theme_override_colors/font_color = Color(0, 0.639216, 0, 1)
+theme_override_fonts/font = ExtResource("18_7x8mt")
+theme_override_font_sizes/font_size = 12
+text = "SPIN SPIN SPIN!!!"
+
+[node name="crtShader" type="ColorRect" parent="Control/spinButton/Sprite2D"]
+material = SubResource("ShaderMaterial_n51mi")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -77.0
+offset_top = -13.0
+offset_right = -115.0
+offset_bottom = -51.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="1spinButton" type="Button" parent="Control/spinButton/Sprite2D"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -23.5
-offset_top = -113.0
-offset_right = 23.5
+offset_left = -174.0
+offset_top = -78.0
+offset_right = -17.0
+offset_bottom = -50.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_font_sizes/font_size = 82
-text = "0"
+theme_override_colors/font_pressed_color = Color(0.572549, 0, 0, 1)
+theme_override_fonts/font = ExtResource("18_7x8mt")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qpgfv")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_oc2hr")
+flat = true
 
 [node name="debugPanel" type="PanelContainer" parent="Control"]
 visible = false
@@ -4020,20 +4073,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Right
 "
-
-[node name="Label" type="Label" parent="Control"]
-visible = false
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 23.0
-grow_horizontal = 2
-theme_override_fonts/font = ExtResource("18_7x8mt")
-theme_override_font_sizes/font_size = 62
-text = "GACHA PWN"
 
 [node name="effectMenu" type="PanelContainer" parent="Control"]
 layout_mode = 1
@@ -4625,6 +4664,57 @@ theme_override_fonts/font = ExtResource("20_fxtm5")
 theme_override_font_sizes/font_size = 41
 text = "Skip Dialogue"
 
+[node name="rollResult" type="Control" parent="Control"]
+visible = false
+anchors_preset = 0
+offset_left = 1153.0
+offset_top = 1242.0
+offset_right = 1193.0
+offset_bottom = 1282.0
+
+[node name="ColorRect" type="ColorRect" parent="Control/rollResult"]
+offset_left = -60.0
+offset_top = -42.0
+offset_right = 60.0
+offset_bottom = 42.0
+color = Color(0, 0, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/rollResult"]
+scale = Vector2(3, 3)
+texture = ExtResource("52_768l3")
+
+[node name="resultLabel" type="Label" parent="Control/rollResult/Sprite2D"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -52.0
+offset_top = -78.0
+offset_right = -12.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0.639216, 0, 1)
+theme_override_fonts/font = ExtResource("18_7x8mt")
+theme_override_font_sizes/font_size = 16
+text = "0
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="crtShader2" type="ColorRect" parent="Control/rollResult/Sprite2D"]
+material = SubResource("ShaderMaterial_n51mi")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -19.0
+offset_top = -13.0
+offset_right = -45.0
+offset_bottom = -51.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="inv" type="Control" parent="."]
 visible = false
 layout_mode = 3
@@ -4987,8 +5077,8 @@ text = "Are you sure? This isn't even [wave][color=red]remotely fair...[/color][
 [connection signal="animation_finished" from="SubViewport/status/PanelContainer/2-2/statusSprite/AnimationPlayer" to="SubViewport/status/PanelContainer/2-2/statusSprite" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="SubViewport/status/PanelContainer/2-4/statusSprite/AnimationPlayer" to="SubViewport/status/PanelContainer/2-4/statusSprite" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="outerFadeRect/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-[connection signal="pressed" from="Control/1spinButton" to="." method="_on_spin_button_pressed"]
-[connection signal="pressed" from="Control/1spinButton" to="lighting & env/spinnerPLACEHOLDER" method="_on_spin_button_pressed"]
+[connection signal="pressed" from="Control/spinButton/Sprite2D/1spinButton" to="." method="_on_spin_button_pressed"]
+[connection signal="pressed" from="Control/spinButton/Sprite2D/1spinButton" to="lighting & env/spinnerPLACEHOLDER" method="_on_spin_button_pressed"]
 [connection signal="pressed" from="Control/debugPanel/VBoxContainer/resetbutton" to="." method="_on_resetbutton_pressed"]
 [connection signal="pressed" from="Control/debugPanel/VBoxContainer/posresButton" to="." method="_on_posres_button_pressed"]
 [connection signal="pressed" from="Control/debugPanel/VBoxContainer/GridContainer/dirUP" to="." method="_on_dir_up_pressed"]

@@ -4945,7 +4945,7 @@ offset_top = 306.0
 offset_right = -1854.0
 offset_bottom = 336.0
 grow_horizontal = 0
-text = "Version: Nightly 1.01c"
+text = "Version: Nightly 1.01d"
 
 [node name="modeSelectLabel" type="RichTextLabel" parent="Menu"]
 visible = false

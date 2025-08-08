@@ -4191,7 +4191,6 @@ layout_mode = 2
 text = "ENRICHMENT MODULE"
 
 [node name="itemMenu" type="PanelContainer" parent="Control"]
-visible = false
 layout_mode = 0
 offset_left = 1959.0
 offset_top = 814.0
@@ -4673,6 +4672,7 @@ offset_right = 1193.0
 offset_bottom = 1282.0
 
 [node name="ColorRect" type="ColorRect" parent="Control/rollResult"]
+layout_mode = 0
 offset_left = -60.0
 offset_top = -42.0
 offset_right = 60.0

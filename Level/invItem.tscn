@@ -1,14 +1,14 @@
 [gd_scene load_steps=14 format=3 uid="uid://dlbrvj56rjkc0"]
 
 [ext_resource type="FontFile" uid="uid://0kpmyoip0ktj" path="res://Assets/ka1.ttf" id="1_sng6o"]
-[ext_resource type="Script" path="res://Level/inventoryItem.gd" id="2_xkxrs"]
+[ext_resource type="Script" uid="uid://d0t6tdb0nlooe" path="res://Level/inventoryItem.gd" id="2_xkxrs"]
 [ext_resource type="Texture2D" uid="uid://c84526k3vmba1" path="res://Assets/obtainables/obt001.png" id="3_avf5t"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i8stc"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2tv88"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uu6na"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2tv88"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i8stc"]
 
 [sub_resource type="Animation" id="Animation_ovrtn"]
 length = 0.001
@@ -69,8 +69,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g660u"]
 _data = {
-"RESET": SubResource("Animation_ovrtn"),
-"hover": SubResource("Animation_g17f1")
+&"RESET": SubResource("Animation_ovrtn"),
+&"hover": SubResource("Animation_g17f1")
 }
 
 [sub_resource type="Animation" id="Animation_2mpje"]
@@ -278,9 +278,9 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hvoxx"]
 _data = {
-"RESET": SubResource("Animation_2mpje"),
-"activateEffect": SubResource("Animation_2q3je"),
-"activateIdle": SubResource("Animation_m6j65")
+&"RESET": SubResource("Animation_2mpje"),
+&"activateEffect": SubResource("Animation_2q3je"),
+&"activateIdle": SubResource("Animation_m6j65")
 }
 
 [node name="item" type="Button"]
@@ -304,9 +304,9 @@ offset_left = -16.0
 offset_top = -13.0
 offset_right = 20.0
 offset_bottom = 17.0
-theme_override_styles/focus = SubResource("StyleBoxEmpty_i8stc")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_uu6na")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_2tv88")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_uu6na")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_i8stc")
 flat = true
 
 [node name="desc" type="Label" parent="."]
@@ -322,7 +322,7 @@ autowrap_mode = 2
 
 [node name="hoverPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_g660u")
+&"": SubResource("AnimationLibrary_g660u")
 }
 
 [node name="activateTipLabel" type="Label" parent="."]
@@ -337,7 +337,7 @@ text = "sampletext"
 
 [node name="activatePlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_hvoxx")
+&"": SubResource("AnimationLibrary_hvoxx")
 }
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

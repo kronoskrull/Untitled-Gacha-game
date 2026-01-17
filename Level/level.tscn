@@ -1,17 +1,19 @@
-[gd_scene load_steps=188 format=3 uid="uid://drt1tip360qt7"]
+[gd_scene load_steps=190 format=3 uid="uid://drt1tip360qt7"]
 
 [ext_resource type="Texture2D" uid="uid://dhw6oc4h6i0ny" path="res://Assets/effects/hudBlock1.0.png" id="1_a7teg"]
-[ext_resource type="Script" path="res://Level/level.gd" id="1_rljoh"]
-[ext_resource type="Script" path="res://Level/eventAssociations.gd" id="2_d2tcv"]
-[ext_resource type="Shader" path="res://Assets/shaders/placeholder.gdshader" id="2_osb5b"]
-[ext_resource type="Script" path="res://Spinner/spinner_placeholder.gd" id="3_thr51"]
+[ext_resource type="Script" uid="uid://dsy5dewf1nl6w" path="res://Level/level.gd" id="1_rljoh"]
+[ext_resource type="Script" uid="uid://bhds4hkmxrfsv" path="res://Level/eventAssociations.gd" id="2_d2tcv"]
+[ext_resource type="Shader" uid="uid://bys5ms4m2drbw" path="res://Assets/shaders/placeholder.gdshader" id="2_osb5b"]
+[ext_resource type="Script" uid="uid://da3hp5pqd14tb" path="res://Level/obtainable_database.gd" id="3_qo0dx"]
+[ext_resource type="Script" uid="uid://dgoqttb0fj8mw" path="res://Spinner/spinner_placeholder.gd" id="3_thr51"]
 [ext_resource type="PackedScene" uid="uid://cv5v5t0ymabiv" path="res://Junctions/L-Dcornerjunc.tscn" id="4_1v6ax"]
 [ext_resource type="Texture2D" uid="uid://bhuv2qlc2tdvs" path="res://Assets/models/Spinner_tex.png" id="4_57hlo"]
+[ext_resource type="Script" uid="uid://b5ulm3styc460" path="res://Level/space_database.gd" id="4_ej3wx"]
 [ext_resource type="Texture2D" uid="uid://b05wrcfotqy8n" path="res://Assets/playerIcon_001.png" id="5_a7gi8"]
 [ext_resource type="Texture2D" uid="uid://dyithwdhvhtwv" path="res://Assets/maze1.0.png" id="5_nn23b"]
 [ext_resource type="ArrayMesh" uid="uid://d1lcl0yp5wud4" path="res://Assets/models/Spinner (1).obj" id="5_ynopn"]
 [ext_resource type="PackedScene" uid="uid://dqld5dxfh26jc" path="res://Assets/models/arcadeFinalMaybe.tscn" id="6_mn3xb"]
-[ext_resource type="Script" path="res://Level/flashlight.gd" id="7_e8di8"]
+[ext_resource type="Script" uid="uid://bniefvxccsqew" path="res://Level/flashlight.gd" id="7_e8di8"]
 [ext_resource type="PackedScene" uid="uid://d0sfuvyon2ptq" path="res://Assets/models/arrow.tscn" id="7_p2lt6"]
 [ext_resource type="PackedScene" uid="uid://gvhpy1s1absr" path="res://Junctions/R-Dcornerjunc.tscn" id="7_r7vob"]
 [ext_resource type="PackedScene" uid="uid://br6hxiou2nh38" path="res://Junctions/L-Ucornerjunc.tscn" id="8_6yic6"]
@@ -23,50 +25,50 @@
 [ext_resource type="Texture2D" uid="uid://decqd8figo386" path="res://Assets/effects/eff1-2.png" id="13_1hduq"]
 [ext_resource type="PackedScene" uid="uid://chgxilpcrsci7" path="res://Interactables/obtainable.tscn" id="13_2xnj0"]
 [ext_resource type="Texture2D" uid="uid://cwnpeo0wiwen" path="res://Assets/effects/eff1-3.png" id="13_n248f"]
-[ext_resource type="Shader" path="res://Assets/shaders/better_crt.gdshader" id="14_3swno"]
-[ext_resource type="Script" path="res://Level/status_sprite.gd" id="14_dc3qn"]
+[ext_resource type="Shader" uid="uid://bbfcwvvwnkro5" path="res://Assets/shaders/better_crt.gdshader" id="14_3swno"]
+[ext_resource type="Script" uid="uid://y85rjk0s8d3c" path="res://Level/status_sprite.gd" id="14_dc3qn"]
 [ext_resource type="Texture2D" uid="uid://c5decay8xjwbc" path="res://Assets/effects/eff1-5.png" id="17_44415"]
 [ext_resource type="Texture2D" uid="uid://bhmp3u1og6j0k" path="res://Assets/effects/eff1-0.png" id="17_es0wu"]
 [ext_resource type="FontFile" uid="uid://0kpmyoip0ktj" path="res://Assets/ka1.ttf" id="18_7x8mt"]
 [ext_resource type="FontFile" uid="uid://dmip7mk1p14dy" path="res://Assets/PrStart.ttf" id="20_fxtm5"]
-[ext_resource type="Script" path="res://Level/effect_menu.gd" id="21_pr0jc"]
-[ext_resource type="Script" path="res://Level/item_menu.gd" id="22_r6gmn"]
+[ext_resource type="Script" uid="uid://v3l32t3djopi" path="res://Level/effect_menu.gd" id="21_pr0jc"]
+[ext_resource type="Script" uid="uid://bw44tx428sxpj" path="res://Level/item_menu.gd" id="22_r6gmn"]
 [ext_resource type="Texture2D" uid="uid://b7wvvb7j8inh6" path="res://Assets/effects/eff2-2.png" id="25_2xqgb"]
 [ext_resource type="Texture2D" uid="uid://btpjuy8i06fk0" path="res://Assets/effects/eff2-4.png" id="26_2gl0d"]
 [ext_resource type="PackedScene" uid="uid://dsjuh3hai7n08" path="res://Level/mon_update.tscn" id="30_ywrb8"]
-[ext_resource type="Script" path="res://Level/loan_shark.gd" id="31_2uu44"]
-[ext_resource type="Script" path="res://Level/loanshark_final.gd" id="31_pivh8"]
+[ext_resource type="Script" uid="uid://bigctkjv2repr" path="res://Level/loan_shark.gd" id="31_2uu44"]
+[ext_resource type="Script" uid="uid://clb0aa81n43m3" path="res://Level/loanshark_final.gd" id="31_pivh8"]
 [ext_resource type="Texture2D" uid="uid://wp6bh4b4fd5a" path="res://Assets/effects/high_contrastCoin.png" id="33_0rops"]
 [ext_resource type="PackedScene" uid="uid://bunptani1d1eu" path="res://Assets/DialogueSystem/dialogue_area_2d.tscn" id="35_lpwu7"]
-[ext_resource type="Script" path="res://Assets/DialogueSystem/DialofueExportResource.gd" id="37_7j578"]
-[ext_resource type="Script" path="res://Assets/DialogueSystem/DialogueFunctionResource.gd" id="37_e3647"]
-[ext_resource type="Script" path="res://Assets/DialogueSystem/DialogueTextResource.gd" id="38_ai8s7"]
+[ext_resource type="Script" uid="uid://cs4glavg7sowv" path="res://Assets/DialogueSystem/DialofueExportResource.gd" id="37_7j578"]
+[ext_resource type="Script" uid="uid://c0kplidiqjeap" path="res://Assets/DialogueSystem/DialogueFunctionResource.gd" id="37_e3647"]
+[ext_resource type="Script" uid="uid://b6fjrudiwh76g" path="res://Assets/DialogueSystem/DialogueTextResource.gd" id="38_ai8s7"]
 [ext_resource type="Resource" uid="uid://bvif4morv33fl" path="res://Level/cullDialogueSystem.tres" id="39_gvbou"]
 [ext_resource type="Texture2D" uid="uid://d4cwh6bd86sps" path="res://Assets/LOANUTSPRITE.png" id="39_luuut"]
 [ext_resource type="Texture2D" uid="uid://57iybrvl7hjs" path="res://Assets/spinnerSprite.png" id="40_ijctb"]
 [ext_resource type="AudioStream" uid="uid://wa54e02ajq43" path="res://Assets/Audio/90s-game-ui-6-185099.mp3" id="40_j3ykj"]
-[ext_resource type="Script" path="res://Level/spinner_menu.gd" id="40_rfyt5"]
+[ext_resource type="Script" uid="uid://nxkpho1nr0l3" path="res://Level/spinner_menu.gd" id="40_rfyt5"]
 [ext_resource type="AudioStream" uid="uid://drlpemysk3yt" path="res://Assets/Audio/loanSharkBite.mp3" id="40_rmqjj"]
-[ext_resource type="Script" path="res://Level/outer_fade_rect.gd" id="41_jketd"]
+[ext_resource type="Script" uid="uid://c5085vqiaqorh" path="res://Level/outer_fade_rect.gd" id="41_jketd"]
 [ext_resource type="AudioStream" uid="uid://vtguar4jeq3u" path="res://Assets/Audio/computer-hum-78343.mp3" id="41_ky7q4"]
-[ext_resource type="Script" path="res://Level/spinnerMenuItem.gd" id="41_vruw2"]
+[ext_resource type="Script" uid="uid://qewffpdds1kt" path="res://Level/spinnerMenuItem.gd" id="41_vruw2"]
 [ext_resource type="AudioStream" uid="uid://cdkdswpo3yvbh" path="res://Assets/Audio/bicycle-wheel-spinning-49716.mp3" id="42_hc1ex"]
 [ext_resource type="PackedScene" uid="uid://ducs5xy0swvpi" path="res://Level/slot_upgrade_notif.tscn" id="43_b3boj"]
-[ext_resource type="Script" path="res://Level/spin_1.gd" id="43_k7kmd"]
-[ext_resource type="Script" path="res://Level/spinSprite.gd" id="43_nemvr"]
+[ext_resource type="Script" uid="uid://c3euakobab1b7" path="res://Level/spin_1.gd" id="43_k7kmd"]
+[ext_resource type="Script" uid="uid://c54ijngj65uqa" path="res://Level/spinSprite.gd" id="43_nemvr"]
 [ext_resource type="AudioStream" uid="uid://chyxlwa18yc4y" path="res://Assets/Audio/coin-drops-and-spins-272429.mp3" id="43_vwx3i"]
 [ext_resource type="AudioStream" uid="uid://vj15swfcs701" path="res://Assets/Audio/level-up-bonus-sequence-2-186891.mp3" id="45_waqyb"]
 [ext_resource type="AudioStream" uid="uid://fhdim5212qyb" path="res://Assets/Audio/cave themeb4.mp3" id="47_cxyms"]
-[ext_resource type="Script" path="res://Level/music.gd" id="48_f87m5"]
+[ext_resource type="Script" uid="uid://s32t6dx84v8m" path="res://Level/music.gd" id="48_f87m5"]
 [ext_resource type="Texture2D" uid="uid://cq7xvtn725ckl" path="res://Assets/effects/smallDisplaySprite.png" id="52_768l3"]
-[ext_resource type="Script" path="res://Level/menu.gd" id="55_mhfh2"]
+[ext_resource type="Script" uid="uid://osc7gqs6ngh8" path="res://Level/menu.gd" id="55_mhfh2"]
 [ext_resource type="Texture2D" uid="uid://cy4mhv5sfs1ay" path="res://Assets/effects/titleSprite.png" id="56_5cj55"]
-[ext_resource type="Script" path="res://Level/standard_mode.gd" id="56_sfhuv"]
-[ext_resource type="Script" path="res://Level/title_sprite.gd" id="57_ck147"]
+[ext_resource type="Script" uid="uid://dn5cso62ysopm" path="res://Level/standard_mode.gd" id="56_sfhuv"]
+[ext_resource type="Script" uid="uid://da3hskq2ep6o2" path="res://Level/title_sprite.gd" id="57_ck147"]
 [ext_resource type="Texture2D" uid="uid://hjjxos6ml8dw" path="res://Assets/effects/low_contrastCoin.png" id="57_fl41h"]
-[ext_resource type="Script" path="res://Level/desc_sprite.gd" id="57_qim8h"]
-[ext_resource type="Script" path="res://Level/dancing_node.gd" id="58_k6ufh"]
-[ext_resource type="Script" path="res://Level/sandbox_mode.gd" id="58_ogrcu"]
+[ext_resource type="Script" uid="uid://cmxau1yiy6bxy" path="res://Level/desc_sprite.gd" id="57_qim8h"]
+[ext_resource type="Script" uid="uid://cn6q8nxdla1s2" path="res://Level/dancing_node.gd" id="58_k6ufh"]
+[ext_resource type="Script" uid="uid://bk17p8286jfxj" path="res://Level/sandbox_mode.gd" id="58_ogrcu"]
 [ext_resource type="Texture2D" uid="uid://rcgppns2n67c" path="res://Assets/effects/evilCoin.png" id="60_ecobq"]
 [ext_resource type="Texture2D" uid="uid://b04iclufyt57y" path="res://Assets/buttonArcadeSprite.png" id="60_y1flv"]
 [ext_resource type="AudioStream" uid="uid://oqr0r32td0lj" path="res://Assets/Audio/blipSelect.wav" id="63_octud"]
@@ -74,26 +76,6 @@
 
 [sub_resource type="Resource" id="Resource_rctjk"]
 script = ExtResource("2_d2tcv")
-eventID = {
-"(0, 0)": [0, 999, 2],
-"(0, 1)": [0, 999, 2],
-"(0, 2)": [0, 999, 2],
-"(0, 3)": [1, 4, 3, 999, 2, 5],
-"(0, 4)": [1, 4, 3, 999, 2, 5],
-"(0, 5)": [1, 4, 3, 999, 2, 5],
-"(1, 0)": [999],
-"(1, 1)": [0, 999, 2],
-"(1, 2)": [999],
-"(1, 3)": [1, 3, 999],
-"(1, 4)": [1, 4, 3, 999, 2, 5],
-"(1, 5)": [1, 999],
-"(2, 0)": [0, 999, 2],
-"(2, 1)": [0, 999, 2],
-"(2, 2)": [999],
-"(2, 3)": [1, 4, 3, 999, 2, 5],
-"(2, 4)": [1, 3, 999],
-"(2, 5)": []
-}
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_3nx2p"]
 viewport_path = NodePath("SubViewport")
@@ -131,8 +113,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kqxwm"]
 _data = {
-"RESET": SubResource("Animation_me5tm"),
-"gotoPlay": SubResource("Animation_w2ayg")
+&"RESET": SubResource("Animation_me5tm"),
+&"gotoPlay": SubResource("Animation_w2ayg")
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e1sik"]
@@ -237,10 +219,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rf2mu"]
 _data = {
-"RESET": SubResource("Animation_07pa7"),
-"colorSwap": SubResource("Animation_q837t"),
-"modeColorChange": SubResource("Animation_gr3oq"),
-"serMenuChange": SubResource("Animation_a4gx6")
+&"RESET": SubResource("Animation_07pa7"),
+&"colorSwap": SubResource("Animation_q837t"),
+&"modeColorChange": SubResource("Animation_gr3oq"),
+&"serMenuChange": SubResource("Animation_a4gx6")
 }
 
 [sub_resource type="Animation" id="Animation_r85w7"]
@@ -305,10 +287,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_inuk2"]
 _data = {
-"RESET": SubResource("Animation_r85w7"),
-"colorSwap": SubResource("Animation_5reox"),
-"modeColorChange": SubResource("Animation_pasnp"),
-"serMenuChange": SubResource("Animation_0xgl5")
+&"RESET": SubResource("Animation_r85w7"),
+&"colorSwap": SubResource("Animation_5reox"),
+&"modeColorChange": SubResource("Animation_pasnp"),
+&"serMenuChange": SubResource("Animation_0xgl5")
 }
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7jfsy"]
@@ -458,10 +440,10 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y8u0f"]
 _data = {
-"RESET": SubResource("Animation_2weyw"),
-"appear": SubResource("Animation_d4kem"),
-"die": SubResource("Animation_6d6ms"),
-"hover": SubResource("Animation_mnnni")
+&"RESET": SubResource("Animation_2weyw"),
+&"appear": SubResource("Animation_d4kem"),
+&"die": SubResource("Animation_6d6ms"),
+&"hover": SubResource("Animation_mnnni")
 }
 
 [sub_resource type="Animation" id="Animation_bne4e"]
@@ -522,8 +504,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pfo23"]
 _data = {
-"RESET": SubResource("Animation_bne4e"),
-"blink_bob": SubResource("Animation_kl46q")
+&"RESET": SubResource("Animation_bne4e"),
+&"blink_bob": SubResource("Animation_kl46q")
 }
 
 [sub_resource type="Animation" id="Animation_c24m2"]
@@ -560,8 +542,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xum8k"]
 _data = {
-"RESET": SubResource("Animation_c24m2"),
-"bob": SubResource("Animation_5rmf5")
+&"RESET": SubResource("Animation_c24m2"),
+&"bob": SubResource("Animation_5rmf5")
 }
 
 [sub_resource type="Animation" id="Animation_gcbii"]
@@ -703,10 +685,10 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2mk88"]
 _data = {
-"RESET": SubResource("Animation_gcbii"),
-"appear": SubResource("Animation_6qyfp"),
-"die": SubResource("Animation_xxp08"),
-"hover": SubResource("Animation_x7hum")
+&"RESET": SubResource("Animation_gcbii"),
+&"appear": SubResource("Animation_6qyfp"),
+&"die": SubResource("Animation_xxp08"),
+&"hover": SubResource("Animation_x7hum")
 }
 
 [sub_resource type="Animation" id="Animation_8mvvs"]
@@ -757,8 +739,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_exyok"]
 _data = {
-"RESET": SubResource("Animation_8mvvs"),
-"wobble": SubResource("Animation_hpev1")
+&"RESET": SubResource("Animation_8mvvs"),
+&"wobble": SubResource("Animation_hpev1")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lbd2a"]
@@ -769,359 +751,220 @@ script = ExtResource("38_ai8s7")
 speaker_name = "Loan Shark"
 speaker_img = ExtResource("39_luuut")
 speaker_img_Hframes = 2
-speaker_img_rest_frame = 0
 text = "Hey there, couldn't help but notice you're..."
 text_speed = 15.0
 text_sound = ExtResource("40_rmqjj")
-text_volume_db = 0
-text_volume_pitch_min = 0.85
-text_volume_pitch_max = 1.15
-camera_position = Vector2(999.999, 999.999)
-camera_transition_time = 1.0
 
 [sub_resource type="Resource" id="Resource_77s4o"]
 script = ExtResource("37_e3647")
 target_path = NodePath("..")
 function_name = "changeSharkFrame"
 function_arguments = [2]
-hide_dialogue_box = false
-wait_for_signal_to_continue = ""
 
 [sub_resource type="Resource" id="Resource_q8hcw"]
 script = ExtResource("38_ai8s7")
 speaker_name = "Loan Shark"
 speaker_img = ExtResource("39_luuut")
 speaker_img_Hframes = 2
-speaker_img_rest_frame = 0
 text = "[rainbow][wave]Flat Broke![/wave][/rainbow]"
 text_speed = 15.0
 text_sound = ExtResource("40_rmqjj")
-text_volume_db = 0
-text_volume_pitch_min = 0.85
-text_volume_pitch_max = 1.15
-camera_position = Vector2(999.999, 999.999)
-camera_transition_time = 1.0
 
 [sub_resource type="Resource" id="Resource_3k81x"]
 script = ExtResource("37_e3647")
 target_path = NodePath("..")
 function_name = "changeSharkFrame"
 function_arguments = [3]
-hide_dialogue_box = false
-wait_for_signal_to_continue = ""
 
 [sub_resource type="Resource" id="Resource_emugd"]
 script = ExtResource("38_ai8s7")
-speaker_name = ""
 speaker_img = ExtResource("39_luuut")
 speaker_img_Hframes = 2
-speaker_img_rest_frame = 0
 text = "Luckily for you, I just so happen to have..."
 text_speed = 15.0
 text_sound = ExtResource("40_rmqjj")
-text_volume_db = 0
-text_volume_pitch_min = 0.85
-text_volume_pitch_max = 1.15
-camera_position = Vector2(999.999, 999.999)
-camera_transition_time = 1.0
 
 [sub_resource type="Resource" id="Resource_cge0d"]
 script = ExtResource("37_e3647")
 target_path = NodePath("..")
 function_name = "changeSharkFrame"
 function_arguments = [1]
-hide_dialogue_box = false
-wait_for_signal_to_continue = ""
 
 [sub_resource type="Resource" id="Resource_gniqk"]
 script = ExtResource("38_ai8s7")
-speaker_name = ""
 speaker_img = ExtResource("39_luuut")
 speaker_img_Hframes = 2
-speaker_img_rest_frame = 0
 text = "Just the thing you need!"
 text_speed = 15.0
 text_sound = ExtResource("40_rmqjj")
-text_volume_db = 0
-text_volume_pitch_min = 0.85
-text_volume_pitch_max = 1.15
-camera_position = Vector2(999.999, 999.999)
-camera_transition_time = 1.0
 
 [sub_resource type="Resource" id="Resource_7jtav"]
 script = ExtResource("37_e3647")
 target_path = NodePath("..")
 function_name = "changeSharkFrame"
 function_arguments = [3]
-hide_dialogue_box = false
-wait_for_signal_to_continue = ""
 
 [sub_resource type="Resource" id="Resource_ayycp"]
 script = ExtResource("38_ai8s7")
-speaker_name = ""
 speaker_img = ExtResource("39_luuut")
 speaker_img_Hframes = 2
-speaker_img_rest_frame = 0
 text = "I'll give ya a loan, on the house!"
 text_speed = 15.0
 text_sound = ExtResource("40_rmqjj")
-text_volume_db = 0
-text_volume_pitch_min = 0.85
-text_volume_pitch_max = 1.15
-camera_position = Vector2(999.999, 999.999)
-camera_transition_time = 1.0
 
 [sub_resource type="Resource" id="Resource_o8ckw"]
 script = ExtResource("37_e3647")
 target_path = NodePath("..")
 function_name = "changeSharkFrame"
 function_arguments = [2]
-hide_dialogue_box = false
-wait_for_signal_to_continue = ""
 
 [sub_resource type="Resource" id="Resource_gxm60"]
 script = ExtResource("38_ai8s7")
-speaker_name = ""
 speaker_img = ExtResource("39_luuut")
 speaker_img_Hframes = 2
-speaker_img_rest_frame = 0
 text = "Don't spend it all in one place!"
 text_speed = 15.0
 text_sound = ExtResource("40_rmqjj")
-text_volume_db = 0
-text_volume_pitch_min = 0.85
-text_volume_pitch_max = 1.15
-camera_position = Vector2(999.999, 999.999)
-camera_transition_time = 1.0
 
 [sub_resource type="Resource" id="Resource_bwvt0"]
 script = ExtResource("37_e3647")
 target_path = NodePath("..")
 function_name = "changeSharkFrame"
 function_arguments = [6]
-hide_dialogue_box = false
-wait_for_signal_to_continue = ""
 
 [sub_resource type="Resource" id="Resource_ynxyd"]
 script = ExtResource("38_ai8s7")
-speaker_name = ""
 speaker_img = ExtResource("39_luuut")
 speaker_img_Hframes = 2
-speaker_img_rest_frame = 0
 text = "Uhhh... buddy, i don't know if you know this..."
 text_speed = 15.0
 text_sound = ExtResource("40_rmqjj")
-text_volume_db = 0
-text_volume_pitch_min = 0.85
-text_volume_pitch_max = 1.15
-camera_position = Vector2(999.999, 999.999)
-camera_transition_time = 1.0
 
 [sub_resource type="Resource" id="Resource_cliy1"]
 script = ExtResource("37_e3647")
 target_path = NodePath("..")
 function_name = "changeSharkFrame"
 function_arguments = [4]
-hide_dialogue_box = false
-wait_for_signal_to_continue = ""
 
 [sub_resource type="Resource" id="Resource_km4q7"]
 script = ExtResource("38_ai8s7")
-speaker_name = ""
 speaker_img = ExtResource("39_luuut")
 speaker_img_Hframes = 2
-speaker_img_rest_frame = 0
 text = "[shake]...but you're bleeding my cash like crazy here![/shake]"
 text_speed = 15.0
 text_sound = ExtResource("40_rmqjj")
-text_volume_db = 0
-text_volume_pitch_min = 0.85
-text_volume_pitch_max = 1.15
-camera_position = Vector2(999.999, 999.999)
-camera_transition_time = 1.0
 
 [sub_resource type="Resource" id="Resource_mc8en"]
 script = ExtResource("37_e3647")
 target_path = NodePath("..")
 function_name = "changeSharkFrame"
 function_arguments = [6]
-hide_dialogue_box = false
-wait_for_signal_to_continue = ""
 
 [sub_resource type="Resource" id="Resource_s1pel"]
 script = ExtResource("38_ai8s7")
-speaker_name = ""
 speaker_img = ExtResource("39_luuut")
 speaker_img_Hframes = 2
-speaker_img_rest_frame = 0
 text = "I'll give ya another chance, but from now on..."
 text_speed = 15.0
 text_sound = ExtResource("40_rmqjj")
-text_volume_db = 0
-text_volume_pitch_min = 0.85
-text_volume_pitch_max = 1.15
-camera_position = Vector2(999.999, 999.999)
-camera_transition_time = 1.0
 
 [sub_resource type="Resource" id="Resource_iaygg"]
 script = ExtResource("37_e3647")
 target_path = NodePath("..")
 function_name = "changeSharkFrame"
 function_arguments = [5]
-hide_dialogue_box = false
-wait_for_signal_to_continue = ""
 
 [sub_resource type="Resource" id="Resource_a1hmg"]
 script = ExtResource("38_ai8s7")
-speaker_name = ""
 speaker_img = ExtResource("39_luuut")
 speaker_img_Hframes = 2
-speaker_img_rest_frame = 0
 text = "[shake][color=red]IT'LL COST YOU.[/color[/shake]"
 text_speed = 10.0
 text_sound = ExtResource("40_rmqjj")
-text_volume_db = 0
 text_volume_pitch_min = 0.2
 text_volume_pitch_max = 0.3
-camera_position = Vector2(999.999, 999.999)
-camera_transition_time = 1.0
 
 [sub_resource type="Resource" id="Resource_4io4a"]
 script = ExtResource("38_ai8s7")
-speaker_name = ""
 speaker_img = ExtResource("39_luuut")
 speaker_img_Hframes = 2
-speaker_img_rest_frame = 0
 text = "How's my little loanee doing?"
 text_speed = 15.0
 text_sound = ExtResource("40_rmqjj")
-text_volume_db = 0
-text_volume_pitch_min = 0.85
-text_volume_pitch_max = 1.15
-camera_position = Vector2(999.999, 999.999)
-camera_transition_time = 1.0
 
 [sub_resource type="Resource" id="Resource_dkwtu"]
 script = ExtResource("38_ai8s7")
-speaker_name = ""
 speaker_img = ExtResource("39_luuut")
 speaker_img_Hframes = 2
-speaker_img_rest_frame = 0
 text = "..."
 text_speed = 15.0
 text_sound = ExtResource("40_rmqjj")
-text_volume_db = 0
-text_volume_pitch_min = 0.85
-text_volume_pitch_max = 1.15
-camera_position = Vector2(999.999, 999.999)
-camera_transition_time = 1.0
 
 [sub_resource type="Resource" id="Resource_5ea41"]
 script = ExtResource("37_e3647")
 target_path = NodePath("..")
 function_name = "changeSharkFrame"
 function_arguments = [4]
-hide_dialogue_box = false
-wait_for_signal_to_continue = ""
 
 [sub_resource type="Resource" id="Resource_kfs85"]
 script = ExtResource("38_ai8s7")
-speaker_name = ""
 speaker_img = ExtResource("39_luuut")
 speaker_img_Hframes = 2
-speaker_img_rest_frame = 0
 text = "[shake]Are ya kidding me, you're broke again??[/shake]"
 text_speed = 15.0
 text_sound = ExtResource("40_rmqjj")
-text_volume_db = 0
-text_volume_pitch_min = 0.85
-text_volume_pitch_max = 1.15
-camera_position = Vector2(999.999, 999.999)
-camera_transition_time = 1.0
 
 [sub_resource type="Resource" id="Resource_sanvr"]
 script = ExtResource("38_ai8s7")
-speaker_name = ""
 speaker_img = ExtResource("39_luuut")
 speaker_img_Hframes = 2
-speaker_img_rest_frame = 0
 text = "..."
 text_speed = 15.0
 text_sound = ExtResource("40_rmqjj")
-text_volume_db = 0
-text_volume_pitch_min = 0.85
-text_volume_pitch_max = 1.15
-camera_position = Vector2(999.999, 999.999)
-camera_transition_time = 1.0
 
 [sub_resource type="Resource" id="Resource_61mmu"]
 script = ExtResource("37_e3647")
 target_path = NodePath("..")
 function_name = "changeSharkFrame"
 function_arguments = [3]
-hide_dialogue_box = false
-wait_for_signal_to_continue = ""
 
 [sub_resource type="Resource" id="Resource_h07pi"]
 script = ExtResource("38_ai8s7")
-speaker_name = ""
 speaker_img = ExtResource("39_luuut")
 speaker_img_Hframes = 2
-speaker_img_rest_frame = 0
 text = "[rainbow][wave]That's great![/rainbow][/wave]"
 text_speed = 15.0
 text_sound = ExtResource("40_rmqjj")
-text_volume_db = 0
-text_volume_pitch_min = 0.85
-text_volume_pitch_max = 1.15
-camera_position = Vector2(999.999, 999.999)
-camera_transition_time = 1.0
 
 [sub_resource type="Resource" id="Resource_7m53a"]
 script = ExtResource("37_e3647")
 target_path = NodePath("..")
 function_name = "changeSharkFrame"
 function_arguments = [1]
-hide_dialogue_box = false
-wait_for_signal_to_continue = ""
 
 [sub_resource type="Resource" id="Resource_edl7g"]
 script = ExtResource("38_ai8s7")
-speaker_name = ""
 speaker_img = ExtResource("39_luuut")
 speaker_img_Hframes = 2
-speaker_img_rest_frame = 0
 text = "I just [wave][color=red]LOVE[/color][/wave] a returning customer! Just don't forget..."
 text_speed = 15.0
 text_sound = ExtResource("40_rmqjj")
-text_volume_db = 0
-text_volume_pitch_min = 0.85
-text_volume_pitch_max = 1.15
-camera_position = Vector2(999.999, 999.999)
-camera_transition_time = 1.0
 
 [sub_resource type="Resource" id="Resource_i1i86"]
 script = ExtResource("37_e3647")
 target_path = NodePath("..")
 function_name = "changeSharkFrame"
 function_arguments = [5]
-hide_dialogue_box = false
-wait_for_signal_to_continue = ""
 
 [sub_resource type="Resource" id="Resource_bvq5a"]
 script = ExtResource("38_ai8s7")
-speaker_name = ""
 speaker_img = ExtResource("39_luuut")
 speaker_img_Hframes = 2
-speaker_img_rest_frame = 0
 text = "[color=red][shake]I ALWAYS GET WHATS OWED[/shake][/color]"
 text_speed = 12.0
 text_sound = ExtResource("40_rmqjj")
-text_volume_db = 0
 text_volume_pitch_min = 0.2
 text_volume_pitch_max = 0.3
-camera_position = Vector2(999.999, 999.999)
-camera_transition_time = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0r3jn"]
 size = Vector2(73, 171)
@@ -1201,9 +1044,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6l5cl"]
 _data = {
-"RESET": SubResource("Animation_gw4nn"),
-"fade": SubResource("Animation_8a31l"),
-"return": SubResource("Animation_53u0m")
+&"RESET": SubResource("Animation_gw4nn"),
+&"fade": SubResource("Animation_8a31l"),
+&"return": SubResource("Animation_53u0m")
 }
 
 [sub_resource type="Animation" id="Animation_2m4rg"]
@@ -1288,8 +1131,8 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_11cuq"]
 _data = {
-"RESET": SubResource("Animation_2m4rg"),
-"blink": SubResource("Animation_8bmmd")
+&"RESET": SubResource("Animation_2m4rg"),
+&"blink": SubResource("Animation_8bmmd")
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n51mi"]
@@ -1318,9 +1161,9 @@ shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.4
 shader_parameter/vignette_opacity = 1.0
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qpgfv"]
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oc2hr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qpgfv"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y06rg"]
 
@@ -1406,8 +1249,8 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lwsti"]
 _data = {
-"RESET": SubResource("Animation_jh7v6"),
-"lights": SubResource("Animation_apr0s")
+&"RESET": SubResource("Animation_jh7v6"),
+&"lights": SubResource("Animation_apr0s")
 }
 
 [sub_resource type="Animation" id="Animation_mjv31"]
@@ -1415,16 +1258,16 @@ resource_name = "dance"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2jrtu"]
 _data = {
-"dance": SubResource("Animation_mjv31")
+&"dance": SubResource("Animation_mjv31")
 }
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_45vvb"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nhvkq"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v7whx"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vsy6t"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v7whx"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nhvkq"]
 
 [sub_resource type="Animation" id="Animation_wvu5r"]
 length = 0.001
@@ -1459,17 +1302,17 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2j2jm"]
 _data = {
-"RESET": SubResource("Animation_wvu5r"),
-"pressed": SubResource("Animation_dm7tx")
+&"RESET": SubResource("Animation_wvu5r"),
+&"pressed": SubResource("Animation_dm7tx")
 }
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1sgx2"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f8uhe"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_18bji"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fcplq"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_18bji"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f8uhe"]
 
 [sub_resource type="Animation" id="Animation_102lt"]
 length = 0.001
@@ -1505,15 +1348,15 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4rxyo"]
 _data = {
-"RESET": SubResource("Animation_102lt"),
-"dance": SubResource("Animation_klqyc")
+&"RESET": SubResource("Animation_102lt"),
+&"dance": SubResource("Animation_klqyc")
 }
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ta2ky"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ivdae"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_150vu"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ivdae"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ta2ky"]
 
 [sub_resource type="Animation" id="Animation_egklq"]
 length = 0.001
@@ -1706,14 +1549,16 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ut1pv"]
 _data = {
-"RESET": SubResource("Animation_egklq"),
-"appear": SubResource("Animation_3a6ms"),
-"disappear": SubResource("Animation_tlq3o")
+&"RESET": SubResource("Animation_egklq"),
+&"appear": SubResource("Animation_3a6ms"),
+&"disappear": SubResource("Animation_tlq3o")
 }
 
 [node name="level" type="Node3D"]
 script = ExtResource("1_rljoh")
 eUtils = SubResource("Resource_rctjk")
+obtDatabase = ExtResource("3_qo0dx")
+spaceDatabase = ExtResource("4_ej3wx")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.914642, 0.404264, 0, -0.404264, 0.914642, 0, 3.16594, 10.8507)
@@ -1725,7 +1570,7 @@ fov = 83.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Camera3D"]
 libraries = {
-"": SubResource("AnimationLibrary_kqxwm")
+&"": SubResource("AnimationLibrary_kqxwm")
 }
 
 [node name="lighting & env" type="Node3D" parent="."]
@@ -1999,7 +1844,7 @@ spot_angle = 35.3799
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="lighting & env/lights/modeLights/SpotLight3D3"]
 libraries = {
-"": SubResource("AnimationLibrary_rf2mu")
+&"": SubResource("AnimationLibrary_rf2mu")
 }
 
 [node name="SpotLight3D4" type="SpotLight3D" parent="lighting & env/lights/modeLights"]
@@ -2013,7 +1858,7 @@ spot_angle = 35.3799
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="lighting & env/lights/modeLights/SpotLight3D4"]
 root_node = NodePath("../../SpotLight3D3")
 libraries = {
-"": SubResource("AnimationLibrary_inuk2")
+&"": SubResource("AnimationLibrary_inuk2")
 }
 
 [node name="SubViewport" type="SubViewport" parent="."]
@@ -2030,78 +1875,97 @@ texture = ExtResource("1_a7teg")
 [node name="obtainable" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
 position = Vector2(1114, 612)
 scale = Vector2(2, 2)
+obtDatabase = ExtResource("3_qo0dx")
 
 [node name="obtainable2" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
 position = Vector2(666, 804)
 scale = Vector2(2, 2)
+obtDatabase = ExtResource("3_qo0dx")
 
 [node name="obtainable3" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
 position = Vector2(890, 516)
 scale = Vector2(2, 2)
+obtDatabase = ExtResource("3_qo0dx")
 
 [node name="obtainable4" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
 position = Vector2(986, 804)
 scale = Vector2(2, 2)
+obtDatabase = ExtResource("3_qo0dx")
 
 [node name="obtainable6" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
 position = Vector2(1146, 388)
 scale = Vector2(2, 2)
+obtDatabase = ExtResource("3_qo0dx")
 
 [node name="obtainable7" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
 position = Vector2(1338, 484)
 scale = Vector2(2, 2)
+obtDatabase = ExtResource("3_qo0dx")
 
 [node name="obtainable8" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
 position = Vector2(570, 36)
 scale = Vector2(2, 2)
+obtDatabase = ExtResource("3_qo0dx")
 
 [node name="obtainable9" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
 position = Vector2(634, 260)
 scale = Vector2(2, 2)
+obtDatabase = ExtResource("3_qo0dx")
 
 [node name="obtainable10" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
 position = Vector2(890, 164)
 scale = Vector2(2, 2)
+obtDatabase = ExtResource("3_qo0dx")
 
 [node name="obtainable11" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
 position = Vector2(1242, 36)
 scale = Vector2(2, 2)
+obtDatabase = ExtResource("3_qo0dx")
 
 [node name="obtainable12" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
 position = Vector2(986, 292)
 scale = Vector2(2, 2)
+obtDatabase = ExtResource("3_qo0dx")
 
 [node name="obtainable13" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
 position = Vector2(858, 356)
 scale = Vector2(2, 2)
+obtDatabase = ExtResource("3_qo0dx")
 
 [node name="obtainable14" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
 position = Vector2(986, 580)
 scale = Vector2(2, 2)
+obtDatabase = ExtResource("3_qo0dx")
 
 [node name="obtainable15" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
 position = Vector2(698, 740)
 scale = Vector2(2, 2)
+obtDatabase = ExtResource("3_qo0dx")
 
 [node name="obtainable16" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
 position = Vector2(602, 740)
 scale = Vector2(2, 2)
+obtDatabase = ExtResource("3_qo0dx")
 
 [node name="obtainable17" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
 position = Vector2(1178, 164)
 scale = Vector2(2, 2)
+obtDatabase = ExtResource("3_qo0dx")
 
 [node name="obtainable18" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
 position = Vector2(1306, 292)
 scale = Vector2(2, 2)
+obtDatabase = ExtResource("3_qo0dx")
 
 [node name="obtainable19" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
 position = Vector2(1306, 740)
 scale = Vector2(2, 2)
+obtDatabase = ExtResource("3_qo0dx")
 
 [node name="obtainable5" parent="SubViewport/obtainables" instance=ExtResource("13_2xnj0")]
 position = Vector2(666, 516)
 scale = Vector2(2, 2)
+obtDatabase = ExtResource("3_qo0dx")
 
 [node name="junctions" type="Node2D" parent="SubViewport"]
 position = Vector2(-198, -112)
@@ -3210,7 +3074,6 @@ scale = Vector2(1.5, 1.5)
 
 [node name="statusSprite" type="Control" parent="SubViewport/coinNumber"]
 texture_filter = 1
-layout_mode = 3
 anchors_preset = 0
 script = ExtResource("14_dc3qn")
 
@@ -3229,7 +3092,7 @@ flat = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/coinNumber/statusSprite"]
 root_node = NodePath("../Sprite2D")
 libraries = {
-"": SubResource("AnimationLibrary_y8u0f")
+&"": SubResource("AnimationLibrary_y8u0f")
 }
 
 [node name="moneyLabel" type="Label" parent="SubViewport/coinNumber/statusSprite"]
@@ -3263,7 +3126,7 @@ scale = Vector2(3, 3)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/obtainedAnim"]
 libraries = {
-"": SubResource("AnimationLibrary_pfo23")
+&"": SubResource("AnimationLibrary_pfo23")
 }
 
 [node name="gotItem" type="Label" parent="SubViewport/obtainedAnim"]
@@ -3360,7 +3223,7 @@ texture = ExtResource("13_1hduq")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/eventAnim"]
 libraries = {
-"": SubResource("AnimationLibrary_xum8k")
+&"": SubResource("AnimationLibrary_xum8k")
 }
 
 [node name="status" type="Control" parent="SubViewport"]
@@ -3393,7 +3256,7 @@ texture = ExtResource("17_es0wu")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/status/PanelContainer/1-0/statusSprite"]
 root_node = NodePath("../Sprite2D")
 libraries = {
-"": SubResource("AnimationLibrary_2mk88")
+&"": SubResource("AnimationLibrary_2mk88")
 }
 
 [node name="deathLabel" type="Label" parent="SubViewport/status/PanelContainer/1-0/statusSprite"]
@@ -3408,7 +3271,7 @@ text = "dfasdsadsa"
 
 [node name="deathLabelAnims" type="AnimationPlayer" parent="SubViewport/status/PanelContainer/1-0/statusSprite"]
 libraries = {
-"": SubResource("AnimationLibrary_exyok")
+&"": SubResource("AnimationLibrary_exyok")
 }
 
 [node name="VSeparator" type="Control" parent="SubViewport/status/PanelContainer"]
@@ -3489,7 +3352,7 @@ texture = ExtResource("13_1hduq")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/status/PanelContainer/1-2/statusSprite"]
 root_node = NodePath("../Sprite2D")
 libraries = {
-"": SubResource("AnimationLibrary_2mk88")
+&"": SubResource("AnimationLibrary_2mk88")
 }
 
 [node name="deathLabel" type="Label" parent="SubViewport/status/PanelContainer/1-2/statusSprite"]
@@ -3504,7 +3367,7 @@ text = "dfasdsadsa"
 
 [node name="deathLabelAnims" type="AnimationPlayer" parent="SubViewport/status/PanelContainer/1-2/statusSprite"]
 libraries = {
-"": SubResource("AnimationLibrary_exyok")
+&"": SubResource("AnimationLibrary_exyok")
 }
 
 [node name="VSeparator9" type="Control" parent="SubViewport/status/PanelContainer"]
@@ -3576,7 +3439,7 @@ texture = ExtResource("13_n248f")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/status/PanelContainer/1-3/statusSprite"]
 root_node = NodePath("../Sprite2D")
 libraries = {
-"": SubResource("AnimationLibrary_2mk88")
+&"": SubResource("AnimationLibrary_2mk88")
 }
 
 [node name="deathLabel" type="Label" parent="SubViewport/status/PanelContainer/1-3/statusSprite"]
@@ -3591,7 +3454,7 @@ text = "dfasdsadsa"
 
 [node name="deathLabelAnims" type="AnimationPlayer" parent="SubViewport/status/PanelContainer/1-3/statusSprite"]
 libraries = {
-"": SubResource("AnimationLibrary_exyok")
+&"": SubResource("AnimationLibrary_exyok")
 }
 
 [node name="VSeparator41" type="Control" parent="SubViewport/status/PanelContainer"]
@@ -3678,7 +3541,7 @@ texture = ExtResource("17_44415")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/status/PanelContainer/1-5/statusSprite"]
 root_node = NodePath("../Sprite2D")
 libraries = {
-"": SubResource("AnimationLibrary_2mk88")
+&"": SubResource("AnimationLibrary_2mk88")
 }
 
 [node name="deathLabel" type="Label" parent="SubViewport/status/PanelContainer/1-5/statusSprite"]
@@ -3693,7 +3556,7 @@ text = "dfasdsadsa"
 
 [node name="deathLabelAnims" type="AnimationPlayer" parent="SubViewport/status/PanelContainer/1-5/statusSprite"]
 libraries = {
-"": SubResource("AnimationLibrary_exyok")
+&"": SubResource("AnimationLibrary_exyok")
 }
 
 [node name="VSeparator87" type="Control" parent="SubViewport/status/PanelContainer"]
@@ -3780,7 +3643,7 @@ texture = ExtResource("25_2xqgb")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/status/PanelContainer/2-2/statusSprite"]
 root_node = NodePath("../Sprite2D")
 libraries = {
-"": SubResource("AnimationLibrary_2mk88")
+&"": SubResource("AnimationLibrary_2mk88")
 }
 
 [node name="deathLabel" type="Label" parent="SubViewport/status/PanelContainer/2-2/statusSprite"]
@@ -3795,7 +3658,7 @@ text = "dfasdsadsa"
 
 [node name="deathLabelAnims" type="AnimationPlayer" parent="SubViewport/status/PanelContainer/2-2/statusSprite"]
 libraries = {
-"": SubResource("AnimationLibrary_exyok")
+&"": SubResource("AnimationLibrary_exyok")
 }
 
 [node name="VSeparator61" type="Control" parent="SubViewport/status/PanelContainer"]
@@ -3873,7 +3736,7 @@ texture = ExtResource("26_2gl0d")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport/status/PanelContainer/2-4/statusSprite"]
 root_node = NodePath("../Sprite2D")
 libraries = {
-"": SubResource("AnimationLibrary_2mk88")
+&"": SubResource("AnimationLibrary_2mk88")
 }
 
 [node name="deathLabel" type="Label" parent="SubViewport/status/PanelContainer/2-4/statusSprite"]
@@ -3888,7 +3751,7 @@ text = "dfasdsadsa"
 
 [node name="deathLabelAnims" type="AnimationPlayer" parent="SubViewport/status/PanelContainer/2-4/statusSprite"]
 libraries = {
-"": SubResource("AnimationLibrary_exyok")
+&"": SubResource("AnimationLibrary_exyok")
 }
 
 [node name="loanShark" type="CharacterBody2D" parent="SubViewport" groups=["player"]]
@@ -3932,7 +3795,7 @@ script = ExtResource("41_jketd")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="outerFadeRect"]
 libraries = {
-"": SubResource("AnimationLibrary_6l5cl")
+&"": SubResource("AnimationLibrary_6l5cl")
 }
 
 [node name="Control" type="Control" parent="."]
@@ -3967,7 +3830,7 @@ script = ExtResource("43_nemvr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Control/spinButton/Sprite2D"]
 libraries = {
-"": SubResource("AnimationLibrary_11cuq")
+&"": SubResource("AnimationLibrary_11cuq")
 }
 
 [node name="Label" type="Label" parent="Control/spinButton/Sprite2D"]
@@ -4007,8 +3870,8 @@ grow_vertical = 0
 theme_override_colors/font_pressed_color = Color(0.572549, 0, 0, 1)
 theme_override_fonts/font = ExtResource("18_7x8mt")
 theme_override_font_sizes/font_size = 40
-theme_override_styles/focus = SubResource("StyleBoxEmpty_qpgfv")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_oc2hr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qpgfv")
 flat = true
 
 [node name="debugPanel" type="PanelContainer" parent="Control"]
@@ -4042,7 +3905,7 @@ layout_mode = 2
 text = "Current DIR:"
 
 [node name="curDIR" type="Label" parent="Control/debugPanel/VBoxContainer/curDIRlabel"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 124.0
 offset_top = -1.0
 offset_right = 176.0
@@ -4197,6 +4060,7 @@ offset_top = 814.0
 offset_right = 2270.0
 offset_bottom = 1270.0
 script = ExtResource("22_r6gmn")
+obtDatabase = ExtResource("3_qo0dx")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/itemMenu"]
 layout_mode = 2
@@ -4802,7 +4666,7 @@ script = ExtResource("57_ck147")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/titleSprite"]
 libraries = {
-"": SubResource("AnimationLibrary_lwsti")
+&"": SubResource("AnimationLibrary_lwsti")
 }
 
 [node name="titleLabel" type="RichTextLabel" parent="Menu"]
@@ -4814,15 +4678,15 @@ offset_bottom = 183.0
 scale = Vector2(0.8, 0.8)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("18_7x8mt")
-theme_override_fonts/mono_font = ExtResource("18_7x8mt")
-theme_override_fonts/italics_font = ExtResource("18_7x8mt")
-theme_override_fonts/bold_italics_font = ExtResource("18_7x8mt")
 theme_override_fonts/bold_font = ExtResource("18_7x8mt")
+theme_override_fonts/bold_italics_font = ExtResource("18_7x8mt")
+theme_override_fonts/italics_font = ExtResource("18_7x8mt")
+theme_override_fonts/mono_font = ExtResource("18_7x8mt")
+theme_override_font_sizes/normal_font_size = 96
+theme_override_font_sizes/bold_font_size = 96
 theme_override_font_sizes/bold_italics_font_size = 96
 theme_override_font_sizes/italics_font_size = 96
 theme_override_font_sizes/mono_font_size = 96
-theme_override_font_sizes/normal_font_size = 96
-theme_override_font_sizes/bold_font_size = 96
 bbcode_enabled = true
 text = "[color=gold][wave freq=2.5 amp=60]Gacha Pwn[/wave][/color]"
 
@@ -4841,7 +4705,7 @@ script = ExtResource("58_k6ufh")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/creditsLabel"]
 libraries = {
-"": SubResource("AnimationLibrary_2jrtu")
+&"": SubResource("AnimationLibrary_2jrtu")
 }
 
 [node name="mainOptions" type="PanelContainer" parent="Menu"]
@@ -4864,9 +4728,9 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.833333, 0, 1)
 theme_override_fonts/font = ExtResource("18_7x8mt")
 theme_override_font_sizes/font_size = 30
-theme_override_styles/focus = SubResource("StyleBoxEmpty_nhvkq")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_vsy6t")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_v7whx")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vsy6t")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nhvkq")
 text = "
 New Game
  "
@@ -4881,7 +4745,7 @@ hframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/mainOptions/VBoxContainer/newgame/buttonSprite"]
 libraries = {
-"": SubResource("AnimationLibrary_2j2jm")
+&"": SubResource("AnimationLibrary_2j2jm")
 }
 
 [node name="subOptions" type="PanelContainer" parent="Menu"]
@@ -4903,16 +4767,16 @@ layout_mode = 2
 
 [node name="standardMode" type="Button" parent="Menu/subOptions/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_hover_pressed_color = Color(1, 0.843137, 0, 1)
-theme_override_colors/font_hover_color = Color(1, 0.843137, 0, 1)
-theme_override_colors/font_pressed_color = Color(1, 0.843137, 0, 1)
-theme_override_colors/font_focus_color = Color(1, 0.843137, 0, 1)
 theme_override_colors/font_color = Color(0.433333, 1, 0, 1)
+theme_override_colors/font_focus_color = Color(1, 0.843137, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.843137, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 0.843137, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 0.843137, 0, 1)
 theme_override_fonts/font = ExtResource("18_7x8mt")
 theme_override_font_sizes/font_size = 30
-theme_override_styles/focus = SubResource("StyleBoxEmpty_f8uhe")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_fcplq")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_18bji")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_fcplq")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_f8uhe")
 text = " 
 Standard
  "
@@ -4927,7 +4791,7 @@ hframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/subOptions/VBoxContainer/standardMode/buttonSprite"]
 libraries = {
-"": SubResource("AnimationLibrary_2j2jm")
+&"": SubResource("AnimationLibrary_2j2jm")
 }
 
 [node name="desclabel" type="RichTextLabel" parent="Menu/subOptions/VBoxContainer/standardMode"]
@@ -4954,21 +4818,22 @@ script = ExtResource("57_qim8h")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/subOptions/VBoxContainer/standardMode/descSprite"]
 libraries = {
-"": SubResource("AnimationLibrary_4rxyo")
+&"": SubResource("AnimationLibrary_4rxyo")
 }
 
 [node name="challengeMode" type="Button" parent="Menu/subOptions/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_hover_pressed_color = Color(1, 0.843137, 0, 1)
-theme_override_colors/font_hover_color = Color(1, 0.843137, 0, 1)
-theme_override_colors/font_pressed_color = Color(1, 0.843137, 0, 1)
-theme_override_colors/font_focus_color = Color(1, 0.843137, 0, 1)
 theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(1, 0.843137, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.843137, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 0.843137, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 0.843137, 0, 1)
 theme_override_fonts/font = ExtResource("18_7x8mt")
 theme_override_font_sizes/font_size = 30
-theme_override_styles/focus = SubResource("StyleBoxEmpty_ta2ky")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_150vu")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_ivdae")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_150vu")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ta2ky")
+disabled = true
 text = " 
 Serious
  "
@@ -4983,7 +4848,7 @@ hframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/subOptions/VBoxContainer/challengeMode/buttonSprite"]
 libraries = {
-"": SubResource("AnimationLibrary_2j2jm")
+&"": SubResource("AnimationLibrary_2j2jm")
 }
 
 [node name="desclabel2" type="RichTextLabel" parent="Menu/subOptions/VBoxContainer/challengeMode"]
@@ -5014,12 +4879,12 @@ script = ExtResource("57_qim8h")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/subOptions/VBoxContainer/challengeMode/descSprite2"]
 libraries = {
-"": SubResource("AnimationLibrary_4rxyo")
+&"": SubResource("AnimationLibrary_4rxyo")
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Menu/subOptions"]
 libraries = {
-"": SubResource("AnimationLibrary_ut1pv")
+&"": SubResource("AnimationLibrary_ut1pv")
 }
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Menu"]

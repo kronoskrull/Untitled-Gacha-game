@@ -2,6 +2,8 @@ extends Node3D
 
 
 @export var eUtils: eventUtils
+@export var obtDatabase: Script
+@export var spaceDatabase: Script
 
 @onready var player: Node2D = $SubViewport/player
 var playerDIR: Vector2 = Vector2(0, 32)
@@ -30,7 +32,7 @@ var deltaMoney: int = 0
 
 
 
-var lastObtained: int
+var lastObtained: Array
 @onready var itemSprite: Sprite2D = $SubViewport/obtainedAnim/itemSprite
 @onready var itemAnims: AnimationPlayer = $SubViewport/obtainedAnim/AnimationPlayer
 @onready var itemName: Label = $SubViewport/obtainedAnim/itemname
@@ -38,7 +40,7 @@ var lastObtained: int
 @onready var commentLabel: Label = $SubViewport/obtainedAnim/commentLabel
 @onready var obtainedAnim: Node2D = $SubViewport/obtainedAnim
 var itemsActivating: Array = [0]
-var newItemIndex: int
+var newItem: Array
 var newActLabel: String
 @onready var invItem = preload("res://Level/invItem.tscn")
 @onready var invSeparator = preload("res://Level/inv_separator.tscn")
@@ -96,7 +98,7 @@ var eventPause: bool = false
 @onready var spinOps: Array = [spinner_slot_0, spinner_slot_1, spinner_slot_2, spinner_slot_3, spinner_slot_4, 
 spinner_slot_5, spinner_slot_6, spinner_slot_7, spinner_slot_8, spinner_slot_9]
 
-var lastSpaceEffect: Vector2
+var lastSpaceEffect: Array
 
 var debugSelect
 var debugRarity: int = 0
@@ -119,6 +121,10 @@ var firstSpin: bool = true
 var standPressed: int = 0
 var serPress: int = 0
 
+var event_popup_up := false
+var event_queued := false
+var item_popup_up := false
+var item_queued := false
 
 @onready var monUpdateTag = $SubViewport/coinNumber/statusSprite/moneyLabel/monUpdate
 var ITEM_GET = preload("res://itemGet.tscn")
@@ -135,6 +141,12 @@ func _process(delta: float) -> void:
 		$"Control/spinButton".hide()
 	
 	roll_result.text = str(spinResult)                     #CULL
+	
+	if Input.is_action_pressed("interact"):
+		if item_popup_up:
+			end_item_popup()
+		if event_popup_up:
+			end_event_popup()
 
 func monUpdate(Delta: int) -> void:
 	money += Delta
@@ -175,78 +187,96 @@ func interpretSpin() -> void:
 		getIndex.get_child(0).timesRolled += 1
 		var spinResult: int = getIndex.get_child(0).index
 		
-		for x in obtainedItems:
-			if x == 5 and spinResult == 0:
-				var i = randi_range(doubleChance, 4)
-				if i >= 4:
-					itemsActivating.clear()
-					itemsActivating.append(5)
-					itemActivate(itemsActivating)
-					canSpin = true
-					interpretSpin()
 		
-		
-		
-		
+		if obtainedItems.has("Anywhere But Here") and spinResult == 0:
+			var i = randi_range(doubleChance, 4)
+			if i >= 4:
+				itemsActivating.clear()
+				itemsActivating.append(5)
+				itemActivate(itemsActivating)
+				canSpin = true
+				interpretSpin()
 		
 		var distance: int = spinResult
 		
-		
-		for i in obtainedItems:
-			if i == 0:
-				var x = randi_range(doubleChance, 10)
-				if x >= 10:
-					itemsActivating.append(0)
-					distance += 1
-		
-		for i in obtainedItems:
-			if i == 3:
-				itemsActivating.append(3)
+		if obtainedItems.has("Leg Day"):
+			var x = randi_range(doubleChance, 10)
+			if x >= 10:
+				itemsActivating.append(0)
 				distance += 1
-			
 		
-		for i in obtainedItems:
-			if i == 6:
-				itemsActivating.append(6)
-				distance += 3
+		if obtainedItems.has("Leg Day+"):
+			itemsActivating.append(3)
+			distance += 1
+		
+		if obtainedItems.has("Leg Day++"):
+			itemsActivating.append(6)
+			distance += 3
 		
 		itemActivate(itemsActivating)
-		move(distance)
+		
+		if distance > 0:
+			move(distance)
+		else:
+			
+			if rareSpaceCoinLoss:
+				rareSpaceCoinLoss = false
+				coinPerSpace(0, distance)
+			if ultraSpaceCoinGain:
+				ultraSpaceCoinGain = false
+				coinPerSpace(1, distance)
+			if ultraSpaceCoinLoss:
+				ultraSpaceCoinLoss = false
+			coinPerSpace(2, distance)
+			
+			eventPause = true
+			spaceEvent()
 
 func itemActivate(items: Array) -> void:
 	for c in inventory.get_children():
-		if items.has(c.index):
+		if items.has(c):
 			c.activate()
 		await get_tree().create_timer(0.05).timeout
 
 func move(distance: int) -> void:
 	var locDistance: int = distance
-	if locDistance > 0:
-		for i in locDistance:
-			i = locDistance
-			if i > 0:
-				await pauseForEvent()
-				player.position = Vector2(player.position.x + playerDIR.x, player.position.y + playerDIR.y)
-				audioPlayer.stream = preload("res://Assets/Audio/hitHurt (1).wav")
-				audioPlayer.play()
+	
+	for i in locDistance:
+		var x = locDistance
+		if x > 0:
+			if item_queued:
+				item_queued = false
+				item_popup_up = true
+				pause_for_item()
+			if event_queued:
+				event_queued = false
+				event_popup_up = true
+				pauseForEvent()
+			
+			if !item_popup_up:
+				move_next_space()
+				
 				await get_tree().create_timer(0.6).timeout
 				locDistance -= 1
-			
-		if rareSpaceCoinLoss:
-			rareSpaceCoinLoss = false
-			coinPerSpace(0, distance)
-		if ultraSpaceCoinGain:
-			ultraSpaceCoinGain = false
-			coinPerSpace(1, distance)
-		if ultraSpaceCoinLoss:
-			ultraSpaceCoinLoss = false
-			coinPerSpace(2, distance)
 		
-		eventPause = true
-		spaceEvent()
-	else:
-		eventPause = true
-		spaceEvent()
+	if rareSpaceCoinLoss:
+		rareSpaceCoinLoss = false
+		coinPerSpace(0, distance)
+	if ultraSpaceCoinGain:
+		ultraSpaceCoinGain = false
+		coinPerSpace(1, distance)
+	if ultraSpaceCoinLoss:
+		ultraSpaceCoinLoss = false
+		coinPerSpace(2, distance)
+	
+	eventPause = true
+	spaceEvent()
+
+func move_next_space() -> void:
+	player.position = Vector2(player.position.x + playerDIR.x, player.position.y + playerDIR.y)
+	audioPlayer.stream = preload("res://Assets/Audio/hitHurt (1).wav")
+	audioPlayer.play()
+	
 
 func coinPerSpace(type: int, distance: int) -> void:
 	var locDistance: int
@@ -275,14 +305,30 @@ func coinPerSpace(type: int, distance: int) -> void:
 	monUpdate(deltaMoney)
 
 func pauseForEvent() -> void:
+	fadeRect.color.a = lerpf(fadeRect.color.a, 0.7, 1)
+	eventAnim.show()
+	eventTrigger()
 
-	while obtainablePause:
-		
-		fadeRect.color.a = lerpf(fadeRect.color.a, 0.7, 1)
-		
-		obtainableAnim()
-		
-		await get_tree().create_timer(5.0).timeout
+func end_event_popup() -> void:
+	event_popup_up = false
+	canSpin = true
+	debugSelect = false
+	eventSprite.hide()
+	eventAnim.hide()
+	fadeRect.color.a = lerpf(fadeRect.color.a, 0, 1)
+	eventPause = false
+	if money <= 0:
+		loan_shark.enter()
+
+func pause_for_item() -> void:
+	item_queued = false
+	item_popup_up = true
+	fadeRect.color.a = lerpf(fadeRect.color.a, 0.7, 1)
+	obtainableAnim()
+
+func end_item_popup() -> void:
+	if item_popup_up:
+		item_popup_up = false
 		fadeRect.color.a = lerpf(fadeRect.color.a, 0, 1)
 		obtainedAnim.hide()
 		itemAnims.stop()
@@ -293,370 +339,46 @@ func pauseForEvent() -> void:
 		inventory.add_child(invSeparatorInstance)
 		inventory.add_child(invSeparatorInstance)
 		invItemInstance.z_index = 5
-		invItemInstance.index = newItemIndex
 		invItemInstance.itemName.text = itemName.text
 		invItemInstance.itemName.self_modulate = Color(rarity)
 		invItemInstance.itemSprite.texture = itemSprite.texture
 		invItemInstance.descLabel.text = itemEffect.text
 		invItemInstance.activateTipLabel.text = newActLabel
 		
-		obtainablePause = false
-		continue
-	
-	
-	while eventPause:
-		fadeRect.color.a = lerpf(fadeRect.color.a, 0.7, 1)
-		eventAnim.show()
-		eventTrigger()
-		await get_tree().create_timer(5.0).timeout
-		eventSprite.hide()
-		eventAnim.hide()
-		fadeRect.color.a = lerpf(fadeRect.color.a, 0, 1)
-		eventPause = false
-		if money <= 0:
-			loan_shark.enter()
-	
-	
+		if event_queued:
+			event_queued = false
+			pauseForEvent()
 
-
-# This function determines based on probability the rarity of the effect,
-# then picks a random effect from that rarity. This system does not differentiate
-# from positive or negative, as both have an equal chance of triggering. To this
-# end, the number of positive and negative effects in a given rarity should stay
-# roughly even, but as the number of effects increases this will become less of an
-# issue.
-
-# To add more effects, simply continue in the same format that the other effects
-# are, adding the new effect to the end of the list.
+## Pick a random event from the database and flags it to trigger the popup
 func spaceEvent() -> void:
 	randomize()
 	var i = randi_range(0, 100)
-	var spaceRarity
+	
+	
 	if i >= 0 and i < 70:
-		spaceRarity = 0
+		lastSpaceEffect = spaceDatabase.COMMON.pick_random()
+		eventName.self_modulate = common
 	if i >= 70 and i < 95:
-		spaceRarity = 1
+		lastSpaceEffect = spaceDatabase.RARE.pick_random()
+		eventName.self_modulate = rare
 	if i >= 95 and i <= 100:
-		spaceRarity = 2
+		lastSpaceEffect = spaceDatabase.ULTRA.pick_random()
+		eventName.self_modulate = ultraRare
 	
-	var s = randi_range(0, 5)
-	if debugSelect:
-		s = debugX
-	if debugSelect:
-		spaceRarity = debugRarity
+	eventName.text = lastSpaceEffect[0]
+	eventStory.text = lastSpaceEffect[1].pick_random()
+	eventEffect.text = lastSpaceEffect[2]
 	
-	match spaceRarity:
+	match lastSpaceEffect[3]:
+		"positive":
+			eventEffect.self_modulate = positive
+		"negative":
+			eventEffect.self_modulate = negative
+		"unique":
+			eventEffect.self_modulate = unique
 	
-		0:                                  # Common Effects
-			lastSpaceEffect.x = 0
-			eventName.self_modulate = common
-			match s:                  
-				0:        # +1
-					eventName.text = "Penny Pincher"
-					var x = randi_range(0, 2)
-					match x:
-						0:
-							eventStory.text = "You find a lonesome coin in the desolate maze. Better
-							than nothing, right?"
-						1:
-							eventStory.text = "A corpse lies here, with a single shining coin in its
-							rotting hand. You take it anyway, better yours than his."
-						2:
-							eventStory.text = "You find a suitcase full of money! Suddenly, an IRS 
-							agent rounds the corner and takes away taxes, leaving a single coin in 
-							revenue. Bummer."
-					eventEffect.text = "Gain 1 coin"
-					eventEffect.self_modulate = positive
-					lastSpaceEffect.y = 0
-				1:        # +2
-					eventName.text = "Cash Bonus"
-					var x = randi_range(0, 2)
-					match x:
-						0:
-							eventStory.text = "A few coins are strewn on the ground here. A nice haul
-							in such an empty place."
-						1:
-							eventStory.text = "An owl flies in from above, dropping an envelope with
-							your name on it - it's your royalties for your mixtape!"
-						2:
-							eventStory.text = "While digging through your pockets, you find some coins
-							mixed with a wad of old gum. You've won, but at what cost?"
-					eventEffect.text = "Gain 2 coins"
-					eventEffect.self_modulate = positive
-					lastSpaceEffect.y = 1
-				2:        # +3
-					eventName.text = "Extra Credit"
-					var x = randi_range(0, 2)
-					match x:
-						0:
-							eventStory.text = "An albatross swoops through and drops a letter from
-							grandma - it's a birthday card! If only it wasn't 6 months late..."
-						1:
-							eventStory.text = "You stumble across a skeleton clutching a gold necklace.
-							 Were you above grave robbing, it might have stayed that way..."
-						2:
-							eventStory.text = "You found a suitcase full of money! Suddenly, an IRS
-							agent rounds the corner to take away taxes. You beat him to death before
-							he can. Take that, taxes!"
-					eventEffect.text = "Gain 3 coins"
-					eventEffect.self_modulate = positive
-					lastSpaceEffect.y = 2
-				3:        # -1
-					eventName.text = "A Minor Inconvenience"
-					var x = randi_range(0, 2)
-					match x:
-						0:
-							eventStory.text = "While admiring your coinage, you fumble your bag and
-							drop one into the conveniently placed sewer grate. Way to go."
-						1:
-							eventStory.text = "Digging through your pockets, you find a hole through
-							which a coin falls into a conveniently placed vat of acid you didn't realize
-							was there. Nice job."
-						2:
-							eventStory.text = "Trumpets bellow from above - The Rapture has come!...
-							 for your wallet. Even God needs a buck sometimes."
-					eventEffect.text = "Lose 1 coin"
-					eventEffect.self_modulate = negative
-					lastSpaceEffect.y = 3
-				4:        # -2
-					eventName.text = "Taxes and.. What Else?"
-					var x = randi_range(0, 2)
-					match x:
-						0:
-							eventStory.text = "A pelican flies through, dropping your credit card bill. 
-							Even here, there is no escape."
-						1:
-							eventStory.text = "An emu accosts you. You throw a handful of your shiniest
-							coins to distract it and make your escape."
-						2:
-							eventStory.text = "A passing seagull shits on your nicest shirt. Luckily, the
-							dry cleaners is just ahead."
-					eventEffect.text = "Lose 2 coins"
-					eventEffect.self_modulate = negative
-					lastSpaceEffect.y = 4
-				5:        # -3
-					eventName.text = "Defecit Spending"
-					var x = randi_range(0, 2)
-					match x:
-						0:
-							eventStory.text = "You discover crypto currency. Surely this will turn out well!"
-						1:
-							eventStory.text = "Passing by an arcade, you discover the hard way how
-							 bad you are at claw machines."
-						2:
-							eventStory.text = "A brand new [insert fad here] is your new favorite thing!
-							 You waste a shit ton of money on it and never touch it again."
-					eventEffect.text = "Lose 3 coins."
-					eventEffect.self_modulate = negative
-					lastSpaceEffect.y = 5
-		
-		1:                                 # Rare Effects
-			lastSpaceEffect.x = 1
-			eventName.self_modulate = rare
-			match s:                   
-				0:        # Can't lose coins next time you would
-					eventName.text = "Coinsurance"
-					var x = randi_range(0, 2)
-					match x:
-						0:
-							eventStory.text = "Who said wallet chains are out of style?"
-						1:
-							eventStory.text = "That quarter of your paycheck is finally paying off!"
-						2:
-							eventStory.text = "Nothing protects your personal space (and your wallet)
-							better than a gun!"
-					eventEffect.text = "Can't lose coins the next time you would"
-					eventEffect.self_modulate = positive
-					eventSprite.texture = preload("res://Assets/effects/eff1-0.png")
-					anims.play("bob")
-					eventSprite.show()
-					lastSpaceEffect.y = 0
-				1:        # +6 
-					eventName.text = "Investment Opportunity"
-					var x = randi_range(0, 2)
-					match x:
-						0:
-							eventStory.text = "You check your $HITCOIN wallet..."
-						1:
-							eventStory.text = "You invested in an indie gacha game for a game jam, and
-							somehow it wasn't half bad."
-						2:
-							eventStory.text = "You bought 10 shares in 'Bubba's Bathtub Moonshine'."
-					eventEffect.text = "Gain 6 coins"
-					eventEffect.self_modulate = positive
-					lastSpaceEffect.y = 1
-				2:        # Spend now, gain later
-					eventName.text = "Savings Account"
-					var x = randi_range(0, 2)
-					if !savingsAcc:
-						match x:
-							0:
-								eventStory.text = "Investing in victory..."
-							1:
-								eventStory.text = "A shady banker, a cardboard desk, and a painted sign...
-								 surely this pays off!"
-							2:
-								eventStory.text = "Now, I know it sounds crazy, but i swear leaving your money
-								under this conspicuously placed rock makes it magically double!"
-						eventEffect.text = "Lose up to 5 coins now, for a positive bonus later..."
-						eventEffect.self_modulate = negative
-						eventSprite.texture = preload("res://Assets/effects/eff1-2.png")
-						anims.play("bob")
-						eventSprite.show()
-						lastSpaceEffect.y = 2
-					else:
-						match x:
-							0:
-								eventStory.text = "... means playing the long game!"
-							1:
-								eventStory.text = "Who said banks couldn't be trusted?"
-							2:
-								eventStory.text = "Surely you'll put this money to good use, right?"
-						eventEffect.text = "Gain double the coins you saved before!"
-						eventEffect.self_modulate = positive
-						lastSpaceEffect.y = 2
-				3:        # Lose a coin for every other space (2 turns)
-					eventName.text = "Delayed Detriment"
-					var x = randi_range(0, 2)
-					match x:
-						0:
-							eventStory.text = "Unbeknownst to you, a hole magically appears in your wallet..."
-						1:
-							eventStory.text = "Maybe Flex Seal isn't all it's cracked up to be..."
-						2:
-							eventStory.text = "Well if you don't like it, maybe you shouldn't have picked a road
-							with so many tolls!"
-					eventEffect.text = "Lose a coin for every other space you move on the next spin"
-					eventEffect.self_modulate = negative
-					eventSprite.texture = preload("res://Assets/effects/eff1-3.png")
-					eventSprite.show()
-					anims.play("bob")
-					lastSpaceEffect.y = 3
-				4:        # -6
-					eventName.text = "Investment Opportunity"
-					var x = randi_range(0, 2)
-					match x:
-						0:
-							eventStory.text = "You check your $HITCOIN wallet..."
-						1:
-							eventStory.text = "Seems like your scam call center was more work than that
-							Nigerian prince made it out to be..."
-						2:
-							eventStory.text = "You invested in a pyramid scheme. How could you have known
-							they were actually building a pyramid?"
-					eventEffect.text = "Lose 6 Coins"
-					eventEffect.self_modulate = negative
-					lastSpaceEffect.y = 4
-				5:        # 1 in 3 to double next negative effect
-					eventName.text = "Double Negative"
-					var x = randi_range(0, 2)
-					match x:
-						0:
-							eventStory.text = "A black cat under a ladder and a broken mirror... SURELY 
-							that can only mean good things."
-						1:
-							eventStory.text = "You step on a crack. It's in God's hands now."
-						2:
-							eventStory.text = "You felt your sins crawling on your back."
-					eventEffect.text = "1 in 3 chance to double the next negative effect"
-					eventEffect.self_modulate = negative
-					eventSprite.texture = preload("res://Assets/effects/eff1-5.png")
-					eventSprite.show()
-					anims.play("bob")
-					lastSpaceEffect.y = 5
-	
-		2:                                 # UltraRare Effects
-			lastSpaceEffect.x = 2
-			eventName.self_modulate = ultraRare
-			match s:                   
-				0:       # 2x coins
-					eventName.text = "Sellout"
-					var x = randi_range(0, 2)
-					match x:
-						0:
-							eventStory.text = "You give in to temptation and start promoting dropshipping
-							 outlets. Shame on you."
-						1:
-							eventStory.text = "Who knew being a corporate yes-man could be so fulfilling?"
-						2:
-							eventStory.text = "You start working for EA. There is no redeeming factor to this."
-					eventEffect.text = "Duplicate your coins, at the cost of your dignity"
-					eventEffect.self_modulate = positive
-					lastSpaceEffect.y = 0
-				1:       # +10
-					eventName.text = "Winfall"
-					var x = randi_range(0, 2)
-					match x:
-						0:
-							eventStory.text = "Stairs: 1, Grandma: 0. At least you're in the will."
-						1:
-							eventStory.text = "Insurance fraud never felt so good."
-						2:
-							eventStory.text = "In retrospect, we've always been friends, right?"
-					eventEffect.text = "Gain 10 coins"
-					eventEffect.self_modulate = positive
-					lastSpaceEffect.y = 1
-				2:       # Gain coin for every space you move (2 turns)
-					eventName.text = "Money Trail"
-					var x = randi_range(0, 2)
-					match x:
-						0:
-							eventStory.text = "A trail of gold coins NEVER leads anywhere bad, right?"
-						1:
-							eventStory.text = "Ooh, piece of candy... ooh, piece of candy..."
-						2:
-							eventStory.text = "If I told you where leprachauns got their gold from, 
-							you'd never want it again."
-					eventEffect.text = "Gain a coin for every space you move on the next spin"
-					eventEffect.self_modulate = positive
-					lastSpaceEffect.y = 2
-				3:       # 1/2 coins
-					eventName.text = "Art Of The Deal"
-					var x = randi_range(0, 2)
-					match x:
-						0:
-							eventStory.text = "This is why I signed a prenup."
-						1:
-							eventStory.text = "Nobody escapes the IRS."
-						2:
-							eventStory.text = "Investing in NFT's REALLY didn't pay off."
-					eventEffect.text = "Lose half your coins"
-					eventEffect.self_modulate = negative
-					lastSpaceEffect.y = 3
-				4:       # Lose coin for every space you move (2 turns)
-					eventName.text = "Highway Robbery"
-					var x = randi_range(0, 2)
-					match x:
-						0:
-							eventStory.text = "Go this way, you said. There's less tolls here, you said. This is
-							 what you get for using Mapquest."
-						1:
-							eventStory.text = "A blue-footed booby flies through and drops an envelope with
-							 an extensive record of your search history. You agree to his blackmail immediately."
-						2:
-							eventStory.text = "When I said that they'd 'garnish your bread', I wasn't talking about food."
-					eventEffect.text = "Lose a coin for every space you move on your next spin"
-					eventEffect.self_modulate = negative
-					lastSpaceEffect.y = 4
-				5:       # Enrichment Module
-					eventName.text = "ENRICHMENT MODULE"
-					var x = randi_range(0, 2)
-					match x:
-						0:
-							eventStory.text = "Please enjoy the ENRICHMENT MODULE!"
-						1:
-							eventStory.text = "Thank you for your 'voluntary' participation in the testing of the 
-							ENRICHMENT MODULE!"
-						2:
-							eventStory.text = "ENRICHMENT MODULE!"
-					eventEffect.text = "100% chance of increased enrichment! (not a peer reviewed statistic)"
-					eventEffect.self_modulate = unique
-					lastSpaceEffect.y = 5
-	
-	await pauseForEvent()
-	canSpin = true
-	eventPause = false
-	debugSelect = false
+	event_popup_up = true
+	pauseForEvent()
 
 
 # Get the latest space event, then get its related modifier info. Then, iterate through the list.
@@ -666,113 +388,109 @@ func spaceEvent() -> void:
 # to the match int 999
 
 func eventTrigger() -> void:
-	var event: Vector2 = lastSpaceEffect
-	var eventInfo: Array = eUtils.eventID[str(event)]
+	var event: Array = lastSpaceEffect
+	var event_name = lastSpaceEffect[0]
+	var eventInfo: Array = eUtils.eventID[str(event[0])]
 	var locDeltaMoney: int = 0
-	
 	# Iterate through the event's modifiers, then apply it appropriately
 	itemsActivating.clear()
 	for m in eventInfo:
 		match m:
 			999:
-				match event:
-					Vector2(0, 0):            # Common
+				match event_name:
+					"Penny Pincher":            # Common
 						locDeltaMoney += 1
-					Vector2(0, 1):
+					"Cash Bonus":
 						locDeltaMoney += 2
-					Vector2(0, 2):
+					"Extra Credit":
 						locDeltaMoney += 3
-					Vector2(0, 3):
+					"A Minor Inconvenience":
 						locDeltaMoney -= 1
 						audioPlayer.stream = preload("res://Assets/Audio/arcade-ui-28-229497.mp3")
 						audioPlayer.play()
-					Vector2(0, 4):
+					"Taxes and.. What Else?":
 						locDeltaMoney -= 2
 						audioPlayer.stream = preload("res://Assets/Audio/arcade-ui-28-229497.mp3")
 						audioPlayer.play()
-					Vector2(0, 5):
+					"Defecit Spending":
 						locDeltaMoney -= 3
 						audioPlayer.stream = preload("res://Assets/Audio/arcade-ui-28-229497.mp3")
 						audioPlayer.play()
 					
-					Vector2(1, 0):           # Rare
+					"Coinsurance":           # Rare
 						insured = true
 						statusSprite1_0.status = 1
-					Vector2(1, 1):
+					"Investment Opportunity: Positive":
 						locDeltaMoney += 6
-					Vector2(1, 2):
-						if !savingsAcc:
-							coinsSaved = 0
-							coinsSaved = randi_range(money, 5)
-							if coinsSaved > 5:
-								coinsSaved = 5
-							locDeltaMoney -= coinsSaved
-							savingsAcc = true
-							statusSprite1_2.status = 1
-						else:
-							locDeltaMoney += (coinsSaved * 2)
-							savingsAcc = false
-							statusSprite1_2.status = 0
-							statusSprite1_2.type = 2
-					Vector2(1, 3):
+					"Savings Account I":
+						coinsSaved = 0
+						coinsSaved = randi_range(money, 5)
+						if coinsSaved > 5:
+							coinsSaved = 5
+						locDeltaMoney -= coinsSaved
+						savingsAcc = true
+						statusSprite1_2.status = 1
+					"Savings Account II":
+						locDeltaMoney += (coinsSaved * 2)
+						savingsAcc = false
+						statusSprite1_2.status = 0
+						statusSprite1_2.type = 2
+					"Delayed Detriment":
 						rareSpaceCoinLoss = true
 						statusSprite1_3.status = 1
 						audioPlayer.stream = preload("res://Assets/Audio/arcade-ui-28-229497.mp3")
 						audioPlayer.play()
-					Vector2(1, 4):
+					"Investment Opportunity: Negative":
 						locDeltaMoney -= 6
 						audioPlayer.stream = preload("res://Assets/Audio/arcade-ui-28-229497.mp3")
 						audioPlayer.play()
-					Vector2(1, 5):
+					"Double Negative":
 						chanceNegIncrease = true
 						statusSprite1_5.status = 1
 						audioPlayer.stream = preload("res://Assets/Audio/arcade-ui-28-229497.mp3")
 						audioPlayer.play()
 					
-					Vector2(2, 0):            # Ultra Rare
+					"Sellout":            # Ultra Rare
 						locDeltaMoney = money * 2
-					Vector2(2, 1):
+					"Winfall":
 						locDeltaMoney += 10
-					Vector2(2, 2):
+					"Money Trail":
 						ultraSpaceCoinGain = true
 						statusSprite2_2.status = 1
-					Vector2(2, 3):
+					"Art Of The Deal":
 						locDeltaMoney -= (money / 2)
 						audioPlayer.stream = preload("res://Assets/Audio/arcade-ui-28-229497.mp3")
 						audioPlayer.play()
-					Vector2(2, 4):
+					"Highway Robbery":
 						ultraSpaceCoinLoss = true
 						statusSprite2_4.status = 1
 						audioPlayer.stream = preload("res://Assets/Audio/arcade-ui-28-229497.mp3")
 						audioPlayer.play()
-					Vector2(2, 5):
+					"ENRICHMENT MODULE":
 						pass
 						
 			0: # LUCKY BREAK
-					for i in obtainedItems:
-						if i == 1:
-							var x = randi_range(doubleChance, 5)
-							if x >= 5:
-								locDeltaMoney += 1
-								itemsActivating.append(1)
+					if obtainedItems.has("Lucky Break"):
+						var x = randi_range(doubleChance, 5)
+						if x >= 5:
+							locDeltaMoney += 1
+							itemsActivating.append(1)
 								
 			1: # NEGATIVE NEGATION
-				for i in obtainedItems:
-					if i == 2:
-						var x = randi_range(doubleChance, 15)
-						if x >= 15:
-							locDeltaMoney = 0
-							eventEffect.text = "EFFECT NEGATED"
-							eventInfo.erase(999)
-							itemsActivating.append(2)
+				if obtainedItems.has("Negative Negation"):
+					var x = randi_range(doubleChance, 15)
+					if x >= 15:
+						locDeltaMoney = 0
+						eventEffect.text = "EFFECT NEGATED"
+						eventInfo.erase(999)
+						itemsActivating.append(2)
 							
 			2: # BANK ERROR
-				for i in obtainedItems:
-					if i == 4:
-						var x = randi_range(doubleChance, 4)
-						if x >= 4:
-							locDeltaMoney *= 2
-							itemsActivating.append(4)
+				if obtainedItems.has("Bank Error"):
+					var x = randi_range(doubleChance, 4)
+					if x >= 4:
+						locDeltaMoney *= 2
+						itemsActivating.append(4)
 							
 			3: # SCOT-FREE
 				if scottFree:
@@ -804,6 +522,7 @@ func eventTrigger() -> void:
 						chanceNegIncrease = false
 						statusSprite1_5.status = 0
 						statusSprite1_5.type = 1
+					
 	
 	monUpdate(locDeltaMoney)
 	itemActivate(itemsActivating)
@@ -811,111 +530,44 @@ func eventTrigger() -> void:
 #region Obtainables Stuff
 func obtainableAnim():
 	
-	match lastObtained:
-		0:
-			itemSprite.set_texture(preload("res://Assets/obtainables/obt001.png"))
-			itemName.text = "Leg Day"
-			itemEffect.text = "1 in 10 chance to move an extra space"
+	itemSprite.set_texture(lastObtained[0])
+	itemName.text = lastObtained[1]
+	itemEffect.text = lastObtained[2]
+	commentLabel.text = lastObtained[5]
+	newActLabel = lastObtained[6]
+	
+	match lastObtained[3]:
+		"common":
 			itemEffect.self_modulate = common
 			itemName.self_modulate = common
-			commentLabel.text = "Maybe hitting the gym isn't such a bad idea"
-			newActLabel = "+1 to roll... maybe!"
-			rarity = common
-		1:
-			itemSprite.set_texture(preload("res://Assets/obtainables/obt002.png"))
-			itemName.text = "Lucky Break"
-			itemEffect.text = "1 in 5 chance for +1 coins when you obtain coins"
-			itemEffect.self_modulate = common
-			itemName.self_modulate = common
-			commentLabel.text = "A one-leaf clover HAS to be lucky sometime, right?"
-			newActLabel = "+1 coin!"
-			rarity = common
-		2:
-			itemSprite.set_texture(preload("res://Assets/obtainables/obt003.png"))
-			itemName.text = "Negative Negation"
-			itemEffect.text = "1 in 15 chance to negate a negative space effect"
-			itemEffect.self_modulate = common
-			itemName.self_modulate = common
-			commentLabel.text = "If I can't see it, it doesn't exist!"
-			newActLabel = "Effect Negated!"
-			rarity = common
-		3:
-			itemSprite.set_texture(preload("res://Assets/obtainables/obt004.png"))
-			itemName.text = "Leg Day+"
-			itemEffect.text = "Adds 1 to every spin"
+		"rare":
 			itemEffect.self_modulate = rare
 			itemName.self_modulate = rare
-			commentLabel.text = "Those gains are really paying off, huh?"
-			newActLabel = "+1 to roll!"
-			rarity = rare
-		4:
-			itemSprite.set_texture(preload("res://Assets/obtainables/obt005.png"))
-			itemName.text = "Bank Error"
-			itemEffect.text = "When gaining/losing coins, 1 in 4 chance to double the amount"
-			itemEffect.self_modulate = rare
-			itemName.self_modulate = rare
-			commentLabel.text = "Bank error in your favor (or not)"
-			newActLabel = "ERR0R"
-			rarity = rare
-		5:
-			itemSprite.set_texture(preload("res://Assets/obtainables/obt006.png"))
-			itemName.text = "Anywhere But Here!"
-			itemEffect.text = "1 in 4 chance to reroll every 0"
-			itemEffect.self_modulate = rare
-			itemName.self_modulate = rare
-			commentLabel.text = "We've all cheated at least once, right?"
-			newActLabel = "Reroll!"
-			rarity = rare
-		6:
-			itemSprite.set_texture(preload("res://Assets/obtainables/obt007.png"))
-			itemName.text = "Leg Day++"
-			itemEffect.text = "Adds 3 to every spin"
+		"ultraRare":
 			itemEffect.self_modulate = ultraRare
 			itemName.self_modulate = ultraRare
-			commentLabel.text = "What are they putting in your pre-workout, dude?!"
-			newActLabel = "+3 to roll!"
-			rarity = ultraRare
-		7:
-			itemSprite.set_texture(preload("res://Assets/obtainables/obt008.png"))
-			itemName.text = "Loaded Dice"
-			itemEffect.text = "Doubles all odds"
-			itemEffect.self_modulate = ultraRare
-			itemName.self_modulate = ultraRare
-			commentLabel.text = "If you want a guarantee, buy a toaster. Or take this item, either works."
-			rarity = ultraRare
-			doubleChanceInc()
-		8:
-			itemSprite.set_texture(preload("res://Assets/obtainables/obt009.png"))
-			itemName.text = "Scot-Free"
-			itemEffect.text = "Pay 10 coins to negate a negative space effect"
-			itemEffect.self_modulate = ultraRare
-			itemName.self_modulate = ultraRare
-			commentLabel.text = "Just like in real life!"
-			newActLabel = "Consequences Escaped!"
-			rarity = ultraRare
-			scottFree = true
-		9:
-			itemSprite.set_texture(preload("res://Assets/obtainables/obt001.png"))
-			itemName.text = "Multiroll"
-			itemEffect.text = "Roll 3 times, last roll upgrades the space effect!"
-			itemEffect.self_modulate = unique
-			itemName.self_modulate = unique
-			commentLabel.text = "This is where the fun begins!"
-			newActLabel = "Multiroll!"
+	
+	if lastObtained.has("Loaded Dice"):
+		doubleChanceInc()
+	if lastObtained.has("Scot-Free"):
+		scottFree = true
 	
 	audioPlayer.stream = preload("res://Assets/Audio/arcade-ui-24-229496.mp3")
 	audioPlayer.play()
 	obtainedAnim.show()
 	itemAnims.play("blink_bob")
 
+
+func getObtainable(obtainable: Array) -> void:
+	newItem = obtainable
+	obtainedItems.append(obtainable[1])
+	lastObtained = obtainable
+	item_queued = true
+
+
 func doubleChanceInc() -> void:
 	doubleChance *= 2
 
-func getObtainable(obtainable: int) -> void:
-	newItemIndex = obtainable
-	obtainedItems.append(obtainable)
-	lastObtained = obtainable
-	#pauseForEvent()
 #endregion
 
 #region Buttons

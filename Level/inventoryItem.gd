@@ -1,6 +1,5 @@
 extends Button
 
-var index: int
 
 @onready var itemName: Button = $"."
 @onready var itemSprite: Sprite2D = $Sprite2D
@@ -30,11 +29,6 @@ func activate():
 
 func _on_stim_button_pressed() -> void:
 	activatePlayer.play("activateIdle")
-	match index:
-		0:
-			pass
-		1:
-			pass
 
 
 func _on_mouse_entered() -> void:

@@ -11,8 +11,9 @@ config_version=5
 [application]
 
 config/name="Gacha Pwn"
+config/tags=PackedStringArray("active")
 run/main_scene="res://Level/level.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
